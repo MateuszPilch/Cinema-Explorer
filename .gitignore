@@ -1,5 +1,3 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
-
 # Compiled output
 /dist
 /tmp
@@ -7,9 +5,14 @@
 /bazel-out
 
 # Node
-/node_modules
-npm-debug.log
-yarn-error.log
+**/node_modules
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
 
 # IDEs and editors
 .idea/
@@ -31,6 +34,7 @@ yarn-error.log
 # Miscellaneous
 /.angular/cache
 .sass-cache/
+.angular
 /connect.lock
 /coverage
 /libpeerconnection.log
@@ -40,3 +44,7 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Tests
+/coverage
+/.nyc_output
