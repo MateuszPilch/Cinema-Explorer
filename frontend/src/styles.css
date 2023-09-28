@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "avenir";
+  src: url("assets/fonts/Avenir.ttf");
+}
+
+@font-face {
+  font-family: "poppins";
+  src: url("assets/fonts/Poppins.ttf");
+}

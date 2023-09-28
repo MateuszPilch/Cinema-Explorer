@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent 
 {
+  mobileMenuEnable: boolean = false;
 
+  toggleMobileMenu(): void{
+    this.mobileMenuEnable = !this.mobileMenuEnable;
+  }
 }

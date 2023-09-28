@@ -3,6 +3,10 @@ module.exports = {
     "./src/**/*.{html,ts}",
   ],
   theme: {
+    fontFamily: {
+      'avenir': ['avenir'],
+      'poppins': ['poppins']
+    },
     extend: {},
   },
   plugins: [],
