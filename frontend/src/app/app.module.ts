@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { HomeComponent } from './home/home.component';
-import { MoviePageComponent } from './movies/movie-page/movie-page.component';
-import { MapPageComponent } from './maps/map-page/map-page.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { HomeComponent } from './components/home/home.component';
+import { MoviePageComponent } from './components/movie/movie-page/movie-page.component';
+import { MapPageComponent } from './components/map/map-page/map-page.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +17,7 @@ import { MapPageComponent } from './maps/map-page/map-page.component';
     MapPageComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule
   ],

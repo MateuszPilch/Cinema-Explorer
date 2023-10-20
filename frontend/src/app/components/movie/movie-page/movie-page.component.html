@@ -1,12 +1,12 @@
 <div class="font-poppins">
-  <div class="block md:w-1/6 w-1/2 pb-4 m-auto justify-center items-center">
-    <div class="flex pb-4">
-      <img class="object-contain rounded-xl shadow-md" src="../../assets/images/barbie.jpg">
+  <div class="block pb-4 m-auto justify-center items-center">
+    <div class="flex md:w-1/6 w-1/2 pb-4 m-auto">
+      <img class="object-contain rounded-xl shadow-md" src="https://image.tmdb.org/t/p/original/{{movieDetailsData.poster_path}}">
     </div>   
     <div class="flex pb-4 justify-center items-center text-3xl font-bold">
-      Barbie
+      {{movieDetailsData.title}}
     </div>
-    <div class="flex items-center justify-center">
+    <div class="flex pb-2 items-center justify-center">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-yellow-300">
         <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
       </svg>
@@ -22,9 +22,9 @@
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-gray-300 mr-1 dark:text-gray-500">
         <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
       </svg>
-      <div class="text-center text-md font-medium">
-        4.4/5
-      </div>
+    </div>
+    <div class="text-center text-md font-medium">
+      {{movieDetailsData.vote_average}}/5
     </div>
   </div>
   <div class="grid md:grid-cols-4 grid-cols-1 md:grid-rows-3 grid-flow-row md:gap-8 gap-2 md:p-8 p-2 bg-gray-100 rounded-xl shadow-md">
@@ -71,30 +71,39 @@
     <div class="md:order-1 md:col-span-3 row-span-3 ">
       <div class="block h-fit md:p-8 p-2 bg-white rounded-xl shadow-md">
         <div class="flex justify-between">
-          <div class="block">
-            <div class="flex items-end">
-              <div class="md:text-5xl text-4xl">Barbie</div>
-              <div class="pl-4">2023</div>
-            </div>
-            <div class="pt-4"> reż. Christopher Nolan</div>
+          <div class="flex items-end">
+            <div class="md:text-5xl text-4xl">{{movieDetailsData.title}}</div>
+            <div class="pl-4">{{movieDetailsData.release_date}}</div>
           </div>
-          <div class="flex items-start justify-between">
+          <div class="flex items-center justify-between">
             <div class="md:block hidden p-4 text-xl">
               Mapa lokacji
             </div>
             <div class="p-2 bg-teal-300 hover:scale-110 hover:bg-teal-400 duration-200 rounded-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
               </svg>  
             </div>        
           </div>
         </div>
-        <div class="md:pt-8 pt-4">
-          Historia amerykańskiego naukowca J. Roberta Oppenheimera i jego roli w stworzeniu bomby atomowej.
+        <div class="md:pt-8 pt-4 text-justify">
+          {{movieDetailsData.overview}}
         </div>
         <div class="md:pt-8 pt-4">
-          <div class="text-xl font-bold">
-            Obsada
+          <div class="flex items-center justify-between">
+            <div class="text-xl font-bold">
+              Obsada
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="md:block hidden p-4">
+                Zobacz więcej
+              </div>
+              <div class="p-2 bg-teal-300 hover:scale-110 hover:bg-teal-400 duration-200 rounded-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                </svg> 
+              </div>
+            </div>
           </div>
           <div class="flex w-full">
             <div class="block md:w-1/6 w-2/6">
@@ -115,9 +124,19 @@
             </div>
           </div>
         </div>
-        <div class="block md:pt-8 pt-4">
+        <div class="flex items-center justify-between">
           <div class="text-xl font-bold">
             Twórcy
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="md:block hidden p-4">
+              Zobacz więcej
+            </div>
+            <div class="p-2 bg-teal-300 hover:scale-110 hover:bg-teal-400 duration-200 rounded-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+              </svg> 
+            </div>
           </div>
         </div>
       </div>
