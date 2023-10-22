@@ -1,5 +1,9 @@
 {
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.4.2"
+    "@fortawesome/fontawesome-free": "^6.4.2",
+    "class-transformer": "^0.5.1"
+  },
+  "devDependencies": {
+    "tslib": "^2.6.2"
   }
 }
