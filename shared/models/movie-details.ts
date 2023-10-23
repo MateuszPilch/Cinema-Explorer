@@ -10,6 +10,9 @@ export class MovieDetails
   genres!: Genres[];
 
   @Expose()
+  original_title!: string
+  
+  @Expose()
   overview!: string;
 
   @Expose()
@@ -17,6 +20,9 @@ export class MovieDetails
 
   @Expose()
   release_date!: string;
+
+  @Expose()
+  revenue!:number;
 
   @Expose()
   runtime!: string;

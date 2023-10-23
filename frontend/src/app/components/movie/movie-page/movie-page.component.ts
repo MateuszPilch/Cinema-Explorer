@@ -23,7 +23,6 @@ export class MoviePageComponent {
     this.movieDetailsService.getMovieDetails(this.movie_id!).subscribe((data) => {
       this.movieDetailsData = data;
       this.movieDetailsData.vote_average = Math.round(this.movieDetailsData.vote_average / 2 * 10) / 10;
-      this.movieDetailsData.release_date = this.movieDetailsData.release_date.substring(0,4)
     });
 
     this.movieCreditsService.getMovieCreditsShort(this.movie_id!).subscribe((data) => {
