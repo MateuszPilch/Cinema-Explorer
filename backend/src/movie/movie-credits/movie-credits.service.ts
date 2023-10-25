@@ -31,9 +31,9 @@ export class MovieCreditsService {
       }
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
-    const res = plainToClass(MovieCredits, data);
-    res.cast.slice(0,10);
-    res.crew.slice(0,10);
+    let res = plainToClass(MovieCredits, data);
+    res.cast = res.cast.slice(0,10);
+    res.crew = res.crew.slice(0,10);
     return res;
   }
 }

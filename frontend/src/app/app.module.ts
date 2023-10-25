@@ -5,16 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
-import { MoviePageComponent } from './components/movie/movie-page/movie-page.component';
 import { MapPageComponent } from './components/map/map-page/map-page.component';
+import { MoviePageComponent } from './components/movie/movie-page/movie-page.component';
+import { MovieCreditsComponent } from './components/movie/movie-credits/movie-credits.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
+    MapPageComponent,
     MoviePageComponent,
-    MapPageComponent
+    MovieCreditsComponent
   ],
   imports: [
     HttpClientModule,
