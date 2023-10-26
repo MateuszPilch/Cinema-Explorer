@@ -1,0 +1,92 @@
+<div class="font-poppins">
+  <div class="md:p-8 p-2 bg-gray-100 rounded-xl shadow-md">
+    <div class="block md:p-8 p-4 bg-white rounded-xl shadow-md">
+      <div class="flex">
+        <div class="md:text-3xl text-2xl font-bold">Wyniki</div>
+        <div class="flex">
+          <div class="p-2 text-lg first-letter:uppercase bg-teal-300 rounded-xl shadow-md">
+            Film
+          </div>
+          <div class="p-2 text-lg first-letter:uppercase bg-teal-300 rounded-xl shadow-md">
+            Serial
+          </div>
+          <div class="p-2 text-lg first-letter:uppercase bg-teal-300 rounded-xl shadow-md">
+            Osoba
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let result of searchData.results" class="flex h-56 my-8 p-4 bg-gray-100 rounded-xl shadow-md">
+        <div *ngIf="result.media_type == 'movie'" class="flex w-full">
+          <a routerLink="/movie/{{result.id}}" class="flex w-[10%] h-full">
+            <img class="object-contain hover:scale-105 duration-200 rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w500/{{result.poster_path}}">
+          </a>
+          <div class="block w-[90%] ml-4 p-4 bg-white text-ellipsis overflow-hidden rounded-xl shadow-md">
+            <div class="flex justify-between">
+              <a routerLink="/movie/{{result.id}}">
+                <div class="text-2xl font-bold">
+                  {{result.title}}
+                </div>
+              </a>
+              <div class="flex p-2 items-center bg-teal-300 rounded-xl shadow-md">
+                <div class="first-letter:uppercase">
+                  Film
+                </div>
+              </div>
+            </div>
+            <div class="text-sm">
+              {{result.release_date}}
+            </div>
+            <div class="w-11/12 text-sm text-justify">
+              {{result.overview}}
+            </div>
+          </div>
+        </div>
+        <div *ngIf="result.media_type == 'tv'" class="flex w-full">
+          <a routerLink="/tv/{{result.id}}" class="flex w-[10%] h-full">
+            <img class="object-contain hover:scale-105 duration-200 rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w500/{{result.poster_path}}">
+          </a>
+          <div class="block w-[90%] ml-4 p-4 bg-white rounded-xl shadow-md">
+            <div class="flex justify-between">
+              <a routerLink="/tv/{{result.id}}">
+                <div class="text-2xl font-bold">
+                  {{result.name}}
+                </div>
+              </a>
+              <div class="flex p-2 items-center bg-teal-300 rounded-xl shadow-md">
+                <div class="first-letter:uppercase">
+                  Serial
+                </div>
+              </div>
+            </div>
+            <div class="text-sm">
+              {{result.first_air_date}}
+            </div>
+            <div class="w-11/12 pb-4 text-sm text-ellipsis overflow-hidden">
+              {{result.overview}}
+            </div>
+          </div>
+        </div>
+        <div *ngIf="result.media_type == 'person'" class="flex w-full">
+          <a routerLink="/person/{{result.id}}" class="flex w-[10%] h-full">
+            <img class="object-contain hover:scale-105 duration-200 rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w500/{{result.profile_path}}" onerror="this.src='assets/images/person_blank.png';">
+          </a>
+          <div class="block w-[90%] ml-4 p-4 bg-white rounded-xl shadow-md">
+            <div class="flex justify-between">
+              <a routerLink="/person/{{result.id}}">
+                <div class="text-2xl font-bold">
+                  {{result.name}}
+                </div>
+              </a>
+              <div class="p-2 text-sm first-letter:uppercase bg-teal-300 rounded-xl shadow-md">
+                Osoba
+              </div>
+            </div>
+            <div class="text-sm text-justify">
+              {{result.known_for_department}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

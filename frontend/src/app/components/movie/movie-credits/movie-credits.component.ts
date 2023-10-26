@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieCredits } from 'shared/models/movie-credits';
-import { MovieCreditsService } from 'src/app/services/movie/movie-credits.service';
+import { MovieDetails } from 'shared/models/movie-details';
 
 @Component({
   selector: 'app-movie-credits',
@@ -11,14 +11,19 @@ import { MovieCreditsService } from 'src/app/services/movie/movie-credits.servic
 export class MovieCreditsComponent {
 
   movie_id!: string | null;
+  movieDetailsData!: MovieDetails;
   movieCreditsData!: MovieCredits
 
-  constructor(private movieCreditsService: MovieCreditsService, private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.movie_id = this.route.snapshot.paramMap.get('id');
-    this.movieCreditsService.getMovieCreditsShort(this.movie_id!).subscribe((data) => {
-      this.movieCreditsData = data;
-    });
+    this.route.data.subscribe(({details}) => {
+      this.movieDetailsData = details;
+      this.movieDetailsData.vote_average = Math.round(this.movieDetailsData.vote_average / 2 * 10) / 10;
+    })
+
+    this.route.data.subscribe(({credits}) => {
+      this.movieCreditsData = credits;
+    })
   }
 }

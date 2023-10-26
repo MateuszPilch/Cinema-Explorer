@@ -4,7 +4,7 @@ import { MovieCreditsService } from './movie-credits/movie-credits.service';
 import { MovieDetails } from 'shared/models/movie-details';
 import { MovieCredits } from 'shared/models/movie-credits';
 
-@Controller('/movie')
+@Controller('movie')
 export class MovieController {
   constructor(private readonly movieDetailsService: MovieDetailsService, private readonly movieCreditsService: MovieCreditsService) {}
 
