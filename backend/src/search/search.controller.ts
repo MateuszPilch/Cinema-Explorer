@@ -8,7 +8,7 @@ export class SearchController {
   constructor(private readonly searchService: SearchService) {}
 
   @Get()
-  getSearchResults(@Query('query') query: string, @Query('page') page: string): Promise<SearchData> {
-    return this.searchService.getSearchResults(query, page);
+  getSearchResults(@Query('type') type: string, @Query('query') query: string, @Query('page') page: string): Promise<SearchData> {
+    return this.searchService.getSearchResults(type, query, page);
   }
 }

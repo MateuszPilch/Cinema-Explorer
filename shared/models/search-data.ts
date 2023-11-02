@@ -21,6 +21,7 @@ interface Results
   backdrop_path : string;
   first_air_date : string;
   id: number;
+  known_for: any[];
   known_for_department: string;
   media_type: string;
   name: string;
@@ -32,4 +33,6 @@ interface Results
   profile_path: string;
   release_date: string;
   title: string;
+  vote_average: number;
+  vote_count: number;
 }

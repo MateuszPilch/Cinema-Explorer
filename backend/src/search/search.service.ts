@@ -8,8 +8,8 @@ import { plainToClass } from "class-transformer";
 export class SearchService {
   constructor(private readonly httpService: HttpService) {}
 
-  async getSearchResults(query: string, page: string): Promise<SearchData> {
-    const url = `https://api.themoviedb.org/3/search/multi?language=pl-PL`;
+  async getSearchResults(type: string, query: string, page: string): Promise<SearchData> {
+    const url = `https://api.themoviedb.org/3/search/${type}?language=pl-PL`;
     const headers = {
       headers: {
         accept: 'application/json',

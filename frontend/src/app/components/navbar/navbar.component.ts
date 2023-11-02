@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
+import { SearchService } from 'src/app/services/search/search.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,17 +10,10 @@ import { ActivatedRouteSnapshot, Router } from '@angular/router';
 export class NavbarComponent 
 {
   mobileMenuEnable: boolean = false;
-  searchQuery: string = '';
-  searchQueryPage: number = 1;
-  constructor(private router: Router) {}
-
+  
+  constructor(public searchService: SearchService) {}
+  
   toggleMobileMenu(): void {
     this.mobileMenuEnable = !this.mobileMenuEnable;
-  }
-
-  searchEnter(): void {
-    if(this.searchQuery != '') {
-      this.router.navigate(['search'], { queryParams: { query: this.searchQuery, page: this.searchQueryPage.toString()} });
-    }
   }
 }
