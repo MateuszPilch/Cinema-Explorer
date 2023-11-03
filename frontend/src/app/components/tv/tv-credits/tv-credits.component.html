@@ -1,0 +1,43 @@
+<div class="font-poppins">
+  <div class="block pb-4 m-auto justify-center items-center">
+    <div class="flex md:w-1/6 w-1/2 pb-4 m-auto">
+      <img class="object-contain rounded-xl shadow-md" src="https://image.tmdb.org/t/p/original/{{tvDetailsData.poster_path}}">
+    </div>   
+    <div class="flex pb-4 text-3xl font-bold justify-center items-center">
+      {{tvDetailsData.name}}
+    </div>
+  </div>
+  <div class="md:p-8 p-2 bg-gray-100 rounded-xl shadow-md">
+    <div class="block md:p-8 p-4 bg-white rounded-xl shadow-md">
+      <div class="md:text-3xl text-2xl font-bold">Obsada i twórzcy</div>
+      <div class="pt-4 text-xl font-bold">Obsada</div>
+      <div class="grid md:grid-cols-8 grid-cols-3">
+        <div *ngFor="let cast of tvCreditsData.cast" class="block m-2 bg-gray-100 hover:scale-105 duration-200 rounded-xl shadow-md">
+          <a href="#">
+            <div class="">
+              <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/original/{{cast.profile_path}}" onerror="this.src='assets/images/person_blank.png';">
+            </div>       
+            <div class="block text-center text-sm pt-2">
+              <div class="font-bold overflow">{{cast.name}}</div>
+              <div class="py-2">{{cast.character}}</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="pt-4 text-xl font-bold">Twórcy</div>
+      <div class="grid md:grid-cols-8 grid-cols-3">
+        <div *ngFor="let crew of tvCreditsData.crew" class="block m-2 bg-gray-100 hover:scale-105 duration-200 rounded-xl shadow-md">
+          <a href="#">
+            <div class="">
+              <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/original/{{crew.profile_path}}" onerror="this.src='assets/images/person_blank.png';">
+            </div>       
+            <div class="block text-center text-sm pt-2">
+              <div class="font-bold overflow">{{crew.name}}</div>
+              <div class="py-2">{{crew.job}}</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

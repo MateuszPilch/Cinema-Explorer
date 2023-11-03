@@ -10,7 +10,7 @@ import { MovieCredits } from 'shared/models/movie-credits';
 })
 export class MoviePageComponent {
 
-  movie_id!: string | null;
+  id!: string | null;
   movieDetailsData!: MovieDetails;
   movieCreditsData!: MovieCredits
 

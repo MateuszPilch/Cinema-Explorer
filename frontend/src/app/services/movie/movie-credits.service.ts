@@ -11,12 +11,12 @@ export class MovieCreditsService {
 
   constructor(private http: HttpClient) {}
   
-  getMovieCredits(movie_id: string): Observable<MovieCredits> {
-    return this.http.get<MovieCredits>(`http://localhost:3000/api/movie/${movie_id}/credits`);
+  getMovieCredits(id: string): Observable<MovieCredits> {
+    return this.http.get<MovieCredits>(`http://localhost:3000/api/movie/${id}/credits`);
   }
 
-  getMovieCreditsShort(movie_id: string): Observable<MovieCredits> {
-    return this.http.get<MovieCredits>(`http://localhost:3000/api/movie/${movie_id}/credits_short`);
+  getMovieCreditsShort(id: string): Observable<MovieCredits> {
+    return this.http.get<MovieCredits>(`http://localhost:3000/api/movie/${id}/credits_short`);
   }
 }
 
