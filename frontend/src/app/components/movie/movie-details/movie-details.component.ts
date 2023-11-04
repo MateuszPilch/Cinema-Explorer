@@ -4,11 +4,11 @@ import { MovieDetails } from 'shared/models/movie-details';
 import { MovieCredits } from 'shared/models/movie-credits';
 
 @Component({
-  selector: 'app-movie-page',
-  templateUrl: './movie-page.component.html',
-  styleUrls: ['./movie-page.component.css']
+  selector: 'app-movie-details',
+  templateUrl: './movie-details.component.html',
+  styleUrls: ['./movie-details.component.css']
 })
-export class MoviePageComponent {
+export class MovieDetailsComponent {
 
   id!: string | null;
   movieDetailsData!: MovieDetails;

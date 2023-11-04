@@ -94,7 +94,7 @@
       </div>
     </div>
     <div class="md:order-1 md:col-span-3 row-span-3 ">
-      <div class="block h-fit md:p-8 p-4 bg-white rounded-xl shadow-md">
+      <div class="block h-full md:p-8 p-4 bg-white rounded-xl shadow-md">
         <div class="flex justify-between">
           <div class="flex items-end">
             <div class="md:text-5xl text-4xl">{{tvDetailsData.name}}</div>
@@ -144,58 +144,54 @@
             </div>
           </div>
         </div>
-        <div class="md:pt-8 pt-4">
-          <div class="flex items-center justify-between">
-            <div class="md:text-3xl text-xl font-bold">Obsada i twórzcy</div>
-            <div class="flex items-center justify-between">
-              <div class="md:block hidden p-4">
-                Zobacz więcej
-              </div>
-              <a routerLink="credits">
-                <div class="p-2 bg-teal-300 hover:scale-105 hover:bg-teal-400 duration-200 rounded-lg">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                  </svg> 
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="pt-4 text-xl font-bold">Obsada</div> 
-          <div class="grid md:grid-cols-6 grid-cols-3">
-            <div *ngFor="let cast of tvCreditsData.cast | slice:0:6" class="block m-2 bg-gray-100 hover:scale-105 duration-200 rounded-xl shadow-md">
-              <a href="#">
-                <div class="">
-                  <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/original/{{cast.profile_path}}" onerror="this.src='assets/images/person_blank.png';">
-                </div>       
-                <div class="block text-center text-sm pt-2">
-                  <div class="font-bold overflow">{{cast.name}}</div>
-                  <div class="py-2">{{cast.character}}</div>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="pt-4 text-xl font-bold">Twórcy</div>
-        <div class="grid md:grid-cols-6 grid-cols-3">
-          <div *ngFor="let crew of tvCreditsData.crew | slice:0:6" class="block m-2 bg-gray-100 hover:scale-105 duration-200 rounded-xl shadow-md">
-            <a href="#">
-              <div class="">
-                <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/original/{{crew.profile_path}}" onerror="this.src='assets/images/person_blank.png';">
-              </div>       
-              <div class="block text-center text-sm pt-2">
-                <div class="font-bold overflow">{{crew.name}}</div>
-                <div class="py-2">{{crew.job}}</div>
-              </div>
-            </a>
-          </div>
-        </div>
       </div>
     </div>
-    <div class="md:order-3">
-      <div class="p-4 justify-center items-center bg-white rounded-xl shadow-md">
+    <div class="md:order-3 order-4 md:col-span-1 row-span-2">
+      <div class="h-full p-2 justify-center items-center bg-white rounded-xl shadow-md">
         <div class="text-center text-2xl">
           Ranking
         </div>    
+      </div>
+    </div>
+    <div class="md:order-4 md:col-span-4 row-span-3 md:p-8 p-2 bg-white rounded-xl shadow-md">
+      <div class="flex items-center justify-between">
+        <div class="md:text-3xl text-xl font-bold">Obsada i twórzcy</div>
+        <div class="flex items-center justify-between">
+          <div class="md:block hidden p-4">
+            Zobacz więcej
+          </div>
+          <a routerLink="credits">
+            <div class="p-2 bg-teal-300 hover:scale-105 hover:bg-teal-400 duration-200 rounded-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+              </svg> 
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="pt-4 text-xl font-bold">Obsada</div> 
+      <div class="grid md:grid-cols-8 grid-cols-3">
+        <div *ngFor="let cast of tvCreditsData.cast | slice:0:8" class="block m-2 bg-gray-100 hover:scale-105 duration-200 rounded-xl shadow-md">
+          <a href="/person/{{cast.id}}">
+              <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/original/{{cast.profile_path}}" onerror="this.src='assets/images/person_blank.png';">      
+            <div class="block text-center text-sm pt-2">
+              <div class="font-bold overflow">{{cast.name}}</div>
+              <div class="py-2 truncate">{{cast.character}}</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="pt-4 text-xl font-bold">Twórcy</div>
+      <div class="grid md:grid-cols-8 grid-cols-3">
+        <div *ngFor="let crew of tvCreditsData.crew | slice:0:8" class="block m-2 bg-gray-100 hover:scale-105 duration-200 rounded-xl shadow-md">
+          <a href="/person/{{crew.id}}">
+              <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/original/{{crew.profile_path}}" onerror="this.src='assets/images/person_blank.png';">     
+            <div class="block text-center text-sm pt-2">
+              <div class="font-bold overflow">{{crew.name}}</div>
+              <div class="py-2 truncate">{{crew.job}}</div>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
   </div>

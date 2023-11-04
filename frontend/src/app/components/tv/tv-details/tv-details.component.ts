@@ -4,11 +4,11 @@ import { TvDetails } from 'shared/models/tv-details';
 import { TvCredits } from 'shared/models/tv-credits';
 
 @Component({
-  selector: 'app-tv-page',
-  templateUrl: './tv-page.component.html',
-  styleUrls: ['./tv-page.component.css']
+  selector: 'app-tv-details',
+  templateUrl: './tv-details.component.html',
+  styleUrls: ['./tv-details.component.css']
 })
-export class TvPageComponent {
+export class TvDetailsComponent {
 
   id!: string | null;
   tvDetailsData!: TvDetails;

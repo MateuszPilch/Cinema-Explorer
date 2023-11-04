@@ -1,22 +1,24 @@
 <div class="font-poppins">
   <div class="md:p-8 p-2 bg-gray-100 rounded-xl shadow-md">
     <div class="block md:p-8 p-2 bg-white rounded-xl shadow-md">
-      <div class="w-1/2 md:text-3xl text-2xl font-bold">Wyniki</div>
-      <div class="block pt-8 items-center">
-        <div class="md:text-lg text-base font-bold ">Kategorie</div>
-        <div class="flex pt-2 gap-2">
-          <button (click)="searchService.searchByType('multi')" class="p-2 md:text-lg text-sm hover:scale-105 duration-200 bg-teal-300 rounded-xl shadow-md">
-            Wszystko
-          </button>
-          <button (click)="searchService.searchByType('movie')" class="p-2 md:text-lg text-sm hover:scale-105 duration-200 bg-teal-300 rounded-xl shadow-md">
-            Film
-          </button>
-          <button (click)="searchService.searchByType('tv')" class="p-2 md:text-lg text-sm hover:scale-105 duration-200 bg-teal-300 rounded-xl shadow-md">
-            Serial
-          </button>
-          <button (click)="searchService.searchByType('person')" class="p-2 md:text-lg text-sm hover:scale-105 duration-200 bg-teal-300 rounded-xl shadow-md">
-            Osoba
-          </button>
+      <div class="md:flex block justify-between">
+        <div class="md:text-3xl text-xl font-bold">Wyniki</div>
+        <div class="flex items-center">
+          <div class="p-2 text-base">Filtry</div>
+          <div class="flex gap-2">
+            <button (click)="searchService.searchByType('multi')" class="p-2 md:text-lg text-sm hover:scale-105 duration-200 bg-teal-300 rounded-xl shadow-md">
+              Wszystko
+            </button>
+            <button (click)="searchService.searchByType('movie')" class="p-2 md:text-lg text-sm hover:scale-105 duration-200 bg-teal-300 rounded-xl shadow-md">
+              Film
+            </button>
+            <button (click)="searchService.searchByType('tv')" class="p-2 md:text-lg text-sm hover:scale-105 duration-200 bg-teal-300 rounded-xl shadow-md">
+              Serial
+            </button>
+            <button (click)="searchService.searchByType('person')" class="p-2 md:text-lg text-sm hover:scale-105 duration-200 bg-teal-300 rounded-xl shadow-md">
+              Osoba
+            </button>
+          </div>
         </div>
       </div>
       <div *ngIf="searchData.results.length == 0" class="flex text-xl md:my-8 my-2 md:p-4 p-2 duration-200 bg-gray-100 rounded-xl shadow-md">
