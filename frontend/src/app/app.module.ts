@@ -14,6 +14,7 @@ import { TvDetailsComponent } from './components/tv/tv-details/tv-details.compon
 import { TvCreditsComponent } from './components/tv/tv-credits/tv-credits.component';
 import { PersonDetailsComponent } from './components/person/person-details/person-details.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { MoviePageComponent } from './components/movie/movie-page/movie-page.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     SearchComponent,
     TvDetailsComponent,
     TvCreditsComponent,
-    PersonDetailsComponent
+    PersonDetailsComponent,
+    MoviePageComponent
   ],
   imports: [
     HttpClientModule,

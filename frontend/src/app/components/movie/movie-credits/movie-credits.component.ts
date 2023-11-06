@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MovieCredits } from 'shared/models/movie-credits';
-import { MovieDetails } from 'shared/models/movie-details';
+import { MovieCredits } from 'shared/models/movie/movie-credits';
+import { MovieDetails } from 'shared/models/movie/movie-details';
 
 @Component({
   selector: 'app-movie-credits',

@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
+import { MoviePageComponent } from './components/movie/movie-page/movie-page.component';
 import { MovieDetailsComponent } from './components/movie/movie-details/movie-details.component';
 import { MovieCreditsComponent } from './components/movie/movie-credits/movie-credits.component';
 import { movieDetailsResolver } from './services/movie/movie-details.service';
 import { movieCreditsResolver, movieCreditsResolverShort } from './services/movie/movie-credits.service';
+import { moviePageResolver } from './services/movie/movie-page.service';
 import { TvDetailsComponent } from './components/tv/tv-details/tv-details.component';
 import { TvCreditsComponent } from './components/tv/tv-credits/tv-credits.component';
 import { tvDetailsResolver } from './services/tv/tv-details.service';
@@ -20,6 +22,11 @@ const routes: Routes = [
       data: searchResolver,
     },
     runGuardsAndResolvers: 'always',
+  },
+  {
+    path: 'movie', component: MoviePageComponent, resolve: {
+      data: moviePageResolver
+    }
   },
   { path: 'movie/:id', component: MovieDetailsComponent, resolve: {
       details: movieDetailsResolver,

@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { TvDetails } from 'shared/models/tv-details';
+import { TvDetails } from 'shared/models/tv/tv-details';
 import { ResolveFn, ActivatedRouteSnapshot } from '@angular/router';
 
 @Injectable({

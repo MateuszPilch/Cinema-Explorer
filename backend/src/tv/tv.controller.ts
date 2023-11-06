@@ -1,7 +1,7 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { TvDetails } from 'shared/models/tv-details';
+import { TvDetails } from 'shared/models/tv/tv-details';
 import { TvDetailsService } from './tv-details/tv-details.service';
-import { TvCredits } from 'shared/models/tv-credits';
+import { TvCredits } from 'shared/models/tv/tv-credits';
 import { TvCreditsService } from './tv-credits/tv-credits.service';
 
 @Controller('tv')

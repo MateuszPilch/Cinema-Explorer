@@ -5,7 +5,7 @@
         <div class="md:text-3xl text-xl font-bold">Wyniki</div>
         <div class="flex items-center">
           <div class="p-2 text-base">Filtry</div>
-          <div class="flex gap-2">
+          <div class="flex gap-4">
             <button (click)="searchService.searchByType('multi')" class="p-2 md:text-lg text-sm hover:scale-105 duration-200 bg-teal-300 rounded-xl shadow-md">
               Wszystko
             </button>
@@ -71,7 +71,7 @@
             </div>
             <div class="md:flex w-fit block items-center">
               <div class="md:text-base text-xs">
-                Znana z:
+                Znana/y z:
               </div>
               <div class="md:flex block">
                 <div *ngFor="let know of result.known_for" class="flex p-2 m-2 md:text-sm text-xs line-clamp-1 bg-gray-100 rounded-xl shadow-md">

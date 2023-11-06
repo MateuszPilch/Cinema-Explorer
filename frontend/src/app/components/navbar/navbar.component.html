@@ -25,37 +25,37 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
           </svg>
         </div>
-        <input #search type="text" (keydown.enter)="searchService.searchMulti()" [(ngModel)]=searchService.searchQuery class="mx-3 w-full focus:outline-none" placeholder="Wyszukaj filmów, lokacji...">
+        <input #search type="text" (keydown.enter)="searchService.searchMulti()" [(ngModel)]=searchService.searchQuery class="mx-3 w-full focus:outline-none" placeholder="Szukaj filmów, seriali...">
       </div>
     </div>
     <!--Menu-->
     <div class="md:grid block grid-cols-6 md:mx-10 gap-10 text-xl text-center">
       <div class="group">
-        <a href="#">
+        <a href="movie">
           <div class="py-3 group-hover:text-teal-500 duration-200">Filmy</div>
           <div class="hidden md:flex w-full h-2 rounded-full bg-gray-200 group-hover:bg-teal-300 duration-200"></div>
         </a>
       </div>
       <div class="group">
-        <a href="#">
+        <a href="tv">
           <div class="py-3 group-hover:text-teal-500 duration-200">Seriale</div>
           <div class="hidden md:flex w-full h-2 rounded-full bg-gray-200 group-hover:bg-teal-300 duration-200"></div>
         </a>
       </div>
       <div class="group">
-        <a href="#">
+        <a href="map">
           <div class="py-3 group-hover:text-teal-500 duration-200">Mapa</div>
           <div class="hidden md:flex w-full h-2 rounded-full bg-gray-200 group-hover:bg-teal-300 duration-200"></div>
         </a>
       </div>
       <div class="group">
-        <a href="#">
+        <a href="ranking">
           <div class="py-3 group-hover:text-teal-500 duration-200">Ranking</div>
           <div class="hidden md:flex w-full h-2 rounded-full bg-gray-200 group-hover:bg-teal-300 duration-200"></div>
         </a>
       </div>
       <div class="group">
-        <a href="#">
+        <a href="user">
           <div class="py-3 group-hover:text-teal-500 duration-200">Profil</div>
           <div class="hidden md:flex w-full h-2 rounded-full bg-gray-200 group-hover:bg-teal-300 duration-200"></div>
         </a>

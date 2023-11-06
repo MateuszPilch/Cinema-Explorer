@@ -10,6 +10,9 @@ export class MovieDetails
   genres!: Genres[];
 
   @Expose()
+  id!: number;
+
+  @Expose()
   original_title!: string
   
   @Expose()

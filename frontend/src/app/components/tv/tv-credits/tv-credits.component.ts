@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TvCredits } from 'shared/models/tv-credits';
-import { TvDetails } from 'shared/models/tv-details';
+import { TvCredits } from 'shared/models/tv/tv-credits';
+import { TvDetails } from 'shared/models/tv/tv-details';
 
 @Component({
   selector: 'app-tv-credits',

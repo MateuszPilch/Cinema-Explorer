@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { ResolveFn, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { TvCredits } from 'shared/models/tv-credits';
+import { TvCredits } from 'shared/models/tv/tv-credits';
 
 @Injectable({
   providedIn: 'root'

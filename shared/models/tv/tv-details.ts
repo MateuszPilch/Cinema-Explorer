@@ -13,6 +13,9 @@ export class TvDetails
   genres!: Genres[];
 
   @Expose()
+  id!: number;
+
+  @Expose()
   name!: string;
 
   @Expose()
