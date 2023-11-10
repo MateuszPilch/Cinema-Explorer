@@ -15,6 +15,7 @@ import { TvCreditsComponent } from './components/tv/tv-credits/tv-credits.compon
 import { PersonDetailsComponent } from './components/person/person-details/person-details.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MoviePageComponent } from './components/movie/movie-page/movie-page.component';
+import { NgxSliderModule } from 'ngx-slider-v2';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { MoviePageComponent } from './components/movie/movie-page/movie-page.com
     FormsModule,
     BrowserModule,
     AppRoutingModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    NgxSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

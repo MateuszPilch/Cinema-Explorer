@@ -1,7 +1,7 @@
 <div class="font-poppins">
   <div class="block pb-4 m-auto justify-center items-center">
     <div class="flex md:w-1/6 w-1/2 pb-4 m-auto">
-      <img class="object-contain rounded-xl shadow-md" src="https://image.tmdb.org/t/p/original/{{personDetailsData.profile_path}}">
+      <img class="object-contain w-full h-full rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w200/{{personDetailsData.profile_path}}">
     </div>   
     <div class="flex pb-4 justify-center items-center text-3xl font-bold">
       {{personDetailsData.name}}
@@ -9,25 +9,30 @@
   </div>
   <div class="grid md:grid-cols-4 grid-cols-1 md:grid-rows-3 grid-flow-row md:gap-8 gap-2 md:p-8 p-2 bg-gray-100 rounded-xl shadow-md">
     <div class="md:order-2">
-      <div class="block h-fit p-4 justify-center items-center  bg-white rounded-xl shadow-md">
+      <div class="block h-fit p-4 justify-center items-center bg-white rounded-xl shadow-md">
         <div class="text-center text-2xl">
           Informacje
         </div>
-        <div class="block justify-around gap">
-          <div class="p-2 m-2 text-sm bg-gray-100 rounded-xl shadow-md">
-            Data urodzin: {{personDetailsData.birthday}}
+        <div class="block pt-4">
+          <div class="text-xl">
+            Ogólne
           </div>
-          <div class="p-2 m-2 text-sm bg-gray-100 rounded-xl shadow-md">
-            Miejsce urodzenia: {{personDetailsData.place_of_birth}}
-          </div>
-          <div *ngIf="personDetailsData.deathday != null" class="p-2 m-2 text-sm bg-gray-100 rounded-xl shadow-md">
-            Data śmierci: {{personDetailsData.deathday}}
-          </div>
-          <div class="flex p-2 m-2 text-sm bg-gray-100 rounded-xl shadow-md">
-            Płeć:
-            <div *ngIf="personDetailsData.gender == 1">Kobieta</div>
-            <div *ngIf="personDetailsData.gender == 2">Mężczyzna</div>
-            <div *ngIf="personDetailsData.gender == 3">Niebinarna</div>
+          <div class="block justify-around text-center">
+            <div class="flex p-2 m-4 text-sm justify-center bg-gray-100 rounded-xl shadow-md">
+              Płeć:
+              <div *ngIf="personDetailsData.gender == 1">Kobieta</div>
+              <div *ngIf="personDetailsData.gender == 2">Mężczyzna</div>
+              <div *ngIf="personDetailsData.gender == 3">Niebinarna</div>
+            </div>
+            <div class="p-2 m-4 text-sm bg-gray-100 rounded-xl shadow-md">
+              Data urodzin: {{personDetailsData.birthday}}
+            </div>
+            <div class="p-2 m-4 text-sm bg-gray-100 rounded-xl shadow-md">
+              Miejsce urodzenia: {{personDetailsData.place_of_birth}}
+            </div>
+            <div *ngIf="personDetailsData.deathday != null" class="p-2 m-4 text-sm bg-gray-100 rounded-xl shadow-md">
+              Data śmierci: {{personDetailsData.deathday}}
+            </div>
           </div>
         </div>
       </div>
@@ -51,7 +56,7 @@
           <div class="grid md:grid-cols-6 grid-cols-3">
             <div *ngFor="let result of personDetailsData.combined_credits.cast | slice:0:6" class="block m-2 bg-gray-100 hover:scale-105 duration-200 rounded-xl shadow-md">
               <a href="/{{result.media_type}}/{{result.id}}">
-                  <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/original/{{result.poster_path}}" onerror="this.src='assets/images/movie_blank.png';">    
+                  <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{result.poster_path}}" onerror="this.src='assets/images/movie_blank.png';">    
                 <div class="block text-center text-sm pt-2">
                   <div class="py-2 overflow">{{result.name}}{{result.title}}</div>
                 </div>

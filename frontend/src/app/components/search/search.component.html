@@ -83,7 +83,7 @@
           </div>
         </a>
       </div>
-      <div *ngIf="searchData.total_results != 0" class="flex pt-2 justify-center items-center gap-4">
+      <div *ngIf="searchData.total_results != 0" class="flex pt-8 justify-center items-center gap-4">
         <button (click)="searchService.changePage(1)" class="flex md:w-10 md:h-10 w-6 h-6 justify-center items-center hover:scale-125 hover:bg-teal-300 bg-gray-100 duration-200 rounded-full shadow-md">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="md:w-6 md:h-6 w-4 h-4">
             <path stroke-linecap="round" stroke-linejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />

@@ -31,16 +31,19 @@ export class SearchComponent {
 
   paginationStyle(): void {
     this.searchPagination = [];
-    if (this.searchService.searchPage <= 2) {
-      for (let i = 1; i <= this.searchData.total_pages && i <= 5; i++) {
+    const totalPages = Math.min(this.searchData.total_pages, 500);
+    const currentPage = Math.min(Math.max(this.searchData.page, 1), totalPages);
+
+    if (currentPage <= 3) {
+      for (let i = 1; i <= 5 && i <= totalPages; i++) {
         this.searchPagination.push(i);
       }
-    } else if (this.searchService.searchPage >= this.searchData.total_pages - 1) {
-      for (let i = this.searchData.total_pages - 4; i <= this.searchData.total_pages; i++) {
+    } else if (currentPage >= totalPages - 2) {
+      for (let i = totalPages - 4; i <= totalPages; i++) {
         this.searchPagination.push(i);
       }
     } else {
-      for (let i = this.searchService.searchPage - 2; i <= this.searchService.searchPage + 2; i++) {
+      for (let i = currentPage - 2; i <= currentPage + 2; i++) {
         this.searchPagination.push(i);
       }
     }

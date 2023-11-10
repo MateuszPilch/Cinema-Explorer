@@ -1,7 +1,8 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { MovieDetailsService } from './movie-details/movie-details.service';
 import { MovieCreditsService } from './movie-credits/movie-credits.service';
 import { MovieData } from 'shared/models/movie/movie-data';
+import { MovieFilter } from 'shared/models/movie/movie-filter';
 import { MovieDetails } from 'shared/models/movie/movie-details';
 import { MovieCredits } from 'shared/models/movie/movie-credits';
 import { MoviePageService } from './movie-page/movie-page.service';
@@ -16,8 +17,8 @@ export class MovieController {
   ) {}
 
   @Get()
-  getMovieData(@Param() param: string): Promise<MovieData> {
-    return this.moviePageService.getMovieData(param);
+  getMovieData(@Query() params: MovieFilter): Promise<MovieData> {
+    return this.moviePageService.getMovieData(params);
   }
 
   @Get(':id')

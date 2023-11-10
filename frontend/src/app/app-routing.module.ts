@@ -26,7 +26,8 @@ const routes: Routes = [
   {
     path: 'movie', component: MoviePageComponent, resolve: {
       data: moviePageResolver
-    }
+    },
+    runGuardsAndResolvers: 'always',
   },
   { path: 'movie/:id', component: MovieDetailsComponent, resolve: {
       details: movieDetailsResolver,

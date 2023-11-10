@@ -1,7 +1,7 @@
 <div class="font-poppins">
   <div class="block pb-4 m-auto justify-center items-center">
     <div class="flex md:w-1/6 w-1/2 pb-4 m-auto">
-      <img class="object-contain rounded-xl shadow-md" src="https://image.tmdb.org/t/p/original/{{movieDetailsData.poster_path}}">
+      <img class="object-contain w-full h-full rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w200/{{movieDetailsData.poster_path}}">
     </div>   
     <div class="flex pb-4 justify-center items-center text-3xl font-bold">
       {{movieDetailsData.title}}
@@ -115,50 +115,50 @@
             {{movieDetailsData.overview}}
           </div>
         </div>
-        <div class="block md:pt-8 pt-4">
-          <div class="text-xl font-bold">
-            Informacje
+      </div>
+    </div>
+    <div class="order-3 md:col-span-1 row-span-2">
+      <div class="block h-full p-4 justify-center items-center bg-white rounded-xl shadow-md">
+        <div class="text-center text-2xl">
+          Informacje
+        </div>
+        <div class="block pt-4">
+          <div class="text-xl">
+            Ogólne
           </div>
-          <div class="flex flex-wrap justify-around">
-            <div class="p-2 m-2 text-sm bg-gray-100 rounded-xl shadow-md">
+          <div class="block justify-around text-center">
+            <div class="p-2 m-4 text-sm bg-gray-100 rounded-xl shadow-md">
               Oryginalny tytuł: {{movieDetailsData.original_title}}
             </div>
-            <div class="p-2 m-2 text-sm bg-gray-100 rounded-xl shadow-md">
+            <div class="p-2 m-4 text-sm bg-gray-100 rounded-xl shadow-md">
               Premiera: {{movieDetailsData.release_date}}
             </div>
-            <div class="p-2 m-2 text-sm bg-gray-100 rounded-xl shadow-md">
+            <div class="p-2 m-4 text-sm bg-gray-100 rounded-xl shadow-md">
               Czas trwania: {{movieDetailsData.runtime}} minut
             </div>
-            <div class="p-2 m-2 text-sm bg-gray-100 rounded-xl shadow-md">
+            <div class="p-2 m-4 text-sm bg-gray-100 rounded-xl shadow-md">
               Budżet: {{movieDetailsData.budget}}$
             </div>
-            <div class="p-2 m-2 text-sm bg-gray-100 rounded-xl shadow-md">
+            <div class="p-2 m-4 text-sm bg-gray-100 rounded-xl shadow-md">
               Boxoffice: {{movieDetailsData.revenue}}$
             </div>
           </div>
-          <div class="block md:pt-8 pt-4">
-            <div class="text-xl font-bold">
-              Gatunki
-            </div>
-            <div class="flex flex-wrap justify-start text-sm">
-              <div *ngFor="let genre of movieDetailsData.genres" class="p-2 m-2 bg-gray-100 rounded-xl shadow-md">
-                {{genre.name}}
-              </div>
+        </div>
+        <div class="block pt-4">
+          <div class="text-xl">
+            Gatunki
+          </div>
+          <div class="flex flex-wrap justify-start text-sm">
+            <div *ngFor="let genre of movieDetailsData.genres" class="p-2 m-2 bg-gray-100 rounded-xl shadow-md">
+              {{genre.name}}
             </div>
           </div>
-        </div>
+        </div> 
       </div>
     </div>
-    <div class="md:order-3 order-4 md:col-span-1 row-span-2">
-      <div class="h-full p-2 justify-center items-center bg-white rounded-xl shadow-md">
-        <div class="text-center text-2xl">
-          Ranking
-        </div>    
-      </div>
-    </div>
-    <div class="md:order-4 md:col-span-4 row-span-3 md:p-8 p-2 bg-white rounded-xl shadow-md">
+    <div class="order-4 md:col-span-4 row-span-3 md:p-8 p-2 bg-white rounded-xl shadow-md">
       <div class="flex items-center justify-between">
-        <div class="md:text-3xl text-xl font-bold">Obsada i twórzcy</div>
+        <div class="md:text-3xl text-2xl">Obsada i twórzcy</div>
         <div class="flex items-center justify-between">
           <div class="md:block hidden p-4">
             Zobacz więcej
@@ -172,11 +172,11 @@
           </a>
         </div>
       </div>
-      <div class="pt-4 text-xl font-bold">Obsada</div>  
+      <div class="pt-4 text-xl">Obsada</div>  
       <div class="grid md:grid-cols-8 grid-cols-3">
         <div *ngFor="let cast of movieCreditsData.cast | slice:0:8" class="block m-2 bg-gray-100 hover:scale-105 duration-200 rounded-xl shadow-md">
           <a href="/person/{{cast.id}}">
-              <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/original/{{cast.profile_path}}" onerror="this.src='assets/images/person_blank.png';">     
+              <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{cast.profile_path}}" onerror="this.src='assets/images/person_blank.png';">     
             <div class="block text-center text-sm pt-2">
               <div class="font-bold overflow">{{cast.name}}</div>
               <div class="py-2 truncate">{{cast.character}}</div>
@@ -184,11 +184,11 @@
           </a>
         </div>
       </div>
-    <div class="pt-4 text-xl font-bold">Twórcy</div>
+    <div class="pt-4 text-xl">Twórcy</div>
     <div class="grid md:grid-cols-8 grid-cols-3">
       <div *ngFor="let crew of movieCreditsData.crew | slice:0:8" class="block m-2 bg-gray-100 hover:scale-105 duration-200 rounded-xl shadow-md">
         <a href="/person/{{crew.id}}">
-            <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/original/{{crew.profile_path}}" onerror="this.src='assets/images/person_blank.png';">       
+            <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{crew.profile_path}}" onerror="this.src='assets/images/person_blank.png';">       
           <div class="block text-center text-sm pt-2">
             <div class="font-bold overflow">{{crew.name}}</div>
             <div class="py-2 truncate">{{crew.job}}</div>
