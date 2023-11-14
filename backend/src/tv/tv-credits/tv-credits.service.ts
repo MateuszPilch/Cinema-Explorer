@@ -17,7 +17,7 @@ export class TvCreditsService {
       }
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
-    const res = plainToClass(TvCredits, data);
+    const res = plainToClass(TvCredits, data, { excludeExtraneousValues: true });
     return res;
   }
 
@@ -30,7 +30,7 @@ export class TvCreditsService {
       }
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
-    let res = plainToClass(TvCredits, data);
+    let res = plainToClass(TvCredits, data, { excludeExtraneousValues: true });
     res.cast = res.cast.slice(0,10);
     res.crew = res.crew.slice(0,10);
     return res;

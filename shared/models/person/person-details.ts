@@ -11,10 +11,11 @@ export class PersonDetails {
   @Expose()
   deathday!: string;
 
-  combined_credits!: CombinedCredits; 
-
   @Expose()
   gender!: number;
+
+  @Expose()
+  known_for_department!: string;
 
   @Expose()
   name!:string;
@@ -25,9 +26,4 @@ export class PersonDetails {
   @Expose()
   profile_path!: string;
 
-}
-
-interface CombinedCredits {
-  cast: any[];
-  crew: any[];
 }

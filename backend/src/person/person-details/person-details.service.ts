@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom, map } from 'rxjs';
-import { PersonDetails } from 'shared/models/person-details';
+import { PersonDetails } from 'shared/models/person/person-details';
 import { plainToClass } from "class-transformer"; 
 
 @Injectable()
@@ -9,7 +9,7 @@ export class PersonDetailsService {
   constructor(private readonly httpService: HttpService) {}
 
   async getPersonDetails(id: string): Promise<PersonDetails> {
-    const url = `https://api.themoviedb.org/3/person/${id}?language=pl-PL&append_to_response=combined_credits`;
+    const url = `https://api.themoviedb.org/3/person/${id}?language=pl-PL`;
     const headers = {
       headers: {
         accept: 'application/json',
@@ -17,7 +17,7 @@ export class PersonDetailsService {
       }
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
-    const res = plainToClass(PersonDetails, data, { excludeExtraneousValues: false });
+    const res = plainToClass(PersonDetails, data, { excludeExtraneousValues: true });
     return res;
   }
 }

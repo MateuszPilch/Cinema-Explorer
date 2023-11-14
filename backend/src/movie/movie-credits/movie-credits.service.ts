@@ -18,7 +18,7 @@ export class MovieCreditsService {
       }
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
-    const res = plainToClass(MovieCredits, data);
+    const res = plainToClass(MovieCredits, data,{ excludeExtraneousValues: true });
     return res;
   }
 
@@ -31,7 +31,7 @@ export class MovieCreditsService {
       }
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
-    let res = plainToClass(MovieCredits, data);
+    let res = plainToClass(MovieCredits, data, { excludeExtraneousValues: true });
     res.cast = res.cast.slice(0,10);
     res.crew = res.crew.slice(0,10);
     return res;

@@ -15,6 +15,7 @@ import { SearchComponent } from './components/search/search.component';
 import { searchResolver } from './services/search/search.service';
 import { PersonDetailsComponent } from './components/person/person-details/person-details.component';
 import { personDetailsResolver } from './services/person/person-details.service';
+import { personCreditsResolver } from './services/person/person-credits.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -53,6 +54,7 @@ const routes: Routes = [
   {
     path: 'person/:id', component: PersonDetailsComponent, resolve: {
       details: personDetailsResolver,
+      credits: personCreditsResolver,
     }
   },
 ];

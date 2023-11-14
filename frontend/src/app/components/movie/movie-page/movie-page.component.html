@@ -27,22 +27,16 @@
               <div class="text-lg text-center">Sortuj</div>
               <div class="p-2 grid md:grid-cols-3 grid-cols-2 gap-4">
                 <button 
-                  (click)="this.moviePageService.setFilter('sort_by','vote_average.asc')"
-                  [ngClass]="this.moviePageService.movieFilter.sort_by === 'vote_average.asc' ? 'bg-teal-300' : 'bg-white'"
-                  class="p-2 md:text-sm text-xs hover:scale-105 duration-200 rounded-xl shadow-md">
-                  Oceny rosnąco
-                </button>
-                <button 
                   (click)="this.moviePageService.setFilter('sort_by','vote_average.desc')"
                   [ngClass]="this.moviePageService.movieFilter.sort_by === 'vote_average.desc' ? 'bg-teal-300' : 'bg-white'"
                   class="p-2 md:text-sm text-xs hover:scale-105 duration-200 rounded-xl shadow-md">
                   Oceny malejąco
                 </button>
                 <button 
-                  (click)="this.moviePageService.setFilter('sort_by','popularity.asc')"
-                  [ngClass]="this.moviePageService.movieFilter.sort_by === 'popularity.asc' ? 'bg-teal-300' : 'bg-white'"
+                  (click)="this.moviePageService.setFilter('sort_by','vote_average.asc')"
+                  [ngClass]="this.moviePageService.movieFilter.sort_by === 'vote_average.asc' ? 'bg-teal-300' : 'bg-white'"
                   class="p-2 md:text-sm text-xs hover:scale-105 duration-200 rounded-xl shadow-md">
-                  Popularność rosnąco
+                  Oceny rosnąco
                 </button>
                 <button 
                   (click)="this.moviePageService.setFilter('sort_by','popularity.desc')"
@@ -51,16 +45,22 @@
                   Popularność malejąco
                 </button>
                 <button 
-                  (click)="this.moviePageService.setFilter('sort_by','primary_release_date.asc')"
-                  [ngClass]="this.moviePageService.movieFilter.sort_by === 'primary_release_date.asc' ? 'bg-teal-300' : 'bg-white'"
+                  (click)="this.moviePageService.setFilter('sort_by','popularity.asc')"
+                  [ngClass]="this.moviePageService.movieFilter.sort_by === 'popularity.asc' ? 'bg-teal-300' : 'bg-white'"
                   class="p-2 md:text-sm text-xs hover:scale-105 duration-200 rounded-xl shadow-md">
-                  Data premiery rosnąco
+                  Popularność rosnąco
                 </button>
                 <button 
                   (click)="this.moviePageService.setFilter('sort_by','primary_release_date.desc')"
                   [ngClass]="this.moviePageService.movieFilter.sort_by === 'primary_release_date.desc' ? 'bg-teal-300' : 'bg-white'"
                   class="p-2 md:text-sm text-xs hover:scale-105 duration-200 rounded-xl shadow-md">
                   Data premiery malejąco
+                </button>
+                <button 
+                  (click)="this.moviePageService.setFilter('sort_by','primary_release_date.asc')"
+                  [ngClass]="this.moviePageService.movieFilter.sort_by === 'primary_release_date.asc' ? 'bg-teal-300' : 'bg-white'"
+                  class="p-2 md:text-sm text-xs hover:scale-105 duration-200 rounded-xl shadow-md">
+                  Data premiery rosnąco
                 </button>
               </div>
             </div>
@@ -125,7 +125,7 @@
         </div>
       </div>
       <div *ngIf="movieData.total_results != 0" class="flex pt-8 justify-center items-center gap-4">
-        <button (click)="moviePageService.changePage(1)" class="flex md:w-10 md:h-10 w-6 h-6 justify-center items-center hover:scale-125 hover:bg-teal-300 bg-gray-100 duration-200 rounded-full shadow-md">
+        <button *ngIf="moviePageService.movieFilter.page != 1"(click)="moviePageService.changePage(1)" class="flex md:w-10 md:h-10 w-6 h-6 justify-center items-center hover:scale-125 hover:bg-teal-300 bg-gray-100 duration-200 rounded-full shadow-md">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="md:w-6 md:h-6 w-4 h-4">
             <path stroke-linecap="round" stroke-linejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
           </svg>          
@@ -138,12 +138,12 @@
             {{page}}
           </button>
         </div>
-        <button *ngIf="movieData.total_pages <= 500" (click)="moviePageService.changePage(movieData.total_pages)" class="flex md:w-10 md:h-10 w-6 h-6 justify-center items-center hover:scale-125 hover:bg-teal-300 bg-gray-100 duration-200 rounded-full shadow-md">
+        <button *ngIf="movieData.total_pages <= 500 && moviePageService.movieFilter.page != movieData.total_pages" (click)="moviePageService.changePage(movieData.total_pages)" class="flex md:w-10 md:h-10 w-6 h-6 justify-center items-center hover:scale-125 hover:bg-teal-300 bg-gray-100 duration-200 rounded-full shadow-md">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="md:w-6 md:h-6 w-4 h-4">
             <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
           </svg>          
         </button>
-        <button *ngIf="movieData.total_pages > 500" (click)="moviePageService.changePage(500)" class="flex md:w-10 md:h-10 w-6 h-6 justify-center items-center hover:scale-125 hover:bg-teal-300 bg-gray-100 duration-200 rounded-full shadow-md">
+        <button *ngIf="movieData.total_pages > 500 && moviePageService.movieFilter.page != 500" (click)="moviePageService.changePage(500)" class="flex md:w-10 md:h-10 w-6 h-6 justify-center items-center hover:scale-125 hover:bg-teal-300 bg-gray-100 duration-200 rounded-full shadow-md">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="md:w-6 md:h-6 w-4 h-4">
             <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
           </svg>          
