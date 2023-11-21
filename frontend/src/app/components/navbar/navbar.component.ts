@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRouteSnapshot, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { SearchService } from 'src/app/services/search/search.service';
 
 @Component({
@@ -11,7 +11,7 @@ export class NavbarComponent
 {
   mobileMenuEnable: boolean = false;
   
-  constructor(public searchService: SearchService) {}
+  constructor(public searchService: SearchService, public authService: AuthService) {}
   
   toggleMobileMenu(): void {
     this.mobileMenuEnable = !this.mobileMenuEnable;

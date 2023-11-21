@@ -13,7 +13,7 @@
       <div class="pt-4 text-xl">Obsada</div>
       <div class="grid md:grid-cols-8 grid-cols-3">
         <div *ngFor="let cast of movieCreditsData.cast" class="block m-2 bg-gray-100 hover:scale-105 duration-200 rounded-xl shadow-md">
-          <a href="/person/{{cast.id}}">
+          <a routerLink="/person/{{cast.id}}">
               <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{cast.profile_path}}" onerror="this.src='assets/images/person_blank.png';">   
             <div class="block text-center text-sm pt-2">
               <div class="font-bold overflow">{{cast.name}}</div>
@@ -25,7 +25,7 @@
       <div class="pt-4 text-xl">Twórcy</div>
       <div class="grid md:grid-cols-8 grid-cols-3">
         <div *ngFor="let crew of movieCreditsData.crew" class="block m-2 bg-gray-100 hover:scale-105 duration-200 rounded-xl shadow-md">
-          <a href="/person/{{crew.id}}">
+          <a routerLink="/person/{{crew.id}}">
               <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{crew.profile_path}}" onerror="this.src='assets/images/person_blank.png';">     
             <div class="block text-center text-sm pt-2">
               <div class="font-bold overflow">{{crew.name}}</div>

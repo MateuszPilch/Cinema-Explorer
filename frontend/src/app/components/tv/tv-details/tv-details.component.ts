@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TvDetails } from 'shared/models/tv/tv-details';
 import { TvCredits } from 'shared/models/tv/tv-credits';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-tv-details',
@@ -14,7 +15,7 @@ export class TvDetailsComponent {
   tvDetailsData!: TvDetails;
   tvCreditsData!: TvCredits;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, public authService: AuthService) {}
 
   ngOnInit() {
     this.route.data.subscribe(({details}) => {

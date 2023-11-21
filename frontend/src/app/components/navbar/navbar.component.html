@@ -2,7 +2,7 @@
   <div class="flex justify-around">
     <!--Logo-->
     <div class="text-3xl">
-      <a href="">Logo</a>
+      <a routerLink="">Logo</a>
     </div>
     <!--Mobile Menu Button-->
     <div class="md:hidden flex">
@@ -31,32 +31,35 @@
     <!--Menu-->
     <div class="md:grid block grid-cols-6 md:mx-10 gap-10 text-xl text-center">
       <div class="group">
-        <a href="movie">
+        <a routerLink="movie">
           <div class="py-3 group-hover:text-teal-500 duration-200">Filmy</div>
           <div class="hidden md:flex w-full h-2 rounded-full bg-gray-200 group-hover:bg-teal-300 duration-200"></div>
         </a>
       </div>
       <div class="group">
-        <a href="tv">
+        <a routerLink="tv">
           <div class="py-3 group-hover:text-teal-500 duration-200">Seriale</div>
           <div class="hidden md:flex w-full h-2 rounded-full bg-gray-200 group-hover:bg-teal-300 duration-200"></div>
         </a>
       </div>
       <div class="group">
-        <a href="map">
+        <a routerLink="map">
           <div class="py-3 group-hover:text-teal-500 duration-200">Mapa</div>
           <div class="hidden md:flex w-full h-2 rounded-full bg-gray-200 group-hover:bg-teal-300 duration-200"></div>
         </a>
       </div>
       <div class="group">
-        <a href="user">
+        <a routerLink="user">
           <div class="py-3 group-hover:text-teal-500 duration-200">Profil</div>
           <div class="hidden md:flex w-full h-2 rounded-full bg-gray-200 group-hover:bg-teal-300 duration-200"></div>
         </a>
       </div>
-      <div class="md:flex text-lg text-center">
-        <button class="p-3 bg-teal-300 hover:bg-teal-400 hover:scale-105 duration-200 rounded-lg">Zaloguj</button>
-      </div>
+      <button *ngIf="!authService.isAuthenticated()" routerLink="auth" class="md:flex p-3 items-center justify-center bg-teal-300 hover:bg-teal-400 hover:scale-105 duration-200 rounded-lg shadow-md">
+        Zaloguj     
+      </button>
+      <button *ngIf="authService.isAuthenticated()" (click)="authService.logout()" class="md:flex p-3 items-center justify-center bg-teal-300 hover:bg-teal-400 hover:scale-105 duration-200 rounded-lg shadow-md">
+        Wyloguj
+      </button>
     </div>
   </div>
 </nav>

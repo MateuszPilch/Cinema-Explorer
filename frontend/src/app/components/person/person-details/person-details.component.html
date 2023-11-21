@@ -55,7 +55,7 @@
           </div>
           <div *ngIf="personDetailsData.known_for_department == 'Acting'" class="grid md:grid-cols-6 grid-cols-3">
             <div *ngFor="let result of personCreditsData.cast | slice:0:6" class="block m-2 bg-gray-100 hover:scale-105 duration-200 rounded-xl shadow-md">
-              <a href="/{{result.media_type}}/{{result.id}}">
+              <a routerLink="/{{result.media_type}}/{{result.id}}">
                   <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{result.poster_path}}" onerror="this.src='assets/images/movie_blank.png';">    
                 <div class="block text-center text-sm pt-2">
                   <div class="py-2 overflow">{{result.name}}{{result.title}}</div>
@@ -65,7 +65,7 @@
           </div>
           <div *ngIf="personDetailsData.known_for_department != 'Acting'" class="grid md:grid-cols-6 grid-cols-3">
             <div *ngFor="let result of personCreditsData.crew | slice:0:6" class="block m-2 bg-gray-100 hover:scale-105 duration-200 rounded-xl shadow-md">
-              <a href="/{{result.media_type}}/{{result.id}}">
+              <a routerLink="/{{result.media_type}}/{{result.id}}">
                   <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{result.poster_path}}" onerror="this.src='assets/images/movie_blank.png';">    
                 <div class="block text-center text-sm pt-2">
                   <div class="py-2 overflow">{{result.name}}{{result.title}}</div>
@@ -95,7 +95,7 @@
       </div>
       <div class="pt-4 text-xl">Aktor</div>
       <div *ngFor="let result of personCreditsData.cast" class="flex md:h-52 min-h-40 md:mb-8 mb-2 md:p-4 p-2 hover:scale-[1.02] duration-200 bg-gray-100 rounded-xl shadow-md">
-        <a href="/{{result.media_type}}/{{result.id}}" class="flex w-full items-center">
+        <a routerLink="/{{result.media_type}}/{{result.id}}" class="flex w-full items-center">
           <img class="md:w-fit w-1/4 md:h-full h-fit object-fill rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w500/{{result.poster_path}}" onerror="this.src='assets/images/movie_blank.png';">
           <div class="block w-[90%] h-full md:ml-4 ml-2 md:p-4 p-2 bg-white rounded-xl shadow-md ">
             <div class="flex justify-between">
@@ -121,7 +121,7 @@
       </div>
       <div class="pt-4 text-xl">Twórca</div>
       <div *ngFor="let result of personCreditsData.crew" class="flex md:h-52 min-h-40 md:mb-8 mb-2 md:p-4 p-2 hover:scale-[1.02] duration-200 bg-gray-100 rounded-xl shadow-md">
-        <a href="/{{result.media_type}}/{{result.id}}" class="flex w-full items-center">
+        <a routerLink="/{{result.media_type}}/{{result.id}}" class="flex w-full items-center">
           <img class="md:w-fit w-1/4 md:h-full h-fit object-fill rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w500/{{result.poster_path}}" onerror="this.src='assets/images/movie_blank.png';">
           <div class="block w-[90%] h-full md:ml-4 ml-2 md:p-4 p-2 bg-white rounded-xl shadow-md ">
             <div class="flex justify-between">

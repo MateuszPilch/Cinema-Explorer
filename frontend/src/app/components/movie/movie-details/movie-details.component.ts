@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieDetails } from 'shared/models/movie/movie-details';
 import { MovieCredits } from 'shared/models/movie/movie-credits';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-movie-details',
@@ -14,7 +15,7 @@ export class MovieDetailsComponent {
   movieDetailsData!: MovieDetails;
   movieCreditsData!: MovieCredits
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute,public authService: AuthService) {}
 
   ngOnInit() {
     this.route.data.subscribe(({details}) => {

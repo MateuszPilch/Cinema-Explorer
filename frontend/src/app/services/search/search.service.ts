@@ -32,13 +32,13 @@ export class SearchService {
   }
 
   loadSearch(): void {
-    this.searchType = localStorage.getItem('type') || 'multi';
-    this.searchQuery = localStorage.getItem('query') || '';
+    this.searchType = sessionStorage.getItem('type') || 'multi';
+    this.searchQuery = sessionStorage.getItem('query') || '';
   }
 
   saveSearch(): void {
-    localStorage.setItem('type', this.searchType);
-    localStorage.setItem('query', this.searchQuery);
+    sessionStorage.setItem('type', this.searchType);
+    sessionStorage.setItem('query', this.searchQuery);
   }
 
   search(): void {

@@ -16,47 +16,56 @@ import { searchResolver } from './services/search/search.service';
 import { PersonDetailsComponent } from './components/person/person-details/person-details.component';
 import { personDetailsResolver } from './services/person/person-details.service';
 import { personCreditsResolver } from './services/person/person-credits.service';
+import { AuthComponent } from './components/auth/auth.component';
+import { HomeLayoutComponent } from './components/layouts/home-layout.component';
+import { AuthLayoutComponent } from './components/layouts/auth-layout.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'search', component: SearchComponent, resolve: {
-      data: searchResolver,
+  { path: '', component: HomeLayoutComponent,
+    children: [
+    { path: '', component: HomeComponent},
+    { path: 'search', component: SearchComponent, resolve: {
+        data: searchResolver,
+      },
+      runGuardsAndResolvers: 'always',
     },
-    runGuardsAndResolvers: 'always',
-  },
-  {
-    path: 'movie', component: MoviePageComponent, resolve: {
-      data: moviePageResolver
+    { path: 'movie', component: MoviePageComponent, resolve: {
+        data: moviePageResolver
+      },
+      runGuardsAndResolvers: 'always',
     },
-    runGuardsAndResolvers: 'always',
-  },
-  { path: 'movie/:id', component: MovieDetailsComponent, resolve: {
+    { path: 'movie/:id', component: MovieDetailsComponent, resolve: {
+        details: movieDetailsResolver,
+        credits: movieCreditsResolverShort
+      }
+    },
+    { path: 'movie/:id/credits', component: MovieCreditsComponent, resolve: {
       details: movieDetailsResolver,
-      credits: movieCreditsResolverShort
-    }
-  },
-  { path: 'movie/:id/credits', component: MovieCreditsComponent, resolve: {
-    details: movieDetailsResolver,
-      credits: movieCreditsResolver
-    }
-  },
-  {
-    path: 'tv/:id', component: TvDetailsComponent, resolve: {
+        credits: movieCreditsResolver
+      }
+    },
+    { path: 'tv/:id', component: TvDetailsComponent, resolve: {
+        details: tvDetailsResolver,
+        credits: tvCreditsResolverShort
+      }
+    },
+    { path: 'tv/:id/credits', component: TvCreditsComponent, resolve: {
       details: tvDetailsResolver,
-      credits: tvCreditsResolverShort
-    }
+      credits: tvCreditsResolver
+      }
+    },
+    { path: 'person/:id', component: PersonDetailsComponent, resolve: {
+        details: personDetailsResolver,
+        credits: personCreditsResolver,
+      }
+    }]
   },
-  { path: 'tv/:id/credits', component: TvCreditsComponent, resolve: {
-    details: tvDetailsResolver,
-    credits: tvCreditsResolver
-    }
+  { path: '', component: AuthLayoutComponent,
+    children: [
+      { path: 'auth', component: AuthComponent}
+    ]
   },
-  {
-    path: 'person/:id', component: PersonDetailsComponent, resolve: {
-      details: personDetailsResolver,
-      credits: personCreditsResolver,
-    }
-  },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

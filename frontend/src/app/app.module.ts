@@ -16,6 +16,9 @@ import { PersonDetailsComponent } from './components/person/person-details/perso
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MoviePageComponent } from './components/movie/movie-page/movie-page.component';
 import { NgxSliderModule } from 'ngx-slider-v2';
+import { AuthComponent } from './components/auth/auth.component';
+import { AuthLayoutComponent } from './components/layouts/auth-layout.component';
+import { HomeLayoutComponent } from './components/layouts/home-layout.component';
 
 
 @NgModule({
@@ -23,6 +26,9 @@ import { NgxSliderModule } from 'ngx-slider-v2';
     AppComponent,
     NavbarComponent,
     HomeComponent,
+    HomeLayoutComponent,
+    AuthComponent,
+    AuthLayoutComponent,
     MapPageComponent,
     MovieDetailsComponent,
     MovieCreditsComponent,
@@ -30,7 +36,7 @@ import { NgxSliderModule } from 'ngx-slider-v2';
     TvDetailsComponent,
     TvCreditsComponent,
     PersonDetailsComponent,
-    MoviePageComponent
+    MoviePageComponent,
   ],
   imports: [
     HttpClientModule,

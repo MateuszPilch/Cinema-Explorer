@@ -29,37 +29,37 @@
                 <button 
                   (click)="this.moviePageService.setFilter('sort_by','vote_average.desc')"
                   [ngClass]="this.moviePageService.movieFilter.sort_by === 'vote_average.desc' ? 'bg-teal-300' : 'bg-white'"
-                  class="p-2 md:text-sm text-xs hover:scale-105 duration-200 rounded-xl shadow-md">
+                  class="p-2 md:text-sm text-xs hover:scale-105 duration-200 rounded-full shadow-md">
                   Oceny malejąco
                 </button>
                 <button 
                   (click)="this.moviePageService.setFilter('sort_by','vote_average.asc')"
                   [ngClass]="this.moviePageService.movieFilter.sort_by === 'vote_average.asc' ? 'bg-teal-300' : 'bg-white'"
-                  class="p-2 md:text-sm text-xs hover:scale-105 duration-200 rounded-xl shadow-md">
+                  class="p-2 md:text-sm text-xs hover:scale-105 duration-200 rounded-full shadow-md">
                   Oceny rosnąco
                 </button>
                 <button 
                   (click)="this.moviePageService.setFilter('sort_by','popularity.desc')"
                   [ngClass]="this.moviePageService.movieFilter.sort_by === 'popularity.desc' ? 'bg-teal-300' : 'bg-white'"
-                  class="p-2 md:text-sm text-xs hover:scale-105 duration-200 rounded-xl shadow-md">
+                  class="p-2 md:text-sm text-xs hover:scale-105 duration-200 rounded-full shadow-md">
                   Popularność malejąco
                 </button>
                 <button 
                   (click)="this.moviePageService.setFilter('sort_by','popularity.asc')"
                   [ngClass]="this.moviePageService.movieFilter.sort_by === 'popularity.asc' ? 'bg-teal-300' : 'bg-white'"
-                  class="p-2 md:text-sm text-xs hover:scale-105 duration-200 rounded-xl shadow-md">
+                  class="p-2 md:text-sm text-xs hover:scale-105 duration-200 rounded-full shadow-md">
                   Popularność rosnąco
                 </button>
                 <button 
                   (click)="this.moviePageService.setFilter('sort_by','primary_release_date.desc')"
                   [ngClass]="this.moviePageService.movieFilter.sort_by === 'primary_release_date.desc' ? 'bg-teal-300' : 'bg-white'"
-                  class="p-2 md:text-sm text-xs hover:scale-105 duration-200 rounded-xl shadow-md">
+                  class="p-2 md:text-sm text-xs hover:scale-105 duration-200 rounded-full shadow-md">
                   Data premiery malejąco
                 </button>
                 <button 
                   (click)="this.moviePageService.setFilter('sort_by','primary_release_date.asc')"
                   [ngClass]="this.moviePageService.movieFilter.sort_by === 'primary_release_date.asc' ? 'bg-teal-300' : 'bg-white'"
-                  class="p-2 md:text-sm text-xs hover:scale-105 duration-200 rounded-xl shadow-md">
+                  class="p-2 md:text-sm text-xs hover:scale-105 duration-200 rounded-full shadow-md">
                   Data premiery rosnąco
                 </button>
               </div>
@@ -105,7 +105,7 @@
       </div>
       <div class="grid md:grid-cols-5 grid-cols-2 pt-8 gap-8">
         <div *ngFor="let movie of movieData.results" class="block bg-gray-100 hover:scale-105 duration-200 rounded-xl shadow-md">
-          <a href="/movie/{{movie.id}}">
+          <a routerLink="/movie/{{movie.id}}">
               <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{movie.poster_path}}" onerror="this.src='assets/images/movie_blank.png';">   
               <div class="block text-center text-sm pt-2">
               <div class="font-bold overflow">{{movie.title}}</div>
