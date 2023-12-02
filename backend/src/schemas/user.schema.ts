@@ -17,7 +17,36 @@ export class User extends Document {
 
   @Prop()
   profile_picture: string;
+
+  @Prop()
+  movie_list: MovieList[]
+
+  @Prop()
+  tv_list: TvList[]
   
+}
+
+class MovieList {
+  @Prop()
+  movie_id: number;
+
+  @Prop()
+  rate: number;
+
+  @Prop()
+  review: string;
+}
+
+class TvList {
+
+  @Prop()
+  tv_id: number;
+
+  @Prop()
+  rate: number;
+
+  @Prop()
+  review: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

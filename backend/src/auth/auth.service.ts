@@ -2,7 +2,7 @@ import { BadRequestException, ConflictException, Injectable } from '@nestjs/comm
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcryptjs';
-import { User } from './schemas/user.schema';
+import { User } from '../schemas/user.schema';
 import { JwtService } from '@nestjs/jwt';
 import { SignupDto } from './dto/signup.dto';
 import { LoginDto } from './dto/login.dto';
@@ -117,13 +117,4 @@ export class AuthService {
   private async hashPassword(password: string): Promise<string> {
     return bcrypt.hash(password, 14)
   }
-
-// async getData(id:string, user: User): Promise<any> {
-//   console.log(id,user._id);
-//   if(id === user._id.toString()) {
-//     return await this.userModel.findOne({ _id: id });
-//   } else {
-//     return new UnauthorizedException();
-//   }
-// }
 }

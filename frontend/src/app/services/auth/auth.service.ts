@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  public authToken!: string;
+  private authToken!: string;
 
-  constructor(private http: HttpClient, private router: Router) {}
-
-  ngOnInit(): void {
-    this.authToken = sessionStorage.getItem('token') || '';
+  constructor(private http: HttpClient, private router: Router) {
+    this.authToken = localStorage.getItem('token') || '';
   }
 
   public signup(nickname: string, email: string, password: string, confirmedPassword: string): void {
@@ -24,7 +22,7 @@ export class AuthService {
       confirmedPassword
     })).then((res) => {
       this.authToken = res.token;
-      sessionStorage.setItem('token', this.authToken);
+      localStorage.setItem('token', this.authToken);
       this.router.navigate(['/']);
     }).catch((error) => {
       console.log(error);
@@ -37,7 +35,7 @@ export class AuthService {
       password
     })).then((res) => {
       this.authToken = res.token;
-      sessionStorage.setItem('token', this.authToken);
+      localStorage.setItem('token', this.authToken);
       this.router.navigate(['/']);
     }).catch((error) => {
       console.log(error);
@@ -54,7 +52,7 @@ export class AuthService {
           accessToken: event.data.accessToken
         })).then((res) => {
           this.authToken = res.token;
-          sessionStorage.setItem('token', this.authToken);
+          localStorage.setItem('token', this.authToken);
           this.router.navigate(['/']);
         }).catch((error) => {
           console.log(error);
@@ -72,7 +70,7 @@ export class AuthService {
           accessToken: event.data.accessToken
         })).then((res) => {
           this.authToken = res.token;
-          sessionStorage.setItem('token', this.authToken);
+          localStorage.setItem('token', this.authToken);
           this.router.navigate(['/']);
         }).catch((error) => {
           console.log(error);
@@ -83,7 +81,11 @@ export class AuthService {
   
   public logout(): void {
     this.authToken = '';
-    sessionStorage.removeItem('token');
+    localStorage.removeItem('token');
+  }
+
+  public getAuthToken(): string {
+    return this.authToken;
   }
 
   public isAuthenticated(): boolean {

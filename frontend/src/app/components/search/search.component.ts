@@ -20,7 +20,6 @@ export class SearchComponent {
       this.searchData = data;
       this.dataFormat();
       this.paginationStyle();
-      console.log(this.searchData);
     });
   }
 
