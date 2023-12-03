@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Param, Query, Body, UseGuards, Req } from '@nestjs/common';
+import { Controller, Post, Param, Query, Body, UseGuards, Req, Get } from '@nestjs/common';
 import { MovieDetailsService } from './movie-details/movie-details.service';
 import { MovieCreditsService } from './movie-credits/movie-credits.service';
 import { MovieData } from 'shared/models/movie/movie-data';
@@ -6,8 +6,9 @@ import { MovieFilter } from 'shared/models/movie/movie-filter';
 import { MovieDetails } from 'shared/models/movie/movie-details';
 import { MovieCredits } from 'shared/models/movie/movie-credits';
 import { MoviePageService } from './movie-page/movie-page.service';
-import { MovieListDto } from './dto/movielist.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { MovieReview } from 'shared/models/movie/movie-review';
+import { MovieReviewDto } from './dto/moviereview.dto';
 
 @Controller('movie')
 export class MovieController {
@@ -21,6 +22,12 @@ export class MovieController {
   @Get()
   getMovieData(@Query() params: MovieFilter): Promise<MovieData> {
     return this.moviePageService.getMovieData(params);
+  }
+
+  @Get('moviereview')
+  @UseGuards(AuthGuard('jwt'))
+  getMovieReview(@Req() req, @Query() params: any): Promise<MovieReview> {
+    return this.movieDetailsService.getMovieReview(req.user._id, params.movie_id);
   }
 
   @Get(':id')
@@ -38,15 +45,9 @@ export class MovieController {
     return this.movieCreditsService.getMovieCreditsShort(param);
   }
 
-  @Get('moviereview')
-  @UseGuards(AuthGuard('jwt'))
-  getMovieReview(@Req() req, @Param('movie_id') movie_id: number): Promise<any> {
-    return this.movieDetailsService.getMovieReview(req.user._id, movie_id);
-  }
-
   @Post('moviereview')
   @UseGuards(AuthGuard('jwt'))
-  addMovieReview(@Req() req, @Body() movieList: MovieListDto): Promise<any> {
-    return this.movieDetailsService.addMovieReview(req.user._id, movieList);
+  setMovieReview(@Req() req, @Body() movieReview: MovieReviewDto): Promise<any> {
+    return this.movieDetailsService.setMovieReview(req.user._id, movieReview);
   }
 }

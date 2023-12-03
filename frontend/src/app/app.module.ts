@@ -20,6 +20,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { AuthLayoutComponent } from './components/layouts/auth-layout.component';
 import { HomeLayoutComponent } from './components/layouts/home-layout.component';
 import { AuthInterceptor } from './services/auth/auth-interceptor';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { AuthInterceptor } from './services/auth/auth-interceptor';
     TvCreditsComponent,
     PersonDetailsComponent,
     MoviePageComponent,
+    ProfileComponent,
   ],
   imports: [
     HttpClientModule,

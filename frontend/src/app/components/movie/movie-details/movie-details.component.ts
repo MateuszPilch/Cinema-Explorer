@@ -17,6 +17,8 @@ export class MovieDetailsComponent {
 
   movieRating: number = 0;
   movieReview: string = '';
+  movieFavourite: boolean = false;
+  movieToWatch: boolean = false;
 
   constructor(private route: ActivatedRoute, public authService: AuthService, private movieDetailsService: MovieDetailsService) {}
 
@@ -25,25 +27,41 @@ export class MovieDetailsComponent {
       this.movieDetailsData = details;
       this.movieDetailsData.vote_average = Math.round(this.movieDetailsData.vote_average / 2 * 10) / 10;
 
-      const a = this.movieDetailsService.getMovieReview(this.movieDetailsData.id);
-    })
-
+      this.movieDetailsService.getMovieReview(this.movieDetailsData.id).subscribe(res => {
+        if(res) {
+          this.movieRating = res.rating,
+          this.movieReview = res.review;
+          this.movieFavourite = res.favourite;
+          this.movieToWatch = res.to_watch;
+        }
+      });
+    });
     this.route.data.subscribe(({credits}) => {
       this.movieCreditsData = credits;
     })
   }
 
-  getMovieReview(): void {
-    this.movieDetailsService.getMovieReview(this.movieDetailsData.id);
+  setMovieReview(): void {
+    this.movieDetailsService.setMovieReview(this.movieDetailsData.id, this.movieRating, this.movieReview, this.movieFavourite, this.movieToWatch);
   }
 
-  setMovieReview(rating: number): void {
-    this.movieRating = rating;
-  }
-
-  addMovieReview(): void {
-    if(this.movieRating > 0) {
-      this.movieDetailsService.addMovieReview(this.movieDetailsData.id, this.movieRating, this.movieReview);
+  setMovieRating(rating: number): void {
+    if(this.movieRating != rating) {
+      this.movieRating = rating;
     }
+    else{
+      this.movieRating = 0;
+    }
+    this.setMovieReview();
+  }
+
+  setMovieFavourite(): void {
+    this.movieFavourite = !this.movieFavourite;
+    this.setMovieReview();
+  }
+
+  setMovieToWatch(): void {
+    this.movieToWatch = !this.movieToWatch;
+    this.setMovieReview();
   }
 }

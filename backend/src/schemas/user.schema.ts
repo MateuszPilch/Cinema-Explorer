@@ -31,10 +31,23 @@ class MovieList {
   movie_id: number;
 
   @Prop()
-  rate: number;
+  rating: number;
 
   @Prop()
   review: string;
+
+  @Prop()
+  to_watch: boolean;
+
+  @Prop()
+  favourite: boolean;
+
+  @Prop()
+  createdAt: Date;
+
+  @Prop()
+  updatedAt: Date;
+
 }
 
 class TvList {
@@ -47,6 +60,18 @@ class TvList {
 
   @Prop()
   review: string;
+
+  @Prop()
+  to_watch: boolean;
+
+  @Prop()
+  favourite: boolean;
+
+  @Prop()
+  createdAt: Date;
+
+  @Prop()
+  updatedAt: Date;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
