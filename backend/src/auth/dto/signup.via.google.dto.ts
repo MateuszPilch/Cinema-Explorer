@@ -7,8 +7,6 @@ export class SignupViaGoogleDto {
   @MinLength(4)
   readonly nickname: string;
   
-  @IsNotEmpty()
-  @IsString()
   @IsEmail()
   readonly email: string;
 

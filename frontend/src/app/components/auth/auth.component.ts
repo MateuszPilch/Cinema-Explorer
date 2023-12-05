@@ -12,7 +12,6 @@ export class AuthComponent {
   email!:string;
   password!: string;
   confirmedPassword!: string;
-
   authForm: string = "login";
   
   constructor(public authService: AuthService) {}

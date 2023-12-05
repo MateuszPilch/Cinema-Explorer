@@ -20,7 +20,11 @@ import { AuthComponent } from './components/auth/auth.component';
 import { AuthLayoutComponent } from './components/layouts/auth-layout.component';
 import { HomeLayoutComponent } from './components/layouts/home-layout.component';
 import { AuthInterceptor } from './services/auth/auth-interceptor';
-import { ProfileComponent } from './components/profile/profile.component';
+import { AuthGuard } from './guards/auth-guard.guard';
+import { UserPageComponent } from './components/user/user-page/user-page.component';
+import { UserReviewListComponent } from './components/user/user-review-list/user-review-list.component';
+import { ErrorComponent } from './components/error/error.component';
+import { UserPanelComponent } from './components/user/user-panel/user-panel.component';
 
 
 @NgModule({
@@ -39,7 +43,10 @@ import { ProfileComponent } from './components/profile/profile.component';
     TvCreditsComponent,
     PersonDetailsComponent,
     MoviePageComponent,
-    ProfileComponent,
+    UserPageComponent,
+    UserReviewListComponent,
+    ErrorComponent,
+    UserPanelComponent,
   ],
   imports: [
     HttpClientModule,
@@ -49,7 +56,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     InfiniteScrollModule,
     NgxSliderModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
+  providers: [AuthGuard,{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, firstValueFrom } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
+import { ErrorService } from '../error/error.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class AuthService {
 
   private authToken!: string;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private errorService: ErrorService) {
     this.authToken = localStorage.getItem('token') || '';
   }
 
@@ -25,7 +26,7 @@ export class AuthService {
       localStorage.setItem('token', this.authToken);
       this.router.navigate(['/']);
     }).catch((error) => {
-      console.log(error);
+      this.errorService.setErrorMessages(error.error.message);
     });
   }
 
@@ -38,7 +39,7 @@ export class AuthService {
       localStorage.setItem('token', this.authToken);
       this.router.navigate(['/']);
     }).catch((error) => {
-      console.log(error);
+      this.errorService.setErrorMessages(error.error.message);
     });
   }
 
@@ -55,7 +56,7 @@ export class AuthService {
           localStorage.setItem('token', this.authToken);
           this.router.navigate(['/']);
         }).catch((error) => {
-          console.log(error);
+          this.errorService.setErrorMessages(error.error.message);
         });
       }
     }, {once: true});
@@ -73,7 +74,7 @@ export class AuthService {
           localStorage.setItem('token', this.authToken);
           this.router.navigate(['/']);
         }).catch((error) => {
-          console.log(error);
+          this.errorService.setErrorMessages(error.error.message);
         });
       }
     }, {once: true});
@@ -82,6 +83,7 @@ export class AuthService {
   public logout(): void {
     this.authToken = '';
     localStorage.removeItem('token');
+    this.router.navigate(['/']);
   }
 
   public getAuthToken(): string {

@@ -31,6 +31,12 @@ class MovieList {
   movie_id: number;
 
   @Prop()
+  title: string;
+
+  @Prop()
+  poster_path: string;
+
+  @Prop()
   rating: number;
 
   @Prop()
@@ -56,7 +62,7 @@ class TvList {
   tv_id: number;
 
   @Prop()
-  rate: number;
+  rating: number;
 
   @Prop()
   review: string;

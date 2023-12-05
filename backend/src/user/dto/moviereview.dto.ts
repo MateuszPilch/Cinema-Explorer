@@ -7,6 +7,14 @@ export class MovieReviewDto {
   readonly movie_id: number;
 
   @IsNotEmpty()
+  @IsString()
+  readonly title: string;
+
+  @IsNotEmpty()
+  @IsString()
+  readonly poster_path: string;
+
+  @IsNotEmpty()
   @IsNumber()
   readonly rating: number;
 

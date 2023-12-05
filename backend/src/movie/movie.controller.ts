@@ -6,9 +6,6 @@ import { MovieFilter } from 'shared/models/movie/movie-filter';
 import { MovieDetails } from 'shared/models/movie/movie-details';
 import { MovieCredits } from 'shared/models/movie/movie-credits';
 import { MoviePageService } from './movie-page/movie-page.service';
-import { AuthGuard } from '@nestjs/passport';
-import { MovieReview } from 'shared/models/movie/movie-review';
-import { MovieReviewDto } from './dto/moviereview.dto';
 
 @Controller('movie')
 export class MovieController {
@@ -24,12 +21,6 @@ export class MovieController {
     return this.moviePageService.getMovieData(params);
   }
 
-  @Get('moviereview')
-  @UseGuards(AuthGuard('jwt'))
-  getMovieReview(@Req() req, @Query() params: any): Promise<MovieReview> {
-    return this.movieDetailsService.getMovieReview(req.user._id, params.movie_id);
-  }
-
   @Get(':id')
   getMovieDetails(@Param('id') param: string): Promise<MovieDetails> {
     return this.movieDetailsService.getMovieDetails(param);
@@ -43,11 +34,5 @@ export class MovieController {
   @Get(':id/credits_short')
   getMovieCreditsShort(@Param('id') param: string): Promise<MovieCredits> {
     return this.movieCreditsService.getMovieCreditsShort(param);
-  }
-
-  @Post('moviereview')
-  @UseGuards(AuthGuard('jwt'))
-  setMovieReview(@Req() req, @Body() movieReview: MovieReviewDto): Promise<any> {
-    return this.movieDetailsService.setMovieReview(req.user._id, movieReview);
   }
 }

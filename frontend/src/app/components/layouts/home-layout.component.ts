@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   template: `
   <app-navbar></app-navbar>
   <div class="max-w-screen-xl mx-auto md:pt-32 pt-24 bg-white">
+    <app-error></app-error>
     <router-outlet></router-outlet>
   </div>
   `,

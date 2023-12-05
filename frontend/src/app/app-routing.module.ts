@@ -19,11 +19,16 @@ import { personCreditsResolver } from './services/person/person-credits.service'
 import { AuthComponent } from './components/auth/auth.component';
 import { HomeLayoutComponent } from './components/layouts/home-layout.component';
 import { AuthLayoutComponent } from './components/layouts/auth-layout.component';
+import { AuthGuard } from './guards/auth-guard.guard';
+import { UserPageComponent } from './components/user/user-page/user-page.component';
+import { UserReviewListComponent } from './components/user/user-review-list/user-review-list.component';
 
 const routes: Routes = [
   { path: '', component: HomeLayoutComponent,
     children: [
     { path: '', component: HomeComponent},
+    { path: 'user', component: UserPageComponent, canActivate:[AuthGuard], runGuardsAndResolvers: 'always'},
+    { path: 'user/reviewlist', component: UserReviewListComponent, canActivate:[AuthGuard], runGuardsAndResolvers: 'always'},
     { path: 'search', component: SearchComponent, resolve: {
         data: searchResolver,
       },
@@ -40,7 +45,7 @@ const routes: Routes = [
       }
     },
     { path: 'movie/:id/credits', component: MovieCreditsComponent, resolve: {
-      details: movieDetailsResolver,
+        details: movieDetailsResolver,
         credits: movieCreditsResolver
       }
     },

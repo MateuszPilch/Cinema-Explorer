@@ -1,197 +1,195 @@
-<div class="font-poppins">
-  <div class="block pb-4 m-auto justify-center items-center">
-    <div class="flex md:w-1/6 w-1/2 pb-4 m-auto">
-      <img class="object-contain w-full h-full rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w200/{{tvDetailsData.poster_path}}">
-    </div>   
-    <div class="flex pb-4 justify-center items-center text-3xl font-bold">
-      {{tvDetailsData.name}}
+<div class="block pb-4 m-auto justify-center items-center">
+  <div class="flex md:w-1/6 w-1/2 pb-4 m-auto">
+    <img class="object-contain w-full h-full rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w200/{{tvDetailsData.poster_path}}">
+  </div>   
+  <div class="flex pb-4 justify-center items-center text-3xl font-bold">
+    {{tvDetailsData.name}}
+  </div>
+  <div class="text-center text-2xl font-medium">
+    {{tvDetailsData.vote_average}}
+  </div>
+  <div class="flex pb-2 items-center justify-center">
+    <div>
+      <svg *ngIf="tvDetailsData.vote_average >= 0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-yellow-300">
+        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+      </svg>
+      <svg *ngIf="tvDetailsData.vote_average < 0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-300 mr-1 dark:text-gray-500">
+        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+      </svg>
     </div>
-    <div class="text-center text-2xl font-medium">
-      {{tvDetailsData.vote_average}}
+    <div>
+      <svg *ngIf="tvDetailsData.vote_average >= 1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-yellow-300">
+        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+      </svg>
+      <svg *ngIf="tvDetailsData.vote_average < 1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-300 mr-1 dark:text-gray-500">
+        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+      </svg>
+    </div> 
+    <div>
+      <svg *ngIf="tvDetailsData.vote_average >= 2.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-yellow-300">
+        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+      </svg>
+      <svg *ngIf="tvDetailsData.vote_average < 2.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-300 mr-1 dark:text-gray-500">
+        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+      </svg>
+    </div> 
+    <div>
+      <svg *ngIf="tvDetailsData.vote_average >= 3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-yellow-300">
+        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+      </svg>
+      <svg *ngIf="tvDetailsData.vote_average < 3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-300 mr-1 dark:text-gray-500">
+        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+      </svg>
     </div>
-    <div class="flex pb-2 items-center justify-center">
-      <div>
-        <svg *ngIf="tvDetailsData.vote_average >= 0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-yellow-300">
-          <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-        </svg>
-        <svg *ngIf="tvDetailsData.vote_average < 0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-300 mr-1 dark:text-gray-500">
-          <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-        </svg>
+    <div>
+      <svg *ngIf="tvDetailsData.vote_average >= 4.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-yellow-300">
+        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+      </svg>
+      <svg *ngIf="tvDetailsData.vote_average < 4.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-300 mr-1 dark:text-gray-500">
+        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+      </svg>
+    </div>
+  </div>
+</div>
+<div class="grid md:grid-cols-4 grid-cols-1 md:grid-rows-3 grid-flow-row md:gap-8 gap-2 md:p-8 p-2 bg-gray-100 rounded-xl shadow-md">
+  <div *ngIf="authService.isAuthenticated()" class="md:order-2">
+    <div class="block h-fit p-4 justify-center items-center  bg-white rounded-xl shadow-md">
+      <div class="text-center text-2xl">
+        Twoja ocena
       </div>
-      <div>
-        <svg *ngIf="tvDetailsData.vote_average >= 1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-yellow-300">
-          <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-        </svg>
-        <svg *ngIf="tvDetailsData.vote_average < 1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-300 mr-1 dark:text-gray-500">
-          <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-        </svg>
-      </div> 
-      <div>
-        <svg *ngIf="tvDetailsData.vote_average >= 2.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-yellow-300">
-          <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-        </svg>
-        <svg *ngIf="tvDetailsData.vote_average < 2.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-300 mr-1 dark:text-gray-500">
-          <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-        </svg>
-      </div> 
-      <div>
-        <svg *ngIf="tvDetailsData.vote_average >= 3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-yellow-300">
-          <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-        </svg>
-        <svg *ngIf="tvDetailsData.vote_average < 3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-300 mr-1 dark:text-gray-500">
-          <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-        </svg>
+      <div class="flex p-4 justify-around items-center">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-300 mr-1 dark:text-gray-500">
+            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+            <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="flex">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-300 mr-1 dark:text-gray-500">
+            <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-300 mr-1 dark:text-gray-500">
+            <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-300 mr-1 dark:text-gray-500">
+            <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-300 mr-1 dark:text-gray-500">
+            <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-300 mr-1 dark:text-gray-500">
+            <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-300 mr-1 dark:text-gray-500">
+            <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+          </svg>
+        </div>       
       </div>
-      <div>
-        <svg *ngIf="tvDetailsData.vote_average >= 4.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-yellow-300">
-          <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-        </svg>
-        <svg *ngIf="tvDetailsData.vote_average < 4.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-300 mr-1 dark:text-gray-500">
-          <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-        </svg>
+      <div class="flex items-center bg-gray-100 rounded-xl shadow-md">
+        <textarea id="review" class="mx-4 py-4 w-full bg-transparent resize-none focus:outline-none" type="text" placeholder="Podziel się wrażeniami"></textarea>
       </div>
     </div>
   </div>
-  <div class="grid md:grid-cols-4 grid-cols-1 md:grid-rows-3 grid-flow-row md:gap-8 gap-2 md:p-8 p-2 bg-gray-100 rounded-xl shadow-md">
-    <div *ngIf="authService.isAuthenticated()" class="md:order-2">
-      <div class="block h-fit p-4 justify-center items-center  bg-white rounded-xl shadow-md">
-        <div class="text-center text-2xl">
-          Twoja ocena
+  <div class="md:order-1 md:col-span-3 row-span-3 ">
+    <div class="block h-full md:p-8 p-4 bg-white rounded-xl shadow-md">
+      <div class="flex justify-between">
+        <div class="flex items-end">
+          <div class="md:text-5xl text-4xl">{{tvDetailsData.name}}</div>
         </div>
-        <div class="flex p-4 justify-around items-center">
-          <div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-300 mr-1 dark:text-gray-500">
-              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
-              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
-            </svg>
+        <div class="flex items-center justify-between">
+          <div class="md:block hidden p-4 text-lg">
+            Mapa lokacji
           </div>
-          <div class="flex">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-300 mr-1 dark:text-gray-500">
-              <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-300 mr-1 dark:text-gray-500">
-              <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-300 mr-1 dark:text-gray-500">
-              <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-300 mr-1 dark:text-gray-500">
-              <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-300 mr-1 dark:text-gray-500">
-              <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-            </svg>
-          </div>
-          <div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-gray-300 mr-1 dark:text-gray-500">
-              <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-            </svg>
-          </div>       
-        </div>
-        <div class="flex items-center bg-gray-100 rounded-xl shadow-md">
-          <textarea id="review" class="mx-4 py-4 w-full bg-transparent resize-none focus:outline-none" type="text" placeholder="Podziel się wrażeniami"></textarea>
+          <div class="p-2 bg-teal-300 hover:scale-105 hover:bg-teal-400 duration-200 rounded-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
+            </svg>  
+          </div>        
         </div>
       </div>
-    </div>
-    <div class="md:order-1 md:col-span-3 row-span-3 ">
-      <div class="block h-full md:p-8 p-4 bg-white rounded-xl shadow-md">
-        <div class="flex justify-between">
-          <div class="flex items-end">
-            <div class="md:text-5xl text-4xl">{{tvDetailsData.name}}</div>
-          </div>
-          <div class="flex items-center justify-between">
-            <div class="md:block hidden p-4 text-lg">
-              Mapa lokacji
-            </div>
-            <div class="p-2 bg-teal-300 hover:scale-105 hover:bg-teal-400 duration-200 rounded-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
-              </svg>  
-            </div>        
-          </div>
+      <div class="md:flex block md:pt-8 pt-4 justify-around text-justify ">
+        <div class="md:w-4/5 text-lg">
+          {{tvDetailsData.overview}}
         </div>
-        <div class="md:flex block md:pt-8 pt-4 justify-around text-justify ">
-          <div class="md:w-4/5 text-lg">
-            {{tvDetailsData.overview}}
-          </div>
-        </div> 
-      </div>
+      </div> 
     </div>
-    <div class="order-3 md:col-span-1 row-span-2">
-      <div class="blockh h-full p-4 justify-center items-center bg-white rounded-xl shadow-md">
-        <div class="text-center text-2xl">
-          Informacje
+  </div>
+  <div class="order-3 md:col-span-1 row-span-2">
+    <div class="blockh h-full p-4 justify-center items-center bg-white rounded-xl shadow-md">
+      <div class="text-center text-2xl">
+        Informacje
+      </div>
+      <div class="block pt-4">
+        <div class="text-xl">
+          Ogólne
+        </div>
+        <div class="block justify-around text-center">
+          <div class="p-2 m-4 text-sm bg-gray-100 rounded-xl shadow-md">
+            Oryginalny tytuł: {{tvDetailsData.original_name}}
+          </div>
+          <div class="p-2 m-4 text-sm bg-gray-100 rounded-xl shadow-md">
+            Premiera: {{tvDetailsData.first_air_date}}
+          </div>
+          <div class="p-2 m-4 text-sm bg-gray-100 rounded-xl shadow-md">
+            Ilość sezonów: {{tvDetailsData.number_of_seasons}}
+          </div>
+          <div class="p-2 m-4 text-sm bg-gray-100 rounded-xl shadow-md">
+            Ilość odcinków: {{tvDetailsData.number_of_episodes}}
+          </div>
         </div>
         <div class="block pt-4">
           <div class="text-xl">
-            Ogólne
+            Gatunki
           </div>
-          <div class="block justify-around text-center">
-            <div class="p-2 m-4 text-sm bg-gray-100 rounded-xl shadow-md">
-              Oryginalny tytuł: {{tvDetailsData.original_name}}
-            </div>
-            <div class="p-2 m-4 text-sm bg-gray-100 rounded-xl shadow-md">
-              Premiera: {{tvDetailsData.first_air_date}}
-            </div>
-            <div class="p-2 m-4 text-sm bg-gray-100 rounded-xl shadow-md">
-              Ilość sezonów: {{tvDetailsData.number_of_seasons}}
-            </div>
-            <div class="p-2 m-4 text-sm bg-gray-100 rounded-xl shadow-md">
-              Ilość odcinków: {{tvDetailsData.number_of_episodes}}
-            </div>
-          </div>
-          <div class="block pt-4">
-            <div class="text-xl">
-              Gatunki
-            </div>
-            <div class="flex flex-wrap justify-start text-sm">
-              <div *ngFor="let genre of tvDetailsData.genres" class="p-2 m-2 bg-gray-100 rounded-xl shadow-md">
-                {{genre.name}}
-              </div>
+          <div class="flex flex-wrap justify-start text-sm">
+            <div *ngFor="let genre of tvDetailsData.genres" class="p-2 m-2 bg-gray-100 rounded-xl shadow-md">
+              {{genre.name}}
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="order-4 md:col-span-4 row-span-3 md:p-8 p-2 bg-white rounded-xl shadow-md">
+  </div>
+  <div class="order-4 md:col-span-4 row-span-3 md:p-8 p-2 bg-white rounded-xl shadow-md">
+    <div class="flex items-center justify-between">
+      <div class="md:text-3xl text-2xl">Obsada i twórzcy</div>
       <div class="flex items-center justify-between">
-        <div class="md:text-3xl text-2xl">Obsada i twórzcy</div>
-        <div class="flex items-center justify-between">
-          <div class="md:block hidden p-4">
-            Zobacz więcej
+        <div class="md:block hidden p-4">
+          Zobacz więcej
+        </div>
+        <a routerLink="credits">
+          <div class="p-2 bg-teal-300 hover:scale-105 hover:bg-teal-400 duration-200 rounded-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+            </svg> 
           </div>
-          <a routerLink="credits">
-            <div class="p-2 bg-teal-300 hover:scale-105 hover:bg-teal-400 duration-200 rounded-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-              </svg> 
-            </div>
-          </a>
-        </div>
+        </a>
       </div>
-      <div class="pt-4 text-xl">Obsada</div> 
-      <div class="grid md:grid-cols-8 grid-cols-3">
-        <div *ngFor="let cast of tvCreditsData.cast | slice:0:8" class="block m-2 bg-gray-100 hover:scale-105 duration-200 rounded-xl shadow-md">
-          <a routerLink="/person/{{cast.id}}">
-              <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{cast.profile_path}}" onerror="this.src='assets/images/person_blank.png';">      
-            <div class="block text-center text-sm pt-2">
-              <div class="font-bold overflow">{{cast.name}}</div>
-              <div class="py-2 truncate">{{cast.character}}</div>
-            </div>
-          </a>
-        </div>
+    </div>
+    <div class="pt-4 text-xl">Obsada</div> 
+    <div class="grid md:grid-cols-8 grid-cols-3">
+      <div *ngFor="let cast of tvCreditsData.cast | slice:0:8" class="block m-2 bg-gray-100 hover:scale-105 duration-200 rounded-xl shadow-md">
+        <a routerLink="/person/{{cast.id}}">
+            <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{cast.profile_path}}" onerror="this.src='assets/images/person_blank.png';">      
+          <div class="block text-center text-sm pt-2">
+            <div class="font-bold overflow">{{cast.name}}</div>
+            <div class="py-2 truncate">{{cast.character}}</div>
+          </div>
+        </a>
       </div>
-      <div class="pt-4 text-xl">Twórcy</div>
-      <div class="grid md:grid-cols-8 grid-cols-3">
-        <div *ngFor="let crew of tvCreditsData.crew | slice:0:8" class="block m-2 bg-gray-100 hover:scale-105 duration-200 rounded-xl shadow-md">
-          <a routerLink="/person/{{crew.id}}">
-              <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{crew.profile_path}}" onerror="this.src='assets/images/person_blank.png';">     
-            <div class="block text-center text-sm pt-2">
-              <div class="font-bold overflow">{{crew.name}}</div>
-              <div class="py-2 truncate">{{crew.job}}</div>
-            </div>
-          </a>
-        </div>
+    </div>
+    <div class="pt-4 text-xl">Twórcy</div>
+    <div class="grid md:grid-cols-8 grid-cols-3">
+      <div *ngFor="let crew of tvCreditsData.crew | slice:0:8" class="block m-2 bg-gray-100 hover:scale-105 duration-200 rounded-xl shadow-md">
+        <a routerLink="/person/{{crew.id}}">
+            <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{crew.profile_path}}" onerror="this.src='assets/images/person_blank.png';">     
+          <div class="block text-center text-sm pt-2">
+            <div class="font-bold overflow">{{crew.name}}</div>
+            <div class="py-2 truncate">{{crew.job}}</div>
+          </div>
+        </a>
       </div>
     </div>
   </div>

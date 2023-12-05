@@ -7,6 +7,12 @@ export class MovieReview
   movie_id!: number;
 
   @Expose()
+  title!: string;
+
+  @Expose()
+  poster_path!: string;
+
+  @Expose()
   rating!: number;
 
   @Expose()

@@ -21,23 +21,29 @@ export class AuthService {
   async signup(signupDto: SignupDto): Promise<{ token: string }> {
 
     const {nickname, email, password, confirmedPassword} = signupDto;
-    const user = await this.userModel.findOne({ email });
+    const nicknameCheck = await this.userModel.findOne({ nickname});
+
+    if (nicknameCheck) {
+      throw new ConflictException('This nickname is already taken');
+    } 
+
+    const emailCheck = await this.userModel.findOne({ email });
   
-    if (user) {
-      throw new ConflictException('This email address is already registered.');
-    } else {
-      if(password !== confirmedPassword) {
+    if (emailCheck) {
+      throw new ConflictException('This email address is already registered');
+    }
+
+    if(password !== confirmedPassword) {
         throw new BadRequestException("Password and password confirmation does not match")
-      } else {
-        const hashedPassword = await this.hashPassword(password);
-        const newUser = await this.userModel.create({
-          nickname,
-          email,
-          password: hashedPassword,
-        });
-        const token = this.generateJwtToken(newUser);
-        return { token };
-      }
+    } else {
+      const hashedPassword = await this.hashPassword(password);
+      const newUser = await this.userModel.create({
+        nickname,
+        email,
+        password: hashedPassword,
+      });
+      const token = this.generateJwtToken(newUser);
+      return { token };
     }
   }
 
@@ -47,33 +53,39 @@ export class AuthService {
     const user = await this.userModel.findOne({ email });
 
     if (!user) {
-      throw new BadRequestException('Invalid email or password.');
+      throw new BadRequestException('Invalid email or password');
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
-      throw new BadRequestException('Invalid email or password.');
+      throw new BadRequestException('Invalid email or password');
     }
 
     const token = this.generateJwtToken(user);
     return { token };
-  
   }
 
   async signupViaGoogle(signupViaGoogle: SignupViaGoogleDto): Promise<{ token: string }> {
     const { nickname, email } = signupViaGoogle;
-    const user = await this.userModel.findOne({$or:[{ nickname },{ email }]});
-    if (user) {
-      throw new ConflictException('This account already exists.');
-    } else {
-      const newUser = await this.userModel.create({
-        nickname,
-        email
-      });
-      const token = this.generateJwtToken(newUser);
-      return { token };
+    const nicknameCheck = await this.userModel.findOne({ nickname});
+
+    if (nicknameCheck) {
+      throw new ConflictException('This nickname is already taken');
+    } 
+
+    const emailCheck = await this.userModel.findOne({ email });
+  
+    if (emailCheck) {
+      throw new ConflictException('This email address is already registered');
     }
+
+    const newUser = await this.userModel.create({
+      nickname,
+      email
+    });
+    const token = this.generateJwtToken(newUser);
+    return { token };
   }
 
   async loginViaGoogle(loginViaGoogle: LoginViaGoogleDto): Promise<{ token: string }> {
@@ -82,7 +94,7 @@ export class AuthService {
     const user = await this.userModel.findOne({ email });
 
     if (!user) {
-      throw new BadRequestException('This account does not exists.');
+      throw new BadRequestException('This account does not exists');
     }
       const token = this.generateJwtToken(user);
       return { token };
@@ -95,14 +107,14 @@ export class AuthService {
   async changeNickname(changeNicknameDto: ChangeNicknameDto): Promise<string> {
 
     const {email, nickname} = changeNicknameDto;
-    const user = await this.userModel.findOne({ nickname });
+    const nicknameCheck = await this.userModel.findOne({ nickname });
 
-    if (user) {
-      throw new ConflictException('This nickname is taken.');
+    if (nicknameCheck) {
+      throw new ConflictException('This nickname is already taken');
     } else {
       await this.userModel.findOneAndUpdate({email},{nickname});
 
-      const token = this.generateJwtToken(user);
+      const token = this.generateJwtToken(nicknameCheck);
       return token;
     }
   }
