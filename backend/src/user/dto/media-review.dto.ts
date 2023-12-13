@@ -1,10 +1,14 @@
 import { IsBoolean, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
-export class MovieReviewDto {
+export class MediaReviewDto {
   
   @IsNotEmpty()
   @IsNumber()
-  readonly movie_id: number;
+  readonly media_id: number;
+
+  @IsNotEmpty()
+  @IsString()
+  readonly media_type: string;
 
   @IsNotEmpty()
   @IsString()
@@ -26,5 +30,4 @@ export class MovieReviewDto {
 
   @IsBoolean()
   readonly to_watch: boolean;
-
 }

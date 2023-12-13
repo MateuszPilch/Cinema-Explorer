@@ -122,7 +122,7 @@ export class AuthService {
   private generateJwtToken(user: User): string {
     const payload = { 
       _id: user._id,
-      email: user.email };
+      nickname: user.nickname };
     return this.jwtService.sign(payload);
   }
 

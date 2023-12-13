@@ -12,9 +12,11 @@ import { MoviePageService } from 'src/app/services/movie/movie-page.service';
 })
 export class MoviePageComponent {
 
+  isFilterOpen: boolean = false;
+
   movieData!: MovieData;
   moviePagination!: number[];
-
+  
   voteAvgRange: number[] = [1,5];
   voteAvgOptions: Options = {
     floor: 1,
@@ -57,8 +59,6 @@ export class MoviePageComponent {
       return '#5eead4';
     }
   };
-
-  isFilterOpen: boolean = false;
 
   constructor(private route: ActivatedRoute, public moviePageService: MoviePageService) {}
 

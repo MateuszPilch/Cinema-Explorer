@@ -28,7 +28,6 @@ export class MoviePageService {
   }
   
   getMovieData(filter: MovieFilter): Observable<MovieData> {
-    console.log(filter);
     const params = qs.stringify(filter, { encode: false });
     return this.http.get<MovieData>(`http://localhost:3000/api/movie?${params}`);
   }

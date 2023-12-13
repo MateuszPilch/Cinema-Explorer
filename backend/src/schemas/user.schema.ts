@@ -1,34 +1,26 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, ObjectId } from 'mongoose';
 
-@Schema({
-  timestamps: true,
-})
-export class User extends Document {
-
-  @Prop({ unique: true })
-  nickname: string;
-
-  @Prop({ unique: true, trim: true })
-  email: string;
+class Avatar {
+  @Prop()
+  encoding: string;
 
   @Prop()
-  password: string;
+  mimetype: string;
 
   @Prop()
-  profile_picture: string;
+  buffer: Buffer;
 
   @Prop()
-  movie_list: MovieList[]
-
-  @Prop()
-  tv_list: TvList[]
-  
+  size: number;
 }
 
-class MovieList {
+class MediaList {
   @Prop()
-  movie_id: number;
+  media_id: number;
+
+  @Prop()
+  media_type: string;
 
   @Prop()
   title: string;
@@ -53,31 +45,28 @@ class MovieList {
 
   @Prop()
   updatedAt: Date;
-
 }
 
-class TvList {
+@Schema({
+  timestamps: true,
+})
+export class User extends Document {
+
+  @Prop({ unique: true })
+  nickname: string;
+
+  @Prop({ unique: true, trim: true })
+  email: string;
 
   @Prop()
-  tv_id: number;
+  password: string;
 
   @Prop()
-  rating: number;
+  avatar: Avatar;
 
   @Prop()
-  review: string;
+  media_list: MediaList[]
 
-  @Prop()
-  to_watch: boolean;
-
-  @Prop()
-  favourite: boolean;
-
-  @Prop()
-  createdAt: Date;
-
-  @Prop()
-  updatedAt: Date;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

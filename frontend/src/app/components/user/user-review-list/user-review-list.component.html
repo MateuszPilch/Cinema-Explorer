@@ -1,23 +1,88 @@
-<app-user-panel></app-user-panel>
+<app-user-page></app-user-page>
 <div class="md:p-8 p-2 bg-gray-100 rounded-xl shadow-md">
   <div class="block md:p-8 p-2 bg-white rounded-xl shadow-md">
-    <div *ngIf="!movieReviewList" class="flex text-xl md:my-8 my-2 md:p-4 p-2 pt-8 duration-200 rounded-xl shadow-md">
+    <div class="flex justify-between items-center">
+      <div class="w-1/2 md:text-3xl text-xl font-bold">Lista</div>
+      <div class="flex w-1/2 justify-end gap-8">      
+        <select [(ngModel)]="userService.mediaSortBy" (change)="userService.setMediaListSort()" class="px-4 py-2 md:text-lg text-sm bg-teal-300 rounded-full shadow-md">
+          <option class="bg-white" selected>Sortuj</option>
+          <option class="bg-white" value="rating_desc">Oceny malejąco</option>
+          <option class="bg-white" value="rating_asc">Oceny rosnąco</option>
+          <option class="bg-white" value="createdAt_asc">Najstarsze</option>
+          <option class="bg-white" value="createdAt_desc">Najnowsze</option>
+        </select>
+        <button (click)="toggleFilter()" class="px-4 py-2 md:text-lg text-sm bg-teal-300 hover:scale-105 duration-200 rounded-full shadow-md">
+          Filtry
+        </button>
+      </div>
+    </div>
+    <div *ngIf="isFilterOpen" class="grid md:p-4 p-2 md:grid-cols-3 grid-cols-1 gap-8">
+      <div class="p-4 md:col-span-3 md:text-sm text-xs bg-gray-100 rounded-xl shadow-md">
+        <div class="text-lg">Typ</div>
+        <div class="p-2 grid grid-cols-3 gap-4">
+          <button 
+            (click)="this.userService.setFilter('media_type', null)"
+            [ngClass]="this.userService.mediaFilter.media_type == null ? 'bg-teal-300' : 'bg-white'"
+            class="p-2 md:text-sm text-xs hover:scale-105 duration-200 rounded-full shadow-md">
+            Wszystko
+          </button>
+          <button 
+            (click)="this.userService.setFilter('media_type','movie')"
+            [ngClass]="this.userService.mediaFilter.media_type === 'movie' ? 'bg-teal-300' : 'bg-white'"
+            class="p-2 md:text-sm text-xs hover:scale-105 duration-200 rounded-full shadow-md">
+            Filmy
+          </button>
+          <button 
+            (click)="this.userService.setFilter('media_type','tv')"
+            [ngClass]="this.userService.mediaFilter.media_type === 'tv' ? 'bg-teal-300' : 'bg-white'"
+            class="p-2 md:text-sm text-xs hover:scale-105 duration-200 rounded-full shadow-md">
+            Seriale
+          </button>
+        </div>
+        <div class="text-lg">Dodatkowe</div>
+        <div class="p-2 grid grid-cols-3 gap-4">
+          <button 
+          (click)="this.userService.setFilter('favourite', !this.userService.mediaFilter.favourite)"
+          [ngClass]="this.userService.mediaFilter.favourite ? 'bg-teal-300' : 'bg-white'"
+          class="p-2 md:text-sm text-xs hover:scale-105 duration-200 rounded-full shadow-md">
+          Ulubione
+        </button>
+        <button 
+          (click)="this.userService.setFilter('to_watch', !this.userService.mediaFilter.to_watch)"
+          [ngClass]="this.userService.mediaFilter.to_watch ? 'bg-teal-300' : 'bg-white'"
+          class="p-2 md:text-sm text-xs hover:scale-105 duration-200 rounded-full shadow-md">
+          Chcę zobaczyć
+        </button>
+        </div>
+        <div class="flex mt-4 gap-4 justify-center">
+          <button (click)="this.userService.setMediaListFilter()" class="p-2 md:text-lg text-sm hover:scale-105 duration-200 bg-teal-300 rounded-xl shadow-md">
+            Zastosuj
+          </button>
+          <button (click)="this.userService.clearFilter()" class="p-2 md:text-lg text-sm hover:scale-105 duration-200 bg-teal-300 rounded-xl shadow-md">
+            Wyczyść 
+          </button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="userService.mediaReviewListFiltered.length === 0">
       Brak wyników wyszukiwania
     </div>
     <div class="grid md:grid-cols-5 grid-cols-2 pt-8 gap-8">
-      <div *ngFor="let movie of movieReviewList" class="block bg-gray-100 hover:scale-105 duration-200 rounded-xl shadow-md">
-        <a routerLink="/movie/{{movie.movie_id}}">
-            <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{movie.poster_path}}" onerror="this.src='assets/images/movie_blank.png';">   
+      <div *ngFor="let media of userService.mediaReviewListFiltered" class="block bg-gray-100 hover:scale-105 duration-200 rounded-xl shadow-md">
+        <a routerLink="/{{media.media_type}}/{{media.media_id}}">
+            <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{media.poster_path}}" onerror="this.src='assets/images/movie_blank.png';">   
             <div class="block text-center text-sm pt-2">
-            <div class="font-bold overflow">{{movie.title}}</div>
-            <div *ngIf="movie.rating > 0"class="flex justify-center items-center">
-              <div class="md:text-base text-xs font-bold">
-                {{movie.rating}}
-              </div>
-              <div class="pl-1">
+            <div class="text-lg font-bold overflow">{{media.title}}</div>
+            <div *ngIf="media.rating > 0"class="flex justify-center items-center">
+              <div *ngFor="let item of [].constructor(media.rating)">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="md:w-8 md:h-8 w-6 h-6 text-yellow-300">
                   <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
                 </svg>
+              </div>
+              <div *ngIf="media.favourite">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="md:w-8 md:h-8 w-6 h-6 text-red-600">
+                <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+              </svg>
               </div>
             </div>
           </div>

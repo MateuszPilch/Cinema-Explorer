@@ -21,10 +21,10 @@ import { AuthLayoutComponent } from './components/layouts/auth-layout.component'
 import { HomeLayoutComponent } from './components/layouts/home-layout.component';
 import { AuthInterceptor } from './services/auth/auth-interceptor';
 import { AuthGuard } from './guards/auth-guard.guard';
+import { ErrorComponent } from './components/error/error.component';
+import { UserActivityComponent } from './components/user/user-activity/user-activity.component';
 import { UserPageComponent } from './components/user/user-page/user-page.component';
 import { UserReviewListComponent } from './components/user/user-review-list/user-review-list.component';
-import { ErrorComponent } from './components/error/error.component';
-import { UserPanelComponent } from './components/user/user-panel/user-panel.component';
 
 
 @NgModule({
@@ -43,10 +43,10 @@ import { UserPanelComponent } from './components/user/user-panel/user-panel.comp
     TvCreditsComponent,
     PersonDetailsComponent,
     MoviePageComponent,
+    ErrorComponent,
+    UserActivityComponent,
     UserPageComponent,
     UserReviewListComponent,
-    ErrorComponent,
-    UserPanelComponent,
   ],
   imports: [
     HttpClientModule,

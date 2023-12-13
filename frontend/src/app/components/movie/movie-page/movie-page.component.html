@@ -4,16 +4,16 @@
       <div class="md:text-4xl text-xl font-bold">Filmy</div>
       <div class="flex items-center">
         <div class="flex gap-4">
-          <button (click)="this.moviePageService.highestVoteFilter()" class="p-2 md:text-lg text-sm hover:scale-105 duration-200 bg-teal-300 rounded-xl shadow-md">
+          <button (click)="this.moviePageService.highestVoteFilter()" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-105 duration-200 rounded-full shadow-md">
             Najwyżej oceniane
           </button>
-          <button (click)="this.moviePageService.popularityFilter()" class="p-2 md:text-lg text-sm hover:scale-105 duration-200 bg-teal-300 rounded-xl shadow-md">
+          <button (click)="this.moviePageService.popularityFilter()" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-105 duration-200 rounded-full shadow-md">
             Popularne
           </button>
-          <button (click)="this.moviePageService.upcomingFilter()" class="p-2 md:text-lg text-sm hover:scale-105 duration-200 bg-teal-300 rounded-xl shadow-md">
+          <button (click)="this.moviePageService.upcomingFilter()" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-105 duration-200 rounded-full shadow-md">
             Nadchodzące
           </button>
-          <button (click)="this.toggleFilter()" class="p-2 md:text-lg text-sm hover:scale-105 duration-200 bg-teal-300 rounded-xl shadow-md">
+          <button (click)="this.toggleFilter()" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-105 duration-200 rounded-full shadow-md">
             Filtry
           </button>
         </div>
@@ -118,7 +118,7 @@
                 </svg>
               </div>
             </div>
-            <div class="py-2 truncate">{{movie.release_date}}</div>
+            <div class="py-2 truncate">{{movie.release_date | date: 'd.MM.y'}}</div>
           </div>
         </a>
       </div>

@@ -26,19 +26,19 @@
       </div>
     </div>
     <div class="grid md:grid-cols-6 grid-cols-1 md:mx-10 md:gap-10 gap-2 md:pt-0 pt-2 text-xl">
-      <button routerLink="movie" class="group">
+      <button routerLink="/movie" class="group">
         <div class="py-3 group-hover:text-teal-500 duration-200">Filmy</div>
         <div class="hidden md:flex w-full h-2 rounded-full bg-gray-200 group-hover:bg-teal-300 duration-200"></div>
       </button>
-      <button routerLink="tv" class="group">
+      <button routerLink="/tv" class="group">
           <div class="py-3 group-hover:text-teal-500 duration-200">Seriale</div>
           <div class="hidden md:flex w-full h-2 rounded-full bg-gray-200 group-hover:bg-teal-300 duration-200"></div>
       </button>
-      <button routerLink="map" class="group">
+      <button routerLink="/map" class="group">
         <div class="py-3 group-hover:text-teal-500 duration-200">Mapa</div>
         <div class="hidden md:flex w-full h-2 rounded-full bg-gray-200 group-hover:bg-teal-300 duration-200"></div>  
       </button>
-      <button routerLink="user" class="group">
+      <button routerLink="/user/{{authService.getNickname()}}" class="group">
         <div class="py-3 group-hover:text-teal-500 duration-200">Profil</div>
         <div class="hidden md:flex w-full h-2 rounded-full bg-gray-200 group-hover:bg-teal-300 duration-200"></div>
       </button>

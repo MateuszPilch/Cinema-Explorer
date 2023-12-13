@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -9,8 +9,9 @@ import { SearchModule } from './search/search.module';
 import { PersonModule } from './person/person.module';
 import { AuthModule } from './auth/auth.module';
 import { PassportModule } from '@nestjs/passport';
-import { UserController } from './user/user.controller';
 import { UserModule } from './user/user.module';
+import { MulterModule } from '@nestjs/platform-express';
+import * as Multer from 'multer'; 
 
 @Module({
   imports: [ConfigModule.forRoot( {
@@ -24,3 +25,4 @@ import { UserModule } from './user/user.module';
   providers: [AppService],
 })
 export class AppModule {}
+

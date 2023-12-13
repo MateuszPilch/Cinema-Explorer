@@ -27,7 +27,7 @@ export class MovieDetailsComponent {
       this.movieDetailsData = details;
       this.movieDetailsData.vote_average = Math.round(this.movieDetailsData.vote_average / 2 * 10) / 10;
 
-      this.userService.getMovieReview(this.movieDetailsData.id).subscribe(res => {
+      this.userService.getMediaReview(this.movieDetailsData.id, "movie").subscribe(res => {
         if(res) {
           this.movieRating = res.rating,
           this.movieReview = res.review;
@@ -42,7 +42,7 @@ export class MovieDetailsComponent {
   }
 
   setMovieReview(): void {
-    this.userService.setMovieReview(this.movieDetailsData.id,this.movieDetailsData.title,this.movieDetailsData.poster_path, this.movieRating, this.movieReview, this.movieFavourite, this.movieToWatch);
+    this.userService.setMediaReview(this.movieDetailsData.id, "movie", this.movieDetailsData.title, this.movieDetailsData.poster_path, this.movieRating, this.movieReview, this.movieFavourite, this.movieToWatch);
   }
 
   setMovieRating(rating: number): void {

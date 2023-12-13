@@ -1,10 +1,12 @@
-import { Expose } from 'class-transformer';
+import { Expose } from "class-transformer";
 
-export class MovieReview
+export class MediaReview
 {
+  @Expose()
+  media_id!: number;
 
   @Expose()
-  movie_id!: number;
+  media_type!: string;
 
   @Expose()
   title!: string;
@@ -23,4 +25,7 @@ export class MovieReview
 
   @Expose()
   to_watch!: boolean;
+
+  @Expose()
+  createdAt!: Date;
 }

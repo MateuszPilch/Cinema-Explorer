@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Post, Query, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Req, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { MovieReview } from 'shared/models/movie/movie-review';
-import { MovieReviewDto } from 'src/user/dto/moviereview.dto';
+import { MediaReview } from 'shared/models/media/media-review';
+import { MediaReviewDto } from 'src/user/dto/media-review.dto';
 import { UserService } from './user.service';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('user')
 export class UserController {
@@ -10,21 +11,32 @@ export class UserController {
   constructor(
     private readonly userService: UserService) {}
 
-  @Get('movielist')
-  @UseGuards(AuthGuard('jwt'))
-  getMovieList(@Req() req, @Query() params: any): Promise<MovieReview[]> {
-    return this.userService.getMovieList(req.user._id);
+  @Get('medialist')
+  getMediaList(@Query() params: any): Promise<MediaReview[]> {
+    return this.userService.getMediaList(params.nickname);
   }
 
-  @Get('moviereview')
+  @Get('mediareview')
   @UseGuards(AuthGuard('jwt'))
-  getMovieReview(@Req() req, @Query() params: any): Promise<MovieReview> {
-    return this.userService.getMovieReview(req.user._id, params.movie_id);
+  getMediaReview(@Req() req, @Query() params: any): Promise<MediaReview> {
+    return this.userService.getMediaReview(req.user._id, params.media_id, params.media_type);
   }
 
-  @Post('moviereview')
+  @Post('mediareview')
   @UseGuards(AuthGuard('jwt'))
-  setMovieReview(@Req() req, @Body() movieReview: MovieReviewDto): Promise<any> {
-    return this.userService.setMovieReview(req.user._id, movieReview);
+  setMediaReview(@Req() req, @Body() mediaReview: MediaReviewDto): Promise<any> {
+    return this.userService.setMediaReview(req.user._id, mediaReview);
+  }
+
+  @Get('avatar')
+  getAvatar(@Query() params: any): Promise<any> {
+    return this.userService.getAvatar(params.nickname);
+  }
+
+  @Post('avatar')
+  @UseInterceptors(FileInterceptor('avatar'))
+  @UseGuards(AuthGuard('jwt'))
+  setAvatar(@Req() req, @UploadedFile() avatar: Express.Multer.File): Promise<any> {
+    return this.userService.setAvatar(req.user._id, avatar);
   }
 }
