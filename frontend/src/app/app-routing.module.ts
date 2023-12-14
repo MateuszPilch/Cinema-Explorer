@@ -21,14 +21,17 @@ import { HomeLayoutComponent } from './components/layouts/home-layout.component'
 import { AuthLayoutComponent } from './components/layouts/auth-layout.component';
 import { UserActivityComponent } from './components/user/user-activity/user-activity.component';
 import { UserReviewListComponent } from './components/user/user-review-list/user-review-list.component';
+import { UserPageComponent } from './components/user/user-page/user-page.component';
 
 const routes: Routes = [
   { path: '', component: HomeLayoutComponent,
     children: [
     { path: '', component: HomeComponent},
-    { path: 'user/:nickname', redirectTo: 'user/:nickname/activity'},
-    { path: 'user/:nickname/activity', component: UserActivityComponent, runGuardsAndResolvers: 'always' },
-    { path: 'user/:nickname/reviewlist', component: UserReviewListComponent, runGuardsAndResolvers: 'always' },
+    { path: 'user/:nickname', component:UserPageComponent, runGuardsAndResolvers: 'always' , children: [
+      { path: '', redirectTo: 'activity', pathMatch: 'full'},
+      { path: 'activity', component: UserActivityComponent},
+      { path: 'reviewlist', component: UserReviewListComponent},
+    ]},
     { path: 'search', component: SearchComponent, resolve: {
         data: searchResolver,
       },
