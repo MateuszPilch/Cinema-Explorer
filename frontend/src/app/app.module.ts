@@ -25,6 +25,10 @@ import { ErrorComponent } from './components/error/error.component';
 import { UserActivityComponent } from './components/user/user-activity/user-activity.component';
 import { UserPageComponent } from './components/user/user-page/user-page.component';
 import { UserReviewListComponent } from './components/user/user-review-list/user-review-list.component';
+import { MapDetailsComponent } from './components/map/map-details/map-details.component';
+import { MapAddComponent } from './components/map/map-add/map-add.component';
+import { MapPopupComponent } from './components/map/map-popup/map-popup.component';
+import { MapLocationComponent } from './components/map/map-location/map-location.component';
 
 
 @NgModule({
@@ -47,6 +51,10 @@ import { UserReviewListComponent } from './components/user/user-review-list/user
     UserActivityComponent,
     UserPageComponent,
     UserReviewListComponent,
+    MapAddComponent,
+    MapDetailsComponent,
+    MapPopupComponent,
+    MapLocationComponent,
   ],
   imports: [
     HttpClientModule,

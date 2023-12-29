@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, ObjectId } from 'mongoose';
 
 class Avatar {
+  
   @Prop()
   encoding: string;
 
@@ -16,6 +17,7 @@ class Avatar {
 }
 
 class MediaList {
+
   @Prop()
   media_id: number;
 

@@ -22,51 +22,65 @@ import { AuthLayoutComponent } from './components/layouts/auth-layout.component'
 import { UserActivityComponent } from './components/user/user-activity/user-activity.component';
 import { UserReviewListComponent } from './components/user/user-review-list/user-review-list.component';
 import { UserPageComponent } from './components/user/user-page/user-page.component';
+import { MapPageComponent } from './components/map/map-page/map-page.component';
+import { MapAddComponent } from './components/map/map-add/map-add.component';
+import { MapDetailsComponent } from './components/map/map-details/map-details.component';
+import { MapLocationComponent } from './components/map/map-location/map-location.component';
+import { mapDetailsResolver } from './services/map/map.service';
 
 const routes: Routes = [
   { path: '', component: HomeLayoutComponent,
     children: [
-    { path: '', component: HomeComponent},
-    { path: 'user/:nickname', component:UserPageComponent, runGuardsAndResolvers: 'always' , children: [
-      { path: '', redirectTo: 'activity', pathMatch: 'full'},
-      { path: 'activity', component: UserActivityComponent},
-      { path: 'reviewlist', component: UserReviewListComponent},
-    ]},
-    { path: 'search', component: SearchComponent, resolve: {
-        data: searchResolver,
+      { path: '', component: HomeComponent},
+      { path: 'user/:nickname', component:UserPageComponent, runGuardsAndResolvers: 'always' , children: [
+        { path: '', redirectTo: 'activity', pathMatch: 'full'},
+        { path: 'activity', component: UserActivityComponent},
+        { path: 'reviewlist', component: UserReviewListComponent},
+      ]},
+      { path: 'search', component: SearchComponent, resolve: {
+          data: searchResolver,
+        },
+        runGuardsAndResolvers: 'always',
       },
-      runGuardsAndResolvers: 'always',
-    },
-    { path: 'movie', component: MoviePageComponent, resolve: {
-        data: moviePageResolver
+      { path: 'movie', component: MoviePageComponent, resolve: {
+          data: moviePageResolver
+        },
+        runGuardsAndResolvers: 'always',
       },
-      runGuardsAndResolvers: 'always',
-    },
-    { path: 'movie/:id', component: MovieDetailsComponent, resolve: {
-        details: movieDetailsResolver,
-        credits: movieCreditsResolverShort
-      }
-    },
-    { path: 'movie/:id/credits', component: MovieCreditsComponent, resolve: {
-        details: movieDetailsResolver,
-        credits: movieCreditsResolver
-      }
-    },
-    { path: 'tv/:id', component: TvDetailsComponent, resolve: {
+      { path: 'movie/:id', component: MovieDetailsComponent, resolve: {
+          details: movieDetailsResolver,
+          credits: movieCreditsResolverShort
+        }
+      },
+      { path: 'movie/:id/credits', component: MovieCreditsComponent, resolve: {
+          details: movieDetailsResolver,
+          credits: movieCreditsResolver
+        }
+      },
+      { path: 'tv/:id', component: TvDetailsComponent, resolve: {
+          details: tvDetailsResolver,
+          credits: tvCreditsResolverShort
+        }
+      },
+      { path: 'tv/:id/credits', component: TvCreditsComponent, resolve: {
         details: tvDetailsResolver,
-        credits: tvCreditsResolverShort
-      }
-    },
-    { path: 'tv/:id/credits', component: TvCreditsComponent, resolve: {
-      details: tvDetailsResolver,
-      credits: tvCreditsResolver
-      }
-    },
-    { path: 'person/:id', component: PersonDetailsComponent, resolve: {
-        details: personDetailsResolver,
-        credits: personCreditsResolver,
-      }
-    }]
+        credits: tvCreditsResolver
+        }
+      },
+      { path: 'person/:id', component: PersonDetailsComponent, resolve: {
+          details: personDetailsResolver,
+          credits: personCreditsResolver,
+        }
+      },
+      { path: 'map', component: MapPageComponent, children: [
+        { path: ':media_type/:media_id/add', component: MapAddComponent},
+        { path: ':media_type/:media_id/details', component: MapDetailsComponent , resolve: {
+            details: mapDetailsResolver
+          }
+        },
+        { path: ':media_type/:media_id/location', component: MapLocationComponent},
+      ]},
+    ]
   },
   { path: '', component: AuthLayoutComponent,
     children: [

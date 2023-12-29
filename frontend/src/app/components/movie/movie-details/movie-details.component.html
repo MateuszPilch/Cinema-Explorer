@@ -1,7 +1,7 @@
 <div class="font-poppins">
   <div class="block pb-4 m-auto justify-center items-center">
     <div class="flex md:w-1/6 w-1/2 pb-4 m-auto">
-      <img class="object-contain w-full h-full rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w200/{{movieDetailsData.poster_path}}">
+      <img class="object-contain w-full h-full rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w200/{{movieDetailsData.poster_path}}" onerror="this.src='assets/images/movie_blank.png';">
     </div>   
     <div class="flex pb-4 justify-center items-center text-3xl font-bold">
       {{movieDetailsData.title}}
@@ -64,11 +64,11 @@
             <div class="md:block hidden p-4 text-lg">
               Mapa lokacji
             </div>
-            <div class="p-2 bg-teal-300 hover:scale-105 hover:bg-teal-400 duration-200 rounded-lg">
+            <button routerLink="/map/movie/{{movieDetailsData.id}}/details" class="p-2 bg-teal-300 hover:scale-105 hover:bg-teal-400 duration-200 rounded-lg">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
               </svg>  
-            </div>        
+            </button>        
           </div>
         </div>
         <div class="md:flex block md:pt-8 pt-4 justify-around text-justify ">

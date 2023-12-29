@@ -10,8 +10,7 @@ import { PersonModule } from './person/person.module';
 import { AuthModule } from './auth/auth.module';
 import { PassportModule } from '@nestjs/passport';
 import { UserModule } from './user/user.module';
-import { MulterModule } from '@nestjs/platform-express';
-import * as Multer from 'multer'; 
+import { MapModule } from './map/map.module';
 
 @Module({
   imports: [ConfigModule.forRoot( {
@@ -20,7 +19,7 @@ import * as Multer from 'multer';
   }),
   PassportModule.register({session: true}),
   MongooseModule.forRoot(process.env.MONGODB_URL),
-  MovieModule, TvModule, SearchModule, PersonModule, AuthModule, UserModule],
+  MovieModule, TvModule, SearchModule, PersonModule, AuthModule, UserModule, MapModule],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -1,0 +1,29 @@
+<div class="pointer-events-none absolute top-0 left-0 w-full h-full">
+  <div class="pointer-events-auto md:w-1/5 md:h-full flex flex-col bg-gray-100 rounded-r-xl shadow-md">
+    <div class="flex-none pt-24 pb-4 px-4">
+      <button routerLink="/map">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+      </button>
+      <button routerLink="{{mediaPath}}" class="flex justify-center w-full">
+        <img class="object-contain mx-auto w-1/3 rounded-xl hover:scale-105 duration-200 shadow-md" src="https://image.tmdb.org/t/p/w200/{{mapDetails.poster_path}}" onerror="this.src='assets/images/movie_blank.png';">
+      </button>
+      <div class="flex pt-4 justify-center items-center text-2xl text-center font-bold">
+        {{mapDetails.name}}{{mapDetails.title}}
+      </div>
+      <button routerLink="../add" class="flex w-full h-16 mt-4 justify-center items-center bg-teal-300 rounded-xl shadow-md">
+        <b>Dodaj lokacje</b>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+        </svg>        
+      </button>
+    </div>
+    <ul class="flex-1 overflow-y-auto">
+      <li *ngIf="items.length <= 0" class="text-center">
+        Brak lokacji dla tej produkcji
+      </li>
+      <li *ngFor="let item of items" class="h-52 mb-4 mx-4 bg-white rounded-xl shadow-md">{{item}}</li>
+    </ul>
+  </div>
+</div>
