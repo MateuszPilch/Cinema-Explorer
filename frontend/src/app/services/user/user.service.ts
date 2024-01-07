@@ -113,7 +113,6 @@ export class UserService {
   setAvatar(avatar: File): void {
     const formData = new FormData();
     formData.append('avatar', avatar);
-    this.http.post('http://localhost:3000/api/user/avatar', formData).subscribe(() => {
-    });
+    firstValueFrom(this.http.post('http://localhost:3000/api/user/avatar', formData));
   }
 }

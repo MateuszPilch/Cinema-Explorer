@@ -20,10 +20,18 @@
       </button>
     </div>
     <ul class="flex-1 overflow-y-auto">
-      <li *ngIf="items.length <= 0" class="text-center">
+      <li *ngIf="mapDetails.mapData.length <= 0" class="text-center">
         Brak lokacji dla tej produkcji
       </li>
-      <li *ngFor="let item of items" class="h-52 mb-4 mx-4 bg-white rounded-xl shadow-md">{{item}}</li>
+      <li *ngFor="let location of mapDetails.mapData" (click)="focusOnLocation(location)" class="min-h-80 mb-4 mx-4 p-4 overflow-hidden cursor-pointer bg-white rounded-xl shadow-md">
+        <div class="text-xl font-bold">{{location.name}}</div>
+        <div class="flex justify-between">
+          <div class>Czas: {{location.runtime}}</div>
+          <div *ngIf="location.episode != '' && location.episode !='undefined'" class>Odcinek: {{location.episode}}</div>
+        </div>
+        <div class="pt-4">{{location.description}}</div>
+        <img *ngIf="location.image != ''" class="object-contain h-40 mx-auto rounded-xl shadow-md" [src]="location.image" onerror="this.src='assets/images/movie_blank.png';">
+      </li>
     </ul>
   </div>
 </div>

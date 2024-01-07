@@ -7,7 +7,7 @@ export class ErrorService {
 
   errorMessages: string[] = [];
 
-  constructor() { }
+  constructor() {}
 
   getErrorMessages(): string[] {
     return this.errorMessages;

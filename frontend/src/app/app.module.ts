@@ -28,7 +28,6 @@ import { UserReviewListComponent } from './components/user/user-review-list/user
 import { MapDetailsComponent } from './components/map/map-details/map-details.component';
 import { MapAddComponent } from './components/map/map-add/map-add.component';
 import { MapPopupComponent } from './components/map/map-popup/map-popup.component';
-import { MapLocationComponent } from './components/map/map-location/map-location.component';
 
 
 @NgModule({
@@ -54,7 +53,6 @@ import { MapLocationComponent } from './components/map/map-location/map-location
     MapAddComponent,
     MapDetailsComponent,
     MapPopupComponent,
-    MapLocationComponent,
   ],
   imports: [
     HttpClientModule,

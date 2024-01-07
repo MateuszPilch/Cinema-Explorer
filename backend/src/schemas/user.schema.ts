@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, ObjectId } from 'mongoose';
 
-class Avatar {
+class Image {
   
   @Prop()
   encoding: string;
@@ -64,11 +64,10 @@ export class User extends Document {
   password: string;
 
   @Prop()
-  avatar: Avatar;
+  avatar: Image;
 
   @Prop()
   media_list: MediaList[]
-
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

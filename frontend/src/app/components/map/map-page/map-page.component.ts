@@ -32,7 +32,7 @@ export class MapPageComponent implements OnInit {
       },
     });
 
-    this.map.addOverlay(overlay);
+    //this.map.addOverlay(overlay);
     
     this.map.on('singleclick', function (evt) {
       const coordinate = evt.coordinate;

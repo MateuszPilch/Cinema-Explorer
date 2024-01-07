@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
+import { imageToUrl } from 'shared/image-to-url';
+import { MapData } from 'shared/models/map/map-data';
 import { MapDetails } from 'shared/models/map/map-details';
+import { MapService } from 'src/app/services/map/map.service';
 
 @Component({
   selector: 'app-map-details',
@@ -11,15 +14,21 @@ export class MapDetailsComponent {
 
   mediaPath!: string;
   mapDetails!: MapDetails
-  items = [];
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private mapService: MapService) {}
 
   ngOnInit() {
     this.route.data.subscribe(({details}) => {
       this.mediaPath = `/${this.route.snapshot.paramMap.get('media_type')}/${this.route.snapshot.paramMap.get('media_id')}`;
-      console.log(details);
       this.mapDetails = details;
+      this.mapDetails.mapData.forEach((data) => {
+        data.image = imageToUrl(data.image);
+        this.mapService.drawMapLocation(data.center, data.radius);
+      }); 
     });
+  }
+
+  focusOnLocation(location: MapData): void {
+    this.mapService.focusOnLocation(location.center, location.radius);
   }
 }

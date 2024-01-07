@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Draw, Select } from 'ol/interaction';
 import { Type } from 'ol/geom/Geometry';
 import Map from 'ol/Map';
@@ -6,6 +6,9 @@ import { MapService } from 'src/app/services/map/map.service';
 import { click } from 'ol/events/condition';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
+import Circle from 'ol/geom/Circle';
+import { DrawEvent } from 'ol/interaction/Draw';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-map-add',
@@ -13,23 +16,32 @@ import VectorSource from 'ol/source/Vector';
   styleUrls: ['./map-add.component.css']
 })
 export class MapAddComponent {
+
   private map!: Map;
-  draw!: Draw;
-  drawType?: Type = 'Circle';
+  private vectorSource!: VectorSource;
+  private locationImageFile!: File;
+  private draw!: Draw;
+  private drawType?: Type = 'Circle';
 
   name!: string;
-  runtime!: number;
-  episode!: number;
+  runtime!: string;
+  episode!: string;
   description!: string;
 
-  constructor(private mapService: MapService) {}
+  mediaPath!: string;
+  markLocationEnabled: boolean = true;
+  locationImageUrl!: string | ArrayBuffer | null;
 
-  ngOnInit() {
+  constructor(private route: ActivatedRoute, private mapService: MapService) {}
+
+  ngOnInit() {    
+    this.mediaPath = `/${this.route.snapshot.paramMap.get('media_type')}/${this.route.snapshot.paramMap.get('media_id')}`;
+    
     this.map = this.mapService.getMap();
-    const vectorSource = new VectorSource();
+    this.vectorSource = new VectorSource();
 
     const vectorLayer = new VectorLayer({
-      source: vectorSource
+      source: this.vectorSource
     });
 
     const select = new Select({
@@ -42,17 +54,53 @@ export class MapAddComponent {
 
     if(this.drawType) {
       this.draw = new Draw({
-        source: vectorSource,
-        type: this.drawType
+        source: this.vectorSource,
+        type: this.drawType,
+        maxPoints: 1
       });
-      this.map.addInteraction(this.draw);
+
+      this.draw.on('drawend', (event: DrawEvent) => {
+        this.draw.setActive(false);
+        this.markLocationEnabled = !this.markLocationEnabled;
+      });
+      this.draw.setActive(false);
+    }
+    this.map.addInteraction(this.draw);
+  }
+
+  markLocation(): void {
+    this.draw.setActive(true);
+  }
+
+  clearLocation(): void {
+    this.vectorSource.clear();
+    this.markLocationEnabled = !this.markLocationEnabled;
+  }
+
+  setLocationImage(event: any): void {
+    this.locationImageFile = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(this.locationImageFile); 
+    reader.onload = (_event) => { 
+      this.locationImageUrl = reader.result; 
     }
   }
 
-  markLocation(): void { 
-  }
-  
   addMapLocation(): void {
+    const circle = this.vectorSource.getFeatures()[0].getGeometry()! as Circle;
+    let radius, center;
 
+    radius = circle.getRadius();
+    center = circle.getCenter();
+
+    this.mapService.addMapLocation(this.mediaPath, {
+      name: this.name,
+      runtime: this.runtime,
+      episode: this.episode,
+      description: this.description,
+      center: center,
+      radius: radius,
+      image: this.locationImageFile
+    });
   }
 }

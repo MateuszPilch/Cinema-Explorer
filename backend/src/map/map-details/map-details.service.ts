@@ -21,8 +21,9 @@ export class MapDetailsService {
       }
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
-    const details = await this.mapsModel.findOne({media_type, media_id})
-    const res = plainToClass(MapDetails, {...data, ...details}, { excludeExtraneousValues: false });
+    const details = (await this.mapsModel.findOne({media_type, media_id}));
+    const mapData = details ? details.map_data : null;
+    const res = plainToClass(MapDetails, {...data, mapData}, { excludeExtraneousValues: false });
 
     return res;
   }

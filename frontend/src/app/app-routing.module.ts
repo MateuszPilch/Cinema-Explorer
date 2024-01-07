@@ -25,7 +25,6 @@ import { UserPageComponent } from './components/user/user-page/user-page.compone
 import { MapPageComponent } from './components/map/map-page/map-page.component';
 import { MapAddComponent } from './components/map/map-add/map-add.component';
 import { MapDetailsComponent } from './components/map/map-details/map-details.component';
-import { MapLocationComponent } from './components/map/map-location/map-location.component';
 import { mapDetailsResolver } from './services/map/map.service';
 
 const routes: Routes = [
@@ -78,7 +77,6 @@ const routes: Routes = [
             details: mapDetailsResolver
           }
         },
-        { path: ':media_type/:media_id/location', component: MapLocationComponent},
       ]},
     ]
   },

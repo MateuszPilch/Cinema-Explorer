@@ -1,9 +1,13 @@
 import { Expose } from 'class-transformer';
+import { MapData } from './map-data';
 
 export class MapDetails
 { 
   @Expose()
   id!: number;
+
+  @Expose()
+  mapData!: MapData[];
 
   @Expose()
   name!: string;

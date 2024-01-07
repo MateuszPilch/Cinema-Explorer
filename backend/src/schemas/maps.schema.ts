@@ -16,31 +16,28 @@ class Image {
   size: number;
 }
 
-class Location {
-
-  @Prop()
-  coordinates: Number[]
-
-  @Prop()
-  radius: number;
-}
-
-class MediaDetails {
+class MapData {
 
   @Prop()
   name: string;
 
   @Prop()
-  runtime: number;
+  runtime: string;
 
   @Prop()
   episode: string;
 
   @Prop()
-  images: Image[];
+  description: string;
 
   @Prop()
-  location: Location
+  center: number[];
+
+  @Prop()
+  radius: number;
+
+  @Prop()
+  image: Image;
 }
 
 @Schema({
@@ -56,7 +53,7 @@ export class Maps extends Document {
   media_type: string;
 
   @Prop()
-  media_details: MediaDetails[]
+  map_data: MapData[]
 
   @Prop()
   visible: boolean
