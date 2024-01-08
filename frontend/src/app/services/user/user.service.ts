@@ -39,7 +39,6 @@ export class UserService {
       }
       return true;
     });
-    console.log(this.mediaFilter);
   }
 
   setMediaListSort(): void {

@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 class Image {
 
@@ -18,6 +18,9 @@ class Image {
 
 class MapData {
 
+  @Prop()
+  _id: string;
+  
   @Prop()
   name: string;
 

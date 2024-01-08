@@ -3,7 +3,9 @@ import { Injectable, inject } from '@angular/core';
 import { ResolveFn, ActivatedRouteSnapshot, Router, NavigationEnd } from '@angular/router';
 import { Feature, View } from 'ol';
 import Map from 'ol/Map';
-import { Circle, Geometry } from 'ol/geom';
+import { click } from 'ol/events/condition';
+import { Circle, Geometry, Point } from 'ol/geom';
+import { Select } from 'ol/interaction';
 import TileLayer from 'ol/layer/Tile';
 import VectorLayer from 'ol/layer/Vector';
 import { fromLonLat } from 'ol/proj';
@@ -23,6 +25,7 @@ import { MapDetails } from 'shared/models/map/map-details';
 export class MapService {
   private map!: Map;
   private vectorSource!: VectorSource;
+  private vectorLayer!: VectorLayer<VectorSource>;
 
   constructor(private http: HttpClient, private router: Router) {
     this.initializeMap();
@@ -38,7 +41,14 @@ export class MapService {
     this.vectorSource = new VectorSource();
 
     const vectorLayer = new VectorLayer({
-      source: this.vectorSource
+      source: this.vectorSource,
+      style: {
+        'circle-radius': 8,
+        'circle-fill-color': 'rgb(20, 184, 166)',
+        'fill-color': 'rgba(20, 184, 166, 0.2)',
+        'stroke-color':'rgb(20, 184, 166)',
+        'stroke-width': 4,
+      },
     });
 
     const rasterLayer = new TileLayer({
@@ -50,24 +60,50 @@ export class MapService {
       view: new View({
         center: [0, 0],
         zoom: 3
-      })
+      }),
     });
-    console.log(this.map.getAllLayers());
   }
 
   getMap(): Map {
     return this.map;
   }
 
-  clearMap(): void {
-    this.map.getInteractions().pop();
-    // if(this.map.getLayers().getLength() > 1) {
-    //   this.map.getLayers().pop();
-    // }
-    this.vectorSource.getFeatures().pop();
+  getVectorSource(): VectorSource {
+    return this.vectorSource;
   }
 
-  addMapLocation(mediaPath: string, mapData: MapData) {
+  getVectorLayer(): VectorLayer<VectorSource> {
+    return this.vectorLayer;
+  }
+
+  clearMap(): void {
+    this.map.getInteractions().pop();
+    this.vectorSource.clear();
+  }
+
+  drawCircleLocation(center: number[], radius: number): void {
+    const circleFeature = new Feature({
+      geometry: new Circle(center, radius),
+    })
+    this.vectorSource.addFeature(circleFeature);
+  }
+
+  drawPointLocation(media_type:string, media_id: string, location_id: string, center: number[]): void {
+    const pointFeature = new Feature({
+      media_type,
+      media_id,
+      location_id,
+      geometry: new Point(center),
+    })
+
+    this.vectorSource.addFeature(pointFeature);
+  }
+
+  focusOnLocation(center: number[], radius: number): void {
+    this.map.getView().fit(new Circle(center, radius), {padding: [150, 0, 150, 0]});
+  }
+
+  addMapLocation(mediaPath: string, mapData: MapData): void {
     const formData = new FormData();
     Object.entries(mapData).forEach(([key, value]) => {
       formData.append(key, value);
@@ -76,33 +112,27 @@ export class MapService {
     firstValueFrom(this.http.post(`http://localhost:3000/api/map${mediaPath}/add`, formData));
   }
 
-  drawMapLocation(center: number[], radius: number): void {
-    const circleFeature = new Feature({
-      geometry: new Circle(center, radius),
-    })
-    const circleStyle = new Style({
-      fill: new Fill({
-        color: 'rgba(20, 184, 166, 0.2)',
-      }),
-      stroke: new Stroke({
-        color: 'rgb(20, 184, 166)',
-        width: 4,
-      }),
-    });
-    circleFeature.setStyle(circleStyle);
-    this.vectorSource.addFeature(circleFeature);
-  }
-
-  focusOnLocation(center: number[], radius: number): void {
-    this.map.getView().fit(new Circle(center, radius), {padding: [150, 0, 150, 0]});
+  deleteMapLocation(mediaPath: string, location_id: string): void {
+    firstValueFrom(this.http.post<MapDetails>(`http://localhost:3000/api/map${mediaPath}/${location_id}/delete`,{}));
   }
 
   getMapDetails(mediaPath: string): Observable<MapDetails> {
-    return this.http.get<MapDetails>(`http://localhost:3000/api/map${mediaPath}/details`,{
-    });
+    return this.http.get<MapDetails>(`http://localhost:3000/api/map${mediaPath}/details`);
+  }
+
+  getLocationDetails(mediaPath: string, location_id: string): Observable<MapDetails> {
+    return this.http.get<MapDetails>(`http://localhost:3000/api/map${mediaPath}/${location_id}`);
+  }
+
+  getAllLocations(): Observable<MapData[]> {
+    return this.http.get<MapData[]>(`http://localhost:3000/api/map/all`);
   }
 }
 
 export const mapDetailsResolver: ResolveFn<MapDetails> = (route: ActivatedRouteSnapshot) => {
   return inject(MapService).getMapDetails(`/${route.paramMap.get('media_type')!}/${route.paramMap.get('media_id')!}`);
+};
+
+export const mapPageResolver: ResolveFn<MapData[]> = () => {
+  return inject(MapService).getAllLocations();
 };

@@ -38,7 +38,7 @@
               Serial
             </div>
           </div>
-          <div class="flex items-center">
+          <div *ngIf="result.vote_average != 0" class="flex items-center">
             <div class="md:text-base text-xs font-bold">
               {{result.vote_average}}
             </div>

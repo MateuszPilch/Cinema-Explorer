@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { imageToUrl } from 'shared/image-to-url';
 import { MapData } from 'shared/models/map/map-data';
 import { MapDetails } from 'shared/models/map/map-details';
@@ -23,9 +23,14 @@ export class MapDetailsComponent {
       this.mapDetails = details;
       this.mapDetails.mapData.forEach((data) => {
         data.image = imageToUrl(data.image);
-        this.mapService.drawMapLocation(data.center, data.radius);
+        this.mapService.drawCircleLocation(data.center, data.radius);
       }); 
     });
+  }
+
+  deleteMapLocation(location_id: string): void {
+    this.mapService.deleteMapLocation(this.mediaPath, location_id);
+    this.mapDetails.mapData.splice(this.mapDetails.mapData.findIndex((loc) => loc._id === location_id), 1);
   }
 
   focusOnLocation(location: MapData): void {

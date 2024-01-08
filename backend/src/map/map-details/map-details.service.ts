@@ -2,7 +2,7 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { plainToClass } from 'class-transformer';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { firstValueFrom } from 'rxjs';
 import { MapDetails } from 'shared/models/map/map-details';
 import { Maps } from 'src/schemas/maps.schema';
@@ -24,7 +24,10 @@ export class MapDetailsService {
     const details = (await this.mapsModel.findOne({media_type, media_id}));
     const mapData = details ? details.map_data : null;
     const res = plainToClass(MapDetails, {...data, mapData}, { excludeExtraneousValues: false });
-
     return res;
+  }
+
+  async deleteMapLocation(media_type: string, media_id: string, location_id : string): Promise<any> {
+    await this.mapsModel.updateOne({media_type, media_id}, { $pull: { map_data: {_id: location_id}}});
   }
 }

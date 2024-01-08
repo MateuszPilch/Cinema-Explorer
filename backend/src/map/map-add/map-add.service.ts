@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 import { MapData } from 'shared/models/map/map-data';
 import { Maps } from 'src/schemas/maps.schema';
 
@@ -14,6 +14,7 @@ export class MapAddService {
     const coords = mapData.center.toString().split(',').map(coord => Number(coord));
     if(media) {
       media.map_data.push({
+        _id: new mongoose.mongo.ObjectId().toString(),
         name: mapData.name,
         runtime: mapData.runtime, 
         episode: mapData.episode,
@@ -28,6 +29,7 @@ export class MapAddService {
         media_type,
         media_id,
         map_data: {
+          _id: new mongoose.mongo.ObjectId().toString(),
           name: mapData.name,
           runtime: mapData.runtime, 
           episode: mapData.episode,

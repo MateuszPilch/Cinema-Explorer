@@ -25,7 +25,7 @@ import { UserPageComponent } from './components/user/user-page/user-page.compone
 import { MapPageComponent } from './components/map/map-page/map-page.component';
 import { MapAddComponent } from './components/map/map-add/map-add.component';
 import { MapDetailsComponent } from './components/map/map-details/map-details.component';
-import { mapDetailsResolver } from './services/map/map.service';
+import { mapDetailsResolver, mapPageResolver } from './services/map/map.service';
 
 const routes: Routes = [
   { path: '', component: HomeLayoutComponent,
@@ -71,13 +71,16 @@ const routes: Routes = [
           credits: personCreditsResolver,
         }
       },
-      { path: 'map', component: MapPageComponent, children: [
+      { path: 'map', component: MapPageComponent, children:  [
         { path: ':media_type/:media_id/add', component: MapAddComponent},
         { path: ':media_type/:media_id/details', component: MapDetailsComponent , resolve: {
             details: mapDetailsResolver
           }
         },
-      ]},
+      ], resolve: {
+          data: mapPageResolver
+        }
+      },
     ]
   },
   { path: '', component: AuthLayoutComponent,

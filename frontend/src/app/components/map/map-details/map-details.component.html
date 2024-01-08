@@ -1,18 +1,23 @@
 <div class="pointer-events-none absolute top-0 left-0 w-full h-full">
   <div class="pointer-events-auto md:w-1/5 md:h-full flex flex-col bg-gray-100 rounded-r-xl shadow-md">
     <div class="flex-none pt-24 pb-4 px-4">
-      <button routerLink="/map">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-        </svg>
-      </button>
-      <button routerLink="{{mediaPath}}" class="flex justify-center w-full">
-        <img class="object-contain mx-auto w-1/3 rounded-xl hover:scale-105 duration-200 shadow-md" src="https://image.tmdb.org/t/p/w200/{{mapDetails.poster_path}}" onerror="this.src='assets/images/movie_blank.png';">
-      </button>
+      <div class="flex justify-between">
+        <button routerLink="{{mediaPath}}">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+          </svg>
+        </button>
+        <button routerLink="/map">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>          
+        </button>
+      </div>
+        <img class="object-contain mx-auto w-1/3 rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w200/{{mapDetails.poster_path}}" onerror="this.src='assets/images/movie_blank.png';">
       <div class="flex pt-4 justify-center items-center text-2xl text-center font-bold">
         {{mapDetails.name}}{{mapDetails.title}}
       </div>
-      <button routerLink="../add" class="flex w-full h-16 mt-4 justify-center items-center bg-teal-300 rounded-xl shadow-md">
+      <button routerLink="../add" class="flex w-full h-16 mt-4 justify-center items-center hover:scale-[1.02] bg-teal-300 hover:bg-teal-400 duration-200 rounded-xl shadow-md">
         <b>Dodaj lokacje</b>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -20,17 +25,26 @@
       </button>
     </div>
     <ul class="flex-1 overflow-y-auto">
-      <li *ngIf="mapDetails.mapData.length <= 0" class="text-center">
+      <li *ngIf="!mapDetails.mapData || (mapDetails.mapData && mapDetails.mapData.length <= 0)" class="text-center">
         Brak lokacji dla tej produkcji
       </li>
-      <li *ngFor="let location of mapDetails.mapData" (click)="focusOnLocation(location)" class="min-h-80 mb-4 mx-4 p-4 overflow-hidden cursor-pointer bg-white rounded-xl shadow-md">
-        <div class="text-xl font-bold">{{location.name}}</div>
+      <li *ngFor="let location of mapDetails.mapData" class="min-h-80 mb-4 mx-4 p-4 overflow-hidden bg-white rounded-xl shadow-md">
         <div class="flex justify-between">
-          <div class>Czas: {{location.runtime}}</div>
-          <div *ngIf="location.episode != '' && location.episode !='undefined'" class>Odcinek: {{location.episode}}</div>
+          <div class="text-xl font-bold">{{location.name}}</div>
+          <button (click)="deleteMapLocation(location._id)" class="hover:scale-125 duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+            </svg>
+          </button>
         </div>
-        <div class="pt-4">{{location.description}}</div>
-        <img *ngIf="location.image != ''" class="object-contain h-40 mx-auto rounded-xl shadow-md" [src]="location.image" onerror="this.src='assets/images/movie_blank.png';">
+        <div (click)="focusOnLocation(location)" class="cursor-pointer">
+          <div class="flex justify-between">
+            <div class>Czas: {{location.runtime}}</div>
+            <div *ngIf="location.episode != '' && location.episode !='undefined'" class>Odcinek: {{location.episode}}</div>
+          </div>
+          <div *ngIf="location.description != '' && location.description !='undefined'" class="pt-4">{{location.description}}</div>
+          <img *ngIf="location.image != ''" class="object-contain h-40 mx-auto rounded-xl shadow-md" [src]="location.image" onerror="this.src='assets/images/movie_blank.png';">
+        </div>
       </li>
     </ul>
   </div>
