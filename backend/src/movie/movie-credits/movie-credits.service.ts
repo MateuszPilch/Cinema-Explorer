@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom, map } from 'rxjs';
-import { MovieCredits } from 'shared/models/movie/movie-credits';
+import { MediaCredits } from 'shared/models/media/media-credits';
 import { plainToClass } from "class-transformer"; 
 
 
@@ -9,7 +9,7 @@ import { plainToClass } from "class-transformer";
 export class MovieCreditsService {
   constructor(private readonly httpService: HttpService) {}
 
-  async getMovieCredits(movie_id: string): Promise<MovieCredits> {
+  async getMovieCredits(movie_id: string): Promise<MediaCredits> {
     const url = `https://api.themoviedb.org/3/movie/${movie_id}/credits?language=pl-PL`;
     const headers = {
       headers: {
@@ -18,11 +18,11 @@ export class MovieCreditsService {
       }
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
-    const res = plainToClass(MovieCredits, data,{ excludeExtraneousValues: true });
+    const res = plainToClass(MediaCredits, data,{ excludeExtraneousValues: true });
     return res;
   }
 
-  async getMovieCreditsShort(movie_id: string): Promise<MovieCredits> {
+  async getMovieCreditsShort(movie_id: string): Promise<MediaCredits> {
     const url = `https://api.themoviedb.org/3/movie/${movie_id}/credits?language=pl-PL`;
     const headers = {
       headers: {
@@ -31,7 +31,7 @@ export class MovieCreditsService {
       }
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
-    let res = plainToClass(MovieCredits, data, { excludeExtraneousValues: true });
+    let res = plainToClass(MediaCredits, data, { excludeExtraneousValues: true });
     res.cast = res.cast.slice(0,10);
     res.crew = res.crew.slice(0,10);
     return res;

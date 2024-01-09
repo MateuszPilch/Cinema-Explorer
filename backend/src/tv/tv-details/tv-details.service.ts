@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom, map } from 'rxjs';
-import { TvDetails } from 'shared/models/tv/tv-details';
+import { MediaDetails } from 'shared/models/tv/tv-details';
 import { plainToClass } from "class-transformer"; 
 
 @Injectable()
 export class TvDetailsService {
   constructor(private readonly httpService: HttpService) {}
 
-  async getTvDetails(id: string): Promise<TvDetails> {
+  async getTvDetails(id: string): Promise<MediaDetails> {
     const url = `https://api.themoviedb.org/3/tv/${id}?language=pl-PL`;
     const headers = {
       headers: {
@@ -17,7 +17,7 @@ export class TvDetailsService {
       }
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
-    const res = plainToClass(TvDetails, data, { excludeExtraneousValues: true });
+    const res = plainToClass(MediaDetails, data, { excludeExtraneousValues: true });
     return res;
   }
 }

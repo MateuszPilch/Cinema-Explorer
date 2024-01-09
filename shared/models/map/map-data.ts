@@ -1,7 +1,6 @@
 import { Expose } from 'class-transformer';
 
 export class MapData {
-
   @Expose()
   _id!: string;
 

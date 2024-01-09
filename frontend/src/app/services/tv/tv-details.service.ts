@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { TvDetails } from 'shared/models/tv/tv-details';
+import { MediaDetails } from 'shared/models/media/media-details';
 import { ResolveFn, ActivatedRouteSnapshot } from '@angular/router';
 
 @Injectable({
@@ -10,11 +10,11 @@ import { ResolveFn, ActivatedRouteSnapshot } from '@angular/router';
 export class TvDetailsService {
 
   constructor(private http: HttpClient) {}
-  getTvDetails(id:string): Observable<TvDetails> {
-    return this.http.get<TvDetails>(`http://localhost:3000/api/tv/${id}`);
+  getTvDetails(id:string): Observable<MediaDetails> {
+    return this.http.get<MediaDetails>(`http://localhost:3000/api/tv/${id}`);
   }
 }
 
-export const tvDetailsResolver: ResolveFn<TvDetails> = (route: ActivatedRouteSnapshot) => {
+export const tvDetailsResolver: ResolveFn<MediaDetails> = (route: ActivatedRouteSnapshot) => {
   return inject(TvDetailsService).getTvDetails(route.paramMap.get('id')!);
 };

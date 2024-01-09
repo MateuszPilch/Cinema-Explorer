@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TvCredits } from 'shared/models/tv/tv-credits';
-import { TvDetails } from 'shared/models/tv/tv-details';
+import { MediaDetails } from 'shared/models/media/media-details';
+import { MediaCredits } from 'shared/models/media/media-credits';
 
 @Component({
   selector: 'app-tv-credits',
@@ -11,8 +11,8 @@ import { TvDetails } from 'shared/models/tv/tv-details';
 export class TvCreditsComponent {
 
   id!: string | null;
-  tvDetailsData!: TvDetails;
-  tvCreditsData!: TvCredits
+  tvDetailsData!: MediaDetails;
+  tvCreditsData!: MediaCredits
 
   constructor(private route: ActivatedRoute) {}
 

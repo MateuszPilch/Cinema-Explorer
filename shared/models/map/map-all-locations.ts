@@ -1,7 +1,6 @@
 import { Expose } from 'class-transformer';
 
 export class MapAllLocations {
-
   @Expose()
   media_type!: string;
 
@@ -13,7 +12,6 @@ export class MapAllLocations {
 }
 
 class MapData {
-
   @Expose()
   _id!: string;
 

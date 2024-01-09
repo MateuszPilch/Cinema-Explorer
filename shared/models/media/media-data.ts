@@ -1,14 +1,12 @@
 import { Expose } from 'class-transformer';
-import { MovieDetails } from './movie-details'
+import { MediaDetails } from './media-details'
 
-export class MovieData
-{
-  
+export class MediaData {
   @Expose()
   page!: number;
 
   @Expose()
-  results!: MovieDetails[];
+  results!: MediaDetails[];
 
   @Expose()
   total_pages!: number

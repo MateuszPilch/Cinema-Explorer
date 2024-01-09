@@ -1,16 +1,17 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
-import { MediaSearchFilter } from 'shared/models/media/media-search-filter';
 import { firstValueFrom } from 'rxjs';
 import { MediaData } from 'shared/models/media/media-data';
+import { MediaSearchFilter } from 'shared/models/media/media-search-filter';
 
 @Injectable()
-export class MoviePageService {
+export class TvPageService {
+
   constructor(private readonly httpService: HttpService) {}
 
-  async getMovieData(params: MediaSearchFilter): Promise<MediaData> {
-    const url = `https://api.themoviedb.org/3/discover/movie/?language=pl-PL`;
+  async getTvData(params: MediaSearchFilter): Promise<MediaData> {
+    const url = `https://api.themoviedb.org/3/discover/tv/?language=pl-PL`;
     const headers = {
       headers: {
         accept: 'application/json',

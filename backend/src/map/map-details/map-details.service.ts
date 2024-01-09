@@ -2,7 +2,7 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { plainToClass } from 'class-transformer';
-import { Model, Types } from 'mongoose';
+import { Model } from 'mongoose';
 import { firstValueFrom } from 'rxjs';
 import { MapDetails } from 'shared/models/map/map-details';
 import { Maps } from 'src/schemas/maps.schema';

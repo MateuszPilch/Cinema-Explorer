@@ -3,17 +3,19 @@ import { Injectable, inject } from '@angular/core';
 import { ResolveFn, ActivatedRouteSnapshot, Router, NavigationEnd } from '@angular/router';
 import { Feature, View } from 'ol';
 import Map from 'ol/Map';
-import { click } from 'ol/events/condition';
-import { Circle, Geometry, Point } from 'ol/geom';
-import { Select } from 'ol/interaction';
+import Cluster from 'ol/source/Cluster';
+import { Circle, Point } from 'ol/geom';
+import { Draw, Select } from 'ol/interaction';
 import TileLayer from 'ol/layer/Tile';
 import VectorLayer from 'ol/layer/Vector';
-import { fromLonLat } from 'ol/proj';
 import OSM from 'ol/source/OSM';
+import {
+  Circle as CircleStyle,
+  Fill,
+  Style,
+  Text,
+} from 'ol/style.js';
 import VectorSource from 'ol/source/Vector';
-import Fill from 'ol/style/Fill';
-import Stroke from 'ol/style/Stroke';
-import Style from 'ol/style/Style';
 import { Observable, firstValueFrom } from 'rxjs';
 import { MapData } from 'shared/models/map/map-data';
 import { MapDetails } from 'shared/models/map/map-details';
@@ -54,7 +56,40 @@ export class MapService {
     const rasterLayer = new TileLayer({
       source: new OSM()
     });
+/*
+    const clusterSource = new Cluster({
+      distance: 250,
+      source: this.vectorSource,
+    });
 
+    const styleCache: Style[] = [];
+    const clusterLayer = new VectorLayer({
+      source: clusterSource,
+      style: (feature) => {
+        const size = feature.get('features').length;
+        let style = styleCache[size];
+        if (!style) {
+          style = new Style({
+            image: new CircleStyle({
+              radius: 12,
+              fill: new Fill({
+                color: 'rgb(15, 118, 110)',
+              }),
+            }),
+            text: new Text({
+              font: '12px poppins',
+              text: size.toString(),
+              fill: new Fill({
+                color: 'white',
+              }),
+            }),
+          });
+          styleCache[size] = style;
+        }
+        return style;
+      }
+    });*/
+    
     this.map = new Map({
       layers: [rasterLayer, vectorLayer],
       view: new View({
@@ -77,8 +112,14 @@ export class MapService {
   }
 
   clearMap(): void {
-    this.map.getInteractions().pop();
+    this.map.getInteractions().forEach((interaction) => {
+      if (interaction instanceof Select || interaction instanceof Draw) {
+        interaction.setActive(false);
+      }
+    });
+    this.map.getOverlays().pop();
     this.vectorSource.clear();
+
   }
 
   drawCircleLocation(center: number[], radius: number): void {
@@ -88,7 +129,7 @@ export class MapService {
     this.vectorSource.addFeature(circleFeature);
   }
 
-  drawPointLocation(media_type:string, media_id: string, location_id: string, center: number[]): void {
+  drawPointLocation(media_type: string, media_id: string, location_id: string, center: number[]): void {
     const pointFeature = new Feature({
       media_type,
       media_id,

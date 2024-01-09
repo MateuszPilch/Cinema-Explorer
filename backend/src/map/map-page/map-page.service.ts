@@ -5,7 +5,6 @@ import { plainToClass } from 'class-transformer';
 import { Model } from 'mongoose';
 import { firstValueFrom } from 'rxjs';
 import { MapAllLocations } from 'shared/models/map/map-all-locations';
-import { MapData } from 'shared/models/map/map-data';
 import { MapDetails } from 'shared/models/map/map-details';
 import { Maps } from 'src/schemas/maps.schema';
 

@@ -21,8 +21,8 @@ export class UserPageComponent {
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
       this.nickname = this.route.snapshot.paramMap.get('nickname')!
-      this.userService.getAvatar(this.nickname).subscribe((res) => {
-        this.avatarPath = imageToUrl(res);
+      this.userService.getAvatar(this.nickname).subscribe(async (res) => {
+        this.avatarPath = await imageToUrl(res);
       });
       this.userService.getMediaList(this.nickname);
     });

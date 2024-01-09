@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { MoviePageComponent } from './components/movie/movie-page/movie-page.component';
-import { MovieDetailsComponent } from './components/movie/movie-details/movie-details.component';
-import { MovieCreditsComponent } from './components/movie/movie-credits/movie-credits.component';
-import { movieDetailsResolver } from './services/movie/movie-details.service';
-import { movieCreditsResolver, movieCreditsResolverShort } from './services/movie/movie-credits.service';
 import { moviePageResolver } from './services/movie/movie-page.service';
+import { MovieDetailsComponent } from './components/movie/movie-details/movie-details.component';
+import { movieDetailsResolver } from './services/movie/movie-details.service';
+import { MovieCreditsComponent } from './components/movie/movie-credits/movie-credits.component';
+import { movieCreditsResolver, movieCreditsResolverShort } from './services/movie/movie-credits.service';
 import { TvDetailsComponent } from './components/tv/tv-details/tv-details.component';
 import { TvCreditsComponent } from './components/tv/tv-credits/tv-credits.component';
 import { tvDetailsResolver } from './services/tv/tv-details.service';
@@ -26,6 +26,9 @@ import { MapPageComponent } from './components/map/map-page/map-page.component';
 import { MapAddComponent } from './components/map/map-add/map-add.component';
 import { MapDetailsComponent } from './components/map/map-details/map-details.component';
 import { mapDetailsResolver, mapPageResolver } from './services/map/map.service';
+import { MapMainComponent } from './components/map/map-main/map-main.component';
+import { TvPageComponent } from './components/tv/tv-page/tv-page.component';
+import { tvPageResolver } from './services/tv/tv-page.service';
 
 const routes: Routes = [
   { path: '', component: HomeLayoutComponent,
@@ -56,14 +59,18 @@ const routes: Routes = [
           credits: movieCreditsResolver
         }
       },
+      { path: 'tv', component: TvPageComponent, resolve: {
+          data: tvPageResolver
+        }
+      },
       { path: 'tv/:id', component: TvDetailsComponent, resolve: {
           details: tvDetailsResolver,
           credits: tvCreditsResolverShort
         }
       },
       { path: 'tv/:id/credits', component: TvCreditsComponent, resolve: {
-        details: tvDetailsResolver,
-        credits: tvCreditsResolver
+          details: tvDetailsResolver,
+          credits: tvCreditsResolver
         }
       },
       { path: 'person/:id', component: PersonDetailsComponent, resolve: {
@@ -71,16 +78,19 @@ const routes: Routes = [
           credits: personCreditsResolver,
         }
       },
-      { path: 'map', component: MapPageComponent, children:  [
+      { path: 'map', component: MapMainComponent, children:  [
         { path: ':media_type/:media_id/add', component: MapAddComponent},
         { path: ':media_type/:media_id/details', component: MapDetailsComponent , resolve: {
             details: mapDetailsResolver
           }
         },
-      ], resolve: {
-          data: mapPageResolver
-        }
-      },
+        {
+          path: 'page', component: MapPageComponent, resolve: {
+            data: mapPageResolver
+          }
+        },
+        { path: '**', redirectTo: 'page' }
+      ]},
     ]
   },
   { path: '', component: AuthLayoutComponent,

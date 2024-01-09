@@ -1,7 +1,6 @@
 import { Expose } from 'class-transformer';
 
-export class TvCredits
-{
+export class MediaCredits {
   @Expose()
   cast!: Cast[];
 
@@ -9,8 +8,7 @@ export class TvCredits
   crew!: Crew[];
 }
 
-interface Cast
-{
+interface Cast {
   adult: boolean;
   cast_id: number;
   character: string;
@@ -25,8 +23,7 @@ interface Cast
   profile_path: string;
 }
 
-interface Crew
-{
+interface Crew {
   adult: boolean;
   credit_id: number;
   department: string;

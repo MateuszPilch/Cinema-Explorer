@@ -63,8 +63,8 @@ export class MapAddComponent {
       });
 
       this.draw.on('drawend', (event: DrawEvent) => {
-        this.draw.setActive(false);
         this.markLocationEnabled = !this.markLocationEnabled;
+        this.draw.setActive(false);
       });
       this.draw.setActive(false);
     }

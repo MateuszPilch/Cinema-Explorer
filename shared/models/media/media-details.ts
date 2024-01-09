@@ -1,8 +1,6 @@
 import { Expose } from 'class-transformer';
 
-export class TvDetails
-{
-  
+export class MediaDetails {
   @Expose()
   budget!: string;
 
@@ -14,18 +12,21 @@ export class TvDetails
 
   @Expose()
   id!: number;
-
+  
   @Expose()
   name!: string;
+
+  @Expose()
+  number_of_seasons!: number;
 
   @Expose()
   number_of_episodes!: string;
 
   @Expose()
-  number_of_seasons!: string;
+  original_name! : string;
 
   @Expose()
-  original_name!: string
+  original_title!: string
   
   @Expose()
   overview!: string;
@@ -34,10 +35,16 @@ export class TvDetails
   poster_path!: string;
 
   @Expose()
+  release_date!: string;
+
+  @Expose()
   revenue!:number;
 
   @Expose()
   runtime!: string;
+
+  @Expose()
+  title!: string;
 
   @Expose()
   vote_average!: number;

@@ -1,4 +1,4 @@
-export function imageToUrl(res: any): string {
+export async function imageToUrl(res: any): Promise<string> {
   try {
     const mime = res.mimetype;
     const bstr = atob(res.buffer);

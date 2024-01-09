@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MovieDetails } from 'shared/models/movie/movie-details';
-import { MovieCredits } from 'shared/models/movie/movie-credits';
+import { MediaDetails } from 'shared/models/media/media-details';
+import { MediaCredits } from 'shared/models/media/media-credits';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { UserService } from 'src/app/services/user/user.service';
 
@@ -12,8 +12,8 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class MovieDetailsComponent {
 
-  movieDetailsData!: MovieDetails;
-  movieCreditsData!: MovieCredits
+  movieDetailsData!: MediaDetails;
+  movieCreditsData!: MediaCredits
 
   movieRating: number = 0;
   movieReview: string = '';

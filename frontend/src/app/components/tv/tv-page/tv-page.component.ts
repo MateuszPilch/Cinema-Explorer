@@ -2,19 +2,18 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Options } from 'ngx-slider-v2';
 import { MediaData } from 'shared/models/media/media-data';
-import { MoviePageService } from 'src/app/services/movie/movie-page.service';
+import { TvPageService } from 'src/app/services/tv/tv-page.service';
 
 @Component({
-  selector: 'app-movie-page',
-  templateUrl: './movie-page.component.html',
-  styleUrls: ['./movie-page.component.css']
+  selector: 'app-tv-page',
+  templateUrl: './tv-page.component.html',
+  styleUrls: ['./tv-page.component.css']
 })
-export class MoviePageComponent {
-
+export class TvPageComponent {
   isFilterOpen: boolean = false;
 
-  movieData!: MediaData;
-  moviePagination!: number[];
+  tvData!: MediaData;
+  tvPagination!: number[];
   
   voteAvgRange: number[] = [1,5];
   voteAvgOptions: Options = {
@@ -59,37 +58,37 @@ export class MoviePageComponent {
     }
   };
 
-  constructor(private route: ActivatedRoute, public moviePageService: MoviePageService) {}
+  constructor(private route: ActivatedRoute, public tvPageService: TvPageService) {}
 
   ngOnInit() {
     this.route.data.subscribe(({data}) => {
-      this.movieData = data;
+      this.tvData = data;
       this.dataFormat();
       this.paginationStyle();
     })
   }
 
   dataFormat(): void {
-    this.movieData.results.forEach((a)=> a.vote_average = Math.round(a.vote_average / 2 * 10) / 10);
+    this.tvData.results.forEach((a)=> a.vote_average = Math.round(a.vote_average / 2 * 10) / 10);
   }
 
   paginationStyle(): void {
     
-    this.moviePagination = [];
-    const totalPages = Math.min(this.movieData.total_pages, 500);
-    const currentPage = Math.min(Math.max(this.movieData.page, 1), totalPages);
+    this.tvPagination = [];
+    const totalPages = Math.min(this.tvData.total_pages, 500);
+    const currentPage = Math.min(Math.max(this.tvData.page, 1), totalPages);
   
     if (currentPage <= 3) {
       for (let i = 1; i <= 5 && i <= totalPages; i++) {
-        this.moviePagination.push(i);
+        this.tvPagination.push(i);
       }
     } else if (currentPage >= totalPages - 2) {
       for (let i = totalPages - 4; i <= totalPages; i++) {
-        this.moviePagination.push(i);
+        this.tvPagination.push(i);
       }
     } else {
       for (let i = currentPage - 2; i <= currentPage + 2; i++) {
-        this.moviePagination.push(i);
+        this.tvPagination.push(i);
       }
     }
   }

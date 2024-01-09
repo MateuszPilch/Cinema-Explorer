@@ -1,5 +1,4 @@
-export class MovieFilter
-{
+export class MediaSearchFilter {
   certification!: {
     gte: string;
     lte: string;

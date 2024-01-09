@@ -1,8 +1,6 @@
 import { Expose } from 'class-transformer';
 
-export class SearchData
-{
-  
+export class SearchData {
   @Expose()
   page!: number;
 
@@ -16,8 +14,7 @@ export class SearchData
   total_results!: number;
 }
 
-interface Results
-{
+interface Results {
   backdrop_path : string;
   first_air_date : string;
   id: number;

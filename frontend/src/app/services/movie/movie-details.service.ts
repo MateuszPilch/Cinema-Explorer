@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, firstValueFrom } from 'rxjs';
-import { MovieDetails } from 'shared/models/movie/movie-details';
+import { MediaDetails } from 'shared/models/media/media-details';
 import { ResolveFn, ActivatedRouteSnapshot } from '@angular/router';
 
 @Injectable({
@@ -11,11 +11,11 @@ export class MovieDetailsService {
 
   constructor(private http: HttpClient) {}
   
-  getMovieDetails(movie_id: string): Observable<MovieDetails> {
-    return this.http.get<MovieDetails>(`http://localhost:3000/api/movie/${movie_id}`);
+  getMovieDetails(movie_id: string): Observable<MediaDetails> {
+    return this.http.get<MediaDetails>(`http://localhost:3000/api/movie/${movie_id}`);
   }
 }
 
-export const movieDetailsResolver: ResolveFn<MovieDetails> = (route: ActivatedRouteSnapshot) => {
+export const movieDetailsResolver: ResolveFn<MediaDetails> = (route: ActivatedRouteSnapshot) => {
   return inject(MovieDetailsService).getMovieDetails(route.paramMap.get('id')!);
 };

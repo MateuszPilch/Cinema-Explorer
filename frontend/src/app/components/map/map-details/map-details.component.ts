@@ -21,16 +21,16 @@ export class MapDetailsComponent {
     this.route.data.subscribe(({details}) => {
       this.mediaPath = `/${this.route.snapshot.paramMap.get('media_type')}/${this.route.snapshot.paramMap.get('media_id')}`;
       this.mapDetails = details;
-      this.mapDetails.mapData.forEach((data) => {
-        data.image = imageToUrl(data.image);
-        this.mapService.drawCircleLocation(data.center, data.radius);
+      this.mapDetails.mapData.forEach(async (location) => {
+        location.image = await imageToUrl(location.image);
+        this.mapService.drawCircleLocation(location.center, location.radius);
       }); 
     });
   }
 
   deleteMapLocation(location_id: string): void {
     this.mapService.deleteMapLocation(this.mediaPath, location_id);
-    this.mapDetails.mapData.splice(this.mapDetails.mapData.findIndex((loc) => loc._id === location_id), 1);
+    this.mapDetails.mapData.splice(this.mapDetails.mapData.findIndex((location) => location._id === location_id), 1);
   }
 
   focusOnLocation(location: MapData): void {
