@@ -1,19 +1,20 @@
-import { IsEmail, IsString, Matches, MinLength } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, Matches, MinLength } from 'class-validator';
 
 export class SignupDto {
   
-  @IsString()
-  @MinLength(4)
+  @IsNotEmpty( {message: 'Nazwa nie może być pusta'})
+  @IsString({ message: 'Nazwa musi być znakiem'})
+  @MinLength(4, { message: 'Nazwa jest za krótka'})
   readonly nickname: string;
 
-  @IsEmail()
+  @IsEmail({},{ message: 'Email nie jest poprawny' })
   readonly email: string;
 
-  @MinLength(8, { message: 'password is too short' })
-  @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, { message: 'password is too weak' })
+  @MinLength(8, { message: 'Hasło jest za krótkie' })
+  @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, { message: 'Hasło jest za słabe' })
   readonly password: string;
 
-  @MinLength(8, { message: 'password is too short' })
-  @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, { message: 'password is too weak' })
+  @MinLength(8, { message: 'Hasło jest za krótkie' })
+  @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, { message: 'Hasło jest za słabe' })
   readonly confirmedPassword: string;
 }

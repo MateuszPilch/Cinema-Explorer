@@ -2,7 +2,7 @@ import { Controller, Post, Param, Query, Body, UseGuards, Req, Get } from '@nest
 import { MovieDetailsService } from './movie-details/movie-details.service';
 import { MovieCreditsService } from './movie-credits/movie-credits.service';
 import { MediaData } from 'shared/models/media/media-data';
-import { MediaSearchFilter } from 'shared/models/media/media-search-filter';
+import { MovieSearchFilter } from 'shared/models/movie/movie-search-filter';
 import { MediaDetails } from 'shared/models/media/media-details';
 import { MediaCredits } from 'shared/models/media/media-credits';
 import { MoviePageService } from './movie-page/movie-page.service';
@@ -17,7 +17,7 @@ export class MovieController {
   ) {}
 
   @Get()
-  getMovieData(@Query() params: MediaSearchFilter): Promise<MediaData> {
+  getMovieData(@Query() params: MovieSearchFilter): Promise<MediaData> {
     return this.moviePageService.getMovieData(params);
   }
 

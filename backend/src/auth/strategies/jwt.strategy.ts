@@ -3,13 +3,13 @@ import { InjectModel } from '@nestjs/mongoose';
 import { PassportStrategy } from '@nestjs/passport';
 import { Model } from 'mongoose';
 import { Strategy, ExtractJwt } from 'passport-jwt';
-import { User } from '../../schemas/user.schema';
+import { Auth } from 'src/schemas/auth.schema';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor(
-    @InjectModel(User.name)
-    private userModel: Model<User>,
+    @InjectModel(Auth.name)
+    private authModel: Model<Auth>,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -19,12 +19,12 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
 
   async validate(payload) {
     const { _id } = payload;
-    const user = await this.userModel.findById(_id);
+    const auth = await this.authModel.findById(_id);
 
-    if (!user) {
-      throw new UnauthorizedException('Unauthorized access.');
+    if (!auth) {
+      throw new UnauthorizedException('Nieautoryzowany dostęp');
     }
 
-    return user; 
+    return auth; 
   }
 }

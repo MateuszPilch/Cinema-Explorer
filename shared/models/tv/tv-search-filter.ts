@@ -1,21 +1,15 @@
-export class MediaSearchFilter {
-  certification!: {
+export class TvSearchFilter {
+  air_date!: {
     gte: string;
     lte: string;
   };
-  certification_country!:string;
+  first_air_date_year!: number;
+  first_air_date!: {
+    gte: string;
+    lte: string;
+  };
   language!: string;
   page: number = 1;
-  primary_release_year!:number;
-  primary_release_date!: {
-    gte: Date;
-    lte: Date;
-  };
-  region!: string;
-  release_date!: {
-    gte: Date;
-    lte: Date;
-  };
   sort_by!: string;
   vote_average!: {
     gte: number;
@@ -36,7 +30,6 @@ export class MediaSearchFilter {
   };
   with_watch_monetization_types!: string;
   with_watch_providers!: string;
-  year!: number;
 
   setFilter(property: keyof any, value: any): void {
     (this as any)[property]  = value;

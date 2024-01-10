@@ -23,7 +23,7 @@ export class MediaDetails {
   number_of_episodes!: string;
 
   @Expose()
-  original_name! : string;
+  original_name!: string;
 
   @Expose()
   original_title!: string
@@ -38,7 +38,7 @@ export class MediaDetails {
   release_date!: string;
 
   @Expose()
-  revenue!:number;
+  revenue!: number;
 
   @Expose()
   runtime!: string;
@@ -50,8 +50,7 @@ export class MediaDetails {
   vote_average!: number;
 }
 
-interface Genres
-{
+interface Genres {
   id: number;
   name: string;
 }

@@ -49,7 +49,7 @@
         </button>
       </div>
       <div class="flex mt-4 items-center bg-gray-100 rounded-xl shadow-md">
-        <textarea id="review" (focusout)="this.setTvReview()" [(ngModel)]="this.tvReview" class="mx-4 pb-10 pt-2 w-full h-full bg-transparent resize-none focus:outline-none" type="text" placeholder="Podziel się wrażeniami"></textarea>
+        <textarea id="review" (focusout)="this.setTvReview()" [(ngModel)]="this.tvReview" class="mx-4 pb-10 pt-2 w-full h-full bg-transparent resize-none focus:outline-none" type="text" placeholder="Podziel się wrażeniami" maxlength="100"></textarea>
       </div>
     </div>
   </div>
@@ -115,16 +115,12 @@
     <div class="flex items-center justify-between">
       <div class="md:text-3xl text-2xl">Obsada i twórzcy</div>
       <div class="flex items-center justify-between">
-        <div class="md:block hidden p-4">
+        <button routerLink="credits" class="flex p-4 items-center bg-teal-300 hover:scale-[1.03] hover:bg-teal-400 duration-200 rounded-xl shadow-md">
           Zobacz więcej
-        </div>
-        <a routerLink="credits">
-          <div class="p-2 bg-teal-300 hover:scale-105 hover:bg-teal-400 duration-200 rounded-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-            </svg> 
-          </div>
-        </a>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-2 w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+          </svg> 
+        </button>
       </div>
     </div>
     <div class="pt-4 text-xl">Obsada</div> 

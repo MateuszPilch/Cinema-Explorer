@@ -1,17 +1,17 @@
+import * as qs from 'qs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router, ResolveFn, ActivatedRouteSnapshot } from '@angular/router';
-import * as qs from 'qs';
 import { Observable } from 'rxjs';
 import { MediaData } from 'shared/models/media/media-data';
-import { MediaSearchFilter } from 'shared/models/media/media-search-filter';
+import { TvSearchFilter } from 'shared/models/tv/tv-search-filter';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TvPageService {
 
-  tvFilter!: MediaSearchFilter;
+  tvFilter!: TvSearchFilter;
 
   nowDate: Date;
   todayDateString: string;
@@ -19,7 +19,7 @@ export class TvPageService {
 
 
   constructor(private http: HttpClient, private router: Router) {
-    this.tvFilter = new MediaSearchFilter;
+    this.tvFilter = new TvSearchFilter;
     
     this.nowDate = new Date();
     this.todayDateString = this.nowDate.toISOString().split('T')[0];
@@ -27,7 +27,7 @@ export class TvPageService {
 
   }
   
-  getTvData(filter: MediaSearchFilter): Observable<MediaData> {
+  getTvData(filter: TvSearchFilter): Observable<MediaData> {
     const params = qs.stringify(filter, { encode: false });
     return this.http.get<MediaData>(`http://localhost:3000/api/tv?${params}`);
   }
@@ -60,13 +60,13 @@ export class TvPageService {
 
   upcomingFilter(): void {
     this.tvFilter.clearFilter();
-    this.tvFilter.setFilter('primary_release_date.gte', this.todayDateString);
-    this.tvFilter.setFilter('primary_release_date.lte', this.upcomingDateString);
+    this.tvFilter.setFilter('first_air_date.gte', this.todayDateString);
+    this.tvFilter.setFilter('first_air_date.lte', this.upcomingDateString);
     this.tvFilter.setFilter('sort_by', 'popularity.desc');
     this.router.navigate(['tv']);
   }
 }
 
-export const tvPageResolver: ResolveFn<MediaData> = (route: ActivatedRouteSnapshot) => {
+export const tvPageResolver: ResolveFn<MediaData> = () => {
   return inject(TvPageService).getTvData(inject(TvPageService).tvFilter);
 };

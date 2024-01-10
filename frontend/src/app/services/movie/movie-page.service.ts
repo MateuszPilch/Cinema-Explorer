@@ -1,17 +1,17 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import * as qs from 'qs';
+import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { ResolveFn, ActivatedRouteSnapshot, Router } from '@angular/router';
-import * as qs from 'qs';
 import { Observable } from 'rxjs';
 import { MediaData } from 'shared/models/media/media-data';
-import { MediaSearchFilter } from 'shared/models/media/media-search-filter';
+import { MovieSearchFilter } from 'shared/models/movie/movie-search-filter';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MoviePageService {
 
-  movieFilter!: MediaSearchFilter;
+  movieFilter!: MovieSearchFilter;
 
   nowDate: Date;
   todayDateString: string;
@@ -19,7 +19,7 @@ export class MoviePageService {
 
 
   constructor(private http: HttpClient, private router: Router) {
-    this.movieFilter = new MediaSearchFilter;
+    this.movieFilter = new MovieSearchFilter;
     
     this.nowDate = new Date();
     this.todayDateString = this.nowDate.toISOString().split('T')[0];
@@ -27,7 +27,7 @@ export class MoviePageService {
 
   }
   
-  getMovieData(filter: MediaSearchFilter): Observable<MediaData> {
+  getMovieData(filter: MovieSearchFilter): Observable<MediaData> {
     const params = qs.stringify(filter, { encode: false });
     return this.http.get<MediaData>(`http://localhost:3000/api/movie?${params}`);
   }
@@ -67,6 +67,6 @@ export class MoviePageService {
   }
 }
 
-export const moviePageResolver: ResolveFn<MediaData> = (route: ActivatedRouteSnapshot) => {
+export const moviePageResolver: ResolveFn<MediaData> = () => {
   return inject(MoviePageService).getMovieData(inject(MoviePageService).movieFilter);
 };

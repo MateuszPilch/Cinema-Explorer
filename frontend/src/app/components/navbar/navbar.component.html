@@ -1,8 +1,8 @@
 <nav class="md:flex fixed w-full py-2 z-50 bg-gray-100 justify-around items-center shadow-md rounded-b-xl">
   <div class="flex justify-around">
-    <div class="text-3xl">
-      <a routerLink="">Logo</a>
-    </div>
+    <a routerLink="/" class="text-3xl">
+      Cinema Explorer
+    </a>
     <div class="md:hidden flex">
       <button (click)="toggleMobileMenu()">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8" *ngIf="!mobileMenuEnable">
@@ -26,6 +26,10 @@
       </div>
     </div>
     <div class="grid md:grid-cols-6 grid-cols-1 md:mx-10 md:gap-10 gap-2 md:pt-0 pt-2 text-xl">
+      <button routerLink="/map" class="group">
+        <div class="py-3 group-hover:text-teal-500 duration-200">Mapa</div>
+        <div class="hidden md:flex w-full h-2 rounded-full bg-gray-200 group-hover:bg-teal-300 duration-200"></div>  
+      </button>
       <button routerLink="/movie" class="group">
         <div class="py-3 group-hover:text-teal-500 duration-200">Filmy</div>
         <div class="hidden md:flex w-full h-2 rounded-full bg-gray-200 group-hover:bg-teal-300 duration-200"></div>
@@ -34,11 +38,7 @@
           <div class="py-3 group-hover:text-teal-500 duration-200">Seriale</div>
           <div class="hidden md:flex w-full h-2 rounded-full bg-gray-200 group-hover:bg-teal-300 duration-200"></div>
       </button>
-      <button routerLink="/map" class="group">
-        <div class="py-3 group-hover:text-teal-500 duration-200">Mapa</div>
-        <div class="hidden md:flex w-full h-2 rounded-full bg-gray-200 group-hover:bg-teal-300 duration-200"></div>  
-      </button>
-      <button routerLink="/user/{{authService.getNickname()}}" class="group">
+      <button *ngIf="authService.isAuthenticated()" routerLink="/user/{{authService.getNickname()}}" class="group">
         <div class="py-3 group-hover:text-teal-500 duration-200">Profil</div>
         <div class="hidden md:flex w-full h-2 rounded-full bg-gray-200 group-hover:bg-teal-300 duration-200"></div>
       </button>

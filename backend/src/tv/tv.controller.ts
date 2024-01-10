@@ -5,7 +5,7 @@ import { TvDetailsService } from './tv-details/tv-details.service';
 import { TvCreditsService } from './tv-credits/tv-credits.service';
 import { TvPageService } from './tv-page/tv-page.service';
 import { MediaData } from 'shared/models/media/media-data';
-import { MediaSearchFilter } from 'shared/models/media/media-search-filter';
+import { TvSearchFilter } from 'shared/models/tv/tv-search-filter';
 
 @Controller('tv')
 export class TvController {
@@ -16,7 +16,7 @@ export class TvController {
   ){}
 
   @Get()
-  getMovieData(@Query() params: MediaSearchFilter): Promise<MediaData> {
+  getMovieData(@Query() params: TvSearchFilter): Promise<MediaData> {
     return this.tvPageService.getTvData(params);
   }
 

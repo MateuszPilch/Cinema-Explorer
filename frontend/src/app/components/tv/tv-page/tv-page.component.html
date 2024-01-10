@@ -2,21 +2,19 @@
   <div class="block md:p-8 p-2 bg-white rounded-xl shadow-md">
     <div class="md:flex block justify-between">
       <div class="md:text-4xl text-xl font-bold">Filmy</div>
-      <div class="flex items-center">
-        <div class="flex gap-4">
-          <button (click)="this.tvPageService.highestVoteFilter()" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-105 duration-200 rounded-full shadow-md">
-            Najwyżej oceniane
-          </button>
-          <button (click)="this.tvPageService.popularityFilter()" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-105 duration-200 rounded-full shadow-md">
-            Popularne
-          </button>
-          <button (click)="this.tvPageService.upcomingFilter()" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-105 duration-200 rounded-full shadow-md">
-            Nadchodzące
-          </button>
-          <button (click)="this.toggleFilter()" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-105 duration-200 rounded-full shadow-md">
-            Filtry
-          </button>
-        </div>
+      <div class="flex items-center gap-4">
+        <button (click)="this.tvPageService.highestVoteFilter()" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-105 duration-200 rounded-full shadow-md">
+          Najwyżej oceniane
+        </button>
+        <button (click)="this.tvPageService.popularityFilter()" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-105 duration-200 rounded-full shadow-md">
+          Popularne
+        </button>
+        <button (click)="this.tvPageService.upcomingFilter()" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-105 duration-200 rounded-full shadow-md">
+          Nadchodzące
+        </button>
+        <button (click)="this.toggleFilter()" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-105 duration-200 rounded-full shadow-md">
+          Filtry
+        </button>
       </div>
     </div>
     <div *ngIf="isFilterOpen" class="flex mt-8 bg-gray-100 rounded-xl shadow-md">
@@ -118,7 +116,7 @@
                 </svg>
               </div>
             </div>
-            <div class="py-2 truncate">{{tv.release_date | date: 'd.MM.y'}}</div>
+            <div class="py-2 truncate">{{tv.first_air_date | date: 'd.MM.y'}}</div>
           </div>
         </a>
       </div>

@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, ObjectId } from 'mongoose';
+import { Document } from 'mongoose';
 
 class Image {
   
@@ -56,12 +56,6 @@ export class User extends Document {
 
   @Prop({ unique: true })
   nickname: string;
-
-  @Prop({ unique: true, trim: true })
-  email: string;
-
-  @Prop()
-  password: string;
 
   @Prop()
   avatar: Image;

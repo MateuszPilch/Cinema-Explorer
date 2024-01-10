@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
+import { Document } from 'mongoose';
 
 class Image {
 
@@ -46,7 +46,6 @@ class MapData {
 @Schema({
   timestamps: true,
 })
-
 export class Maps extends Document {
 
   @Prop()

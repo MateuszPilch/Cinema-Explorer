@@ -2,7 +2,7 @@ import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
 
 export class ValidateViaGoogleDto {
     
-  @IsEmail()
+  @IsEmail({},{ message: 'Email nie jest poprawny' })
   readonly email: string;
 
   @IsNotEmpty()

@@ -52,7 +52,8 @@ const routes: Routes = [
       { path: 'movie/:id', component: MovieDetailsComponent, resolve: {
           details: movieDetailsResolver,
           credits: movieCreditsResolverShort
-        }
+        },
+        runGuardsAndResolvers: 'always',
       },
       { path: 'movie/:id/credits', component: MovieCreditsComponent, resolve: {
           details: movieDetailsResolver,
@@ -61,12 +62,14 @@ const routes: Routes = [
       },
       { path: 'tv', component: TvPageComponent, resolve: {
           data: tvPageResolver
-        }
+        },
+        runGuardsAndResolvers: 'always',
       },
       { path: 'tv/:id', component: TvDetailsComponent, resolve: {
           details: tvDetailsResolver,
           credits: tvCreditsResolverShort
-        }
+        },
+        runGuardsAndResolvers: 'always',
       },
       { path: 'tv/:id/credits', component: TvCreditsComponent, resolve: {
           details: tvDetailsResolver,
@@ -87,10 +90,11 @@ const routes: Routes = [
         {
           path: 'page', component: MapPageComponent, resolve: {
             data: mapPageResolver
-          }
+          },
         },
-        { path: '**', redirectTo: 'page' }
-      ]},
+        { path: '**', redirectTo: 'page' },
+      ],
+      runGuardsAndResolvers: 'always',},
     ]
   },
   { path: '', component: AuthLayoutComponent,

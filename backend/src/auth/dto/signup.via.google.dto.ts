@@ -2,12 +2,12 @@ import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
 
 export class SignupViaGoogleDto {
   
-  @IsNotEmpty()
-  @IsString()
-  @MinLength(4)
+  @IsNotEmpty( {message: 'Nazwa nie może być pusta'})
+  @IsString({ message: 'Nazwa musi być znakiem'})
+  @MinLength(4, { message: 'Nazwa jest za krótka'})
   readonly nickname: string;
   
-  @IsEmail()
+  @IsEmail({},{ message: 'Email nie jest poprawny' })
   readonly email: string;
 
   @IsNotEmpty()
