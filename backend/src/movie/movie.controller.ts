@@ -6,6 +6,7 @@ import { MovieSearchFilter } from 'shared/models/movie/movie-search-filter';
 import { MediaDetails } from 'shared/models/media/media-details';
 import { MediaCredits } from 'shared/models/media/media-credits';
 import { MoviePageService } from './movie-page/movie-page.service';
+import { MediaImages } from 'shared/models/media/media-images';
 
 @Controller('movie')
 export class MovieController {
@@ -22,17 +23,22 @@ export class MovieController {
   }
 
   @Get(':id')
-  getMovieDetails(@Param('id') param: string): Promise<MediaDetails> {
-    return this.movieDetailsService.getMovieDetails(param);
+  getMovieDetails(@Param('id') id: string): Promise<MediaDetails> {
+    return this.movieDetailsService.getMovieDetails(id);
+  }
+  
+  @Get(':id/images')
+  getMovieImages(@Param('id') id: string): Promise<MediaImages> {
+    return this.movieDetailsService.getMovieImages(id);
   }
 
   @Get(':id/credits')
-  getMovieCredits(@Param('id') param: string): Promise<MediaCredits> {
-    return this.movieCreditsService.getMovieCredits(param);
+  getMovieCredits(@Param('id') id: string): Promise<MediaCredits> {
+    return this.movieCreditsService.getMovieCredits(id);
   }
 
   @Get(':id/credits_short')
-  getMovieCreditsShort(@Param('id') param: string): Promise<MediaCredits> {
-    return this.movieCreditsService.getMovieCreditsShort(param);
+  getMovieCreditsShort(@Param('id') id: string): Promise<MediaCredits> {
+    return this.movieCreditsService.getMovieCreditsShort(id);
   }
 }

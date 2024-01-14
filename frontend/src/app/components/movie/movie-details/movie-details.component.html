@@ -1,6 +1,6 @@
 <div class="block pb-4 m-auto justify-center items-center">
   <div class="flex md:w-1/6 w-1/2 pb-4 m-auto">
-    <img class="object-contain w-full h-full rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w200/{{movieDetailsData.poster_path}}" onerror="this.src='assets/images/movie_blank.png';">
+    <img class="object-contain w-full h-full rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w200/{{movieDetailsData.poster_path}}" onerror="this.src='assets/images/media_blank.png';">
   </div>   
   <div class="flex pb-4 justify-center items-center text-3xl font-bold">
     {{movieDetailsData.title}}
@@ -11,7 +11,7 @@
   <div class="flex pb-2 items-center justify-center">
     <div *ngFor="let i of [0,1,2,3,4]">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8"
-        [ngClass]="movieDetailsData.vote_average >= 0.5 + i ? 'text-yellow-300' : 'text-gray-300'">
+        [ngClass]="movieDetailsData.vote_average >= 0.5 + i ? 'text-yellow-400' : 'text-gray-300'">
         <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
       </svg>
     </div> 
@@ -19,7 +19,7 @@
 </div>
 <div class="grid md:grid-cols-4 grid-cols-1 md:grid-rows-3 grid-flow-row md:gap-8 gap-2 md:p-8 p-2 bg-gray-100 rounded-xl shadow-md">
   <div *ngIf="authService.isAuthenticated()" class="md:order-2">
-    <div class="block h-fit p-4 justify-center items-center  bg-white rounded-xl shadow-md">
+    <div class="block h-fit p-4 justify-center items-center bg-white rounded-xl shadow-md">
       <div class="text-center text-2xl">
         Twoja ocena
       </div>
@@ -35,7 +35,7 @@
           <div *ngFor="let i of [1,2,3,4,5]">
             <button (click)="this.setMovieRating(i)">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 hover:scale-125 duration-200"
-              [ngClass]="this.movieRating >= i ? 'text-yellow-300' : 'text-gray-300'">
+              [ngClass]="this.movieRating >= i ? 'text-yellow-400' : 'text-gray-300'">
                 <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
               </svg>
             </button>
@@ -48,7 +48,7 @@
           </svg>   
         </button>
       </div>
-      <div class="flex mt-4 items-center bg-gray-100 rounded-xl shadow-md">
+      <div class="flex mt-8 items-center bg-gray-100 rounded-xl shadow-md">
         <textarea id="review" (focusout)="this.setMovieReview()" [(ngModel)]="this.movieReview" class="mx-4 pb-10 pt-2 w-full h-full bg-transparent resize-none focus:outline-none" type="text" placeholder="Podziel się wrażeniami" maxlength="100"></textarea>
       </div>
     </div>
@@ -126,28 +126,60 @@
         </button>
       </div>
     </div>
-    <div class="pt-4 text-xl">Obsada</div>  
-    <div class="grid md:grid-cols-8 grid-cols-3">
-      <div *ngFor="let cast of movieCreditsData.cast | slice:0:8" class="block m-2 bg-gray-100 hover:scale-105 duration-200 rounded-xl shadow-md">
-        <a routerLink="/person/{{cast.id}}">
-            <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{cast.profile_path}}" onerror="this.src='assets/images/person_blank.png';">     
-          <div class="block text-center text-sm pt-2">
-            <div class="font-bold overflow">{{cast.name}}</div>
-            <div class="py-2 truncate">{{cast.character}}</div>
+    <div class="pt-4 text-2xl">Obsada</div>  
+    <div class="grid md:grid-cols-6 grid-cols-2 md:gap-4">
+      <div *ngFor="let cast of movieCreditsData.cast | slice:0:6" class="block m-2 bg-gray-100 hover:scale-[1.03] duration-200 rounded-xl shadow-md">
+        <button routerLink="/person/{{cast.id}}">
+          <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{cast.profile_path}}" onerror="this.src='assets/images/person_blank.png';">     
+          <div class="block p-2 text-center">
+            <div class="text-base font-bold overflow">{{cast.name}}</div>
+            <div class="text-sm py-2 line-clamp-2">{{cast.character}}</div>
           </div>
-        </a>
+        </button>
       </div>
     </div>
-  <div class="pt-4 text-xl">Twórcy</div>
-  <div class="grid md:grid-cols-8 grid-cols-3">
-    <div *ngFor="let crew of movieCreditsData.crew | slice:0:8" class="block m-2 bg-gray-100 hover:scale-105 duration-200 rounded-xl shadow-md">
-      <a routerLink="/person/{{crew.id}}">
+    <div class="pt-4 text-2xl">Twórcy</div>
+    <div class="grid md:grid-cols-6 grid-cols-2 md:gap-4">
+      <div *ngFor="let crew of movieCreditsData.crew | slice:0:6" class="block m-2 bg-gray-100 hover:scale-[1.03] duration-200 rounded-xl shadow-md">
+        <button routerLink="/person/{{crew.id}}">
           <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{crew.profile_path}}" onerror="this.src='assets/images/person_blank.png';">       
-        <div class="block text-center text-sm pt-2">
-          <div class="font-bold overflow">{{crew.name}}</div>
-          <div class="py-2 truncate">{{crew.job}}</div>
-        </div>
-      </a>
+          <div class="block p-2 text-center">
+            <div class="text-base font-bold overflow">{{crew.name}}</div>
+            <div class="text-sm py-2 line-clamp-2">{{crew.job}}</div>
+          </div>
+        </button>
+      </div>
     </div>
   </div>
+  <div *ngIf="movieImagesData" class="order-5 md:col-span-4 row-span-3 md:p-8 p-2 bg-white rounded-xl shadow-md">
+    <div class="md:text-3xl text-2xl">Galeria</div>
+    <div class="flex overflow-x-scroll">
+      <button *ngFor="let media of movieImagesData.backdrops; index as i" (click)="lightboxControl(true, i)" class="flex-shrink-0  p-4">
+        <img class="object-cover rounded-xl" src="https://image.tmdb.org/t/p/w500{{media.file_path}}" onerror="this.src='assets/images/media_blank.png';">   
+      </button>
+    </div>
+  </div>
+</div>
+<div *ngIf="isLightboxEnabled" class="fixed top-0 left-0 h-full w-full flex items-center bg-black bg-opacity-80">
+  <div class="absolute top-24 left-6 text-white text-3xl">
+    {{lightboxIndex + 1}}/{{movieImagesData.backdrops.length}}
+  </div>
+  <button (click)="lightboxControl(false, 0)" class="absolute top-20 right-2">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-white w-16 h-16">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+    </svg>  
+  </button>
+  <button (click)="lightboxChangeImage(-1)" class="flex w-1/12 justify-start">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-white w-16 h-16">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+    </svg> 
+  </button>
+  <div class="flex w-10/12 h-2/3 justify-center">
+    <img class="object-cover rounded-xl" src="https://image.tmdb.org/t/p/original{{lightboxImage}}" onerror="this.src='assets/images/media_blank.png';">
+  </div>
+  <button (click)="lightboxChangeImage(1)" class="flex w-1/12 justify-end">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-white w-16 h-16">
+      <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+    </svg>      
+  </button>
 </div>

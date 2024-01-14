@@ -1,0 +1,28 @@
+<div *ngIf="nickname" class="mx-20 my-20 text-5xl">Witaj 
+  <b>{{nickname}}</b>
+</div>
+<div class="md:p-8 p-2 bg-gray-100 rounded-xl shadow-md">
+  <div class="block md:p-8 p-2 bg-white rounded-xl shadow-md">
+    <div class="flex justify-between items-center">
+      <div class="w-1/2 md:text-3xl text-xl">Popularne</div>
+      <div class="flex items-center gap-4">
+        <button (click)="getTrending('day')" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
+          Dzisiaj
+        </button>
+        <button (click)="getTrending('week')" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
+          W tym tygodniu
+        </button>
+      </div>
+    </div>
+    <div *ngIf="trendingData" class="flex overflow-x-auto py-8 gap-8">
+      <div *ngFor="let media of trendingData.results" class="block bg-gray-100 hover:scale-[1.03] duration-200 rounded-xl shadow-md">
+        <button routerLink="/{{media.media_type}}/{{media.id}}">
+          <img class="w-full object-cover rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{media.poster_path}}" onerror="this.src='assets/images/media_blank.png';">   
+          <div class="w-48 pt-2 text-lg text-center font-bold overflow">
+            {{media.title}}{{media.name}}
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

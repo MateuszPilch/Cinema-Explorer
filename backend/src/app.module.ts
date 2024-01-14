@@ -11,6 +11,7 @@ import { AuthModule } from './auth/auth.module';
 import { PassportModule } from '@nestjs/passport';
 import { UserModule } from './user/user.module';
 import { MapModule } from './map/map.module';
+import { HomeModule } from './home/home.module';
 
 @Module({
   imports: [ConfigModule.forRoot( {
@@ -19,7 +20,7 @@ import { MapModule } from './map/map.module';
   }),
   PassportModule.register({session: true}),
   MongooseModule.forRoot(process.env.MONGODB_URL),
-  MovieModule, TvModule, SearchModule, PersonModule, AuthModule, UserModule, MapModule],
+  AuthModule, HomeModule, MapModule, MovieModule, TvModule, SearchModule, PersonModule, UserModule],
   controllers: [AppController],
   providers: [AppService],
 })

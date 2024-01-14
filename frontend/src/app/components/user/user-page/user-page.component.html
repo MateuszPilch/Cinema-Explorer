@@ -15,22 +15,22 @@
   </div>
 </div>
 <div class="flex md:p-8 p-2 rounded-xl justify-between">
-  <button routerLink="activity" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-105 duration-200 rounded-full shadow-md">
+  <button routerLink="activity" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
     Aktywność
   </button>
-  <button (click)="movieListFilter()" routerLink="reviewlist" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-105 duration-200 rounded-full shadow-md">
+  <button (click)="movieListFilter()" routerLink="reviewlist" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
     Filmy 
     <b>{{getMediaListCount("movie")}}</b>
   </button>
-  <button (click)="tvListFilter()" routerLink="reviewlist" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-105 duration-200 rounded-full shadow-md">
+  <button (click)="tvListFilter()" routerLink="reviewlist" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
     Seriale
     <b>{{getMediaListCount("tv")}}</b>
   </button>
-  <button (click)="favouritveListFilter()" routerLink="reviewlist" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-105 duration-200 rounded-full shadow-md">
+  <button (click)="favouritveListFilter()" routerLink="reviewlist" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
     Ulubione
     <b>{{getFavouriteListCount()}}</b>
   </button>
-  <button (click)="toWatchListFilter()" routerLink="reviewlist" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-105 duration-200 rounded-full shadow-md">
+  <button (click)="toWatchListFilter()" routerLink="reviewlist" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
     Chce zobaczyć
     <b>{{getToWatchListCount()}}</b>
   </button>

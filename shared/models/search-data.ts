@@ -8,7 +8,7 @@ export class SearchData {
   results!: Results[];
 
   @Expose()
-  total_pages!: number
+  total_pages!: number;
   
   @Expose()
   total_results!: number;
@@ -22,6 +22,7 @@ interface Results {
   known_for_department: string;
   media_type: string;
   name: string;
+  nickname: string;
   original_name: string;
   original_title: string;
   overview: string;

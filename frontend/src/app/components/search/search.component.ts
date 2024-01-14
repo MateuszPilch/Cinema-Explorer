@@ -25,7 +25,7 @@ export class SearchComponent {
 
   dataFormat(): void {
     this.searchData.results.forEach((a)=> a.vote_average = Math.round(a.vote_average / 2 * 10) / 10);
-    this.voteCount();
+    this.popularitySort();
   }
 
   paginationStyle(): void {
@@ -50,13 +50,5 @@ export class SearchComponent {
 
   popularitySort(): void {
     this.searchData.results.sort((a, b) => b.popularity - a.popularity);
-  }
-
-  voteAvg(): void {
-    this.searchData.results.sort((a, b) => b.vote_average - a.vote_average);
-  }
-
-  voteCount(): void {
-    this.searchData.results.sort((a, b) => b.vote_count - a.vote_count);
   }
 }

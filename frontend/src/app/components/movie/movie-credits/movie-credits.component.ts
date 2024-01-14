@@ -17,12 +17,8 @@ export class MovieCreditsComponent {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.route.data.subscribe(({details}) => {
+    this.route.data.subscribe(({details, credits}) => {
       this.movieDetailsData = details;
-      this.movieDetailsData.vote_average = Math.round(this.movieDetailsData.vote_average / 2 * 10) / 10;
-    })
-
-    this.route.data.subscribe(({credits}) => {
       this.movieCreditsData = credits;
     })
   }

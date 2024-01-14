@@ -66,6 +66,7 @@ export class UserService {
   }
 
   getMediaList(nickname: string): void {
+    this.mediaReviewList = [];
     this.http.get<MediaReview[]>(`http://localhost:3000/api/user/medialist`,{
       params: {
         nickname 

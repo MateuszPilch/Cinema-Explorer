@@ -11,12 +11,12 @@ export class TvCreditsService {
   
   constructor(private http: HttpClient) {}
   
-  getTvCredits(id: string): Observable<MediaCredits> {
-    return this.http.get<MediaCredits>(`http://localhost:3000/api/tv/${id}/credits`);
+  getTvCredits(tv_id: string): Observable<MediaCredits> {
+    return this.http.get<MediaCredits>(`http://localhost:3000/api/tv/${tv_id}/credits`);
   }
 
-  getTvCreditsShort(id: string): Observable<MediaCredits> {
-    return this.http.get<MediaCredits>(`http://localhost:3000/api/tv/${id}/credits_short`);
+  getTvCreditsShort(tv_id: string): Observable<MediaCredits> {
+    return this.http.get<MediaCredits>(`http://localhost:3000/api/tv/${tv_id}/credits_short`);
   }
 }
 

@@ -10,8 +10,7 @@ import { User } from 'src/schemas/user.schema';
 @Injectable()
 export class UserService {
 
-  constructor(private readonly httpService: HttpService, 
-    @InjectModel(User.name) private userModel: Model<User>) {}
+  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
   
   async getMediaList(nickname: string): Promise<MediaReview[]> {
     const data = await this.userModel.findOne({nickname});
@@ -47,7 +46,7 @@ export class UserService {
       });
     } else {
       if(mediaReview.rating == 0 && !mediaReview.favourite && !mediaReview.to_watch) {
-        data.media_list = data.media_list.slice(mediaIndex,1);
+        data.media_list.splice(mediaIndex, 1);
       } else {
         data.media_list[mediaIndex].rating = mediaReview.rating;
         data.media_list[mediaIndex].review = mediaReview.review;
@@ -55,9 +54,8 @@ export class UserService {
         data.media_list[mediaIndex].to_watch = mediaReview.to_watch;
         data.media_list[mediaIndex].updatedAt = new Date();
       }
-
-      data.markModified('media_list');
     }
+    data.markModified('media_list');
     await data.save();
   }
 

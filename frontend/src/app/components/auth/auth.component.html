@@ -10,16 +10,16 @@
     <div class="text-right">
       Zapomniałem hasła 
     </div>
-    <button (click)="login()" class="flex p-2 items-center justify-center text-lg bg-teal-300 hover:bg-teal-400 hover:scale-105 duration-200 rounded-full shadow-md">
+    <button (click)="login()" class="flex p-2 items-center justify-center text-lg bg-teal-300 hover:bg-teal-400 hover:scale-[1.03] duration-200 rounded-full shadow-md">
       Zaloguj
     </button>
-    <button (click)="loginViaGoogle()" class="flex p-2 items-center justify-center text-lg bg-teal-300 hover:bg-teal-400 hover:scale-105 duration-200 rounded-full shadow-md">
+    <button (click)="loginViaGoogle()" class="flex p-2 items-center justify-center text-lg bg-teal-300 hover:bg-teal-400 hover:scale-[1.03] duration-200 rounded-full shadow-md">
       Zaloguj się przez Google
     </button>
     <div class="text-center">
       lub 
     </div>
-    <button (click)="changeCurrentForm('signup')" class="flex p-2 items-center justify-center text-lg bg-teal-300 hover:bg-teal-400 hover:scale-105 duration-200 rounded-full shadow-md">
+    <button (click)="changeCurrentForm('signup')" class="flex p-2 items-center justify-center text-lg bg-teal-300 hover:bg-teal-400 hover:scale-[1.03] duration-200 rounded-full shadow-md">
       Utwórz konto
     </button>
   </div>
@@ -37,16 +37,16 @@
     <div class="flex items-center h-10 bg-gray-100 fill-gray-100 rounded-full shadow-sm">
       <input [(ngModel)]=confirmedPassword #search type="password" class="w-full mx-3 bg-gray-100 focus:outline-none" placeholder="Powtórz hasło">
     </div>
-    <button (click)="signup()" class="flex p-2 items-center justify-center text-lg bg-teal-300 hover:bg-teal-400 hover:scale-105 duration-200 rounded-full shadow-md">
+    <button (click)="signup()" class="flex p-2 items-center justify-center text-lg bg-teal-300 hover:bg-teal-400 hover:scale-[1.03] duration-200 rounded-full shadow-md">
       Zarejestruj się
     </button>
-    <button (click)="changeCurrentForm('singupgoogle')" class="flex p-2 items-center justify-center text-lg bg-teal-300 hover:bg-teal-400 hover:scale-105 duration-200 rounded-full shadow-md">
+    <button (click)="changeCurrentForm('singupgoogle')" class="flex p-2 items-center justify-center text-lg bg-teal-300 hover:bg-teal-400 hover:scale-[1.03] duration-200 rounded-full shadow-md">
       Zarejestruj się przez Google
     </button>
     <div class="text-center">
       lub 
     </div>
-    <button (click)="changeCurrentForm('login')" class="p-2 items-center justify-center text-lg bg-teal-300 hover:bg-teal-400 hover:scale-105 duration-200 rounded-full shadow-md">
+    <button (click)="changeCurrentForm('login')" class="p-2 items-center justify-center text-lg bg-teal-300 hover:bg-teal-400 hover:scale-[1.03] duration-200 rounded-full shadow-md">
       Mam już konto
     </button>
   </div>
@@ -55,13 +55,13 @@
     <div class="flex items-center h-10 bg-gray-100 rounded-full shadow-sm">
       <input [(ngModel)]=nickname #search type="text" class="w-full mx-3 bg-gray-100 focus:outline-none" placeholder="Nazwa użytkownika">
     </div>
-    <button (click)="signupViaGoogle()" class="flex p-2 items-center justify-center text-lg bg-teal-300 hover:bg-teal-400 hover:scale-105 duration-200 rounded-full shadow-md">
+    <button (click)="signupViaGoogle()" class="flex p-2 items-center justify-center text-lg bg-teal-300 hover:bg-teal-400 hover:scale-[1.03] duration-200 rounded-full shadow-md">
       Zarejestruj się
     </button>
     <div class="text-center">
       lub 
     </div>
-    <button (click)="changeCurrentForm('login')" class="p-2 items-center justify-center text-lg bg-teal-300 hover:bg-teal-400 hover:scale-105 duration-200 rounded-full shadow-md">
+    <button (click)="changeCurrentForm('login')" class="p-2 items-center justify-center text-lg bg-teal-300 hover:bg-teal-400 hover:scale-[1.03] duration-200 rounded-full shadow-md">
       Mam już konto
     </button>
   </div>

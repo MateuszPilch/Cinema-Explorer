@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MediaDetails } from 'shared/models/media/media-details';
+import { MediaImages } from 'shared/models/media/media-images';
 import { MediaCredits } from 'shared/models/media/media-credits';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { UserService } from 'src/app/services/user/user.service';
@@ -13,6 +14,7 @@ import { UserService } from 'src/app/services/user/user.service';
 export class MovieDetailsComponent {
 
   movieDetailsData!: MediaDetails;
+  movieImagesData!: MediaImages;
   movieCreditsData!: MediaCredits
 
   movieRating: number = 0;
@@ -20,11 +22,18 @@ export class MovieDetailsComponent {
   movieFavourite: boolean = false;
   movieToWatch: boolean = false;
 
+  isLightboxEnabled: boolean = false;
+  lightboxIndex!: number;
+  lightboxImage!: string;
+
   constructor(private route: ActivatedRoute, public authService: AuthService, private userService: UserService) {}
 
   ngOnInit() {
-    this.route.data.subscribe(({details}) => {
+    this.route.data.subscribe(({details, images, credits}) => {
       this.movieDetailsData = details;
+      this.movieImagesData = images;
+      this.movieCreditsData = credits;
+
       this.movieDetailsData.vote_average = Math.round(this.movieDetailsData.vote_average / 2 * 10) / 10;
 
       this.userService.getMediaReview(this.movieDetailsData.id, "movie").subscribe(res => {
@@ -36,9 +45,6 @@ export class MovieDetailsComponent {
         }
       });
     });
-    this.route.data.subscribe(({credits}) => {
-      this.movieCreditsData = credits;
-    })
   }
 
   setMovieReview(): void {
@@ -63,5 +69,16 @@ export class MovieDetailsComponent {
   setMovieToWatch(): void {
     this.movieToWatch = !this.movieToWatch;
     this.setMovieReview();
+  }
+
+  lightboxControl(status: boolean, index: number): void {
+    this.isLightboxEnabled = status;
+    this.lightboxIndex = index;
+    this.lightboxImage = this.movieImagesData.backdrops[this.lightboxIndex].file_path;
+  }
+
+  lightboxChangeImage(index: number): void {
+    this.lightboxIndex = Math.max(0, Math.min(this.lightboxIndex + index, this.movieImagesData.backdrops.length - 1));
+    this.lightboxImage = this.movieImagesData.backdrops[this.lightboxIndex].file_path;
   }
 }

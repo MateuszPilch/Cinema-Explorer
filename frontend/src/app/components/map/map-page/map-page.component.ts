@@ -7,6 +7,9 @@ import { MapAllLocations } from 'shared/models/map/map-all-locations';
 import { Point } from 'ol/geom';
 import { MapDetails } from 'shared/models/map/map-details';
 import { imageToUrl } from 'shared/image-to-url';
+import VectorSource from 'ol/source/Vector';
+import { Fill, Style } from 'ol/style';
+import CircleStyle from 'ol/style/Circle';
 
 @Component({
   selector: 'app-map-page',
@@ -19,6 +22,9 @@ export class MapPageComponent implements OnInit {
   private mapAllLocations!: MapAllLocations[];
 
   mapDetails!: MapDetails | null;
+  vectorSource!: VectorSource
+
+  overlay!: Overlay;
 
   mediaPath!: string;
   location_id!: string;
@@ -36,44 +42,37 @@ export class MapPageComponent implements OnInit {
     });
 
     this.map = this.mapService.getMap();
+    this.vectorSource = this.mapService.getVectorSource();
 
     let container = document.getElementById('popup')!;
     const closer = document.getElementById('popup-closer')!;
 
-    const overlay = new Overlay({
+    this.overlay = new Overlay({
       element: container,
       
     });
+    this.map.addOverlay(this.overlay);
 
     this.map.on('click', (evt) => {
-      const feature = this.map.forEachFeatureAtPixel(evt.pixel, function (feature) {
+      const feature = this.map.forEachFeatureAtPixel(evt.pixel, (feature) => {
         return feature;
       });
       
-      if (!feature) {
-        overlay.setPosition(undefined);
-        closer.blur();
-        return;
-      }
+      if (feature) {
+        const point = feature.getGeometry() as Point;
+        const properties = feature.getProperties();
 
-      const point = feature.getGeometry() as Point;
-      const properties = feature.getProperties();
+        this.setMediaPath(properties['media_type'], properties['media_id'], properties['location_id']);
+        
+        if(feature.getProperties()['location_id'] == null) {
+          this.closeOverlay()
+          return
+        } 
 
-      this.setMediaPath(properties['media_type'], properties['media_id'], properties['location_id']);
-      
-      if(feature.getProperties()['location_id'] == null) {
-        overlay.setPosition(undefined);
-        closer.blur();
-        return
-      } 
-
-      overlay.setPosition(point.getCoordinates());
-      overlay.setOffset([-160, -450]);
-
-      closer.onclick = () => {
-        overlay.setPosition(undefined);
-        closer.blur();
-        return false;
+        this.overlay.setPosition(point.getCoordinates());
+        this.overlay.setOffset([-160, -480]);
+      } else {
+        this.closeOverlay();
       }
     });
 
@@ -85,8 +84,6 @@ export class MapPageComponent implements OnInit {
           target.style.cursor = hit ? 'pointer' : '';
       }
     });
-
-    this.map.addOverlay(overlay);
   }
 
   setMediaPath(media_type: string, media_id: string, location_id: string): void {
@@ -101,5 +98,28 @@ export class MapPageComponent implements OnInit {
       this.mapDetails = location;
       this.mapDetails.mapData[0].image = await imageToUrl(location.mapData[0].image);
     });
+  }
+
+  filterLocations(media_type: string): void {
+    this.closeOverlay();
+    this.vectorSource.getFeatures().forEach((feature) => {
+      if(media_type == 'multi' || feature.getProperties()['media_type'] == media_type){
+        feature.setStyle(new Style({
+          image: new CircleStyle({
+            fill: new Fill({
+              color:'rgb(20, 184, 166)'
+            }),
+            radius: 8
+          })
+        }));
+      }
+      else{
+        feature.setStyle(new Style())
+      }
+    });
+  }
+
+  closeOverlay(): void {
+    this.overlay.setPosition(undefined);
   }
 }

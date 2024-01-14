@@ -3,17 +3,20 @@
     <div class="md:flex block justify-between">
       <div class="md:text-3xl text-xl font-bold">Wyniki</div>
       <div class="flex items-center gap-4">
-        <button (click)="searchService.searchByType('multi')" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-105 duration-200 rounded-full shadow-md">
+        <button (click)="searchService.searchByType('multi')" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
           Wszystko
         </button>
-        <button (click)="searchService.searchByType('movie')" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-105 duration-200 rounded-full shadow-md">
+        <button (click)="searchService.searchByType('movie')" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
           Filmy
         </button>
-        <button (click)="searchService.searchByType('tv')" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-105 duration-200 rounded-full shadow-md">
+        <button (click)="searchService.searchByType('tv')" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
           Seriale
         </button>
-        <button (click)="searchService.searchByType('person')" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-105 duration-200 rounded-full shadow-md">
+        <button (click)="searchService.searchByType('person')" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
           Osoby
+        </button>
+        <button (click)="searchService.searchByType('user')" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
+          Użytkownicy
         </button>
       </div>
     </div>
@@ -21,19 +24,15 @@
       Brak wyników wyszukiwania
     </div>
     <div *ngFor="let result of searchData.results" class="flex md:h-52 min-h-40 md:my-8 my-2 md:p-4 p-2 hover:scale-[1.02] duration-200 bg-gray-100 rounded-xl shadow-md">
-      <a *ngIf="result.media_type == 'movie' || searchService.searchType == 'movie' || result.media_type == 'tv' || searchService.searchType == 'tv'" routerLink="/{{result.media_type}}/{{result.id}}" class="flex w-full items-center">
-        <img class="md:w-fit w-1/4 md:h-full h-fit object-fill rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w500/{{result.poster_path}}" onerror="this.src='assets/images/movie_blank.png';">
+      <button *ngIf="result.media_type == 'movie' || searchService.searchType == 'movie'" routerLink="/movie/{{result.id}}" class="flex w-full items-center">
+        <img class="md:w-fit w-1/4 md:h-full h-fit object-fill rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w500/{{result.poster_path}}" onerror="this.src='assets/images/media_blank.png';">
         <div class="block w-[90%] h-full md:ml-4 ml-2 md:p-4 p-2 bg-white rounded-xl shadow-md ">
           <div class="flex justify-between">
             <div class="md:text-xl text-base font-bold">
               {{result.title}}
-              {{result.name}}
             </div>
-            <div *ngIf="result.media_type == 'movie' || searchService.searchType == 'movie'" class="flex md:text-base h-fit text-xs p-2 items-center bg-teal-300 rounded-xl shadow-md">
+            <div class="flex md:text-base h-fit text-xs p-2 items-center bg-teal-300 rounded-xl shadow-md">
               Film
-            </div>
-            <div *ngIf="result.media_type == 'tv' || searchService.searchType == 'tv'" class="flex md:text-base h-fit text-xs p-2 items-center bg-teal-300 rounded-xl shadow-md">
-              Serial
             </div>
           </div>
           <div *ngIf="result.vote_average != 0" class="flex items-center">
@@ -41,7 +40,7 @@
               {{result.vote_average}}
             </div>
             <div class="pl-1">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="md:w-8 md:h-8 w-6 h-6 text-yellow-300">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="md:w-8 md:h-8 w-6 h-6 text-yellow-400">
                 <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
               </svg>
             </div>
@@ -50,8 +49,34 @@
             {{result.overview}}
           </div>
         </div>
-      </a> 
-      <a *ngIf="result.media_type == 'person' || searchService.searchType == 'person'" routerLink="/person/{{result.id}}" class="flex w-full items-center">
+      </button>
+      <button *ngIf="result.media_type == 'tv' || searchService.searchType == 'tv'" routerLink="/tv/{{result.id}}" class="flex w-full items-center">
+        <img class="md:w-fit w-1/4 md:h-full h-fit object-fill rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w500/{{result.poster_path}}" onerror="this.src='assets/images/media_blank.png';">
+        <div class="block w-[90%] h-full md:ml-4 ml-2 md:p-4 p-2 bg-white rounded-xl shadow-md ">
+          <div class="flex justify-between">
+            <div class="md:text-xl text-base font-bold">
+              {{result.name}}
+            </div>
+            <div class="flex md:text-base h-fit text-xs p-2 items-center bg-teal-300 rounded-xl shadow-md">
+              Serial
+            </div>
+          </div>
+          <div *ngIf="result.vote_average != 0" class="flex items-center">
+            <div class="md:text-base text-xs font-bold">
+              {{result.vote_average}}
+            </div>
+            <div class="pl-1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="md:w-8 md:h-8 w-6 h-6 text-yellow-400">
+                <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+              </svg>
+            </div>
+          </div>
+          <div class="md:w-11/12 w-full md:text-sm text-xs line-clamp-3 text-justify">
+            {{result.overview}}
+          </div>
+        </div>
+      </button> 
+      <button *ngIf="result.media_type == 'person' || searchService.searchType == 'person'" routerLink="/person/{{result.id}}" class="flex w-full items-center">
         <img class="md:w-fit w-1/4 md:h-full h-fit object-fill rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w500/{{result.profile_path}}" onerror="this.src='assets/images/person_blank.png';">
         <div class="block w-[90%] h-full md:ml-4 ml-2 md:p-4 p-2 bg-white rounded-xl shadow-md">
           <div class="flex justify-between">
@@ -77,7 +102,20 @@
             </div>
           </div>   
         </div>
-      </a>
+      </button>
+      <button *ngIf="result.media_type == 'user' || searchService.searchType == 'user'" routerLink="/user/{{result.nickname}}" class="flex w-full items-center">
+        <img class="md:w-fit w-1/4 md:h-full h-fit object-fill rounded-xl shadow-md" src="assets/images/person_blank.png">
+        <div class="block w-[90%] h-full md:ml-4 ml-2 md:p-4 p-2 bg-white rounded-xl shadow-md">
+          <div class="flex justify-between">
+            <div class="md:text-xl text-base font-bold">
+              {{result.nickname}}
+            </div>
+            <div class="flex md:text-base h-fit text-xs p-2 items-center bg-teal-300 rounded-xl shadow-md">
+              Użytkownik
+            </div> 
+          </div>
+        </div>
+      </button>
     </div>
     <div *ngIf="searchData.total_results != 0" class="flex pt-8 justify-center items-center gap-4">
       <button (click)="searchService.changePage(1)" class="flex md:w-10 md:h-10 w-6 h-6 justify-center items-center hover:scale-125 hover:bg-teal-300 bg-gray-100 duration-200 rounded-full shadow-md">

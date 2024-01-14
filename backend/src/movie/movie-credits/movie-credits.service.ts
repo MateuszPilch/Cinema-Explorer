@@ -19,6 +19,10 @@ export class MovieCreditsService {
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
     const res = plainToClass(MediaCredits, data,{ excludeExtraneousValues: true });
+
+    res.cast.sort((a,b) => a.order - b.order);
+    res.crew.sort((a,b) => b.popularity - a.popularity);
+    
     return res;
   }
 
@@ -32,8 +36,12 @@ export class MovieCreditsService {
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
     let res = plainToClass(MediaCredits, data, { excludeExtraneousValues: true });
-    res.cast = res.cast.slice(0,10);
-    res.crew = res.crew.slice(0,10);
+
+    res.cast.sort((a,b) => a.order - b.order);
+    res.crew.sort((a,b) => b.popularity - a.popularity);
+
+    res.cast = res.cast.slice(0,6);
+    res.crew = res.crew.slice(0,6);
     return res;
   }
 }

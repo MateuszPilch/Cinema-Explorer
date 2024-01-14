@@ -6,6 +6,7 @@ import { TvCreditsService } from './tv-credits/tv-credits.service';
 import { TvPageService } from './tv-page/tv-page.service';
 import { MediaData } from 'shared/models/media/media-data';
 import { TvSearchFilter } from 'shared/models/tv/tv-search-filter';
+import { MediaImages } from 'shared/models/media/media-images';
 
 @Controller('tv')
 export class TvController {
@@ -21,16 +22,22 @@ export class TvController {
   }
 
   @Get(':id')
-  getTvDetails(@Param('id') param: string): Promise<MediaDetails> {
-    return this.tvDetailsService.getTvDetails(param);
+  getTvDetails(@Param('id') id: string): Promise<MediaDetails> {
+    return this.tvDetailsService.getTvDetails(id);
   }
+
+  @Get(':id/images')
+  getMovieImages(@Param('id') id: string): Promise<MediaImages> {
+    return this.tvDetailsService.getTvImages(id);
+  }
+
   @Get(':id/credits')
-  getTvCredits(@Param('id') param: string): Promise<MediaCredits> {
-    return this.tvCreditsService.getTvCredits(param);
+  getTvCredits(@Param('id') id: string): Promise<MediaCredits> {
+    return this.tvCreditsService.getTvCredits(id);
   }
 
   @Get(':id/credits_short')
-  getTvCreditsShort(@Param('id') param: string): Promise<MediaCredits> {
-    return this.tvCreditsService.getTvCreditsShort(param);
+  getTvCreditsShort(@Param('id') id: string): Promise<MediaCredits> {
+    return this.tvCreditsService.getTvCreditsShort(id);
   }
 }

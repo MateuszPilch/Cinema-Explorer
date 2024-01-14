@@ -4,6 +4,7 @@ import { MediaDetails } from 'shared/models/media/media-details';
 import { MediaCredits } from 'shared/models/media/media-credits';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { MediaImages } from 'shared/models/media/media-images';
 
 @Component({
   selector: 'app-tv-details',
@@ -12,8 +13,8 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class TvDetailsComponent {
 
-  id!: string | null;
   tvDetailsData!: MediaDetails;
+  tvImagesData!: MediaImages;
   tvCreditsData!: MediaCredits;
 
   tvRating: number = 0;
@@ -21,13 +22,20 @@ export class TvDetailsComponent {
   tvFavourite: boolean = false;
   tvToWatch: boolean = false;
 
+  isLightboxEnabled: boolean = false;
+  lightboxIndex!: number;
+  lightboxImage!: string;
+
   constructor(private route: ActivatedRoute, public authService: AuthService, private userService: UserService) {}
 
   ngOnInit() {
-    this.route.data.subscribe(({details}) => {
+    this.route.data.subscribe(({details, images, credits}) => {
       this.tvDetailsData = details;
-      this.tvDetailsData.vote_average = Math.round(this.tvDetailsData.vote_average / 2 * 10) / 10;
+      this.tvImagesData = images;
+      this.tvCreditsData = credits;
 
+      this.tvDetailsData.vote_average = Math.round(this.tvDetailsData.vote_average / 2 * 10) / 10;
+      
       this.userService.getMediaReview(this.tvDetailsData.id, "tv").subscribe(res => {
         if(res) {
           this.tvRating = res.rating,
@@ -37,9 +45,6 @@ export class TvDetailsComponent {
         }
       });
     });
-    this.route.data.subscribe(({credits}) => {
-      this.tvCreditsData = credits;
-    })
   }
 
   setTvReview(): void {
@@ -64,5 +69,16 @@ export class TvDetailsComponent {
   setTvToWatch(): void {
     this.tvToWatch = !this.tvToWatch;
     this.setTvReview();
+  }
+
+  lightboxControl(status: boolean, index: number): void {
+    this.isLightboxEnabled = status;
+    this.lightboxIndex = index;
+    this.lightboxImage = this.tvImagesData.backdrops[this.lightboxIndex].file_path;
+  }
+
+  lightboxChangeImage(index: number): void {
+    this.lightboxIndex = Math.max(0, Math.min(this.lightboxIndex + index, this.tvImagesData.backdrops.length - 1));
+    this.lightboxImage = this.tvImagesData.backdrops[this.lightboxIndex].file_path;
   }
 }

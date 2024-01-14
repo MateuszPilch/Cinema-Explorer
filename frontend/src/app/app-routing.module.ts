@@ -4,12 +4,12 @@ import { HomeComponent } from './components/home/home.component';
 import { MoviePageComponent } from './components/movie/movie-page/movie-page.component';
 import { moviePageResolver } from './services/movie/movie-page.service';
 import { MovieDetailsComponent } from './components/movie/movie-details/movie-details.component';
-import { movieDetailsResolver } from './services/movie/movie-details.service';
+import { movieDetailsResolver, movieImagesResolver } from './services/movie/movie-details.service';
 import { MovieCreditsComponent } from './components/movie/movie-credits/movie-credits.component';
 import { movieCreditsResolver, movieCreditsResolverShort } from './services/movie/movie-credits.service';
 import { TvDetailsComponent } from './components/tv/tv-details/tv-details.component';
 import { TvCreditsComponent } from './components/tv/tv-credits/tv-credits.component';
-import { tvDetailsResolver } from './services/tv/tv-details.service';
+import { tvDetailsResolver, tvImagesResolver } from './services/tv/tv-details.service';
 import { tvCreditsResolver, tvCreditsResolverShort } from './services/tv/tv-credits.service';
 import { SearchComponent } from './components/search/search.component';
 import { searchResolver } from './services/search/search.service';
@@ -51,6 +51,7 @@ const routes: Routes = [
       },
       { path: 'movie/:id', component: MovieDetailsComponent, resolve: {
           details: movieDetailsResolver,
+          images: movieImagesResolver,
           credits: movieCreditsResolverShort
         },
         runGuardsAndResolvers: 'always',
@@ -67,6 +68,7 @@ const routes: Routes = [
       },
       { path: 'tv/:id', component: TvDetailsComponent, resolve: {
           details: tvDetailsResolver,
+          images: tvImagesResolver,
           credits: tvCreditsResolverShort
         },
         runGuardsAndResolvers: 'always',

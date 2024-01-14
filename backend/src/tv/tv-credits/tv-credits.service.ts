@@ -9,7 +9,7 @@ export class TvCreditsService {
   constructor(private readonly httpService: HttpService) {}
 
   async getTvCredits(id: string): Promise<MediaCredits> {
-    const url = `https://api.themoviedb.org/3/tv/${id}/credits?language=pl-PL`;
+    const url = `https://api.themoviedb.org/3/tv/${id}/aggregate_credits?language=pl-PL`;
     const headers = {
       headers: {
         accept: 'application/json',
@@ -18,11 +18,15 @@ export class TvCreditsService {
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
     const res = plainToClass(MediaCredits, data, { excludeExtraneousValues: true });
+    
+    res.cast.sort((a,b) => a.order - b.order);
+    res.crew.sort((a,b) => b.popularity - a.popularity);
+
     return res;
   }
 
   async getTvCreditsShort(id: string): Promise<MediaCredits> {
-    const url = `https://api.themoviedb.org/3/tv/${id}/credits?language=pl-PL`;
+    const url = `https://api.themoviedb.org/3/tv/${id}/aggregate_credits?language=pl-PL`;
     const headers = {
       headers: {
         accept: 'application/json',
@@ -31,8 +35,12 @@ export class TvCreditsService {
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
     let res = plainToClass(MediaCredits, data, { excludeExtraneousValues: true });
-    res.cast = res.cast.slice(0,10);
-    res.crew = res.crew.slice(0,10);
+
+    res.cast.sort((a,b) => a.order - b.order);
+    res.crew.sort((a,b) =>  b.popularity - a.popularity);
+
+    res.cast = res.cast.slice(0,6);
+    res.crew = res.crew.slice(0,6);
     return res;
   }
 }
