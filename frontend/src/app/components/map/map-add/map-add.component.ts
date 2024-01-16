@@ -9,6 +9,7 @@ import VectorSource from 'ol/source/Vector';
 import Circle from 'ol/geom/Circle';
 import { DrawEvent } from 'ol/interaction/Draw';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-map-add',
@@ -23,18 +24,20 @@ export class MapAddComponent {
   private draw!: Draw;
   private drawType?: Type = 'Circle';
 
-  name!: string;
-  runtime!: string;
-  episode!: string;
-  description!: string;
+  name: string = '';
+  runtime: string = '';
+  episode: string = '';
+  description: string = '';
 
+  media_type!: string;
   mediaPath!: string;
   markLocationEnabled: boolean = true;
   locationImageUrl!: string | ArrayBuffer | null;
 
-  constructor(private route: ActivatedRoute, private router: Router, private mapService: MapService) {}
+  constructor(private route: ActivatedRoute, public authService: AuthService, private router: Router, private mapService: MapService) {}
 
   ngOnInit() {    
+    this.media_type = this.route.snapshot.paramMap.get('media_type') || '';
     this.mediaPath = `/${this.route.snapshot.paramMap.get('media_type')}/${this.route.snapshot.paramMap.get('media_id')}`;
     
     this.map = this.mapService.getMap();
@@ -90,23 +93,19 @@ export class MapAddComponent {
   }
 
   addMapLocation(): void {
-    const circle = this.vectorSource.getFeatures()[0].getGeometry()! as Circle;
+    const circle = this.vectorSource.getFeatures()[0].getGeometry() as Circle;
     const radius = circle.getRadius();
     const center = circle.getCenter();
-
-    if(this.name && this.runtime) {
-      this.mapService.addMapLocation(this.mediaPath, {
-        _id: '',
-        name: this.name,
-        runtime: this.runtime,
-        episode: this.episode,
-        description: this.description,
-        center: center,
-        radius: radius,
-        image: this.locationImageFile
-      });
-  
-      this.router.navigate(['../details'], { relativeTo: this.route });
-    }
+    this.mapService.addMapLocation(this.mediaPath, {
+      _id: '',
+      user_id: '',
+      name: this.name,
+      runtime: this.runtime,
+      episode: this.episode,
+      description: this.description,
+      center: center,
+      radius: radius,
+      image: this.locationImageFile
+    });
   }
 }

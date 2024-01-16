@@ -23,11 +23,14 @@ export class MapPageComponent implements OnInit {
 
   mapDetails!: MapDetails | null;
   vectorSource!: VectorSource
-
   overlay!: Overlay;
 
   mediaPath!: string;
   location_id!: string;
+
+  isLightboxEnabled: boolean = false;
+  lightboxIndex!: number;
+  lightboxImage!: string;
   
   constructor(private route: ActivatedRoute, private mapService: MapService) {}
 
@@ -45,11 +48,9 @@ export class MapPageComponent implements OnInit {
     this.vectorSource = this.mapService.getVectorSource();
 
     let container = document.getElementById('popup')!;
-    const closer = document.getElementById('popup-closer')!;
-
+    
     this.overlay = new Overlay({
-      element: container,
-      
+      element: container,  
     });
     this.map.addOverlay(this.overlay);
 
@@ -62,15 +63,27 @@ export class MapPageComponent implements OnInit {
         const point = feature.getGeometry() as Point;
         const properties = feature.getProperties();
 
-        this.setMediaPath(properties['media_type'], properties['media_id'], properties['location_id']);
+        this.mapDetails = null;
+        this.closeOverlay();
+
+        this.mediaPath = `/${properties['media_type']}/${properties['media_id']}`;
+        this.location_id = properties['location_id'];
+
+        this.mapService.getLocationDetails(this.mediaPath, this.location_id).subscribe(async (location) => {
+          this.mapDetails = location;
+          this.mapDetails.mapData[0].image = await imageToUrl(location.mapData[0].image);
+          
+          setTimeout(() => {
+            this.overlay.setPosition(point.getCoordinates());
+            this.overlay.setOffset([-container.offsetWidth/2, -container.offsetHeight - 10]);
+          }, 100);
+        });
         
         if(feature.getProperties()['location_id'] == null) {
           this.closeOverlay()
           return
         } 
 
-        this.overlay.setPosition(point.getCoordinates());
-        this.overlay.setOffset([-160, -480]);
       } else {
         this.closeOverlay();
       }
@@ -83,20 +96,6 @@ export class MapPageComponent implements OnInit {
       if (target instanceof HTMLElement) {
           target.style.cursor = hit ? 'pointer' : '';
       }
-    });
-  }
-
-  setMediaPath(media_type: string, media_id: string, location_id: string): void {
-    this.mediaPath = `/${media_type}/${media_id}`;
-    this.location_id = location_id;
-    this.getLocationDetails();
-  }
-
-  getLocationDetails(): void {
-    this.mapDetails = null;
-    this.mapService.getLocationDetails(this.mediaPath, this.location_id).subscribe(async (location) => {
-      this.mapDetails = location;
-      this.mapDetails.mapData[0].image = await imageToUrl(location.mapData[0].image);
     });
   }
 
@@ -121,5 +120,10 @@ export class MapPageComponent implements OnInit {
 
   closeOverlay(): void {
     this.overlay.setPosition(undefined);
+  }
+
+  lightboxControl(status: boolean): void {
+    this.isLightboxEnabled = status;
+    this.lightboxImage = this.mapDetails?.mapData[0].image;
   }
 }

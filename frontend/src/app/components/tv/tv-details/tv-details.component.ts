@@ -16,6 +16,7 @@ export class TvDetailsComponent {
   tvDetailsData!: MediaDetails;
   tvImagesData!: MediaImages;
   tvCreditsData!: MediaCredits;
+  tvLocationCount: number = 0;
 
   tvRating: number = 0;
   tvReview: string = '';
@@ -29,10 +30,11 @@ export class TvDetailsComponent {
   constructor(private route: ActivatedRoute, public authService: AuthService, private userService: UserService) {}
 
   ngOnInit() {
-    this.route.data.subscribe(({details, images, credits}) => {
+    this.route.data.subscribe(({details, images, credits,locationCount}) => {
       this.tvDetailsData = details;
       this.tvImagesData = images;
       this.tvCreditsData = credits;
+      this.tvLocationCount = locationCount;
 
       this.tvDetailsData.vote_average = Math.round(this.tvDetailsData.vote_average / 2 * 10) / 10;
       

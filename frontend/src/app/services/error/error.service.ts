@@ -15,7 +15,6 @@ export class ErrorService {
 
   setErrorMessages(errorMessages: string | string[]): void {
     this.clearErrorMessages();
-    
     if(typeof(errorMessages) === 'string') {
       this.errorMessages.push(errorMessages);
     } else {

@@ -1,7 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { plainToClass } from 'class-transformer';
+import { plainToInstance } from 'class-transformer';
 import { Model } from 'mongoose';
 import { firstValueFrom } from 'rxjs';
 import { MapDetails } from 'shared/models/map/map-details';
@@ -20,14 +20,19 @@ export class MapDetailsService {
         Authorization: `Bearer ${process.env.TMDB_API_CRED}`
       }
     };
-    const { data } = await firstValueFrom(this.httpService.get(url,headers))
+    const { data } = await firstValueFrom(this.httpService.get(url, headers))
     const details = (await this.mapsModel.findOne({media_type, media_id}));
     const mapData = details ? details.map_data : null;
-    const res = plainToClass(MapDetails, {...data, mapData}, { excludeExtraneousValues: false });
+    const res = plainToInstance(MapDetails, {...data, mapData}, { excludeExtraneousValues: false });
     return res;
   }
 
-  async deleteMapLocation(media_type: string, media_id: string, location_id : string): Promise<any> {
-    await this.mapsModel.updateOne({media_type, media_id}, { $pull: { map_data: {_id: location_id}}});
+  async getLocationCount(media_type: string, media_id: string): Promise<number> {
+    const res = await this.mapsModel.findOne({media_type, media_id});
+    return (res?.map_data?.length ?? 0);
+  }
+
+  async deleteMapLocation(user_id: string, media_type: string, media_id: string, location_id : string): Promise<any> {
+    return await this.mapsModel.updateOne({media_type, media_id}, { $pull: { map_data: {_id: location_id, user_id: user_id.toString()}}});
   }
 }

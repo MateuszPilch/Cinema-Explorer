@@ -24,6 +24,6 @@ export const tvCreditsResolver: ResolveFn<MediaCredits> = (route: ActivatedRoute
   return inject(TvCreditsService).getTvCredits(route.paramMap.get('id')!);
 };
 
-export const tvCreditsResolverShort: ResolveFn<MediaCredits> = (route: ActivatedRouteSnapshot) => {
+export const tvCreditsShortResolver: ResolveFn<MediaCredits> = (route: ActivatedRouteSnapshot) => {
   return inject(TvCreditsService).getTvCreditsShort(route.paramMap.get('id')!);
 };

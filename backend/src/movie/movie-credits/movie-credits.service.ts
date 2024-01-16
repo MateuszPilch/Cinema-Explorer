@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom, map } from 'rxjs';
 import { MediaCredits } from 'shared/models/media/media-credits';
-import { plainToClass } from "class-transformer"; 
+import { plainToInstance } from "class-transformer"; 
 
 
 @Injectable()
@@ -18,7 +18,7 @@ export class MovieCreditsService {
       }
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
-    const res = plainToClass(MediaCredits, data,{ excludeExtraneousValues: true });
+    const res = plainToInstance(MediaCredits, data,{ excludeExtraneousValues: true });
 
     res.cast.sort((a,b) => a.order - b.order);
     res.crew.sort((a,b) => b.popularity - a.popularity);
@@ -35,7 +35,7 @@ export class MovieCreditsService {
       }
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
-    let res = plainToClass(MediaCredits, data, { excludeExtraneousValues: true });
+    let res = plainToInstance(MediaCredits, data, { excludeExtraneousValues: true });
 
     res.cast.sort((a,b) => a.order - b.order);
     res.crew.sort((a,b) => b.popularity - a.popularity);

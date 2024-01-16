@@ -5,6 +5,9 @@ export class MapData {
   _id!: string;
 
   @Expose()
+  user_id!: string;
+
+  @Expose()
   name!: string;
 
   @Expose()

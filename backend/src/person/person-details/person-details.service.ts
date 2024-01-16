@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom, map } from 'rxjs';
 import { PersonDetails } from 'shared/models/person/person-details';
-import { plainToClass } from "class-transformer"; 
+import { plainToInstance } from "class-transformer"; 
 
 @Injectable()
 export class PersonDetailsService {
@@ -17,7 +17,7 @@ export class PersonDetailsService {
       }
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
-    const res = plainToClass(PersonDetails, data, { excludeExtraneousValues: true });
+    const res = plainToInstance(PersonDetails, data, { excludeExtraneousValues: true });
     return res;
   }
 }

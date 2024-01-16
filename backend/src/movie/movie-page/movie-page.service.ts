@@ -1,6 +1,6 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
-import { plainToClass } from 'class-transformer';
+import { plainToInstance } from 'class-transformer';
 import { MovieSearchFilter } from 'shared/models/movie/movie-search-filter';
 import { firstValueFrom } from 'rxjs';
 import { MediaData } from 'shared/models/media/media-data';
@@ -19,7 +19,7 @@ export class MoviePageService {
       params 
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
-    const res = plainToClass(MediaData, data, { excludeExtraneousValues: true });
+    const res = plainToInstance(MediaData, data, { excludeExtraneousValues: true });
     return res;
   }
 }

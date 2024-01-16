@@ -17,5 +17,4 @@ class MapData {
 
   @Expose()
   center!: number[]
-
 }

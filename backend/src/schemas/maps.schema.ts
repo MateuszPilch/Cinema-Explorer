@@ -20,6 +20,9 @@ class MapData {
 
   @Prop()
   _id: string;
+
+  @Prop()
+  user_id: string;
   
   @Prop()
   name: string;
@@ -56,9 +59,6 @@ export class Maps extends Document {
 
   @Prop()
   map_data: MapData[]
-
-  @Prop()
-  visible: boolean
 }
 
 export const MapsSchema = SchemaFactory.createForClass(Maps);

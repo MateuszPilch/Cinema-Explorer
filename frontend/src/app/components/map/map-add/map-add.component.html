@@ -15,9 +15,9 @@
       </div>
       <div class="flex w-full h-16 mt-4 p-2 items-center bg-white rounded-xl shadow-md">
         <p>Czas wystąpienia</p>
-        <input [(ngModel)]="this.runtime" class="w-full h-full mx-2 my-2 p-2 bg-gray-100 focus:outline-none rounded-xl" type="text" required maxlength="8" placeholder="00:00:00"/>
+        <input [(ngModel)]="this.runtime" class="w-full h-full mx-2 my-2 p-2 bg-gray-100 focus:outline-none rounded-xl" type="text" required maxlength="8" placeholder="00:00:00 (Opcjonalne)"/>
       </div>
-      <div class="flex w-full h-16 mt-4 p-2 items-center bg-white rounded-xl shadow-md">
+      <div *ngIf="media_type == 'tv'" class="flex w-full h-16 mt-4 p-2 items-center bg-white rounded-xl shadow-md">
         <p>Odcinek</p>
         <input [(ngModel)]="this.episode" class="w-full h-full mx-2 my-2 p-2 bg-gray-100 focus:outline-none rounded-xl" type="text" maxlength="6" placeholder="s01e01 (Opcjonalne)"/>
       </div>
@@ -49,9 +49,9 @@
       <div *ngIf="locationImageUrl" class="flex w-full h-60 pt-4 justify-center">
         <img class="object-contain rounded-xl shadow-md" [src]="locationImageUrl">
       </div>
-      <button (click)="addMapLocation()"class="flex w-full h-16 mt-4 justify-center items-center hover:scale-[1.02] bg-teal-300 hover:bg-teal-400 duration-200 rounded-xl shadow-md">
-        <b>Dodaj</b>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-6 h-6">
+      <button (click)="addMapLocation()" routerLink="../add" class="flex w-full h-16 mt-4 text-xl justify-center items-center hover:scale-[1.02] bg-teal-300 hover:bg-teal-400 duration-200 rounded-xl shadow-md">
+        Dodaj
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" data-slot="icon" class="ml-2 w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
         </svg>        
       </button>

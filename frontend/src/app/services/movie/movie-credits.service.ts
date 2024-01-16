@@ -15,7 +15,7 @@ export class MovieCreditsService {
     return this.http.get<MediaCredits>(`http://localhost:3000/api/movie/${id}/credits`);
   }
 
-  getMovieCreditsShort(id: string): Observable<MediaCredits> {
+  getMovieShortCredits(id: string): Observable<MediaCredits> {
     return this.http.get<MediaCredits>(`http://localhost:3000/api/movie/${id}/credits_short`);
   }
 }
@@ -24,6 +24,6 @@ export const movieCreditsResolver: ResolveFn<MediaCredits> = (route: ActivatedRo
   return inject(MovieCreditsService).getMovieCredits(route.paramMap.get('id')!);
 };
 
-export const movieCreditsResolverShort: ResolveFn<MediaCredits> = (route: ActivatedRouteSnapshot) => {
-  return inject(MovieCreditsService).getMovieCreditsShort(route.paramMap.get('id')!);
+export const movieCreditsShortResolver: ResolveFn<MediaCredits> = (route: ActivatedRouteSnapshot) => {
+  return inject(MovieCreditsService).getMovieShortCredits(route.paramMap.get('id')!);
 };

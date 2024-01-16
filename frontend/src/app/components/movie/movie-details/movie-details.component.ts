@@ -16,6 +16,7 @@ export class MovieDetailsComponent {
   movieDetailsData!: MediaDetails;
   movieImagesData!: MediaImages;
   movieCreditsData!: MediaCredits
+  movieLocationCount: number = 0;
 
   movieRating: number = 0;
   movieReview: string = '';
@@ -29,10 +30,11 @@ export class MovieDetailsComponent {
   constructor(private route: ActivatedRoute, public authService: AuthService, private userService: UserService) {}
 
   ngOnInit() {
-    this.route.data.subscribe(({details, images, credits}) => {
+    this.route.data.subscribe(({details, images, credits, locationCount}) => {
       this.movieDetailsData = details;
       this.movieImagesData = images;
       this.movieCreditsData = credits;
+      this.movieLocationCount = locationCount;
 
       this.movieDetailsData.vote_average = Math.round(this.movieDetailsData.vote_average / 2 * 10) / 10;
 

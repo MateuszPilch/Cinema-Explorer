@@ -4,13 +4,13 @@ import { HomeComponent } from './components/home/home.component';
 import { MoviePageComponent } from './components/movie/movie-page/movie-page.component';
 import { moviePageResolver } from './services/movie/movie-page.service';
 import { MovieDetailsComponent } from './components/movie/movie-details/movie-details.component';
-import { movieDetailsResolver, movieImagesResolver } from './services/movie/movie-details.service';
+import { movieDetailsResolver, movieImagesResolver, movieLocationCountResolver } from './services/movie/movie-details.service';
 import { MovieCreditsComponent } from './components/movie/movie-credits/movie-credits.component';
-import { movieCreditsResolver, movieCreditsResolverShort } from './services/movie/movie-credits.service';
+import { movieCreditsResolver, movieCreditsShortResolver } from './services/movie/movie-credits.service';
 import { TvDetailsComponent } from './components/tv/tv-details/tv-details.component';
 import { TvCreditsComponent } from './components/tv/tv-credits/tv-credits.component';
-import { tvDetailsResolver, tvImagesResolver } from './services/tv/tv-details.service';
-import { tvCreditsResolver, tvCreditsResolverShort } from './services/tv/tv-credits.service';
+import { tvDetailsResolver, tvImagesResolver, tvLocationCountResolver } from './services/tv/tv-details.service';
+import { tvCreditsResolver, tvCreditsShortResolver } from './services/tv/tv-credits.service';
 import { SearchComponent } from './components/search/search.component';
 import { searchResolver } from './services/search/search.service';
 import { PersonDetailsComponent } from './components/person/person-details/person-details.component';
@@ -29,6 +29,7 @@ import { mapDetailsResolver, mapPageResolver } from './services/map/map.service'
 import { MapMainComponent } from './components/map/map-main/map-main.component';
 import { TvPageComponent } from './components/tv/tv-page/tv-page.component';
 import { tvPageResolver } from './services/tv/tv-page.service';
+import { AuthGuard } from './guards/auth-guard.guard';
 
 const routes: Routes = [
   { path: '', component: HomeLayoutComponent,
@@ -52,7 +53,8 @@ const routes: Routes = [
       { path: 'movie/:id', component: MovieDetailsComponent, resolve: {
           details: movieDetailsResolver,
           images: movieImagesResolver,
-          credits: movieCreditsResolverShort
+          credits: movieCreditsShortResolver,
+          locationCount: movieLocationCountResolver,
         },
         runGuardsAndResolvers: 'always',
       },
@@ -69,7 +71,8 @@ const routes: Routes = [
       { path: 'tv/:id', component: TvDetailsComponent, resolve: {
           details: tvDetailsResolver,
           images: tvImagesResolver,
-          credits: tvCreditsResolverShort
+          credits: tvCreditsShortResolver,
+          locationCount: tvLocationCountResolver,
         },
         runGuardsAndResolvers: 'always',
       },
@@ -84,7 +87,7 @@ const routes: Routes = [
         }
       },
       { path: 'map', component: MapMainComponent, children:  [
-        { path: ':media_type/:media_id/add', component: MapAddComponent},
+        { path: ':media_type/:media_id/add', component: MapAddComponent, canActivate: [AuthGuard]},
         { path: ':media_type/:media_id/details', component: MapDetailsComponent , resolve: {
             details: mapDetailsResolver
           }

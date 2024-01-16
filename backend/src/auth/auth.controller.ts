@@ -52,9 +52,4 @@ export class AuthController {
   async loginViaGoogle(@Body() logininViaGoogle: LoginViaGoogleDto): Promise<{ token: string }> {
     return await this.authService.loginViaGoogle(logininViaGoogle);
   }
-
-  @Post('changenickname')
-  async changeNickname(@Body() changeNicknameDto: ChangeNicknameDto): Promise<string> {
-    return this.authService.changeNickname(changeNicknameDto);
-  } 
 }

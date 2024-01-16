@@ -1,7 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { plainToClass } from 'class-transformer';
+import { plainToInstance } from 'class-transformer';
 import { Model } from 'mongoose';
 import { firstValueFrom } from 'rxjs';
 import { MapAllLocations } from 'shared/models/map/map-all-locations';
@@ -25,15 +25,13 @@ export class MapPageService {
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
     const details = (await this.mapsModel.findOne({media_type, media_id}));
     const mapData = details ? [details.map_data.find(location => location._id == location_id)] : null;
-    const res = plainToClass(MapDetails, {...data, mapData}, { excludeExtraneousValues: false });
-
+    const res = plainToInstance(MapDetails, {...data, mapData}, { excludeExtraneousValues: false });
     return res;
   }
 
   async getAllLocations(): Promise<MapAllLocations[]> {
-
     const details = (await this.mapsModel.find({}, 'media_type media_id map_data._id map_data.center').lean());
-    const res = plainToClass(MapAllLocations, details, { excludeExtraneousValues: false });
+    const res = plainToInstance(MapAllLocations, details, { excludeExtraneousValues: true });
     return res;
   }
 }

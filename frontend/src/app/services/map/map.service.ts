@@ -3,22 +3,16 @@ import { Injectable, inject } from '@angular/core';
 import { ResolveFn, ActivatedRouteSnapshot, Router, NavigationEnd } from '@angular/router';
 import { Feature, View } from 'ol';
 import Map from 'ol/Map';
-import Cluster from 'ol/source/Cluster';
 import { Circle, Point } from 'ol/geom';
 import { Draw, Select } from 'ol/interaction';
 import TileLayer from 'ol/layer/Tile';
 import VectorLayer from 'ol/layer/Vector';
 import OSM from 'ol/source/OSM';
-import {
-  Circle as CircleStyle,
-  Fill,
-  Style,
-  Text,
-} from 'ol/style.js';
 import VectorSource from 'ol/source/Vector';
 import { Observable, firstValueFrom } from 'rxjs';
 import { MapData } from 'shared/models/map/map-data';
 import { MapDetails } from 'shared/models/map/map-details';
+import { ErrorService } from '../error/error.service';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +23,7 @@ export class MapService {
   private vectorSource!: VectorSource;
   private vectorLayer!: VectorLayer<VectorSource>;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private errorService: ErrorService) {
     this.initializeMap();
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd && this.router.url.startsWith('/map')) {
@@ -150,7 +144,11 @@ export class MapService {
       formData.append(key, value);
     });
 
-    firstValueFrom(this.http.post(`http://localhost:3000/api/map${mediaPath}/add`, formData));
+    firstValueFrom(this.http.post(`http://localhost:3000/api/map${mediaPath}/add`, formData)).then(() => {
+      this.router.navigate([`/map${mediaPath}/details`],);
+    }).catch((error) => {
+      this.errorService.setErrorMessages(error.error.message);
+    });
   }
 
   deleteMapLocation(mediaPath: string, location_id: string): void {

@@ -11,12 +11,14 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthService {
 
   private authToken!: string;
+  private authId!: string;
   private nickname!: string;
   private helper = new JwtHelperService();
   
   constructor(private http: HttpClient, private router: Router, private errorService: ErrorService) {
     this.authToken = localStorage.getItem('token') || '';
-    this.nickname = localStorage.getItem('nickname') || '';
+    this.authId = localStorage.getItem('auth_id') || '';
+    this.nickname = localStorage.getItem('auth_nickname') || '';
   }
 
   public signup(nickname: string, email: string, password: string, confirmedPassword: string): void {
@@ -82,16 +84,22 @@ export class AuthService {
   
   public logout(): void {
     this.authToken = '';
+    this.authId = '';
     this.nickname = '';
 
     localStorage.removeItem('token');
-    localStorage.removeItem('nickname');
+    localStorage.removeItem('auth_id')
+    localStorage.removeItem('auth_nickname');
 
     this.router.navigate(['/']);
   }
 
   public getAuthToken(): string {
     return this.authToken;
+  }
+
+  public getAuthId(): string {
+    return this.authId;
   }
 
   public getNickname(): string {
@@ -104,9 +112,11 @@ export class AuthService {
 
   private setAuthenticationData(data: {token: string}): void {
     this.authToken = data.token;
+    this.authId = this.helper.decodeToken(this.authToken)._id;
     this.nickname = this.helper.decodeToken(this.authToken).nickname;
-
+    
     localStorage.setItem('token', this.authToken);
-    localStorage.setItem('nickname', this.nickname);
+    localStorage.setItem('auth_id', this.authId);
+    localStorage.setItem('auth_nickname', this.nickname);
   }
 }

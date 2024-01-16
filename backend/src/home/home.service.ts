@@ -1,6 +1,6 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
-import { plainToClass } from 'class-transformer';
+import { plainToInstance } from 'class-transformer';
 import { firstValueFrom } from 'rxjs';
 import { SearchData } from 'shared/models/search-data';
 
@@ -18,7 +18,7 @@ export class HomeService {
       }
     };
     const { data } = await firstValueFrom(this.httpService.get(url, headers))
-    const res = plainToClass(SearchData, data, { excludeExtraneousValues: true });
+    const res = plainToInstance(SearchData, data, { excludeExtraneousValues: true });
     return data;
   }
 }

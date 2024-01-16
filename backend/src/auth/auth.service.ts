@@ -24,7 +24,6 @@ export class AuthService {
   ){}
 
   async signup(signupDto: SignupDto): Promise<{ token: string }> {
-
     const {nickname, email, password, confirmedPassword} = signupDto;
     const nicknameCheck = await this.authModel.findOne({ nickname });
 
@@ -62,7 +61,6 @@ export class AuthService {
   }
 
   async login(loginDto: LoginDto): Promise<{ token: string }> {
-
     const { email, password } = loginDto;
     const auth = await this.authModel.findOne({ email });
 
@@ -112,7 +110,6 @@ export class AuthService {
   }
 
   async loginViaGoogle(loginViaGoogle: LoginViaGoogleDto): Promise<{ token: string }> {
-
     const { email } = loginViaGoogle;
     const auth = await this.authModel.findOne({ email });
 
@@ -125,22 +122,6 @@ export class AuthService {
 
   async validateViaGoogle(validateViaGoogleDto: ValidateViaGoogleDto): Promise<ValidateViaGoogleDto> {
     return validateViaGoogleDto;
-  }
-
-  async changeNickname(changeNicknameDto: ChangeNicknameDto): Promise<string> {
-
-    const {email, nickname} = changeNicknameDto;
-    const nicknameCheck = await this.authModel.findOne({ nickname });
-
-    if (nicknameCheck) {
-      throw new ConflictException('Ta nazwa użytkownika już istnieje');
-    } else {
-      await this.authModel.findOneAndUpdate({email},{nickname});
-      await this.userModel.findOneAndUpdate({email},{nickname});
-
-      const token = this.generateJwtToken(nicknameCheck);
-      return token;
-    }
   }
 
   private generateJwtToken(auth: Auth): string {

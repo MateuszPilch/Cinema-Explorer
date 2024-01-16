@@ -19,6 +19,10 @@ export class MovieDetailsService {
   getMovieImages(movie_id: string): Observable<MediaImages> {
     return this.http.get<MediaImages>(`http://localhost:3000/api/movie/${movie_id}/images`);
   }
+
+  getMovieLocationCount(movie_id: string): Observable<number> {
+    return this.http.get<number>(`http://localhost:3000/api/map/movie/${movie_id}/count`);
+  }
 }
 
 export const movieDetailsResolver: ResolveFn<MediaDetails> = (route: ActivatedRouteSnapshot) => {
@@ -27,4 +31,8 @@ export const movieDetailsResolver: ResolveFn<MediaDetails> = (route: ActivatedRo
 
 export const movieImagesResolver: ResolveFn<MediaImages> = (route: ActivatedRouteSnapshot) => {
   return inject(MovieDetailsService).getMovieImages(route.paramMap.get('id')!);
+};
+
+export const movieLocationCountResolver: ResolveFn<number> = (route: ActivatedRouteSnapshot) => {
+  return inject(MovieDetailsService).getMovieLocationCount(route.paramMap.get('id')!);
 };

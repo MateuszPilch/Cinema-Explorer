@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom, map } from 'rxjs';
 import { MediaDetails } from 'shared/models/media/media-details';
-import { plainToClass } from "class-transformer"; 
+import { plainToInstance } from "class-transformer"; 
 import { MediaImages } from 'shared/models/media/media-images';
 
 @Injectable()
@@ -18,7 +18,7 @@ export class TvDetailsService {
       }
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
-    const res = plainToClass(MediaDetails, data, { excludeExtraneousValues: true });
+    const res = plainToInstance(MediaDetails, data, { excludeExtraneousValues: true });
     return res;
   }
 
@@ -31,7 +31,7 @@ export class TvDetailsService {
       }
     };
     const { data } = await firstValueFrom(this.httpService.get(url, headers));
-    const res = plainToClass(MediaImages, data, { excludeExtraneousValues: true });
+    const res = plainToInstance(MediaImages, data, { excludeExtraneousValues: true });
     return res;
   }
 }

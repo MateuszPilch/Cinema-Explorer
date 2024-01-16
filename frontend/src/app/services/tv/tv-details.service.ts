@@ -20,6 +20,10 @@ export class TvDetailsService {
   getTvImages(tv_id: string): Observable<MediaImages> {
     return this.http.get<MediaImages>(`http://localhost:3000/api/tv/${tv_id}/images`);
   }
+
+  getTvLocationCount(tv_id: string): Observable<number> {
+    return this.http.get<number>(`http://localhost:3000/api/map/tv/${tv_id}/count`);
+  }
 }
 
 export const tvDetailsResolver: ResolveFn<MediaDetails> = (route: ActivatedRouteSnapshot) => {
@@ -28,4 +32,8 @@ export const tvDetailsResolver: ResolveFn<MediaDetails> = (route: ActivatedRoute
 
 export const tvImagesResolver: ResolveFn<MediaImages> = (route: ActivatedRouteSnapshot) => {
   return inject(TvDetailsService).getTvImages(route.paramMap.get('id')!);
+};
+
+export const tvLocationCountResolver: ResolveFn<number> = (route: ActivatedRouteSnapshot) => {
+  return inject(TvDetailsService).getTvLocationCount(route.paramMap.get('id')!);
 };

@@ -17,8 +17,8 @@
     </div> 
   </div>
 </div>
-<div class="grid md:grid-cols-4 grid-cols-1 md:grid-rows-3 grid-flow-row md:gap-8 gap-2 md:p-8 p-2 bg-gray-100 rounded-xl shadow-md">
-  <div *ngIf="authService.isAuthenticated()" class="md:order-2">
+<div class="grid md:grid-cols-4 grid-cols-1 grid-flow-row md:gap-8 gap-2 md:p-8 p-2 bg-gray-100 rounded-xl shadow-md">
+  <div *ngIf="authService.isAuthenticated()" class="md:order-3 md:col-span-1 row-span-1">
     <div class="block h-fit p-4 justify-center items-center bg-white rounded-xl shadow-md">
       <div class="text-center text-2xl">
         Twoja ocena
@@ -53,29 +53,30 @@
       </div>
     </div>
   </div>
-  <div class="md:order-1 md:col-span-3 row-span-3">
+  <div class="md:order-1 md:col-span-3 row-span-4">
     <div class="block h-full md:p-8 p-4 bg-white rounded-xl shadow-md">
-      <div class="flex">
-        <div class="flex w-4/5">
-          <div class="text-4xl">{{movieDetailsData.title}}</div>
+      <div class="flex text-4xl">{{movieDetailsData.title}}</div>
+      <div class="md:flex block md:pt-8 pt-4 justify-around text-justify">
+        <div *ngIf="movieDetailsData.overview == ''" class="md:w-4/5 text-lg">
+          Ten film nie posiada opisu
         </div>
-        <div class="flex w-1/5 items-center">
-          <button routerLink="/map/movie/{{movieDetailsData.id}}/details" class="flex p-4 items-center bg-teal-300 hover:scale-[1.03] hover:bg-teal-400 duration-200 rounded-xl shadow-md">
-            Mapa lokacji
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-2 w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
-            </svg>  
-          </button>        
-        </div>
-      </div>
-      <div class="md:flex block md:pt-8 pt-4 justify-around text-justify ">
-        <div class="md:w-4/5 text-lg">
+        <div *ngIf="movieDetailsData.overview != ''" class="md:w-4/5 text-lg">
           {{movieDetailsData.overview}}
         </div>
       </div>
     </div>
   </div>
-  <div class="order-3 md:col-span-1 row-span-2">
+  <button routerLink="/map/movie/{{movieDetailsData.id}}/details" class="order-2 md:col-span-1 row-span-1 w-full p-4 bg-teal-300 hover:scale-[1.03] hover:bg-teal-400 duration-200 rounded-xl shadow-md">
+    <div class="flex justify-center items-center">
+      <div class="text-2xl">Mapa lokacji</div>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-2 w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
+      </svg>
+    </div>
+    <div *ngIf="movieLocationCount <= 0" class="text-base">Brak dostępnych lokacji</div>
+    <div *ngIf="movieLocationCount > 0" class="text-base">Dostępne <b>{{movieLocationCount}}</b> lokacji</div>
+  </button>        
+  <div class="order-4 md:col-span-1 row-span-2">
     <div class="block h-full p-4 justify-center items-center bg-white rounded-xl shadow-md">
       <div class="text-center text-2xl">
         Informacje
@@ -114,7 +115,7 @@
       </div> 
     </div>
   </div>
-  <div class="order-4 md:col-span-4 row-span-3 md:p-8 p-2 bg-white rounded-xl shadow-md">
+  <div class="order-5 md:col-span-4 row-span-3 md:p-8 p-2 bg-white rounded-xl shadow-md">
     <div class="flex items-center justify-between">
       <div class="md:text-3xl text-2xl">Obsada i twórzcy</div>
       <div class="flex items-center justify-between">
@@ -151,7 +152,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="movieImagesData" class="order-5 md:col-span-4 row-span-3 md:p-8 p-2 bg-white rounded-xl shadow-md">
+  <div *ngIf="movieImagesData" class="order-6 md:col-span-4 row-span-3 md:p-8 p-2 bg-white rounded-xl shadow-md">
     <div class="md:text-3xl text-2xl">Galeria</div>
     <div class="flex overflow-x-scroll">
       <button *ngFor="let media of movieImagesData.backdrops; index as i" (click)="lightboxControl(true, i)" class="flex-shrink-0  p-4">

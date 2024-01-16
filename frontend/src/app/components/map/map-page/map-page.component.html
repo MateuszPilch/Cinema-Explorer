@@ -30,6 +30,18 @@
       {{mapDetails.mapData[0].name}}
     </div>
     <div *ngIf="mapDetails.mapData[0].description != '' && mapDetails.mapData[0].description !='undefined'">{{mapDetails.mapData[0].description}}</div>
-    <img *ngIf="mapDetails.mapData[0].image != ''" class="mt-4 max-h-52 mx-auto object-contain rounded-xl shadow-md" [src]="mapDetails.mapData[0].image" onerror="this.src='assets/images/media_blank.png';">
+    <button (click)="lightboxControl(true)" class="mt-4 max-h-52 mx-auto">
+      <img *ngIf="mapDetails.mapData[0].image != ''" class="object-contain rounded-xl shadow-md" [src]="mapDetails.mapData[0].image" onerror="this.src='assets/images/media_blank.png';">
+    </button>
+  </div>
+</div>
+<div *ngIf="isLightboxEnabled" class="fixed top-0 left-0 h-full w-full flex items-center bg-black bg-opacity-80">
+  <button (click)="lightboxControl(false)" class="absolute top-20 right-2">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-white w-16 h-16">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+    </svg>  
+  </button>
+  <div class="flex w-full h-2/3 justify-center">
+    <img class="object-cover rounded-xl" src="{{lightboxImage}}" onerror="this.src='assets/images/media_blank.png';">
   </div>
 </div>

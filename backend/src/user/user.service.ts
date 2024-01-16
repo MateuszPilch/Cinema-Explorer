@@ -1,7 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { plainToClass } from 'class-transformer';
+import { plainToInstance } from 'class-transformer';
 import { Model } from 'mongoose';
 import { MediaReview } from 'shared/models/media/media-review';
 import { MediaReviewDto } from 'src/user/dto/media-review.dto';
@@ -15,20 +15,17 @@ export class UserService {
   async getMediaList(nickname: string): Promise<MediaReview[]> {
     const data = await this.userModel.findOne({nickname});
     const res = data.media_list
-
     return res;
   }
   
   async getMediaReview(_id: string, media_id: number, media_type: string): Promise<MediaReview> {
     const data = await this.userModel.findById(_id);
-    const res = plainToClass(MediaReview,data.media_list.find(media => media.media_id === Number(media_id) && media.media_type === media_type));
-
+    const res = plainToInstance(MediaReview,data.media_list.find(media => media.media_id === Number(media_id) && media.media_type === media_type));
     return res;
   }
 
   async setMediaReview(_id: string, mediaReview: MediaReviewDto): Promise<any> {
     const data = await this.userModel.findById(_id);
-    
     const mediaIndex = data.media_list.findIndex(media => media.media_id === mediaReview.media_id && media.media_type === mediaReview.media_type);
 
     if (mediaIndex === -1) {
