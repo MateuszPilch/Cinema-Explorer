@@ -7,6 +7,7 @@ import { MediaDetails } from 'shared/models/media/media-details';
 import { MediaCredits } from 'shared/models/media/media-credits';
 import { MoviePageService } from './movie-page/movie-page.service';
 import { MediaImages } from 'shared/models/media/media-images';
+import { MovieGenres } from 'shared/models/movie/movie-genres';
 
 @Controller('movie')
 export class MovieController {
@@ -20,6 +21,11 @@ export class MovieController {
   @Get()
   getMovieData(@Query() params: MovieSearchFilter): Promise<MediaData> {
     return this.moviePageService.getMovieData(params);
+  }
+
+  @Get('genres')
+  getMovieGenres(): Promise<MovieGenres> {
+    return this.moviePageService.GetMovieGenres();
   }
 
   @Get(':id')

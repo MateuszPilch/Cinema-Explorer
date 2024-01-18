@@ -6,7 +6,7 @@
     {{personDetailsData.name}}
   </div>
 </div>
-<div class="grid h-fit md:grid-cols-4 grid-cols-1 grid-flow-row md:gap-8 gap-2 md:p-8 p-2 bg-gray-100 rounded-xl shadow-md">
+<div class="grid h-fit md:grid-cols-4 grid-cols-2 md:gap-8 md:p-8 p-2 bg-gray-100 rounded-xl shadow-md">
   <div class="order-2">
     <div class="block h-fit p-4 justify-center items-center bg-white rounded-xl shadow-md">
       <div class="text-center text-2xl">
@@ -40,11 +40,14 @@
     <div class="block h-fit md:p-8 p-4 bg-white rounded-xl shadow-md">
       <div class="flex justify-between">
         <div class="flex items-end">
-          <div class="md:text-5xl text-4xl">{{personDetailsData.name}}</div>
+          <div class="text-4xl">{{personDetailsData.name}}</div>
         </div>
       </div>
-      <div class="md:flex block md:pt-8 pt-4 justify-around text-justify ">
-        <div class="md:w-4/5 text-lg">
+      <div class="md:flex block md:pt-8 pt-4 justify-around text-justify">
+        <div *ngIf="personDetailsData.biography == ''" class="md:w-4/5 text-lg">
+          Ta osoba nie posiada opisu.
+        </div>
+        <div *ngIf="personDetailsData.biography != ''" class="md:w-4/5 text-lg">
           {{personDetailsData.biography}}
         </div>
       </div>
@@ -76,22 +79,9 @@
     </div>
   </div>
   <div class="order-3 md:col-span-4 row-span-3 md:p-8 p-2 bg-white rounded-xl shadow-md">
-    <div class="md:flex block justify-between">
-      <div class="md:text-3xl text-xl">Produkcje</div>
-      <div class="flex items-center gap-4">
-        <button class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
-          Wszystko
-        </button>
-        <button class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
-          Filmy
-        </button>
-        <button class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
-          Seriale
-        </button>
-      </div>
-    </div>
+    <div class="md:text-3xl text-2xl">Produkcje</div>
     <div class="pt-4 text-xl">Aktor</div>
-    <div *ngFor="let result of personCreditsData.cast" class="flex md:h-52 min-h-40 md:mb-8 mb-2 md:p-4 p-2 hover:scale-[1.03] duration-200 bg-gray-100 rounded-xl shadow-md">
+    <div *ngFor="let result of personCreditsData.cast" class="flex md:h-52 min-h-40 md:mb-8 mb-2 md:p-4 p-2 hover:scale-[1.01] duration-200 bg-gray-100 rounded-xl shadow-md">
       <button routerLink="/{{result.media_type}}/{{result.id}}" class="flex w-full items-center">
         <img class="md:w-fit w-1/4 md:h-full h-fit object-fill rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w500/{{result.poster_path}}" onerror="this.src='assets/images/media_blank.png';">
         <div class="block w-[90%] h-full md:ml-4 ml-2 md:p-4 p-2 bg-white rounded-xl shadow-md ">
@@ -133,10 +123,10 @@
               Serial
             </div>
           </div>
-          <div>
+          <div class="flex md:text-base items-center">
             jako "{{result.job}}"
           </div>
-          <div class="md:w-11/12 w-full md:text-sm text-xs line-clamp-2 text-justify">
+          <div class="md:w-11/12 w-full md:text-sm text-xs line-clamp-3 text-justify">
             {{result.overview}}
           </div>
         </div>

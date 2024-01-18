@@ -5,6 +5,7 @@ import { TvDetailsService } from './tv-details/tv-details.service';
 import { TvCreditsService } from './tv-credits/tv-credits.service';
 import { TvPageService } from './tv-page/tv-page.service';
 import { MediaData } from 'shared/models/media/media-data';
+import { TvGenres } from 'shared/models/tv/tv-genres';
 import { TvSearchFilter } from 'shared/models/tv/tv-search-filter';
 import { MediaImages } from 'shared/models/media/media-images';
 
@@ -19,6 +20,11 @@ export class TvController {
   @Get()
   getMovieData(@Query() params: TvSearchFilter): Promise<MediaData> {
     return this.tvPageService.getTvData(params);
+  }
+
+  @Get('genres')
+  getMovieGenres(): Promise<TvGenres> {
+    return this.tvPageService.GetTvGenres();
   }
 
   @Get(':id')

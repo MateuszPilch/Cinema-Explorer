@@ -1,113 +1,142 @@
 <div class="md:p-8 p-2 bg-gray-100 rounded-xl shadow-md">
-  <div class="block md:p-8 p-2 bg-white rounded-xl shadow-md">
+  <div class="block md:p-8 p-4 bg-white rounded-xl shadow-md">
     <div class="md:flex block justify-between">
       <div class="md:text-4xl text-xl">Seriale</div>
-      <div class="flex items-center gap-4">
-        <button (click)="this.tvPageService.highestVoteFilter()" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
+      <div class="md:flex md:pt-0 pt-4 gap-4 grid grid-cols-1 items-center">
+        <button (click)="highestVoteFilter()" class="px-4 py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
           Najwyżej oceniane
         </button>
-        <button (click)="this.tvPageService.popularityFilter()" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
+        <button (click)="popularityFilter()" class="px-4 py-2 md:text-lg text-base bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
           Popularne
         </button>
-        <button (click)="this.tvPageService.upcomingFilter()" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
+        <button (click)="upcomingFilter()" class="px-4 py-2 md:text-lg text-base bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
           Nadchodzące
         </button>
-        <button (click)="this.toggleFilter()" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
+        <button (click)="toggleFilter()" class="px-4 py-2 md:text-lg text-base bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
           Filtry
         </button>
       </div>
     </div>
-    <div *ngIf="isFilterOpen" class="flex mt-8 bg-gray-100 rounded-xl shadow-md">
-      <div class="block w-full md:m-4 m-2 md:p-4 p-2 bg-white rounded-xl shadow-md ">
-        <div class="grid md:grid-cols-3 grid-cols-1 gap-8">
-          <div class="p-2 md:col-span-3 md:text-sm text-xs text-center bg-gray-100 rounded-xl shadow-md">
-            <div class="text-lg text-center">Sortuj</div>
-            <div class="p-2 grid md:grid-cols-3 grid-cols-2 gap-4">
-              <button 
-                (click)="this.tvPageService.setFilter('sort_by','vote_average.desc')"
-                [ngClass]="this.tvPageService.tvFilter.sort_by === 'vote_average.desc' ? 'bg-teal-300' : 'bg-white'"
-                class="p-2 md:text-sm text-xs hover:scale-[1.03] duration-200 rounded-full shadow-md">
-                Oceny malejąco
-              </button>
-              <button 
-                (click)="this.tvPageService.setFilter('sort_by','vote_average.asc')"
-                [ngClass]="this.tvPageService.tvFilter.sort_by === 'vote_average.asc' ? 'bg-teal-300' : 'bg-white'"
-                class="p-2 md:text-sm text-xs hover:scale-[1.03] duration-200 rounded-full shadow-md">
-                Oceny rosnąco
-              </button>
-              <button 
-                (click)="this.tvPageService.setFilter('sort_by','popularity.desc')"
-                [ngClass]="this.tvPageService.tvFilter.sort_by === 'popularity.desc' ? 'bg-teal-300' : 'bg-white'"
-                class="p-2 md:text-sm text-xs hover:scale-[1.03] duration-200 rounded-full shadow-md">
-                Popularność malejąco
-              </button>
-              <button 
-                (click)="this.tvPageService.setFilter('sort_by','popularity.asc')"
-                [ngClass]="this.tvPageService.tvFilter.sort_by === 'popularity.asc' ? 'bg-teal-300' : 'bg-white'"
-                class="p-2 md:text-sm text-xs hover:scale-[1.03] duration-200 rounded-full shadow-md">
-                Popularność rosnąco
-              </button>
-              <button 
-                (click)="this.tvPageService.setFilter('sort_by','primary_release_date.desc')"
-                [ngClass]="this.tvPageService.tvFilter.sort_by === 'primary_release_date.desc' ? 'bg-teal-300' : 'bg-white'"
-                class="p-2 md:text-sm text-xs hover:scale-[1.03] duration-200 rounded-full shadow-md">
-                Data premiery malejąco
-              </button>
-              <button 
-                (click)="this.tvPageService.setFilter('sort_by','primary_release_date.asc')"
-                [ngClass]="this.tvPageService.tvFilter.sort_by === 'primary_release_date.asc' ? 'bg-teal-300' : 'bg-white'"
-                class="p-2 md:text-sm text-xs hover:scale-[1.03] duration-200 rounded-full shadow-md">
-                Data premiery rosnąco
-              </button>
-            </div>
+    <div *ngIf="isFilterOpen" class="pt-4">
+      <div class="grid grid-cols-1 gap-4 p-4 text-sm bg-gray-100 rounded-xl shadow-md">
+        <div class="block">
+          <div class="text-xl">Sortuj</div>
+          <div class="grid md:grid-cols-3 grid-cols-2 gap-4 pt-4">
+            <button 
+              (click)="setFilter('sort_by','vote_average.desc')"
+              [ngClass]="tvFilter.sort_by === 'vote_average.desc' ? 'bg-teal-300' : 'bg-white'"
+              class="p-2 text-sm hover:scale-[1.03] duration-200 rounded-full shadow-md">
+              Oceny malejąco
+            </button>
+            <button 
+              (click)="setFilter('sort_by','popularity.desc')"
+              [ngClass]="tvFilter.sort_by === 'popularity.desc' ? 'bg-teal-300' : 'bg-white'"
+              class="p-2 text-sm hover:scale-[1.03] duration-200 rounded-full shadow-md">
+              Popularność malejąco
+            </button>
+            <button 
+              (click)="setFilter('sort_by','first_air_date.desc')"
+              [ngClass]="tvFilter.sort_by === 'first_air_date.desc' ? 'bg-teal-300' : 'bg-white'"
+              class="p-2 text-sm hover:scale-[1.03] duration-200 rounded-full shadow-md">
+              Data premiery malejąco
+            </button>
+            <button 
+              (click)="setFilter('sort_by','vote_average.asc')"
+              [ngClass]="tvFilter.sort_by === 'vote_average.asc' ? 'bg-teal-300' : 'bg-white'"
+              class="p-2 text-sm hover:scale-[1.03] duration-200 rounded-full shadow-md">
+              Oceny rosnąco
+            </button>
+            <button 
+              (click)="setFilter('sort_by','popularity.asc')"
+              [ngClass]="tvFilter.sort_by === 'popularity.asc' ? 'bg-teal-300' : 'bg-white'"
+              class="p-2 text-sm hover:scale-[1.03] duration-200 rounded-full shadow-md">
+              Popularność rosnąco
+            </button>
+            <button 
+              (click)="setFilter('sort_by','first_air_date.asc')"
+              [ngClass]="tvFilter.sort_by === 'first_air_date.asc' ? 'bg-teal-300' : 'bg-white'"
+              class="p-2 text-sm hover:scale-[1.03] duration-200 rounded-full shadow-md">
+              Data premiery rosnąco
+            </button>
           </div>
-          <div  class="p-2 md:text-sm text-xs text-center bg-gray-100 rounded-xl shadow-md">
-            <div class="text-lg text-center">Ocena</div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-4 md:text-center">
+          <div class="block">
+            <div class="text-xl">Ocena</div>
+            <div class="mx-auto mt-4 p-4 text-sm text-center bg-white rounded-xl shadow-md">
               <ngx-slider
                 [(value)]="this.voteAvgRange[0]" 
                 [(highValue)]="this.voteAvgRange[1]" 
                 [options]="voteAvgOptions"
-                (valueChange)="this.tvPageService.setFilter('vote_average.gte',this.voteAvgRange[0] * 2)" 
-                (highValueChange)="this.tvPageService.setFilter('vote_average.lte',this.voteAvgRange[1] * 2)">
+                (valueChange)="setFilter('vote_average.gte',this.voteAvgRange[0] * 2)" 
+                (highValueChange)="setFilter('vote_average.lte',this.voteAvgRange[1] * 2)">
               </ngx-slider>
+            </div>
           </div>
-          <div class="p-2 md:text-sm text-xs text-center bg-gray-100 rounded-xl shadow-md">
-            <div class="text-lg text-center">Minimalna ilość ocen</div>
-              <ngx-slider 
-                [(value)]="this.voteCountRange" 
-                [options]="voteCountOptions"
-                (valueChange)="this.tvPageService.setFilter('vote_count.gte',this.voteCountRange)">
-              </ngx-slider>
-          </div>
-          <div class="p-2 md:text-sm text-xs text-center bg-gray-100 rounded-xl shadow-md">
-            <div class="text-lg text-center">Czas trwania</div>
+          <div class="block">
+            <div class="text-xl">Czas trwania</div>
+            <div class="mx-auto mt-4 p-4 text-sm text-center bg-white rounded-xl shadow-md">
               <ngx-slider 
                 [(value)]="this.runtimeRange[0]" 
                 [(highValue)]="this.runtimeRange[1]" 
                 [options]="runtimeOptions"
-                (valueChange)="this.tvPageService.setFilter('with_runtime.gte',this.runtimeRange[0])"
-                (highValueChange)="this.tvPageService.setFilter('with_runtime.lte',this.runtimeRange[1])">
+                (valueChange)="setFilter('with_runtime.gte',this.runtimeRange[0])"
+                (highValueChange)="setFilter('with_runtime.lte',this.runtimeRange[1])">
               </ngx-slider>
+            </div>
+          </div>
+          <div class="block">
+            <div class="text-xl">Minimalna ilość ocen</div>
+            <div class="mx-auto mt-4 p-4 text-sm text-center bg-white rounded-xl shadow-md">
+              <ngx-slider 
+                [(value)]="this.voteCountRange" 
+                [options]="voteCountOptions"
+                (valueChange)="setFilter('vote_count.gte',this.voteCountRange)">
+              </ngx-slider>
+            </div>
           </div>
         </div>
-        <div class="flex mt-4 justify-center">
-          <button (click)="this.tvPageService.applyFilter()" class="p-2 md:text-lg text-sm hover:scale-[1.03] duration-200 bg-teal-300 rounded-xl shadow-md">
-            Zastosuj
+        <div class="block">
+          <div class="text-xl">Gatunki</div>
+          <div class="grid md:grid-cols-7 grid-cols-2 pt-4 gap-4">
+            <button *ngFor="let genre of tvGenres"
+            (click)="setGenre(genre.id)"
+            [ngClass]="tvGeneresFilter.has(genre.id) ? 'bg-teal-300' : 'bg-white'"
+            class="p-2 text-sm hover:scale-[1.03] duration-200 rounded-full shadow-md">
+            {{genre.name}}
           </button>
+          </div>
         </div>
+        <div class="block">
+          <div class="text-xl">Lata produkcji</div>
+          <div class="grid md:grid-cols-8 grid-cols-2 pt-4 gap-4">
+            <button *ngFor="let decade of tvDecadeFilter"
+            (click)="setDecade(decade)"
+            [ngClass]="selectedDecade == decade ? 'bg-teal-300' : 'bg-white'"
+            class="p-2 text-sm hover:scale-[1.03] duration-200 rounded-full shadow-md">
+            {{decade}}
+          </button>
+          </div>
+        </div>
+        <button (click)="applyFilter()" class="flex md:w-1/3 w-full mx-auto mt-4 p-4 justify-center md:text-xl text-lg hover:scale-[1.03] duration-200 bg-teal-300 rounded-xl shadow-md">
+          Zastosuj
+        </button>
       </div>
     </div>
-    <div *ngIf="tvData.results.length == 0" class="flex text-xl md:my-8 my-2 md:p-4 p-2 pt-8 duration-200 rounded-xl shadow-md">
+    <div *ngIf="tvData.results.length <= 0" class="md:my-8 my-4 md:p-4 p-2 text-lg text-center bg-gray-100 rounded-xl shadow-md">
       Brak wyników wyszukiwania
     </div>
-    <div class="grid md:grid-cols-5 grid-cols-2 pt-8 gap-8">
+    <div *ngIf="tvData.results.length > 0" class="md:my-8 my-4 md:p-4 p-2 text-lg text-center bg-gray-100 rounded-xl shadow-md">
+      Znaleziono {{tvData.total_results}} pozycji
+    </div>
+    <div infinite-scroll [infiniteScrollDistance]="2"[infiniteScrollThrottle]="500" (scrolled)="loadData()" class="grid md:grid-cols-5 grid-cols-2 md:gap-8 gap-4">
       <div *ngFor="let tv of tvData.results" class="block bg-gray-100 hover:scale-[1.03] duration-200 rounded-xl shadow-md">
-        <a routerLink="/tv/{{tv.id}}">
-            <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{tv.poster_path}}" onerror="this.src='assets/images/media_blank.png';">   
-            <div class="block text-center text-sm pt-2">
-            <div class="font-bold overflow">{{tv.name}}</div>
+        <button routerLink="/tv/{{tv.id}}">
+            <img class="w-52 rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{tv.poster_path}}" onerror="this.src='assets/images/media_blank.png';">   
+            <div class="relative text-center text-sm pt-2">
+            <div class="text-base h-16 font-bold line-clamp-2">{{tv.name}}</div>
             <div *ngIf="tv.vote_average > 0"class="flex justify-center items-center">
-              <div class="md:text-base text-xs font-bold">
+              <div class="md:text-base text-xs font-bold" >
                 {{tv.vote_average}}
               </div>
               <div class="pl-1">
@@ -118,33 +147,8 @@
             </div>
             <div class="py-2 truncate">{{tv.first_air_date | date: 'd.MM.y'}}</div>
           </div>
-        </a>
-      </div>
-    </div>
-    <div *ngIf="tvData.total_results != 0" class="flex pt-8 justify-center items-center gap-4">
-      <button *ngIf="tvPageService.tvFilter.page != 1"(click)="tvPageService.changePage(1)" class="flex md:w-10 md:h-10 w-6 h-6 justify-center items-center hover:scale-125 hover:bg-teal-300 bg-gray-100 duration-200 rounded-full shadow-md">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="md:w-6 md:h-6 w-4 h-4">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
-        </svg>          
-      </button>
-      <div *ngFor="let page of tvPagination">
-        <button *ngIf="page == tvPageService.tvFilter.page" (click)="tvPageService.changePage(page)" class="flex md:w-12 md:h-12 w-8 h-8 justify-center items-center bg-teal-500  rounded-full shadow-md">
-          {{page}}
-        </button>
-        <button *ngIf="page != tvPageService.tvFilter.page" (click)="tvPageService.changePage(page)" class="flex md:w-10 md:h-10 w-6 h-6 justify-center items-center hover:scale-125 hover:bg-teal-300 bg-gray-100 duration-200 rounded-full shadow-md">
-          {{page}}
         </button>
       </div>
-      <button *ngIf="tvData.total_pages <= 500 && tvPageService.tvFilter.page != tvData.total_pages" (click)="tvPageService.changePage(tvData.total_pages)" class="flex md:w-10 md:h-10 w-6 h-6 justify-center items-center hover:scale-125 hover:bg-teal-300 bg-gray-100 duration-200 rounded-full shadow-md">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="md:w-6 md:h-6 w-4 h-4">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
-        </svg>          
-      </button>
-      <button *ngIf="tvData.total_pages > 500 && tvPageService.tvFilter.page != 500" (click)="tvPageService.changePage(500)" class="flex md:w-10 md:h-10 w-6 h-6 justify-center items-center hover:scale-125 hover:bg-teal-300 bg-gray-100 duration-200 rounded-full shadow-md">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="md:w-6 md:h-6 w-4 h-4">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
-        </svg>          
-      </button>
     </div>
   </div>
 </div>

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Options } from 'ngx-slider-v2';
 import { MediaData } from 'shared/models/media/media-data';
+import { MovieGenres } from 'shared/models/movie/movie-genres';
+import { MovieSearchFilter } from 'shared/models/movie/movie-search-filter';
 import { MoviePageService } from 'src/app/services/movie/movie-page.service';
 
 @Component({
@@ -11,11 +12,21 @@ import { MoviePageService } from 'src/app/services/movie/movie-page.service';
 })
 export class MoviePageComponent {
 
+  movieData: MediaData = new MediaData();
+  movieGenres!: MovieGenres[];
+  movieFilter!: MovieSearchFilter;
+  movieGeneresFilter: Set<number> = new Set<number>();
+  movieDecadeFilter: number[] = Array.from({ length: 16 }, (_, index) => 1870 + index * 10);
+
+  page: number = 0;
+  selectedDecade!: number;
+  
+  nowDate!: Date;
+  todayDateString!: string;
+  upcomingDateString!: string;
+
   isFilterOpen: boolean = false;
 
-  movieData!: MediaData;
-  moviePagination!: number[];
-  
   voteAvgRange: number[] = [1,5];
   voteAvgOptions: Options = {
     floor: 1,
@@ -59,42 +70,76 @@ export class MoviePageComponent {
     }
   };
 
-  constructor(private route: ActivatedRoute, public moviePageService: MoviePageService) {}
+  constructor(private moviePageService: MoviePageService) {}
 
   ngOnInit() {
-    this.route.data.subscribe(({data}) => {
-      this.movieData = data;
-      this.dataFormat();
-      this.paginationStyle();
-    })
+    this.movieFilter = new MovieSearchFilter;
+    this.loadData();
+
+    this.moviePageService.getMovieGenres().subscribe((genres) => {
+      this.movieGenres = genres;
+    });
+
+    this.nowDate = new Date();
+    this.todayDateString = this.nowDate.toISOString().split('T')[0];
+    this.upcomingDateString = this.nowDate.setMonth(this.nowDate.getMonth() + 6).toString();
   }
 
-  dataFormat(): void {
-    this.movieData.results.forEach((a)=> a.vote_average = Math.round(a.vote_average / 2 * 10) / 10);
-  }
+  loadData(): void {
+    this.page += 1;
+    this.setFilter('page', this.page);
 
-  paginationStyle(): void {
-    
-    this.moviePagination = [];
-    const totalPages = Math.min(this.movieData.total_pages, 500);
-    const currentPage = Math.min(Math.max(this.movieData.page, 1), totalPages);
-  
-    if (currentPage <= 3) {
-      for (let i = 1; i <= 5 && i <= totalPages; i++) {
-        this.moviePagination.push(i);
-      }
-    } else if (currentPage >= totalPages - 2) {
-      for (let i = totalPages - 4; i <= totalPages; i++) {
-        this.moviePagination.push(i);
-      }
-    } else {
-      for (let i = currentPage - 2; i <= currentPage + 2; i++) {
-        this.moviePagination.push(i);
-      }
-    }
+    this.moviePageService.getMovieData(this.movieFilter).subscribe((data) => {
+      this.movieData.page = data.page;
+      this.movieData.results = this.movieData.results.concat(data.results);
+      this.movieData.total_pages = data.total_pages
+      this.movieData.total_results = data.total_results
+    });
   }
 
   toggleFilter() {
     this.isFilterOpen = !this.isFilterOpen;
+  }
+
+  setFilter(property: keyof any, value: any): void {
+    this.movieFilter.setFilter(property, value);
+  }
+
+  setGenre(genre_id: number): void {
+    this.movieGeneresFilter.has(genre_id) ? this.movieGeneresFilter.delete(genre_id) : this.movieGeneresFilter.add(genre_id);
+  }
+
+  setDecade(decade: number): void {
+    this.selectedDecade = decade;
+    this.setFilter('primary_release_date.gte', `${(decade + 1).toString()}-01-01`);
+    this.setFilter('primary_release_date.lte', `${(decade + 10).toString()}-12-31`);
+  }
+
+  applyFilter(): void {
+    this.page = 0;
+    this.movieData = new MediaData();
+    this.setFilter('with_genres',Array.from(this.movieGeneresFilter).join(','));
+    this.loadData();
+  }
+
+  highestVoteFilter(): void {
+    this.movieFilter.clearFilter();
+    this.movieFilter.setFilter('sort_by', 'vote_average.desc');
+    this.movieFilter.setFilter('vote_count.gte', 300);
+    this.applyFilter();
+  }
+
+  popularityFilter(): void {
+    this.movieFilter.clearFilter();
+    this.movieFilter.setFilter('sort_by', 'popularity.desc');
+    this.applyFilter();
+  }
+
+  upcomingFilter(): void {
+    this.movieFilter.clearFilter();
+    this.movieFilter.setFilter('primary_release_date.gte', this.todayDateString);
+    this.movieFilter.setFilter('primary_release_date.lte', this.upcomingDateString);
+    this.movieFilter.setFilter('sort_by', 'popularity.desc');
+    this.applyFilter();
   }
 }

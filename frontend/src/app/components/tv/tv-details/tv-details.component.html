@@ -49,7 +49,7 @@
         </button>
       </div>
       <div class="flex mt-4 items-center bg-gray-100 rounded-xl shadow-md">
-        <textarea id="review" (focusout)="this.setTvReview()" [(ngModel)]="this.tvReview" class="mx-4 pb-10 pt-2 w-full h-full bg-transparent resize-none focus:outline-none" type="text" placeholder="Podziel się wrażeniami" maxlength="100"></textarea>
+        <textarea id="review" (focusout)="this.setTvReview()" [(ngModel)]="this.tvReview" class="w-full h-full mx-4 pb-20 pt-2 bg-transparent resize-none focus:outline-none" type="text" placeholder="Podziel się wrażeniami" maxlength="150"></textarea>
       </div>
     </div>
   </div>
@@ -58,7 +58,7 @@
       <div class="flex text-4xl">{{tvDetailsData.name}}</div>
       <div class="md:flex block md:pt-8 pt-4 justify-around text-justify">
         <div *ngIf="tvDetailsData.overview == ''" class="md:w-4/5 text-lg">
-          Ten film nie posiada opisu
+          Ten serial nie posiada opisu.
         </div>
         <div *ngIf="tvDetailsData.overview != ''" class="md:w-4/5 text-lg">
           {{tvDetailsData.overview}}
@@ -149,7 +149,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="tvImagesData" class="order-6 md:col-span-4 row-span-3 md:p-8 p-2 bg-white rounded-xl shadow-md">
+  <div *ngIf="tvImagesData && tvImagesData.backdrops.length > 0" class="order-6 md:col-span-4 row-span-3 md:p-8 p-2 bg-white rounded-xl shadow-md">
     <div class="md:text-3xl text-2xl">Galeria</div>
     <div class="flex overflow-x-scroll">
       <button *ngFor="let media of tvImagesData.backdrops; index as i" (click)="lightboxControl(true, i)" class="flex-shrink-0  p-4">

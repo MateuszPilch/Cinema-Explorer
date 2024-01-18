@@ -26,6 +26,7 @@ export class MapDetailsComponent {
     this.route.data.subscribe(({details}) => {
       this.mediaPath = `/${this.route.snapshot.paramMap.get('media_type')}/${this.route.snapshot.paramMap.get('media_id')}`;
       this.mapDetails = details;
+      console.log(this.mapDetails);
       this.mapDetails.mapData.forEach(async (location) => {
         location.image = await imageToUrl(location.image);
         this.mapService.drawCircleLocation(location.center, location.radius);

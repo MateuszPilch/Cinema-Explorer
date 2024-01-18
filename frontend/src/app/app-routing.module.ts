@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { MoviePageComponent } from './components/movie/movie-page/movie-page.component';
-import { moviePageResolver } from './services/movie/movie-page.service';
 import { MovieDetailsComponent } from './components/movie/movie-details/movie-details.component';
 import { movieDetailsResolver, movieImagesResolver, movieLocationCountResolver } from './services/movie/movie-details.service';
 import { MovieCreditsComponent } from './components/movie/movie-credits/movie-credits.component';
@@ -28,7 +27,6 @@ import { MapDetailsComponent } from './components/map/map-details/map-details.co
 import { mapDetailsResolver, mapPageResolver } from './services/map/map.service';
 import { MapMainComponent } from './components/map/map-main/map-main.component';
 import { TvPageComponent } from './components/tv/tv-page/tv-page.component';
-import { tvPageResolver } from './services/tv/tv-page.service';
 import { AuthGuard } from './guards/auth-guard.guard';
 
 const routes: Routes = [
@@ -38,17 +36,14 @@ const routes: Routes = [
       { path: 'user/:nickname', component:UserPageComponent, runGuardsAndResolvers: 'always' , children: [
         { path: '', redirectTo: 'activity', pathMatch: 'full'},
         { path: 'activity', component: UserActivityComponent},
-        { path: 'reviewlist', component: UserReviewListComponent},
+        { path: 'reviewlist/:filter', component: UserReviewListComponent,}
       ]},
       { path: 'search', component: SearchComponent, resolve: {
           data: searchResolver,
         },
         runGuardsAndResolvers: 'always',
       },
-      { path: 'movie', component: MoviePageComponent, resolve: {
-          data: moviePageResolver
-        },
-        runGuardsAndResolvers: 'always',
+      { path: 'movie', component: MoviePageComponent, runGuardsAndResolvers: 'always',
       },
       { path: 'movie/:id', component: MovieDetailsComponent, resolve: {
           details: movieDetailsResolver,
@@ -63,10 +58,7 @@ const routes: Routes = [
           credits: movieCreditsResolver
         }
       },
-      { path: 'tv', component: TvPageComponent, resolve: {
-          data: tvPageResolver
-        },
-        runGuardsAndResolvers: 'always',
+      { path: 'tv', component: TvPageComponent, runGuardsAndResolvers: 'always',
       },
       { path: 'tv/:id', component: TvDetailsComponent, resolve: {
           details: tvDetailsResolver,

@@ -29,6 +29,7 @@ import { MapAddComponent } from './components/map/map-add/map-add.component';
 import { MapDetailsComponent } from './components/map/map-details/map-details.component';
 import { MapMainComponent } from './components/map/map-main/map-main.component';
 import { TvPageComponent } from './components/tv/tv-page/tv-page.component';
+import { MapMiniComponent } from './components/map/map-mini/map-mini.component';
 
 
 
@@ -56,6 +57,7 @@ import { TvPageComponent } from './components/tv/tv-page/tv-page.component';
     MapDetailsComponent,
     MapMainComponent,
     TvPageComponent,
+    MapMiniComponent,
   ],
   imports: [
     HttpClientModule,

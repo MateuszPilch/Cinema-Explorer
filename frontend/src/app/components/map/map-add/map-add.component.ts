@@ -34,7 +34,7 @@ export class MapAddComponent {
   markLocationEnabled: boolean = true;
   locationImageUrl!: string | ArrayBuffer | null;
 
-  constructor(private route: ActivatedRoute, public authService: AuthService, private router: Router, private mapService: MapService) {}
+  constructor(private route: ActivatedRoute, public authService: AuthService, private mapService: MapService) {}
 
   ngOnInit() {    
     this.media_type = this.route.snapshot.paramMap.get('media_type') || '';

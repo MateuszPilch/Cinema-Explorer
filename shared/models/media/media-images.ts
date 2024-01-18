@@ -1,7 +1,6 @@
 import { Expose } from 'class-transformer';
 
 export class MediaImages {
-
   @Expose()
   backdrops!: Backdrops[];
 
@@ -13,4 +12,3 @@ interface Backdrops {
   file_path: string;
   width: number;
 }
-

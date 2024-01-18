@@ -1,12 +1,12 @@
 <div class="md:p-8 p-2 bg-gray-100 rounded-xl shadow-md">
-  <div class="block md:p-8 p-2 bg-white rounded-xl shadow-md">
+  <div infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="loadData()" class="block md:p-8 p-2 bg-white rounded-xl shadow-md">
     <div class="flex justify-between items-center">
       <div class="md:text-3xl text-xl">Aktywność</div>
     </div>
-    <div *ngIf="userService.mediaReviewList.length == 0" class="flex md:my-8 my-2 md:p-4 p-2 duration-200 bg-gray-100 rounded-xl shadow-md">
+    <div *ngIf="mediaReviewList.length == 0" class="flex md:my-8 my-2 md:p-4 p-2 duration-200 bg-gray-100 rounded-xl shadow-md">
       Ten użytkownik nie posiada jeszcze ocenionych produkcji
     </div>
-    <div *ngFor="let media of userService.mediaReviewList" class="flex md:h-52 min-h-40 md:my-8 my-2 hover:scale-[1.02] duration-200 rounded-xl">
+    <div *ngFor="let media of mediaReviewList" class="flex md:h-52 min-h-40 md:my-8 my-2 hover:scale-[1.02] duration-200 rounded-xl">
       <button routerLink="/{{media.media_type}}/{{media.media_id}}" class="flex w-full items-center">
         <img class="md:w-fit w-1/4 md:h-full h-fit object-fill rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w200/{{media.poster_path}}" onerror="this.src='assets/images/media_blank.png';">
         <div class="block w-[90%] h-full md:ml-4 ml-2 md:p-4 p-2 bg-gray-50 rounded-xl shadow-md">
@@ -43,7 +43,7 @@
                 </div>
               </div>
             </div>
-            <div class="flex md:w-2/4 h-full md:text-base text-xs line-clamp-3 text-justify">
+            <div class="flex md:w-2/4 h-full md:text-lg text-base text-left italic line-clamp-3">
               {{media.review}}
             </div>
           </div> 

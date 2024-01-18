@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { imageToUrl } from 'shared/image-to-url';
@@ -16,6 +16,11 @@ export class UserPageComponent {
   nickname!: string;
   avatarPath!: string;
 
+  movies: number = 0;
+  tv: number = 0;
+  favourite: number = 0;
+  to_watch: number = 0;
+
   constructor(private route: ActivatedRoute, private authService: AuthService, private userService: UserService) {}
 
   ngOnInit(): void {
@@ -24,45 +29,21 @@ export class UserPageComponent {
       this.userService.getAvatar(this.nickname).subscribe(async (res) => {
         this.avatarPath = await imageToUrl(res);
       });
-      this.userService.getMediaList(this.nickname);
     });
+
+    this.userService.getMediaListCount(this.nickname,'media_type','movie').subscribe(data => this.movies = data);
+    this.userService.getMediaListCount(this.nickname,'media_type','tv').subscribe(data => this.tv = data);
+    this.userService.getMediaListCount(this.nickname,'favourite','true').subscribe(data => this.favourite = data);
+    this.userService.getMediaListCount(this.nickname,'to_watch','true').subscribe(data => this.to_watch = data);
   }
 
-  movieListFilter(): void {
-    this.userService.clearFilter();
-    this.userService.setFilter('media_type', 'movie');
-    this.userService.setMediaListFilter();
+  setFilter(filterKey: string, filterValue: string): void {
+    this.userService.setFilter(filterKey, filterValue);
+
   }
 
-  tvListFilter(): void {
-    this.userService.clearFilter();
-    this.userService.setFilter('media_type', 'tv');
-    this.userService.setMediaListFilter();
-  }
-
-  favouritveListFilter(): void {
-    this.userService.clearFilter();
-    this.userService.setFilter('favourite', true);
-    this.userService.setMediaListFilter();
-  }
-
-  toWatchListFilter(): void {
-    this.userService.clearFilter();
-    this.userService.setFilter('to_watch', true);
-    this.userService.setMediaListFilter();
-  }
-
-  
-  getMediaListCount(media_type: string): number {
-    return this.userService.mediaReviewList.filter(x => x.media_type === media_type).length;
-  }
-
-  getFavouriteListCount(): number {
-    return this.userService.mediaReviewList.filter(x => x.favourite).length;
-  }
-
-  getToWatchListCount(): number {
-    return this.userService.mediaReviewList.filter(x => x.to_watch).length;
+  getMediaCount(filterKey: string, filterValue: string): void {
+    this.userService.getMediaListCount(this.nickname, filterKey, filterValue);
   }
 
   setAvatar(event: any): void {

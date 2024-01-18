@@ -5,7 +5,10 @@
   <div class="flex pb-4 justify-center items-center text-3xl font-bold">
     {{movieDetailsData.title}}
   </div>
-  <div class="text-center text-2xl font-medium">
+  <div *ngIf="movieDetailsData.vote_average <= 0" class="text-center text-2xl font-medium">
+    Brak ocen
+  </div>
+  <div *ngIf="movieDetailsData.vote_average > 0" class="text-center text-2xl font-medium">
     {{movieDetailsData.vote_average}}
   </div>
   <div class="flex pb-2 items-center justify-center">
@@ -48,8 +51,8 @@
           </svg>   
         </button>
       </div>
-      <div class="flex mt-8 items-center bg-gray-100 rounded-xl shadow-md">
-        <textarea id="review" (focusout)="this.setMovieReview()" [(ngModel)]="this.movieReview" class="mx-4 pb-10 pt-2 w-full h-full bg-transparent resize-none focus:outline-none" type="text" placeholder="Podziel się wrażeniami" maxlength="100"></textarea>
+      <div class="flex mt-4 items-center bg-gray-100 rounded-xl shadow-md">
+        <textarea id="review" (focusout)="this.setMovieReview()" [(ngModel)]="this.movieReview" class="w-full h-full mx-4 pb-20 pt-2 bg-transparent resize-none focus:outline-none" type="text" placeholder="Podziel się wrażeniami" maxlength="150"></textarea>
       </div>
     </div>
   </div>
@@ -58,7 +61,7 @@
       <div class="flex text-4xl">{{movieDetailsData.title}}</div>
       <div class="md:flex block md:pt-8 pt-4 justify-around text-justify">
         <div *ngIf="movieDetailsData.overview == ''" class="md:w-4/5 text-lg">
-          Ten film nie posiada opisu
+          Ten film nie posiada opisu.
         </div>
         <div *ngIf="movieDetailsData.overview != ''" class="md:w-4/5 text-lg">
           {{movieDetailsData.overview}}
@@ -152,7 +155,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="movieImagesData" class="order-6 md:col-span-4 row-span-3 md:p-8 p-2 bg-white rounded-xl shadow-md">
+  <div *ngIf="movieImagesData && movieImagesData.backdrops.length > 0" class="order-6 md:col-span-4 row-span-3 md:p-8 p-2 bg-white rounded-xl shadow-md">
     <div class="md:text-3xl text-2xl">Galeria</div>
     <div class="flex overflow-x-scroll">
       <button *ngFor="let media of movieImagesData.backdrops; index as i" (click)="lightboxControl(true, i)" class="flex-shrink-0  p-4">

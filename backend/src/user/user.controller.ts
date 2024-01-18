@@ -11,9 +11,19 @@ export class UserController {
   constructor(
     private readonly userService: UserService) {}
 
-  @Get('medialist')
-  getMediaList(@Query() params: any): Promise<MediaReview[]> {
-    return this.userService.getMediaList(params.nickname);
+  @Get('allmedialist')
+  getAllMediaList(@Query() params: any): Promise<MediaReview[]> {
+    return this.userService.getAllMediaList(params.nickname, params.loaded);
+  }
+
+  @Get('medialistcount')
+  getMediaListCount(@Query() params: any): Promise<number> {
+    return this.userService.getMediaListCount(params.nickname, params.filterKey, params.filterValue);
+  }
+
+  @Get('filtredmedialist')
+  getFiltredMediaList(@Query() params: any): Promise<MediaReview[]> {
+    return this.userService.getFiltredMediaList(params.nickname, params.loaded, params.sort_by, params.filterKey ,params.filterValue);
   }
 
   @Get('mediareview')

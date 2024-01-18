@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MediaReview } from 'shared/models/media/media-review';
-import { MediaFilter } from 'shared/models/media/media-filter';
 import { Observable, firstValueFrom } from 'rxjs';
 
 @Injectable({
@@ -9,74 +8,44 @@ import { Observable, firstValueFrom } from 'rxjs';
 })
 export class UserService {
 
-  mediaReviewList!: MediaReview[];
-  mediaReviewListFiltered!: MediaReview[]
-
-  mediaSortBy: string = 'Sortuj';
-  mediaFilter: MediaFilter = new MediaFilter();
+  filterKey: string = '';
+  filterValue: string = '';
 
   constructor(private http: HttpClient) {}
-  
-  setFilter(property: keyof any, value: any): void {
-    this.mediaFilter.setFilter(property, value);
+
+  setFilter(filterKey: string, filterValue: string): void {
+    this.filterKey = filterKey;
+    this.filterValue = filterValue;
   }
 
-  clearFilter(): void {
-    this.mediaFilter.clearFilter();
-  }
-
-  setMediaListFilter(): void {
-    this.mediaReviewListFiltered = this.mediaReviewList.filter(filter => {
-      for (const key in this.mediaFilter) {
-        const mediaFilterValue = this.mediaFilter[key as keyof MediaFilter];
-        const filterValue = filter[key as keyof MediaReview];
-        if (mediaFilterValue === null) {
-          continue;
-        }
-        if (filterValue !== mediaFilterValue) {
-          return false;
-        }
+  getAllMediaList(nickname: string, loaded: number): Observable<MediaReview[]> {
+    return this.http.get<MediaReview[]>(`http://localhost:3000/api/user/allmedialist`,{
+      params: {
+        nickname, 
+        loaded
       }
-      return true;
     });
   }
 
-  setMediaListSort(): void {
-    switch(this.mediaSortBy) { 
-      case 'rating_asc': { 
-        this.mediaReviewListFiltered.sort((a, b) => {return a.rating - b.rating});
-        break; 
-      } 
-      case 'rating_desc': { 
-        this.mediaReviewListFiltered.sort((a, b) => {return b.rating - a.rating});
-        break; 
-      }
-      case 'createdAt_asc': { 
-        this.mediaReviewListFiltered.sort((a, b) => {return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()});
-        break; 
-      } 
-      case 'createdAt_desc': { 
-        this.mediaReviewListFiltered.sort((a, b) => {return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()});
-        break; 
-      } 
-      default: {
-        break; 
-      } 
-    } 
+  getMediaListCount(nickname: string,  filterKey: string, filterValue: string): Observable<number> {
+    return this.http.get<number>(`http://localhost:3000/api/user/medialistcount`,{
+      params: {
+        nickname,
+        filterKey,
+        filterValue
+      },
+    });
   }
 
-  getMediaList(nickname: string): void {
-    this.mediaReviewList = [];
-    this.http.get<MediaReview[]>(`http://localhost:3000/api/user/medialist`,{
+  getFiltredMediaList(nickname: string, loaded: number, sort_by: string): Observable<MediaReview[]> {
+    return this.http.get<MediaReview[]>(`http://localhost:3000/api/user/filtredmedialist`,{
       params: {
-        nickname 
-      }
-    }).subscribe(data => {
-      if(data) {
-        this.mediaReviewList = data;
-        this.mediaReviewList.sort((a, b) => {return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()});
-        this.mediaReviewListFiltered = this.mediaReviewList;
-      }
+        nickname, 
+        loaded,
+        sort_by,
+        filterKey: this.filterKey,
+        filterValue: this.filterValue
+      },
     });
   }
 

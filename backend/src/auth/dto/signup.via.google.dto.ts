@@ -1,10 +1,8 @@
-import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, Matches } from 'class-validator';
 
 export class SignupViaGoogleDto {
   
-  @IsNotEmpty( {message: 'Nazwa nie może być pusta'})
-  @IsString({ message: 'Nazwa musi być znakiem'})
-  @MinLength(4, { message: 'Nazwa jest za krótka'})
+  @Matches(/^[a-zA-Z0-9]{4,20}$/,{message: 'Nazwa użytkownika nie jest poprawna'})
   readonly nickname: string;
   
   @IsEmail({},{ message: 'Email nie jest poprawny' })

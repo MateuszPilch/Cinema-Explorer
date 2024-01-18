@@ -12,6 +12,13 @@ export class SearchData {
   
   @Expose()
   total_results!: number;
+
+  constructor() {
+    this.page = 1;
+    this.results = [];
+    this.total_pages = 1;
+    this.total_results = 0;
+  }
 }
 
 interface Results {

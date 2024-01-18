@@ -1,75 +1,24 @@
 <div class="md:p-8 p-2 bg-gray-100 rounded-xl shadow-md">
-  <div class="block md:p-8 p-2 bg-white rounded-xl shadow-md">
+  <div infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="loadData()" class="block md:p-8 p-2 bg-white rounded-xl shadow-md">
     <div class="flex justify-between items-center">
       <div class="md:text-3xl text-xl">Lista</div>
       <div class="flex justify-end gap-8">      
-        <select [(ngModel)]="userService.mediaSortBy" (change)="userService.setMediaListSort()" class="px-4 py-2 md:text-lg text-sm bg-teal-300 rounded-full shadow-md">
+        <select [(ngModel)]="mediaSortBy" (ngModelChange)="setSortBy()" class="px-4 py-2 md:text-lg text-sm bg-teal-300 rounded-full shadow-md">
           <option class="bg-white" selected>Sortuj</option>
           <option class="bg-white" value="rating_desc">Oceny malejąco</option>
           <option class="bg-white" value="rating_asc">Oceny rosnąco</option>
           <option class="bg-white" value="createdAt_asc">Najstarsze</option>
           <option class="bg-white" value="createdAt_desc">Najnowsze</option>
         </select>
-        <button (click)="toggleFilter()" class="px-4 py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
-          Filtry
-        </button>
       </div>
     </div>
-    <div *ngIf="isFilterOpen" class="grid md:p-4 p-2 md:grid-cols-3 grid-cols-1 gap-8">
-      <div class="p-4 md:col-span-3 md:text-sm text-xs bg-gray-100 rounded-xl shadow-md">
-        <div class="text-lg">Typ</div>
-        <div class="p-2 grid grid-cols-3 gap-4">
-          <button 
-            (click)="this.userService.setFilter('media_type', null)"
-            [ngClass]="this.userService.mediaFilter.media_type == null ? 'bg-teal-300' : 'bg-white'"
-            class="p-2 md:text-sm text-xs hover:scale-[1.03] duration-200 rounded-full shadow-md">
-            Wszystko
-          </button>
-          <button 
-            (click)="this.userService.setFilter('media_type','movie')"
-            [ngClass]="this.userService.mediaFilter.media_type === 'movie' ? 'bg-teal-300' : 'bg-white'"
-            class="p-2 md:text-sm text-xs hover:scale-[1.03] duration-200 rounded-full shadow-md">
-            Filmy
-          </button>
-          <button 
-            (click)="this.userService.setFilter('media_type','tv')"
-            [ngClass]="this.userService.mediaFilter.media_type === 'tv' ? 'bg-teal-300' : 'bg-white'"
-            class="p-2 md:text-sm text-xs hover:scale-[1.03] duration-200 rounded-full shadow-md">
-            Seriale
-          </button>
-        </div>
-        <div class="text-lg">Dodatkowe</div>
-        <div class="p-2 grid grid-cols-3 gap-4">
-          <button 
-          (click)="this.userService.setFilter('favourite', !this.userService.mediaFilter.favourite)"
-          [ngClass]="this.userService.mediaFilter.favourite ? 'bg-teal-300' : 'bg-white'"
-          class="p-2 md:text-sm text-xs hover:scale-[1.03] duration-200 rounded-full shadow-md">
-          Ulubione
-        </button>
-        <button 
-          (click)="this.userService.setFilter('to_watch', !this.userService.mediaFilter.to_watch)"
-          [ngClass]="this.userService.mediaFilter.to_watch ? 'bg-teal-300' : 'bg-white'"
-          class="p-2 md:text-sm text-xs hover:scale-[1.03] duration-200 rounded-full shadow-md">
-          Chcę zobaczyć
-        </button>
-        </div>
-        <div class="flex mt-4 gap-4 justify-center">
-          <button (click)="this.userService.setMediaListFilter()" class="p-2 md:text-lg text-sm hover:scale-[1.03] duration-200 bg-teal-300 rounded-xl shadow-md">
-            Zastosuj
-          </button>
-          <button (click)="this.userService.clearFilter()" class="p-2 md:text-lg text-sm hover:scale-[1.03] duration-200 bg-teal-300 rounded-xl shadow-md">
-            Wyczyść 
-          </button>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="userService.mediaReviewListFiltered.length === 0" class="flex md:my-8 my-2 md:p-4 p-2 duration-200 bg-gray-100 rounded-xl shadow-md">
+    <div *ngIf="mediaReviewList && mediaReviewList.length === 0" class="flex md:my-8 my-2 md:p-4 p-2 duration-200 bg-gray-100 rounded-xl shadow-md">
       Brak wyników wyszukiwania
     </div>
     <div class="grid md:grid-cols-5 grid-cols-2 pt-8 gap-8">
-      <div *ngFor="let media of userService.mediaReviewListFiltered" class="block bg-gray-100 hover:scale-[1.03] duration-200 rounded-xl shadow-md">
+      <div *ngFor="let media of mediaReviewList" class="block bg-gray-100 hover:scale-[1.03] duration-200 rounded-xl shadow-md">
         <button routerLink="/{{media.media_type}}/{{media.media_id}}">
-          <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{media.poster_path}}" onerror="this.src='assets/images/media_blank.png';">   
+          <img class="w-52 rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{media.poster_path}}" onerror="this.src='assets/images/media_blank.png';">   
           <div class="block text-center text-sm pt-2">
             <div class="text-lg font-bold overflow">{{media.title}}</div>
             <div *ngIf="media.rating > 0 || media.to_watch"class="flex justify-center items-center">

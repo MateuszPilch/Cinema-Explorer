@@ -24,7 +24,7 @@
     </div>
     <ul class="flex-1 overflow-y-auto">
       <li *ngIf="!mapDetails.mapData || (mapDetails.mapData && mapDetails.mapData.length <= 0)" class="text-center">
-        Brak lokacji dla tej produkcji
+        Brak dostępnych lokacji
       </li>
       <li *ngFor="let location of mapDetails.mapData; index as i" (click)="focusOnLocation(location)" class="min-h-80 mb-4 mx-4 p-4 overflow-hidden bg-white hover:scale-[1.02] duration-200 cursor-pointer rounded-xl shadow-md ">
         <div class="flex justify-between">

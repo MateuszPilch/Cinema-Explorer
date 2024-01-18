@@ -34,4 +34,20 @@ export class MapPageService {
     const res = plainToInstance(MapAllLocations, details, { excludeExtraneousValues: true });
     return res;
   }
+
+  async getRandomLocation(): Promise<MapDetails> {
+    const details = await this.mapsModel.findOne().skip(Math.floor(Math.random() * await this.mapsModel.countDocuments())).lean();
+    const mapData = details ? details.map_data : null;
+    const url = `https://api.themoviedb.org/3/${details.media_type}/${details.media_id}?language=pl-PL`;
+    const headers = {
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${process.env.TMDB_API_CRED}`
+      }
+    };
+    const { data } = await firstValueFrom(this.httpService.get(url, headers))
+    
+    const res = plainToInstance(MapDetails, {...data, mapData}, { excludeExtraneousValues: false });
+    return res;
+  }
 }

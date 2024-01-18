@@ -22,6 +22,11 @@ export class MapController {
     return this.mapPageService.getAllLocations();
   }
 
+  @Get('/random')
+  getRandomLocation(): Promise<MapDetails> {
+    return this.mapPageService.getRandomLocation();
+  }
+
   @Get(':media_type/:media_id/details')
   getMapDetails(@Param('media_type') media_type: string, @Param('media_id') media_id: string): Promise<MapDetails> {
     return this.mapDetailsService.getMediaDetails(media_type, media_id);
@@ -38,7 +43,6 @@ export class MapController {
     return this.mapPageService.getLocationDetails(media_type, media_id, location_id);
   }
   
-
   @Post(':media_type/:media_id/add')
   @UseInterceptors(FileInterceptor('image'))
   @UseGuards(AuthGuard('jwt'))

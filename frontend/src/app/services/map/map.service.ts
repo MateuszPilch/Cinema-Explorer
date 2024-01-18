@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { ResolveFn, ActivatedRouteSnapshot, Router, NavigationEnd } from '@angular/router';
 import { Feature, View } from 'ol';
+import { defaults } from 'ol/control';
 import Map from 'ol/Map';
 import { Circle, Point } from 'ol/geom';
 import { Draw, Select } from 'ol/interaction';
@@ -13,6 +14,7 @@ import { Observable, firstValueFrom } from 'rxjs';
 import { MapData } from 'shared/models/map/map-data';
 import { MapDetails } from 'shared/models/map/map-details';
 import { ErrorService } from '../error/error.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -86,6 +88,7 @@ export class MapService {
     
     this.map = new Map({
       layers: [rasterLayer, vectorLayer],
+      controls: [],
       view: new View({
         center: [0, 0],
         zoom: 3
