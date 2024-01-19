@@ -2,8 +2,8 @@
   <div class="block md:p-8 p-4 bg-white rounded-xl shadow-md">
     <div class="md:flex block justify-between">
       <div class="md:text-4xl text-xl">Filmy</div>
-      <div class="md:flex md:pt-0 pt-4 gap-4 grid grid-cols-1 items-center">
-        <button (click)="highestVoteFilter()" class="px-4 py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
+      <div class="md:flex md:pt-0 pt-4 gap-4 grid grid-cols-2 items-center">
+        <button (click)="highestVoteFilter()" class="px-4 md:py-2 md:text-lg text-base bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
           Najwyżej oceniane
         </button>
         <button (click)="popularityFilter()" class="px-4 py-2 md:text-lg text-base bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
@@ -108,14 +108,19 @@
           </div>
         </div>
         <div class="block">
-          <div class="text-xl">Lata produkcji</div>
+          <div class="text-xl">Dekada</div>
           <div class="grid md:grid-cols-8 grid-cols-2 pt-4 gap-4">
+            <button (click)="setDecade(0)"
+              [ngClass]="selectedDecade == 0 ? 'bg-teal-300' : 'bg-white'"
+              class="p-2 text-sm hover:scale-[1.03] duration-200 rounded-full shadow-md">
+              Dowolna
+            </button>
             <button *ngFor="let decade of movieDecadeFilter"
-            (click)="setDecade(decade)"
-            [ngClass]="selectedDecade == decade ? 'bg-teal-300' : 'bg-white'"
-            class="p-2 text-sm hover:scale-[1.03] duration-200 rounded-full shadow-md">
-            {{decade}}
-          </button>
+              (click)="setDecade(decade)"
+              [ngClass]="selectedDecade == decade ? 'bg-teal-300' : 'bg-white'"
+              class="p-2 text-sm hover:scale-[1.03] duration-200 rounded-full shadow-md">
+              {{decade}}
+            </button>
           </div>
         </div>
         <button (click)="applyFilter()" class="flex md:w-1/3 w-full mx-auto mt-4 p-4 justify-center md:text-xl text-lg hover:scale-[1.03] duration-200 bg-teal-300 rounded-xl shadow-md">

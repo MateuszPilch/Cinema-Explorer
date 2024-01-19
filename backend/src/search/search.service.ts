@@ -13,12 +13,7 @@ export class SearchService {
 
   async getSearchResults(type: string, query: string, page: string): Promise<SearchData> {
     
-    let data = {
-      page: 1,
-      results: [],
-      total_pages: 1,
-      total_results: 0
-    };
+    let data = new SearchData();
 
     if(type != 'user') {
       const url = `https://api.themoviedb.org/3/search/${type}?language=pl-PL`;
@@ -33,10 +28,12 @@ export class SearchService {
         }
       };
       data = (await firstValueFrom(this.httpService.get(url, headers))).data;
+      data.results.forEach((a)=> a.vote_average = Math.round(a.vote_average / 2 * 10) / 10);
+      data.results.sort((a, b) => b.popularity - a.popularity);
     }
 
     if(type == 'multi' || type == 'user'){
-      const users = await this.userModel.find({nickname : new RegExp(query, 'i')},'nickname');
+      const users = await this.userModel.find({nickname : new RegExp(query, 'i')},'nickname').skip((Number(page) -1 )  * 20);
       users.forEach((user) => {
         data.total_results += 1;
         data.results.push({

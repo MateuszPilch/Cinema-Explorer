@@ -1,36 +1,40 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
-import { ActivatedRouteSnapshot, ResolveFn, Router } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { SearchData } from 'shared/models/search-data';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
 
+  searchData: SearchData = new SearchData();
+
   searchType!: string;
   searchQuery!: string;
-  searchPage!: number;
+  searchPage: number = 1;
 
-  constructor(private http: HttpClient, private router: Router) {    
+  constructor(private http: HttpClient, private router: Router) {
     this.loadSearch();
+    this.getSearchResults();
   }
 
-  getSearchResults(type: string, query: string, page: string): Observable<SearchData> {
-    this.searchType = type;
-    this.searchQuery = query;
-    this.searchPage = Number(page);
-    this.saveSearch();
-    return this.http.get<SearchData>(`http://localhost:3000/api/search`, { 
+  getSearchResults(): void {
+    this.http.get<SearchData>(`http://localhost:3000/api/search`, { 
       params: {
-        type: type,
-        query: query,
-        page: page
+        type: this.searchType,
+        query: this.searchQuery,
+        page: this.searchPage
       }
-    });
+    }).subscribe((data) => {
+      this.searchPage++;
+      this.searchData.page = data.page;
+      this.searchData.results = this.searchData.results.concat(data.results);
+      this.searchData.total_pages = data.total_pages;
+      this.searchData.total_results = data.total_results;
+    });;
   }
-
+  
   loadSearch(): void {
     this.searchType = sessionStorage.getItem('type') || 'multi';
     this.searchQuery = sessionStorage.getItem('query') || '';
@@ -40,41 +44,26 @@ export class SearchService {
     sessionStorage.setItem('type', this.searchType);
     sessionStorage.setItem('query', this.searchQuery);
   }
-
-  search(): void {
-    this.saveSearch();
-    this.router.navigate(['search'], { 
-      queryParams: { 
-        type: this.searchType,
-        query: this.searchQuery, 
-        page: this.searchPage
-      }
-    });
-  }
-
+  
   searchMulti(): void {
     if(this.searchQuery != '') {
+      this.searchData = new SearchData();
       this.searchType = 'multi';
       this.searchQuery = this.searchQuery;
       this.searchPage = 1;
-      this.search();
+      this.saveSearch();
+      this.getSearchResults();
+      this.router.navigate(['/search']);
     }
   }
 
   searchByType(type: string): void {
     if(this.searchQuery != '') {
+      this.searchData = new SearchData();
       this.searchType = type;
       this.searchPage = 1;
-      this.search();
+      this.saveSearch();
+      this.getSearchResults();
     }
   }
-
-  changePage(page: number): void {
-    this.searchPage = page;
-    this.search();
-  }
 }
-
-export const searchResolver: ResolveFn<SearchData> = (route: ActivatedRouteSnapshot) => {
-  return inject(SearchService).getSearchResults(route.queryParams['type'], route.queryParams['query'],route.queryParams['page']);
-};

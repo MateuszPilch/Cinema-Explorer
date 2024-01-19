@@ -36,9 +36,11 @@ export class MapPageService {
   }
 
   async getRandomLocation(): Promise<MapDetails> {
-    const details = await this.mapsModel.findOne().skip(Math.floor(Math.random() * await this.mapsModel.countDocuments())).lean();
-    const mapData = details ? details.map_data : null;
-    const url = `https://api.themoviedb.org/3/${details.media_type}/${details.media_id}?language=pl-PL`;
+    const details = await this.mapsModel.aggregate([{ $match: { 'map_data.0': { $exists: true } } },{ $sample: { size: 1 } },]);
+    const randomMap = details.length > 0 ? details[0] : null;
+    const mapData = randomMap.map_data;
+    
+    const url = `https://api.themoviedb.org/3/${randomMap.media_type}/${randomMap.media_id}?language=pl-PL`;
     const headers = {
       headers: {
         accept: 'application/json',

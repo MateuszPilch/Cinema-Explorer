@@ -19,8 +19,8 @@
       <div *ngFor="let media of mediaReviewList" class="block bg-gray-100 hover:scale-[1.03] duration-200 rounded-xl shadow-md">
         <button routerLink="/{{media.media_type}}/{{media.media_id}}">
           <img class="w-52 rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{media.poster_path}}" onerror="this.src='assets/images/media_blank.png';">   
-          <div class="block text-center text-sm pt-2">
-            <div class="text-lg font-bold overflow">{{media.title}}</div>
+          <div class="relative text-center text-sm pt-2">
+            <div class="text-base h-16 font-bold line-clamp-2">{{media.title}}</div>
             <div *ngIf="media.rating > 0 || media.to_watch"class="flex justify-center items-center">
               <div *ngFor="let item of [].constructor(media.rating)">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="md:w-8 md:h-8 w-6 h-6 text-yellow-400">

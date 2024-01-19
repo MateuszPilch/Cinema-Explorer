@@ -1,31 +1,27 @@
-<div *ngIf="nickname" class="mx-20 my-10 text-5xl">Witaj 
+<div *ngIf="nickname" class="my-8 md:text-5xl text-center text-3xl">Witaj 
   <b>{{nickname}}</b>
 </div>
-<div>
-  <div class="md:p-8 p-2 bg-gray-100 rounded-xl shadow-md">
+<div class="md:p-8 p-2 bg-gray-100 rounded-xl shadow-md">
     <div class="block md:p-8 p-2 bg-white rounded-xl shadow-md">
       <div class="flex justify-between items-center">
         <div class="w-1/2 md:text-3xl text-xl">Odkryj lokację</div>
-        <button (click)='getRandomLocation()' class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
+        <button (click)='getRandomLocation()' class="px-4 py-2 md:text-lg text-base bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
           Losuj lokację
         </button>
       </div>
-      <div class="w-full h-[40rem] mt-8 rounded-xl shadow-md overflow-hidden">
+      <div class="w-full md:h-[40rem] h-full md:mt-8 mt-4 rounded-xl shadow-md overflow-hidden">
         <app-map-mini></app-map-mini>
       </div>
     </div>
-  </div>
-</div>
-<div class="mt-8 md:p-8 p-2 bg-gray-100 rounded-xl shadow-md">
-  <div class="block md:p-8 p-2 bg-white rounded-xl shadow-md">
-    <div class="flex justify-between items-center">
-      <div class="w-1/2 md:text-3xl text-xl">Popularne</div>
-      <div class="flex items-center gap-4">
-        <button (click)="getTrending('day')" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
-          Dzisiaj
+  <div class="block md:mt-8 mt-2 md:p-8 p-2 bg-white rounded-xl shadow-md">
+    <div class="md:flex block justify-between">
+      <div class="md:text-4xl text-xl">Popularne</div>
+      <div class="md:flex md:pt-0 pt-4 gap-4 grid grid-cols-2 items-center">
+        <button (click)="getTrending('day')" class="px-4 py-2 md:text-lg text-base bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
+          Dziś
         </button>
-        <button (click)="getTrending('week')" class="px-4 md:py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
-          W tym tygodniu
+        <button (click)="getTrending('week')" class="px-4 py-2 md:text-lg text-base bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
+          Ten tygodzień
         </button>
       </div>
     </div>
@@ -36,7 +32,7 @@
           <div class="text-base h-16 font-bold line-clamp-2">
             {{media.title}}{{media.name}}
           </div>
-          <div *ngIf="media.vote_average > 0"class="flex justify-center items-center">
+          <div *ngIf="media.vote_average! > 0"class="flex justify-center items-center">
             <div class="md:text-base text-xs font-bold" >
               {{media.vote_average}}
             </div>

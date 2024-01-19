@@ -93,6 +93,7 @@ export class MapAddComponent {
   }
 
   addMapLocation(): void {
+    this.markLocationEnabled = true;
     const circle = this.vectorSource.getFeatures()[0].getGeometry() as Circle;
     const radius = circle.getRadius();
     const center = circle.getCenter();

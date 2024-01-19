@@ -1,8 +1,8 @@
-<div class="pointer-events-none absolute top-0 left-0 w-full h-full">
-  <div class="pointer-events-auto md:w-1/5 md:h-full bg-gray-100 rounded-r-xl shadow-md">
-    <div class="block pt-24 px-4 h-1/2">
+<div class="pointer-events-none absolute md:top-0 top-[38rem] left-0 w-full h-full">
+  <div class="pointer-events-auto md:w-1/5 h-full bg-gray-100 rounded-r-xl shadow-md">
+    <div class="flex flex-col h-full md:pt-24 p-4">
       <button routerLink="../details">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
         </svg>
       </button>
@@ -46,10 +46,10 @@
           </svg>                                 
         </button>
       </div>
-      <div *ngIf="locationImageUrl" class="flex w-full h-60 pt-4 justify-center">
-        <img class="object-contain rounded-xl shadow-md" [src]="locationImageUrl">
+      <div *ngIf="locationImageUrl" class="flex w-full pt-4 justify-center">
+        <img class="max-h-52 object-contain rounded-xl shadow-md" [src]="locationImageUrl">
       </div>
-      <button (click)="addMapLocation()" routerLink="../add" class="flex w-full h-16 mt-4 text-xl justify-center items-center hover:scale-[1.02] bg-teal-300 hover:bg-teal-400 duration-200 rounded-xl shadow-md">
+      <button (click)="addMapLocation()" routerLink="../add" class="flex w-full h-16 md:mt-auto my-4 text-xl justify-center items-center hover:scale-[1.02] bg-teal-300 hover:bg-teal-400 duration-200 rounded-xl shadow-md">
         Dodaj
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" data-slot="icon" class="ml-2 w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />

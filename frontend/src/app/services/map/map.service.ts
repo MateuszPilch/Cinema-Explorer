@@ -138,7 +138,7 @@ export class MapService {
   }
 
   focusOnLocation(center: number[], radius: number): void {
-    this.map.getView().fit(new Circle(center, radius), {padding: [150, 0, 150, 0]});
+    this.map.getView().fit(new Circle(center, radius), {padding: [200, 100, 200, 100]});
   }
 
   addMapLocation(mediaPath: string, mapData: MapData): void {
@@ -164,6 +164,11 @@ export class MapService {
 
   getLocationDetails(mediaPath: string, location_id: string): Observable<MapDetails> {
     return this.http.get<MapDetails>(`http://localhost:3000/api/map${mediaPath}/${location_id}`);
+  }
+
+  getRandomLocation(): Observable<MapDetails> {
+    this.clearMap();
+    return this.http.get<MapDetails>(`http://localhost:3000/api/map/random`);
   }
 
   getAllLocations(): Observable<MapData[]> {

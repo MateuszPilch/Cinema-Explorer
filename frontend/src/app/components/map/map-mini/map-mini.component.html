@@ -1,5 +1,5 @@
-<div class="flex w-full h-full">
-  <div *ngIf="mapDetails" class="pointer-events-auto w-1/3 bg-gray-100">
+<div class="md:flex w-full h-full grid">
+  <div *ngIf="mapDetails" class="md:order-1 order-2 md:w-1/3 md:h-auto bg-gray-100 ">
     <div class="flex-none pt-4 pb-4 px-4">
       <button *ngIf="mapDetails.name" routerLink="/tv/{{mapDetails.id}}" class="flex mx-auto w-1/3 hover:scale-[1.03] duration-200">
         <img class="object-contain rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w200/{{mapDetails.poster_path}}" onerror="this.src='assets/images/media_blank.png';">
@@ -24,11 +24,22 @@
           <div *ngIf="location.episode != '' && location.episode">Odcinek: {{location.episode}}</div>
         </div>
         <div *ngIf="location.description != '' && location.description" class="pt-4">{{location.description}}</div>
-        <button *ngIf="location.image != ''" class="mt-4 max-h-52 mx-auto">
-          <img class="object-contain rounded-xl shadow-md" src="{{location.image}}" onerror="this.src='assets/images/media_blank.png';">
+        <button *ngIf="location.image != ''" class="flex mt-4 mx-auto">
+          <img class="max-h-52 object-contain rounded-xl shadow-md" src="{{location.image}}" onerror="this.src='assets/images/media_blank.png';">
         </button>
       </li>
     </ul>
-</div>
-  <div #map id="map" class="z-0 w-2/3 inset-0"></div>
+  </div>
+  <div #map id="map" class="md:order-2 order-1 z-0 md:w-2/3 md:h-auto h-96 w-full inset-0">
+    <button *ngIf="mapDetails && mapDetails.name" routerLink="/map/tv/{{mapDetails.id}}/details" class="absolute z-10 p-2 hover:scale-[1.05] duration-200">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+      </svg>
+    </button>
+    <button *ngIf="mapDetails && mapDetails.title" routerLink="/map/movie/{{mapDetails.id}}/details" class="absolute z-10 p-2 hover:scale-[1.05] duration-200">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+      </svg>
+    </button>
+  </div>
 </div>

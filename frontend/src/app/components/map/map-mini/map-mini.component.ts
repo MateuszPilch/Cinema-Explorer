@@ -1,9 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { MapMiniService } from 'src/app/services/map/map-mini.service';
 import Map from 'ol/Map';
 import { MapData } from 'shared/models/map/map-data';
 import { MapDetails } from 'shared/models/map/map-details';
 import { imageToUrl } from 'shared/image-to-url';
+import { MapService } from 'src/app/services/map/map.service';
 
 @Component({
   selector: 'app-map-mini',
@@ -17,7 +17,7 @@ export class MapMiniComponent {
   
   mapDetails!: MapDetails
 
-  constructor(private mapMiniService: MapMiniService) {}
+  constructor(private mapMiniService: MapService) {}
 
   ngOnInit() {
     this.map = this.mapMiniService.getMap();
@@ -29,12 +29,12 @@ export class MapMiniComponent {
   getRandomLocation(): void {
     this.mapMiniService.getRandomLocation().subscribe((data) => {
       this.mapDetails = data;
-      console.log(this.mapDetails);
       this.mapDetails.mapData.forEach(async (location) => {
         location.image = await imageToUrl(location.image);
         this.mapMiniService.drawCircleLocation(location.center, location.radius);
-      }); 
+      });
     });
+    this.map.getView().setZoom(0);
   }
 
   focusOnLocation(location: MapData): void {

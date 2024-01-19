@@ -8,10 +8,10 @@ import { MovieCreditsComponent } from './components/movie/movie-credits/movie-cr
 import { movieCreditsResolver, movieCreditsShortResolver } from './services/movie/movie-credits.service';
 import { TvDetailsComponent } from './components/tv/tv-details/tv-details.component';
 import { TvCreditsComponent } from './components/tv/tv-credits/tv-credits.component';
+import { TvPageComponent } from './components/tv/tv-page/tv-page.component';
 import { tvDetailsResolver, tvImagesResolver, tvLocationCountResolver } from './services/tv/tv-details.service';
 import { tvCreditsResolver, tvCreditsShortResolver } from './services/tv/tv-credits.service';
 import { SearchComponent } from './components/search/search.component';
-import { searchResolver } from './services/search/search.service';
 import { PersonDetailsComponent } from './components/person/person-details/person-details.component';
 import { personDetailsResolver } from './services/person/person-details.service';
 import { personCreditsResolver } from './services/person/person-credits.service';
@@ -21,30 +21,24 @@ import { AuthLayoutComponent } from './components/layouts/auth-layout.component'
 import { UserActivityComponent } from './components/user/user-activity/user-activity.component';
 import { UserReviewListComponent } from './components/user/user-review-list/user-review-list.component';
 import { UserPageComponent } from './components/user/user-page/user-page.component';
-import { MapPageComponent } from './components/map/map-page/map-page.component';
 import { MapAddComponent } from './components/map/map-add/map-add.component';
 import { MapDetailsComponent } from './components/map/map-details/map-details.component';
-import { mapDetailsResolver, mapPageResolver } from './services/map/map.service';
 import { MapMainComponent } from './components/map/map-main/map-main.component';
-import { TvPageComponent } from './components/tv/tv-page/tv-page.component';
+import { MapPageComponent } from './components/map/map-page/map-page.component';
+import { mapDetailsResolver, mapPageResolver } from './services/map/map.service';
 import { AuthGuard } from './guards/auth-guard.guard';
 
 const routes: Routes = [
   { path: '', component: HomeLayoutComponent,
     children: [
-      { path: '', component: HomeComponent},
+      { path: '', component: HomeComponent },
       { path: 'user/:nickname', component:UserPageComponent, runGuardsAndResolvers: 'always' , children: [
         { path: '', redirectTo: 'activity', pathMatch: 'full'},
         { path: 'activity', component: UserActivityComponent},
         { path: 'reviewlist/:filter', component: UserReviewListComponent,}
       ]},
-      { path: 'search', component: SearchComponent, resolve: {
-          data: searchResolver,
-        },
-        runGuardsAndResolvers: 'always',
-      },
-      { path: 'movie', component: MoviePageComponent, runGuardsAndResolvers: 'always',
-      },
+      { path: 'search', component: SearchComponent, runGuardsAndResolvers: 'always' },
+      { path: 'movie', component: MoviePageComponent, runGuardsAndResolvers: 'always' },
       { path: 'movie/:id', component: MovieDetailsComponent, resolve: {
           details: movieDetailsResolver,
           images: movieImagesResolver,
@@ -58,8 +52,7 @@ const routes: Routes = [
           credits: movieCreditsResolver
         }
       },
-      { path: 'tv', component: TvPageComponent, runGuardsAndResolvers: 'always',
-      },
+      { path: 'tv', component: TvPageComponent, runGuardsAndResolvers: 'always' },
       { path: 'tv/:id', component: TvDetailsComponent, resolve: {
           details: tvDetailsResolver,
           images: tvImagesResolver,
@@ -96,7 +89,7 @@ const routes: Routes = [
   },
   { path: '', component: AuthLayoutComponent,
     children: [
-      { path: 'auth', component: AuthComponent}
+      { path: 'auth', component: AuthComponent }
     ]
   },
   { path: '**', redirectTo: '' }

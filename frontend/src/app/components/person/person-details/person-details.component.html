@@ -6,9 +6,51 @@
     {{personDetailsData.name}}
   </div>
 </div>
-<div class="grid h-fit md:grid-cols-4 grid-cols-2 md:gap-8 md:p-8 p-2 bg-gray-100 rounded-xl shadow-md">
-  <div class="order-2">
-    <div class="block h-fit p-4 justify-center items-center bg-white rounded-xl shadow-md">
+<div class="grid md:grid-cols-4 grid-cols-1 grid-flow-row md:gap-8 gap-2 md:p-8 p-2 bg-gray-100 rounded-xl shadow-md">
+  <div class="order-1 md:col-span-3">
+    <div class="block h-fit md:p-8 p-4 bg-white rounded-xl shadow-md">
+      <div class="flex justify-between">
+        <div class="flex items-end">
+          <div class="text-4xl">{{personDetailsData.name}}</div>
+        </div>
+      </div>
+      <div class="md:flex block md:pt-8 pt-4 justify-around text-justify">
+        <div *ngIf="personDetailsData.biography == ''" class="md:w-4/5 text-lg">
+          Ta osoba nie posiada opisu.
+        </div>
+        <div *ngIf="personDetailsData.biography != ''" class="md:w-4/5 text-lg">
+          {{personDetailsData.biography}}
+        </div>
+      </div>
+      <div class="md:pt-8 pt-4">
+        <div class="flex items-center justify-between">
+          <div class="md:text-3xl text-2xl">Znana/y z</div>
+        </div>
+        <div *ngIf="personDetailsData.known_for_department == 'Acting'" class="grid md:grid-cols-6 grid-cols-3">
+          <div *ngFor="let result of personCreditsData.cast | slice:0:6" class="block m-2 bg-gray-100 hover:scale-[1.03] duration-200 rounded-xl shadow-md">
+            <a routerLink="/{{result.media_type}}/{{result.id}}">
+                <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{result.poster_path}}" onerror="this.src='assets/images/media_blank.png';">    
+              <div class="block text-center text-sm pt-2">
+                <div class="py-2 overflow">{{result.name}}{{result.title}}</div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div *ngIf="personDetailsData.known_for_department != 'Acting'" class="grid md:grid-cols-6 grid-cols-3">
+          <div *ngFor="let result of personCreditsData.crew | slice:0:6" class="block m-2 bg-gray-100 hover:scale-[1.03] duration-200 rounded-xl shadow-md">
+            <a routerLink="/{{result.media_type}}/{{result.id}}">
+                <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{result.poster_path}}" onerror="this.src='assets/images/media_blank.png';">    
+              <div class="block text-center text-sm pt-2">
+                <div class="py-2 overflow">{{result.name}}{{result.title}}</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="order-2 h-full">
+    <div class="block p-4 justify-center items-center bg-white rounded-xl shadow-md">
       <div class="text-center text-2xl">
         Informacje
       </div>
@@ -36,101 +78,76 @@
       </div>
     </div>
   </div>
-  <div class="order-1 md:col-span-3 row-span-2">
-    <div class="block h-fit md:p-8 p-4 bg-white rounded-xl shadow-md">
-      <div class="flex justify-between">
-        <div class="flex items-end">
-          <div class="text-4xl">{{personDetailsData.name}}</div>
-        </div>
-      </div>
-      <div class="md:flex block md:pt-8 pt-4 justify-around text-justify">
-        <div *ngIf="personDetailsData.biography == ''" class="md:w-4/5 text-lg">
-          Ta osoba nie posiada opisu.
-        </div>
-        <div *ngIf="personDetailsData.biography != ''" class="md:w-4/5 text-lg">
-          {{personDetailsData.biography}}
-        </div>
-      </div>
-      <div class="md:pt-8 pt-4">
-        <div class="flex items-center justify-between">
-          <div class="text-xl">Znana/y z</div>
-        </div>
-        <div *ngIf="personDetailsData.known_for_department == 'Acting'" class="grid md:grid-cols-6 grid-cols-3">
-          <div *ngFor="let result of personCreditsData.cast | slice:0:6" class="block m-2 bg-gray-100 hover:scale-[1.03] duration-200 rounded-xl shadow-md">
-            <a routerLink="/{{result.media_type}}/{{result.id}}">
-                <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{result.poster_path}}" onerror="this.src='assets/images/media_blank.png';">    
-              <div class="block text-center text-sm pt-2">
-                <div class="py-2 overflow">{{result.name}}{{result.title}}</div>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div *ngIf="personDetailsData.known_for_department != 'Acting'" class="grid md:grid-cols-6 grid-cols-3">
-          <div *ngFor="let result of personCreditsData.crew | slice:0:6" class="block m-2 bg-gray-100 hover:scale-[1.03] duration-200 rounded-xl shadow-md">
-            <a routerLink="/{{result.media_type}}/{{result.id}}">
-                <img class="rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{result.poster_path}}" onerror="this.src='assets/images/media_blank.png';">    
-              <div class="block text-center text-sm pt-2">
-                <div class="py-2 overflow">{{result.name}}{{result.title}}</div>
-              </div>
-            </a>
-          </div>
-        </div>
+  <div class="order-3 md:col-span-4 md:p-8 p-2 bg-white rounded-xl shadow-md">
+    <div class="md:flex block justify-between">
+      <div class="md:text-3xl text-2xl">Produkcje</div>
+      <div class="md:flex md:pt-0 pt-4 gap-4 grid grid-cols-2 items-center">
+        <button (click)="setFilter('all')" class="px-4 py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
+          Wszystko
+        </button>
+        <button (click)="setFilter('cast')" class="px-4 py-2 md:text-lg text-base bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
+          Aktor
+        </button>
+        <button (click)="setFilter('crew')" class="px-4 py-2 md:text-lg text-base bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
+          Twórca
+        </button>
       </div>
     </div>
-  </div>
-  <div class="order-3 md:col-span-4 row-span-3 md:p-8 p-2 bg-white rounded-xl shadow-md">
-    <div class="md:text-3xl text-2xl">Produkcje</div>
-    <div class="pt-4 text-xl">Aktor</div>
-    <div *ngFor="let result of personCreditsData.cast" class="flex md:h-52 min-h-40 md:mb-8 mb-2 md:p-4 p-2 hover:scale-[1.01] duration-200 bg-gray-100 rounded-xl shadow-md">
-      <button routerLink="/{{result.media_type}}/{{result.id}}" class="flex w-full items-center">
-        <img class="md:w-fit w-1/4 md:h-full h-fit object-fill rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w500/{{result.poster_path}}" onerror="this.src='assets/images/media_blank.png';">
-        <div class="block w-[90%] h-full md:ml-4 ml-2 md:p-4 p-2 bg-white rounded-xl shadow-md ">
-          <div class="flex justify-between">
-            <div class="md:text-xl text-base font-bold">
-              {{result.title}}
-              {{result.name}}
+    <div *ngIf="creditsFilter == 'all' || creditsFilter == 'cast'">
+      <div class="text-2xl">Aktor</div>
+      <div *ngFor="let result of personCreditsData.cast" class="flex md:h-52 min-h-40 md:my-8 my-2 hover:scale-[1.02] duration-200">
+        <button routerLink="/{{result.media_type}}/{{result.id}}" class="flex w-full items-center">
+          <img class="md:w-fit w-1/4 md:h-full h-fit object-fill rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w500/{{result.poster_path}}" onerror="this.src='assets/images/media_blank.png';">
+          <div class="block w-[90%] h-full md:ml-4 ml-2 md:p-4 p-2 bg-gray-100 rounded-xl shadow-md ">
+            <div class="flex justify-between">
+              <div class="md:text-xl text-base text-left font-bold">
+                {{result.title}}
+                {{result.name}}
+              </div>
+              <div *ngIf="result.media_type == 'movie'" class="flex md:text-base h-fit text-xs p-2 items-center bg-teal-300 rounded-xl shadow-md">
+                Film
+              </div>
+              <div *ngIf="result.media_type == 'tv'" class="flex md:text-base h-fit text-xs p-2 items-center bg-teal-300 rounded-xl shadow-md">
+                Serial
+              </div>
             </div>
-            <div *ngIf="result.media_type == 'movie'" class="flex md:text-base h-fit text-xs p-2 items-center bg-teal-300 rounded-xl shadow-md">
-              Film
+            <div *ngIf="result.character" class="md:text-base text-left items-center">
+              jako <b>{{result.character}}</b>
             </div>
-            <div *ngIf="result.media_type == 'tv'" class="flex md:text-base h-fit text-xs p-2 items-center bg-teal-300 rounded-xl shadow-md">
-              Serial
+            <div class="md:w-11/12 w-full md:text-lg text-base text-left line-clamp-3">
+              {{result.overview}}
             </div>
           </div>
-          <div class="flex md:text-base items-center">
-            jako "{{result.character}}"
-          </div>
-          <div class="md:w-11/12 w-full md:text-sm text-xs line-clamp-3 text-justify">
-            {{result.overview}}
-          </div>
-        </div>
-      </button> 
+        </button> 
+      </div>
     </div>
-    <div class="pt-4 text-xl">Twórca</div>
-    <div *ngFor="let result of personCreditsData.crew" class="flex md:h-52 min-h-40 md:mb-8 mb-2 md:p-4 p-2 hover:scale-[1.03] duration-200 bg-gray-100 rounded-xl shadow-md">
-      <button routerLink="/{{result.media_type}}/{{result.id}}" class="flex w-full items-center">
-        <img class="md:w-fit w-1/4 md:h-full h-fit object-fill rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w500/{{result.poster_path}}" onerror="this.src='assets/images/media_blank.png';">
-        <div class="block w-[90%] h-full md:ml-4 ml-2 md:p-4 p-2 bg-white rounded-xl shadow-md ">
-          <div class="flex justify-between">
-            <div class="md:text-xl text-base font-bold">
-              {{result.title}}
-              {{result.name}}
+    <div *ngIf="creditsFilter == 'all' || creditsFilter == 'crew'">
+      <div class="text-2xl">Twórca</div>
+      <div *ngFor="let result of personCreditsData.crew" class="flex md:h-52 min-h-40 md:my-8 my-2 hover:scale-[1.02] duration-200">
+        <button routerLink="/{{result.media_type}}/{{result.id}}" class="flex w-full items-center">
+          <img class="md:w-fit w-1/4 md:h-full h-fit object-fill rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w500/{{result.poster_path}}" onerror="this.src='assets/images/media_blank.png';">
+          <div class="block w-[90%] h-full md:ml-4 ml-2 md:p-4 p-2 bg-gray-100 rounded-xl shadow-md ">
+            <div class="flex justify-between">
+              <div class="md:text-xl text-base text-left font-bold">
+                {{result.title}}
+                {{result.name}}
+              </div>
+              <div *ngIf="result.media_type == 'movie'" class="flex md:text-base h-fit text-xs p-2 items-center bg-teal-300 rounded-xl shadow-md">
+                Film
+              </div>
+              <div *ngIf="result.media_type == 'tv'" class="flex md:text-base h-fit text-xs p-2 items-center bg-teal-300 rounded-xl shadow-md">
+                Serial
+              </div>
             </div>
-            <div *ngIf="result.media_type == 'movie'" class="flex md:text-base h-fit text-xs p-2 items-center bg-teal-300 rounded-xl shadow-md">
-              Film
+            <div *ngIf="result.job" class="md:text-base text-left items-center">
+              jako <b>{{result.job}}</b>
             </div>
-            <div *ngIf="result.media_type == 'tv'" class="flex md:text-base h-fit text-xs p-2 items-center bg-teal-300 rounded-xl shadow-md">
-              Serial
+            <div class="md:w-11/12 w-full md:text-lg text-base text-left line-clamp-3">
+              {{result.overview}}
             </div>
           </div>
-          <div class="flex md:text-base items-center">
-            jako "{{result.job}}"
-          </div>
-          <div class="md:w-11/12 w-full md:text-sm text-xs line-clamp-3 text-justify">
-            {{result.overview}}
-          </div>
-        </div>
-      </button> 
+        </button> 
+      </div>
     </div>
   </div>
 </div>

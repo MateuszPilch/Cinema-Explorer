@@ -31,8 +31,6 @@ import { MapMainComponent } from './components/map/map-main/map-main.component';
 import { TvPageComponent } from './components/tv/tv-page/tv-page.component';
 import { MapMiniComponent } from './components/map/map-mini/map-mini.component';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,

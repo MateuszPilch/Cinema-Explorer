@@ -17,6 +17,8 @@ export class PersonCreditsService {
       }
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
+    data.cast.sort((a, b) => b.vote_count - a.vote_count);
+    data.crew.sort((a, b) => b.popularity - a.popularity);
     const res = plainToInstance(PersonCredits, data, { excludeExtraneousValues: true });
     return res;
   }

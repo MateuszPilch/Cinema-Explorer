@@ -1,4 +1,4 @@
-<div class="absolute md:top-24 top-16 left-4 items-center gap-4">
+<div class="absolute md:top-24 top-16 left-4 z-10 items-center gap-4">
   <div class="flex items-center gap-4">
   <button (click)="filterLocations('multi')" class="px-4 py-2 md:text-lg text-sm bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
     Wszystko
@@ -35,13 +35,13 @@
     </button>
   </div>
 </div>
-<div *ngIf="isLightboxEnabled" class="fixed top-0 left-0 h-full w-full flex items-center bg-black bg-opacity-80">
+<div *ngIf="isLightboxEnabled" class="fixed h-screen w-screen top-0 left-0 z-20 flex items-center bg-black bg-opacity-80">
   <button (click)="lightboxControl(false)" class="absolute top-20 right-2">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-white w-16 h-16">
       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
     </svg>  
   </button>
   <div class="flex w-full h-2/3 justify-center">
-    <img class="object-cover rounded-xl" src="{{lightboxImage}}" onerror="this.src='assets/images/media_blank.png';">
+    <img class="md:h-auto md:max-h-none max-h-52 md:my-0 my-auto object-cover rounded-xl" src="{{lightboxImage}}" onerror="this.src='assets/images/media_blank.png';">
   </div>
 </div>

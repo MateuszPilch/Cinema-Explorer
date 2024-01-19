@@ -112,8 +112,13 @@ export class TvPageComponent {
 
   setDecade(decade: number): void {
     this.selectedDecade = decade;
+    if(decade != 0) {
     this.setFilter('first_air_date.gte', `${(decade + 1).toString()}-01-01`);
     this.setFilter('first_air_date.lte', `${(decade + 10).toString()}-12-31`);
+    } else {
+      this.setFilter('first_air_date.gte', ``);
+      this.setFilter('first_air_date.lte', ``);
+    }
   }
 
   applyFilter(): void {

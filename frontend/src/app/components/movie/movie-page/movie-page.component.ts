@@ -111,8 +111,13 @@ export class MoviePageComponent {
 
   setDecade(decade: number): void {
     this.selectedDecade = decade;
-    this.setFilter('primary_release_date.gte', `${(decade + 1).toString()}-01-01`);
-    this.setFilter('primary_release_date.lte', `${(decade + 10).toString()}-12-31`);
+    if(decade != 0) {
+      this.setFilter('primary_release_date.gte', `${(decade + 1).toString()}-01-01`);
+      this.setFilter('primary_release_date.lte', `${(decade + 10).toString()}-12-31`);
+    } else {
+      this.setFilter('primary_release_date.gte', ``);
+      this.setFilter('primary_release_date.lte', ``);
+    }
   }
 
   applyFilter(): void {

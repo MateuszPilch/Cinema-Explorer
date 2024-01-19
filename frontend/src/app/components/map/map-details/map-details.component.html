@@ -1,10 +1,10 @@
-<div class="pointer-events-none absolute top-0 left-0 w-full h-full">
-  <div class="pointer-events-auto md:w-1/5 md:h-full flex flex-col bg-gray-100 rounded-r-xl shadow-md">
-    <div class="flex-none pt-24 pb-4 px-4">
+<div class="pointer-events-none absolute md:top-0 top-[38rem] left-0 w-full h-full">
+  <div class="pointer-events-auto md:w-1/5 h-full flex flex-col bg-gray-100 md:rounded-r-xl rounded-t-xl shadow-md">
+    <div class="flex-none md:pt-20 p-4">
       <button routerLink="/map">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>        
       </button>
       <button routerLink="{{mediaPath}}" class="flex mx-auto w-1/3 hover:scale-[1.03] duration-200">
         <img class="object-contain rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w200/{{mapDetails.poster_path}}" onerror="this.src='assets/images/media_blank.png';">
@@ -40,8 +40,8 @@
           <div *ngIf="location.episode != '' && location.episode">Odcinek: {{location.episode}}</div>
         </div>
         <div *ngIf="location.description != '' && location.description" class="pt-4">{{location.description}}</div>
-        <button *ngIf="location.image != ''" (click)="lightboxControl(true, i)" class="mt-4 max-h-52 mx-auto">
-          <img class="object-contain rounded-xl shadow-md" src="{{location.image}}" onerror="this.src='assets/images/media_blank.png';">
+        <button *ngIf="location.image != ''" (click)="lightboxControl(true, i)" class="flex mt-4 mx-auto">
+          <img class="max-h-52 object-contain rounded-xl shadow-md" src="{{location.image}}" onerror="this.src='assets/images/media_blank.png';">
         </button>
       </li>
     </ul>
@@ -54,6 +54,6 @@
     </svg>  
   </button>
   <div class="flex w-full h-2/3 justify-center">
-    <img class="object-cover rounded-xl" src="{{lightboxImage}}" onerror="this.src='assets/images/media_blank.png';">
+    <img class="md:h-auto md:max-h-none max-h-52 md:my-0 my-auto object-cover rounded-xl" src="{{lightboxImage}}" onerror="this.src='assets/images/media_blank.png';">
   </div>
 </div>

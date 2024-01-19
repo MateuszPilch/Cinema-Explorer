@@ -14,6 +14,8 @@ export class TvCreditsComponent {
   tvDetailsData!: MediaDetails;
   tvCreditsData!: MediaCredits
 
+  creditsFilter: string = 'all';
+
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -21,5 +23,9 @@ export class TvCreditsComponent {
       this.tvDetailsData = details;
       this.tvCreditsData = credits;
     });
+  }
+
+  setFilter(filter: string): void {
+    this.creditsFilter = filter;
   }
 }

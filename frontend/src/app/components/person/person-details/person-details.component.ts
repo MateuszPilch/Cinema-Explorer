@@ -14,19 +14,18 @@ export class PersonDetailsComponent {
   personDetailsData!: PersonDetails;
   personCreditsData!: PersonCredits;
 
+  creditsFilter: string = 'all';
+
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.data.subscribe(({details, credits}) => {
       this.personDetailsData = details;
       this.personCreditsData = credits;
-      this.voteCount();
-
     })
   }
-  
-  voteCount(): void {
-    this.personCreditsData.cast.sort((a, b) => b.vote_count - a.vote_count);
-    this.personCreditsData.crew.sort((a, b) => b.popularity - a.popularity);
+
+  setFilter(filter: string): void {
+    this.creditsFilter = filter;
   }
 }
