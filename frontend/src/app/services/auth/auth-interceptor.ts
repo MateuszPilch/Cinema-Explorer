@@ -14,8 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
           headers: req.headers.set("Authorization","Bearer " + this.authService.getAuthToken())
       });
       return next.handle(cloned);
-    }
-    else {
+    } else {
       return next.handle(req);
     }
   }

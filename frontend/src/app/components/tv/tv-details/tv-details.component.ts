@@ -80,7 +80,9 @@ export class TvDetailsComponent {
   }
 
   lightboxChangeImage(index: number): void {
-    this.lightboxIndex = Math.max(0, Math.min(this.lightboxIndex + index, this.tvImagesData.backdrops.length - 1));
+    this.lightboxIndex += index;
+    this.lightboxIndex = this.lightboxIndex < 0 ? this.tvImagesData.backdrops.length - 1: 
+    this.lightboxIndex >= this.tvImagesData.backdrops.length ? 0 : this.lightboxIndex;
     this.lightboxImage = this.tvImagesData.backdrops[this.lightboxIndex].file_path;
   }
 }

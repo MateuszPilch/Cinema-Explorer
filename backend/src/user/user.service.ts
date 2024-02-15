@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { plainToInstance } from 'class-transformer';
 import { Model } from 'mongoose';
-import { MediaReview } from 'shared/models/media/media-review';
-import { MediaReviewDto } from 'src/user/dto/media-review.dto';
-import { User } from 'src/schemas/user.schema';
+import { User } from '../schemas/user.schema';
+import { MediaReview } from '../../../shared/models/media/media-review';
+import { MediaReviewDto } from './dto/media-review.dto';
 
 @Injectable()
 export class UserService {

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { firstValueFrom, map } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { MediaDetails } from 'shared/models/media/media-details';
 import { MediaImages } from 'shared/models/media/media-images';
 import { plainToInstance } from "class-transformer"; 

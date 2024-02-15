@@ -1,50 +1,48 @@
 <div *ngIf="nickname" class="my-8 md:text-5xl text-center text-3xl">Witaj 
   <b>{{nickname}}</b>
 </div>
-<div class="md:p-8 p-2 bg-gray-100 rounded-xl shadow-md">
-    <div class="block md:p-8 p-2 bg-white rounded-xl shadow-md">
-      <div class="flex justify-between items-center">
-        <div class="w-1/2 md:text-3xl text-xl">Odkryj lokację</div>
-        <button (click)='getRandomLocation()' class="px-4 py-2 md:text-lg text-base bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
-          Losuj lokację
-        </button>
-      </div>
-      <div class="w-full md:h-[40rem] h-full md:mt-8 mt-4 rounded-xl shadow-md overflow-hidden">
-        <app-map-mini></app-map-mini>
-      </div>
-    </div>
-  <div class="block md:mt-8 mt-2 md:p-8 p-2 bg-white rounded-xl shadow-md">
-    <div class="md:flex block justify-between">
-      <div class="md:text-4xl text-xl">Popularne</div>
-      <div class="md:flex md:pt-0 pt-4 gap-4 grid grid-cols-2 items-center">
-        <button (click)="getTrending('day')" class="px-4 py-2 md:text-lg text-base bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
-          Dziś
-        </button>
-        <button (click)="getTrending('week')" class="px-4 py-2 md:text-lg text-base bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
-          Ten tygodzień
-        </button>
-      </div>
-    </div>
-    <div *ngIf="trendingData" class="flex overflow-x-auto py-8 gap-8">
-      <button *ngFor="let media of trendingData.results" routerLink="/{{media.media_type}}/{{media.id}}" class="block overflow bg-gray-100 hover:scale-[1.03] duration-200 rounded-xl shadow-md">
-        <img class="w-full object-cover rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{media.poster_path}}" onerror="this.src='assets/images/media_blank.png';">   
-        <div class="relative text-center text-sm pt-2 w-48">
-          <div class="text-base h-16 font-bold line-clamp-2">
-            {{media.title}}{{media.name}}
-          </div>
-          <div *ngIf="media.vote_average! > 0"class="flex justify-center items-center">
-            <div class="md:text-base text-xs font-bold" >
-              {{media.vote_average}}
-            </div>
-            <div class="pl-1">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="md:w-8 md:h-8 w-6 h-6 text-yellow-400">
-                <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-              </svg>
-            </div>
-          </div>
-          <div class="py-2 truncate">{{media.release_date | date: 'd.MM.y'}}{{media.first_air_date | date: 'd.MM.y'}}</div>
-        </div>
-      </button>
-    </div>
+<div class="block md:p-8 p-2 bg-white rounded-xl shadow-md">
+  <div class="flex justify-between items-center">
+    <div class="w-1/2 md:text-3xl text-xl">Odkryj lokację</div>
+    <button (click)='getRandomLocation()' class="px-4 py-2 md:text-lg text-base bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
+      Losuj lokację
+    </button>
   </div>
+  <div class="w-full md:h-[40rem] h-full md:mt-8 mt-4 rounded-xl shadow-md overflow-hidden">
+    <app-map-mini></app-map-mini>
+  </div>
+</div>
+<div class="block md:mt-8 mt-2 md:p-8 p-2 bg-white rounded-xl shadow-md">
+<div class="md:flex block justify-between">
+  <div class="md:text-4xl text-xl">Popularne</div>
+  <div class="md:flex md:pt-0 pt-4 gap-4 grid grid-cols-2 items-center">
+    <button (click)="getTrending('day')" class="px-4 py-2 md:text-lg text-base bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
+      Dziś
+    </button>
+    <button (click)="getTrending('week')" class="px-4 py-2 md:text-lg text-base bg-teal-300 hover:scale-[1.03] duration-200 rounded-full shadow-md">
+      Ten tygodzień
+    </button>
+  </div>
+</div>
+<div *ngIf="trendingData" class="flex overflow-x-auto py-8 gap-8">
+  <button *ngFor="let media of trendingData.results" routerLink="/{{media.media_type}}/{{media.id}}" class="block overflow bg-gray-100 hover:scale-[1.03] duration-200 rounded-xl shadow-md">
+    <img class="w-full object-cover rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{media.poster_path}}" onerror="this.src='assets/images/media_blank.png';">   
+    <div class="relative text-center text-sm pt-2 w-48">
+      <div class="text-base h-16 font-bold line-clamp-2">
+        {{media.title}}{{media.name}}
+      </div>
+      <div *ngIf="media.vote_average! > 0"class="flex justify-center items-center">
+        <div class="md:text-base text-xs font-bold" >
+          {{media.vote_average}}
+        </div>
+        <div class="pl-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="md:w-8 md:h-8 w-6 h-6 text-yellow-400">
+            <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+          </svg>
+        </div>
+      </div>
+      <div class="py-2 truncate">{{media.release_date | date: 'd.MM.y'}}{{media.first_air_date | date: 'd.MM.y'}}</div>
+    </div>
+  </button>
+</div>
 </div>

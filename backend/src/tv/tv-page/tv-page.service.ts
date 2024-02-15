@@ -12,7 +12,7 @@ export class TvPageService {
   constructor(private readonly httpService: HttpService) {}
 
   async getTvData(params: TvSearchFilter): Promise<MediaData> {
-    const url = `https://api.themoviedb.org/3/discover/tv/?language=pl-PL`;
+    const url = `https://api.themoviedb.org/3/discover/tv?language=pl-PL`;
     const headers = {
       headers: {
         accept: 'application/json',

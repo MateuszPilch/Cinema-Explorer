@@ -2,7 +2,6 @@ import { Body, Controller, Get, Post, Req, Res, UseGuards } from '@nestjs/common
 import { AuthService } from './auth.service';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
-import { ChangeNicknameDto } from './dto/change.nickname.dto';
 import { ValidateViaGoogleDto } from './dto/validate.via.google.dto';
 import { SignupViaGoogleDto } from './dto/signup.via.google.dto';
 import { LoginViaGoogleDto } from './dto/login.via.google.dto';

@@ -80,7 +80,9 @@ export class MovieDetailsComponent {
   }
 
   lightboxChangeImage(index: number): void {
-    this.lightboxIndex = Math.max(0, Math.min(this.lightboxIndex + index, this.movieImagesData.backdrops.length - 1));
+    this.lightboxIndex += index;
+    this.lightboxIndex = this.lightboxIndex < 0 ? this.movieImagesData.backdrops.length - 1: 
+    this.lightboxIndex >= this.movieImagesData.backdrops.length ? 0 : this.lightboxIndex;
     this.lightboxImage = this.movieImagesData.backdrops[this.lightboxIndex].file_path;
   }
 }

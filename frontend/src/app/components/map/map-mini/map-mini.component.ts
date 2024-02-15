@@ -35,6 +35,7 @@ export class MapMiniComponent {
       });
     });
     this.map.getView().setZoom(0);
+    this.map.getView().setCenter([0,0]);
   }
 
   focusOnLocation(location: MapData): void {

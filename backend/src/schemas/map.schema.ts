@@ -49,7 +49,7 @@ class MapData {
 @Schema({
   timestamps: true,
 })
-export class Maps extends Document {
+export class Map extends Document {
 
   @Prop()
   media_id: number;
@@ -61,4 +61,4 @@ export class Maps extends Document {
   map_data: MapData[]
 }
 
-export const MapsSchema = SchemaFactory.createForClass(Maps);
+export const MapSchema = SchemaFactory.createForClass(Map);

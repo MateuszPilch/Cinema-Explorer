@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { ResolveFn, ActivatedRouteSnapshot, Router, NavigationEnd } from '@angular/router';
 import { Feature, View } from 'ol';
-import { defaults } from 'ol/control';
 import Map from 'ol/Map';
 import { Circle, Point } from 'ol/geom';
 import { Draw, Select } from 'ol/interaction';
@@ -45,47 +44,14 @@ export class MapService {
         'circle-fill-color': 'rgb(20, 184, 166)',
         'fill-color': 'rgba(20, 184, 166, 0.2)',
         'stroke-color':'rgb(20, 184, 166)',
-        'stroke-width': 4,
+        'stroke-width': 16,
       },
     });
 
     const rasterLayer = new TileLayer({
       source: new OSM()
     });
-/*
-    const clusterSource = new Cluster({
-      distance: 250,
-      source: this.vectorSource,
-    });
-
-    const styleCache: Style[] = [];
-    const clusterLayer = new VectorLayer({
-      source: clusterSource,
-      style: (feature) => {
-        const size = feature.get('features').length;
-        let style = styleCache[size];
-        if (!style) {
-          style = new Style({
-            image: new CircleStyle({
-              radius: 12,
-              fill: new Fill({
-                color: 'rgb(15, 118, 110)',
-              }),
-            }),
-            text: new Text({
-              font: '12px poppins',
-              text: size.toString(),
-              fill: new Fill({
-                color: 'white',
-              }),
-            }),
-          });
-          styleCache[size] = style;
-        }
-        return style;
-      }
-    });*/
-    
+     
     this.map = new Map({
       layers: [rasterLayer, vectorLayer],
       controls: [],

@@ -11,7 +11,7 @@ export class MoviePageService {
   constructor(private readonly httpService: HttpService) {}
 
   async getMovieData(params: MovieSearchFilter): Promise<MediaData> {
-    const url = `https://api.themoviedb.org/3/discover/movie/?language=pl-PL`;
+    const url = `https://api.themoviedb.org/3/discover/movie?language=pl-PL`;
     const headers = {
       headers: {
         accept: 'application/json',
@@ -19,9 +19,9 @@ export class MoviePageService {
       },
       params 
     };
+
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
     data.results.forEach((a)=> a.vote_average = Math.round(a.vote_average / 2 * 10) / 10);
-    
     const res = plainToInstance(MediaData, data, { excludeExtraneousValues: true });
     return res;
   }
