@@ -28,6 +28,8 @@
     "@nestjs/mongoose": "^10.0.2",
     "@nestjs/passport": "^10.0.2",
     "@nestjs/serve-static": "^4.0.1",
+    "@fortawesome/fontawesome-free": "^6.4.2",
+    "@nestjs/jwt": "^10.2.0",
     "axios": "^1.5.1",
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.5.1",
