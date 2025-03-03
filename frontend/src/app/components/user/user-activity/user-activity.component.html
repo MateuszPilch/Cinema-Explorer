@@ -20,9 +20,8 @@
             Serial
           </div>
         </div>
-        <div class="md:flex md:h-3/4">
+        <div class="md:flex md:h-4/5">
           <div class="md:w-1/4 text-left ">
-            {{media.createdAt | date: 'd.MM.y'}}
             <div *ngIf="media.rating > 0 || media.to_watch" class="flex">
               <div *ngFor="let item of [].constructor(media.rating)">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="md:w-8 md:h-8 w-6 h-6 text-yellow-400">
@@ -42,8 +41,11 @@
               </div>
             </div>
           </div>
-          <div class="flex md:w-2/3 w-full h-full md:text-lg text-base text-left italic line-clamp-3">
+          <div class="flex md:w-2/3 h-full md:text-lg text-base text-left italic line-clamp-3">
             {{media.review}}
+          </div>
+          <div class="flex items-end text-center align-bottom">
+            {{media.createdAt | date: 'd.MM.y'}}
           </div>
         </div> 
       </div>

@@ -98,7 +98,7 @@ export class UserService {
     await data.save();
   }
 
-  async getAvatar(nickname: string) : Promise<any> { 
+  async getAvatar(nickname: string): Promise<any> { 
     const data = await this.userModel.findOne({nickname});
     const res = data.avatar;
     return res;

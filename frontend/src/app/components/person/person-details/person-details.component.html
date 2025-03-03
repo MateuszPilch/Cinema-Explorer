@@ -24,7 +24,9 @@
       </div>
       <div class="md:pt-8 pt-4">
         <div class="flex items-center justify-between">
-          <div class="md:text-3xl text-2xl">Znana/y z</div>
+          <div *ngIf="personDetailsData.gender == 1" class="md:text-3xl text-2xl">Znana z</div>
+          <div *ngIf="personDetailsData.gender == 2" class="md:text-3xl text-2xl">Znany z</div>
+          <div *ngIf="personDetailsData.gender == 3" class="md:text-3xl text-2xl">Znana/y z</div>
         </div>
         <div *ngIf="personDetailsData.known_for_department == 'Acting'" class="grid md:grid-cols-6 grid-cols-3">
           <div *ngFor="let result of personCreditsData.cast | slice:0:6" class="block m-2 bg-gray-100 hover:scale-[1.03] duration-200 rounded-xl shadow-md">
@@ -93,7 +95,7 @@
         </button>
       </div>
     </div>
-    <div *ngIf="creditsFilter == 'all' || creditsFilter == 'cast'">
+    <div *ngIf="(creditsFilter == 'all' || creditsFilter == 'cast') && personCreditsData.cast.length > 0">
       <div class="text-2xl">Aktor</div>
       <div *ngFor="let result of personCreditsData.cast" class="flex md:h-52 min-h-40 md:my-8 my-2 hover:scale-[1.02] duration-200">
         <button routerLink="/{{result.media_type}}/{{result.id}}" class="flex w-full items-center">
@@ -121,7 +123,7 @@
         </button> 
       </div>
     </div>
-    <div *ngIf="creditsFilter == 'all' || creditsFilter == 'crew'">
+    <div *ngIf="(creditsFilter == 'all' || creditsFilter == 'crew') && personCreditsData.crew.length > 0">
       <div class="text-2xl">Twórca</div>
       <div *ngFor="let result of personCreditsData.crew" class="flex md:h-52 min-h-40 md:my-8 my-2 hover:scale-[1.02] duration-200">
         <button routerLink="/{{result.media_type}}/{{result.id}}" class="flex w-full items-center">

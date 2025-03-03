@@ -36,7 +36,7 @@ export class MapAddComponent {
 
   constructor(private route: ActivatedRoute, public authService: AuthService, private mapService: MapService) {}
 
-  ngOnInit() {    
+  ngOnInit() {
     this.media_type = this.route.snapshot.paramMap.get('media_type') || '';
     this.mediaPath = `/${this.route.snapshot.paramMap.get('media_type')}/${this.route.snapshot.paramMap.get('media_id')}`;
     
@@ -72,9 +72,21 @@ export class MapAddComponent {
       this.draw.setActive(false);
     }
     this.map.addInteraction(this.draw);
+
+    setTimeout(() => {
+      window.scroll({ 
+        top: window.innerHeight/2 + 100, 
+        left: 0,
+      });
+    }, 50);
   }
 
   markLocation(): void {
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+    });
     this.draw.setActive(true);
   }
 

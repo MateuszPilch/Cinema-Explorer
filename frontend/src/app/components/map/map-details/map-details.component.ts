@@ -33,6 +33,12 @@ export class MapDetailsComponent {
         }); 
       }
     });
+    setTimeout(() => {
+      window.scroll({ 
+        top: window.innerHeight/2, 
+        left: 0,
+      });
+    }, 50);
   }
 
   deleteMapLocation(location_id: string): void {
@@ -41,6 +47,11 @@ export class MapDetailsComponent {
   }
 
   focusOnLocation(location: MapData): void {
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+    });
     this.mapService.focusOnLocation(location.center, location.radius);
   }
 

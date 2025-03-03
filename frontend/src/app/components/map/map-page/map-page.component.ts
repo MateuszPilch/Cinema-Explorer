@@ -76,7 +76,7 @@ export class MapPageComponent implements OnInit {
           setTimeout(() => {
             this.overlay.setPosition(point.getCoordinates());
             this.overlay.setOffset([-container.offsetWidth/2, -container.offsetHeight - 10]);
-          }, 100);
+          }, 25);
         });
         
         if(feature.getProperties()['location_id'] == null) {
@@ -106,7 +106,7 @@ export class MapPageComponent implements OnInit {
         feature.setStyle(new Style({
           image: new CircleStyle({
             fill: new Fill({
-              color:'rgb(20, 184, 166)'
+              color:'rgb(13 148 136)'
             }),
             radius: 8
           })

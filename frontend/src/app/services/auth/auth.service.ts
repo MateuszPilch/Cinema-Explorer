@@ -48,7 +48,7 @@ export class AuthService {
   }
 
   public signupViaGoogle(nickname: string ): void {
-    window.open('http://localhost:3000/api/auth/google', '_blank','width=600,height=400');
+    window.open('http://localhost:3000/api/auth/google', '_blank');
     window.addEventListener('message', (event) => {
       if (event.origin === 'http://localhost:3000') {
         firstValueFrom(this.http.post<{token: string}>('http://localhost:3000/api/auth/google/signup',{
@@ -66,7 +66,7 @@ export class AuthService {
   }
 
   public loginViaGoogle(): void {
-    window.open('http://localhost:3000/api/auth/google', '_blank','width=600,height=400');
+    window.open('http://localhost:3000/api/auth/google', '_blank');
     window.addEventListener('message', (event) => {
       if (event.origin === 'http://localhost:3000') {
         firstValueFrom(this.http.post<{token: string}>('http://localhost:3000/api/auth/google/login',{

@@ -14,7 +14,6 @@ import { MapData } from 'shared/models/map/map-data';
 import { MapDetails } from 'shared/models/map/map-details';
 import { ErrorService } from '../error/error.service';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -41,10 +40,10 @@ export class MapService {
       source: this.vectorSource,
       style: {
         'circle-radius': 8,
-        'circle-fill-color': 'rgb(20, 184, 166)',
+        'circle-fill-color': 'rgb(13 148 136)',
         'fill-color': 'rgba(20, 184, 166, 0.2)',
-        'stroke-color':'rgb(20, 184, 166)',
-        'stroke-width': 16,
+        'stroke-color':'rgb(13 148 136)',
+        'stroke-width': 12,
       },
     });
 
@@ -82,7 +81,6 @@ export class MapService {
     });
     this.map.getOverlays().pop();
     this.vectorSource.clear();
-
   }
 
   drawCircleLocation(center: number[], radius: number): void {

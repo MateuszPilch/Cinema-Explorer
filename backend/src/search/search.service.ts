@@ -33,7 +33,7 @@ export class SearchService {
     }
 
     if(type == 'multi' || type == 'user'){
-      const users = await this.userModel.find({nickname : new RegExp(query, 'i')},'nickname').skip((Number(page) -1 )  * 20);
+      const users = await this.userModel.find({nickname : new RegExp(query, 'i')},'nickname').skip((Number(page) -1)  * 20);
       users.forEach((user) => {
         data.total_results += 1;
         data.results.push({

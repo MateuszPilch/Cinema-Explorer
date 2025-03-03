@@ -1,4 +1,4 @@
-import { IsEmail, Matches, MinLength } from 'class-validator';
+import { IsEmail, Matches, MinLength} from 'class-validator';
 
 export class SignupDto {
   
@@ -12,7 +12,5 @@ export class SignupDto {
   @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, { message: 'Hasło jest za słabe' })
   readonly password: string;
 
-  @MinLength(8, { message: 'Hasło jest za krótkie' })
-  @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, { message: 'Hasło jest za słabe' })
   readonly confirmedPassword: string;
 }
