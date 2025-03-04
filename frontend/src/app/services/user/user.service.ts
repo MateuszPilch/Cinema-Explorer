@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MediaReview } from '../../../shared/models/media/media-review';
 import { Observable, firstValueFrom } from 'rxjs';
+import { MediaReview } from '../../../../../shared/models/media/media-review';
 import { environment } from '../../../environments/environment.prod';
 
 @Injectable({

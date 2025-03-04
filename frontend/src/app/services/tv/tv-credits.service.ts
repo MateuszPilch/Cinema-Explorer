@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { ResolveFn, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { MediaCredits } from '../../../shared/models/media/media-credits';
+import { MediaCredits } from '../../../../../shared/models/media/media-credits';
 import { environment } from '../../../environments/environment.prod';
 
 @Injectable({

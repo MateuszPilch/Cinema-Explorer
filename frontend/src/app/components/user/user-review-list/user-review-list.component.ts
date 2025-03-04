@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MediaReview } from '../../../shared/models/media/media-review';
+import { MediaReview } from '../../../../../../shared/models/media/media-review';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({

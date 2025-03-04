@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { SearchData } from '../../../shared/models/search-data';
+import { SearchData } from '../../../../../shared/models/search-data';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { HomeService } from 'src/app/services/home/home.service';
 import { MapMiniComponent } from '../map/map-mini/map-mini.component';

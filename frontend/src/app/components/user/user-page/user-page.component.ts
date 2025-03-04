@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { UserService } from 'src/app/services/user/user.service';
-import { imageToUrl } from '../../../shared/image-to-url';
+import { imageToUrl } from '../../../../../../shared/image-to-url';
 
 @Component({
   selector: 'app-user-page',

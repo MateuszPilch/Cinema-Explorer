@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router, ResolveFn, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { MediaData } from '../../../shared/models/media/media-data';
-import { TvSearchFilter } from '../../../shared/models/tv/tv-search-filter';
-import { TvGenres } from '../../../shared/models/tv/tv-genres';
+import { MediaData } from '../../../../../shared/models/media/media-data';
+import { TvSearchFilter } from '../../../../../shared/models/tv/tv-search-filter';
+import { TvGenres } from '../../../../../shared/models/tv/tv-genres';
 import { environment } from '../../../environments/environment.prod';
 
 @Injectable({

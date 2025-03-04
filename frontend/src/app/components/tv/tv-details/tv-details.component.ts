@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MediaDetails } from '../../../shared/models/media/media-details';
-import { MediaCredits } from '../../../shared/models/media/media-credits';
+import { MediaDetails } from '../../../../../../shared/models/media/media-details';
+import { MediaCredits } from '../../../../../../shared/models/media/media-credits';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { UserService } from 'src/app/services/user/user.service';
-import { MediaImages } from '../../../shared/models/media/media-images';
+import { MediaImages } from '../../../../../../shared/models/media/media-images';
 
 @Component({
   selector: 'app-tv-details',

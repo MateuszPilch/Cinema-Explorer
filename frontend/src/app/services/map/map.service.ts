@@ -10,8 +10,8 @@ import VectorLayer from 'ol/layer/Vector';
 import OSM from 'ol/source/OSM';
 import VectorSource from 'ol/source/Vector';
 import { Observable, firstValueFrom } from 'rxjs';
-import { MapData } from '../../../shared/models/map/map-data';
-import { MapDetails } from '../../../shared/models/map/map-details';
+import { MapData } from '../../../../../shared/models/map/map-data';
+import { MapDetails } from '../../../../../shared/models/map/map-details';
 import { ErrorService } from '../error/error.service';
 import { environment } from '../../../environments/environment.prod';
 
