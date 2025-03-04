@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MediaReview } from 'shared/models/media/media-review';
 import { Observable, firstValueFrom } from 'rxjs';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class UserService {
   }
 
   getAllMediaList(nickname: string, loaded: number): Observable<MediaReview[]> {
-    return this.http.get<MediaReview[]>(`http://localhost:3000/api/user/allmedialist`,{
+    return this.http.get<MediaReview[]>(`${environment.backendUrl}/user/allmedialist`,{
       params: {
         nickname, 
         loaded
@@ -28,7 +29,7 @@ export class UserService {
   }
 
   getMediaListCount(nickname: string,  filterKey: string, filterValue: string): Observable<number> {
-    return this.http.get<number>(`http://localhost:3000/api/user/medialistcount`,{
+    return this.http.get<number>(`${environment.backendUrl}/user/medialistcount`,{
       params: {
         nickname,
         filterKey,
@@ -38,7 +39,7 @@ export class UserService {
   }
 
   getFiltredMediaList(nickname: string, loaded: number, sort_by: string): Observable<MediaReview[]> {
-    return this.http.get<MediaReview[]>(`http://localhost:3000/api/user/filtredmedialist`,{
+    return this.http.get<MediaReview[]>(`${environment.backendUrl}/user/filtredmedialist`,{
       params: {
         nickname, 
         loaded,
@@ -50,7 +51,7 @@ export class UserService {
   }
 
   getMediaReview(media_id: number, media_type: string): Observable<MediaReview> {
-    return this.http.get<MediaReview>(`http://localhost:3000/api/user/mediareview`,{
+    return this.http.get<MediaReview>(`${environment.backendUrl}/user/mediareview`,{
       params: {
         media_id,
         media_type
@@ -59,7 +60,7 @@ export class UserService {
   }
 
   setMediaReview(media_id: number, media_type: string, title: string, poster_path: string, rating: number, review: string, favourite: boolean, to_watch: boolean): void {
-    firstValueFrom(this.http.post(`http://localhost:3000/api/user/mediareview`,{
+    firstValueFrom(this.http.post(`${environment.backendUrl}/user/mediareview`,{
       media_id,
       media_type,
       title,
@@ -72,7 +73,7 @@ export class UserService {
   }
 
   getAvatar(nickname: string): Observable<string> {
-    return this.http.get<any>('http://localhost:3000/api/user/avatar', {
+    return this.http.get<any>(`${environment.backendUrl}/user/avatar`, {
       params: {
         nickname
       }
@@ -82,6 +83,6 @@ export class UserService {
   setAvatar(avatar: File): void {
     const formData = new FormData();
     formData.append('avatar', avatar);
-    firstValueFrom(this.http.post('http://localhost:3000/api/user/avatar', formData));
+    firstValueFrom(this.http.post(`${environment.backendUrl}/user/avatar`, formData));
   }
 }

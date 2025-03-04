@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { MediaDetails } from 'shared/models/media/media-details';
 import { MediaImages } from 'shared/models/media/media-images';
 import { ResolveFn, ActivatedRouteSnapshot } from '@angular/router';
+import { environment } from '../../../environments/environment.prod';
 
 
 @Injectable({
@@ -14,15 +15,15 @@ export class TvDetailsService {
   constructor(private http: HttpClient) {}
 
   getTvDetails(tv_id: string): Observable<MediaDetails> {
-    return this.http.get<MediaDetails>(`http://localhost:3000/api/tv/${tv_id}`);
+    return this.http.get<MediaDetails>(`${environment.backendUrl}/tv/${tv_id}`);
   }
 
   getTvImages(tv_id: string): Observable<MediaImages> {
-    return this.http.get<MediaImages>(`http://localhost:3000/api/tv/${tv_id}/images`);
+    return this.http.get<MediaImages>(`${environment.backendUrl}/tv/${tv_id}/images`);
   }
 
   getTvLocationCount(tv_id: string): Observable<number> {
-    return this.http.get<number>(`http://localhost:3000/api/map/tv/${tv_id}/count`);
+    return this.http.get<number>(`${environment.backendUrl}/tv/${tv_id}/count`);
   }
 }
 

@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { MediaData } from 'shared/models/media/media-data';
 import { TvSearchFilter } from 'shared/models/tv/tv-search-filter';
 import { TvGenres } from 'shared/models/tv/tv-genres';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,10 @@ export class TvPageService {
   
   getTvData(filter: TvSearchFilter): Observable<MediaData> {
     const params = qs.stringify(filter, { encode: false });
-    return this.http.get<MediaData>(`http://localhost:3000/api/tv?${params}`);
+    return this.http.get<MediaData>(`${environment.backendUrl}/tv?${params}`);
   }
 
   getTvGenres(): Observable<TvGenres[]> {
-     return this.http.get<TvGenres[]>(`http://localhost:3000/api/tv/genres`);
+     return this.http.get<TvGenres[]>(`${environment.backendUrl}/tv/genres`);
   }
 }

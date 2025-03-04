@@ -13,6 +13,7 @@ import { Observable, firstValueFrom } from 'rxjs';
 import { MapData } from 'shared/models/map/map-data';
 import { MapDetails } from 'shared/models/map/map-details';
 import { ErrorService } from '../error/error.service';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -111,7 +112,7 @@ export class MapService {
       formData.append(key, value);
     });
 
-    firstValueFrom(this.http.post(`http://localhost:3000/api/map${mediaPath}/add`, formData)).then(() => {
+    firstValueFrom(this.http.post(`${environment.backendUrl}/map${mediaPath}/add`, formData)).then(() => {
       this.router.navigate([`/map${mediaPath}/details`],);
     }).catch((error) => {
       this.errorService.setErrorMessages(error.error.message);
@@ -119,24 +120,24 @@ export class MapService {
   }
 
   deleteMapLocation(mediaPath: string, location_id: string): void {
-    firstValueFrom(this.http.post<MapDetails>(`http://localhost:3000/api/map${mediaPath}/${location_id}/delete`,{}));
+    firstValueFrom(this.http.post<MapDetails>(`${environment.backendUrl}/map${mediaPath}/${location_id}/delete`,{}));
   }
 
   getMapDetails(mediaPath: string): Observable<MapDetails> {
-    return this.http.get<MapDetails>(`http://localhost:3000/api/map${mediaPath}/details`);
+    return this.http.get<MapDetails>(`${environment.backendUrl}/map${mediaPath}/details`);
   }
 
   getLocationDetails(mediaPath: string, location_id: string): Observable<MapDetails> {
-    return this.http.get<MapDetails>(`http://localhost:3000/api/map${mediaPath}/${location_id}`);
+    return this.http.get<MapDetails>(`${environment.backendUrl}/map${mediaPath}/${location_id}`);
   }
 
   getRandomLocation(): Observable<MapDetails> {
     this.clearMap();
-    return this.http.get<MapDetails>(`http://localhost:3000/api/map/random`);
+    return this.http.get<MapDetails>(`${environment.backendUrl}/map/random`);
   }
 
   getAllLocations(): Observable<MapData[]> {
-    return this.http.get<MapData[]>(`http://localhost:3000/api/map/all`);
+    return this.http.get<MapData[]>(`${environment.backendUrl}/map/all`);
   }
 }
 

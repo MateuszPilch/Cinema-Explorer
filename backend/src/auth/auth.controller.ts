@@ -35,7 +35,7 @@ export class AuthController {
         window.opener.postMessage({ 
           email: '${data.email}', 
           accessToken: '${data.accessToken}' 
-        }, 'http://localhost:4200');
+        }, '${process.env.FRONTEND_URL}');
         window.close();
       </script>`
     );

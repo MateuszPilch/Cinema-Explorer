@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { ErrorService } from '../error/error.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from '../../../environments/environment.prod';
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +24,7 @@ export class AuthService {
   }
 
   public signup(nickname: string, email: string, password: string, confirmedPassword: string): void {
-    firstValueFrom(this.http.post<{token: string}>('http://localhost:3000/api/auth/signup',{
+    firstValueFrom(this.http.post<{token: string}>(`${environment.backendUrl}/auth/signup`,{
       nickname,  
       email,
       password,
@@ -36,7 +38,7 @@ export class AuthService {
   }
 
   public login(email: string, password: string): void {
-    firstValueFrom(this.http.post<{token: string}>('http://localhost:3000/api/auth/login',{
+    firstValueFrom(this.http.post<{token: string}>(`${environment.backendUrl}/auth/login`,{
       email,
       password
     })).then((data) => {
@@ -48,37 +50,33 @@ export class AuthService {
   }
 
   public signupViaGoogle(nickname: string ): void {
-    window.open('http://localhost:3000/api/auth/google', '_blank');
+    window.open(`${environment.backendUrl}/auth/google`, '_blank');
     window.addEventListener('message', (event) => {
-      if (event.origin === 'http://localhost:3000') {
-        firstValueFrom(this.http.post<{token: string}>('http://localhost:3000/api/auth/google/signup',{
-          nickname,
-          email: event.data.email,
-          accessToken: event.data.accessToken
-        })).then((data) => {
-          this.setAuthenticationData(data);
-          this.router.navigate(['/']);
-        }).catch((error) => {
-          this.errorService.setErrorMessages(error.error.message);
-        });
-      }
+      firstValueFrom(this.http.post<{token: string}>(`${environment.backendUrl}/auth/google/signup`,{
+        nickname,
+        email: event.data.email,
+        accessToken: event.data.accessToken
+      })).then((data) => {
+        this.setAuthenticationData(data);
+        this.router.navigate(['/']);
+      }).catch((error) => {
+        this.errorService.setErrorMessages(error.error.message);
+      });
     }, {once: true});
   }
 
   public loginViaGoogle(): void {
-    window.open('http://localhost:3000/api/auth/google', '_blank');
+    window.open(`${environment.backendUrl}/auth/google`, '_blank');
     window.addEventListener('message', (event) => {
-      if (event.origin === 'http://localhost:3000') {
-        firstValueFrom(this.http.post<{token: string}>('http://localhost:3000/api/auth/google/login',{
-          email: event.data.email,
-          accessToken: event.data.accessToken
-        })).then((data) => {
-          this.setAuthenticationData(data);
-          this.router.navigate(['/']);
-        }).catch((error) => {
-          this.errorService.setErrorMessages(error.error.message);
-        });
-      }
+      firstValueFrom(this.http.post<{token: string}>(`${environment.backendUrl}/auth/google/login`,{
+        email: event.data.email,
+        accessToken: event.data.accessToken
+      })).then((data) => {
+        this.setAuthenticationData(data);
+        this.router.navigate(['/']);
+      }).catch((error) => {
+        this.errorService.setErrorMessages(error.error.message);
+      });
     }, {once: true});
   }
   

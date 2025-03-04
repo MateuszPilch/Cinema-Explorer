@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { MediaDetails } from 'shared/models/media/media-details';
 import { MediaImages } from 'shared/models/media/media-images';
 import { ResolveFn, ActivatedRouteSnapshot } from '@angular/router';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +14,15 @@ export class MovieDetailsService {
   constructor(private http: HttpClient) {}
   
   getMovieDetails(movie_id: string): Observable<MediaDetails> {
-    return this.http.get<MediaDetails>(`http://localhost:3000/api/movie/${movie_id}`);
+    return this.http.get<MediaDetails>(`${environment.backendUrl}/movie/${movie_id}`);
   }
 
   getMovieImages(movie_id: string): Observable<MediaImages> {
-    return this.http.get<MediaImages>(`http://localhost:3000/api/movie/${movie_id}/images`);
+    return this.http.get<MediaImages>(`${environment.backendUrl}/movie/${movie_id}/images`);
   }
 
   getMovieLocationCount(movie_id: string): Observable<number> {
-    return this.http.get<number>(`http://localhost:3000/api/map/movie/${movie_id}/count`);
+    return this.http.get<number>(`${environment.backendUrl}/movie/${movie_id}/count`);
   }
 }
 

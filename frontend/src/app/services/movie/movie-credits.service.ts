@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { ResolveFn, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MediaCredits } from 'shared/models/media/media-credits';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,11 @@ export class MovieCreditsService {
   constructor(private http: HttpClient) {}
   
   getMovieCredits(id: string): Observable<MediaCredits> {
-    return this.http.get<MediaCredits>(`http://localhost:3000/api/movie/${id}/credits`);
+    return this.http.get<MediaCredits>(`${environment.backendUrl}/movie/${id}/credits`);
   }
 
   getMovieShortCredits(id: string): Observable<MediaCredits> {
-    return this.http.get<MediaCredits>(`http://localhost:3000/api/movie/${id}/credits_short`);
+    return this.http.get<MediaCredits>(`${environment.backendUrl}/movie/${id}/credits_short`);
   }
 }
 

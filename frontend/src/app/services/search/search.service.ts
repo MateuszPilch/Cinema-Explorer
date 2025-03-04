@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { SearchData } from 'shared/models/search-data';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class SearchService {
   }
 
   getSearchResults(): void {
-    this.http.get<SearchData>(`http://localhost:3000/api/search`, { 
+    this.http.get<SearchData>(`${environment.backendUrl}/search`, { 
       params: {
         type: this.searchType,
         query: this.searchQuery,
