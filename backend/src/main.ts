@@ -7,6 +7,7 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
   app.useGlobalPipes(new ValidationPipe());
   app.enableCors();
-  await app.listen(process.env.BACKEND_PORT);
+  console.log('MONGODB_URI:', process.env.MONGODB_URI);
+  await app.listen(process.env.PORT || 3000);
 }
 bootstrap();

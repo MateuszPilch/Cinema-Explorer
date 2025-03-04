@@ -49,5 +49,5 @@ Thumbs.db
 /coverage
 /.nyc_output
 .env
-frontend/dist/
-backend/dist/
+frontend/dist
+backend/dist

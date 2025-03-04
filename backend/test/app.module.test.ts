@@ -15,7 +15,7 @@ import { UserModule } from "../src/user/user.module";
     isGlobal: true,
   }),
   PassportModule.register({session: true}),
-  MongooseModule.forRoot(process.env.MONGODB_URL),
+  MongooseModule.forRoot(process.env.MONGODB_URI),
   AuthModule, MapModule, UserModule],
   controllers: [AppController],
   providers: [AppService],

@@ -24,7 +24,17 @@ import { join } from 'path';
     rootPath: join(__dirname, '..', 'frontend'),
   }),
   PassportModule.register({session: true}),
-  MongooseModule.forRoot(process.env.MONGODB_URL),
+  MongooseModule.forRoot(process.env.MONGODB_URI, {
+    connectionFactory: (connection) => {
+      connection.on('connected', () => {
+        console.log('Connected to MongoDB');
+      });
+      connection.on('error', (err) => {
+        console.error('Error connecting to MongoDB:', err);
+      });
+      return connection;
+    },
+  }),
   AuthModule, HomeModule, MapModule, MovieModule, TvModule, SearchModule, PersonModule, UserModule],
   controllers: [AppController],
   providers: [AppService],
