@@ -12,16 +12,11 @@ import { PassportModule } from '@nestjs/passport';
 import { UserModule } from './user/user.module';
 import { MapModule } from './map/map.module';
 import { HomeModule } from './home/home.module';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { join } from 'path';
 
 @Module({
   imports: [ConfigModule.forRoot( {
     envFilePath: '.env',
     isGlobal: true,
-  }),
-  ServeStaticModule.forRoot({
-    rootPath: join(__dirname, '..', 'frontend'),
   }),
   PassportModule.register({session: true}),
   MongooseModule.forRoot(process.env.MONGODB_URI, {
