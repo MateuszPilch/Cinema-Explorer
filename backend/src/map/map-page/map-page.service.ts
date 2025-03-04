@@ -4,8 +4,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { plainToInstance } from 'class-transformer';
 import { Model } from 'mongoose';
 import { firstValueFrom } from 'rxjs';
-import { MapAllLocations } from 'shared/models/map/map-all-locations';
-import { MapDetails } from 'shared/models/map/map-details';
+import { MapAllLocations } from '../../../../shared/models/map/map-all-locations';
+import { MapDetails } from '../../../../shared/models/map/map-details';
 import { Map } from 'src/schemas/map.schema';
 
 @Injectable()

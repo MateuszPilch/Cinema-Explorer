@@ -2,7 +2,7 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { firstValueFrom } from 'rxjs';
-import { PersonCredits } from 'shared/models/person/person-credits';
+import { PersonCredits } from '../../../../shared/models/person/person-credits';
 
 @Injectable()
 export class PersonCreditsService {

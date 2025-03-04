@@ -1,6 +1,6 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { HomeService } from './home.service';
-import { SearchData } from 'shared/models/search-data';
+import { SearchData } from '../../../shared/models/search-data';
 
 @Controller('home')
 export class HomeController {

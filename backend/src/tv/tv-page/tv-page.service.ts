@@ -2,9 +2,9 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { firstValueFrom } from 'rxjs';
-import { MediaData } from 'shared/models/media/media-data';
-import { TvSearchFilter } from 'shared/models/tv/tv-search-filter';
-import { TvGenres } from 'shared/models/tv/tv-genres';
+import { MediaData } from '../../../../shared/models/media/media-data';
+import { TvSearchFilter } from '../../../../shared/models/tv/tv-search-filter';
+import { TvGenres } from '../../../../shared/models/tv/tv-genres';
 
 @Injectable()
 export class TvPageService {

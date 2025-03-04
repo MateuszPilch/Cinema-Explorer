@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
-import { imageToUrl } from 'shared/image-to-url';
-import { MapData } from 'shared/models/map/map-data';
-import { MapDetails } from 'shared/models/map/map-details';
+import { imageToUrl } from '../../../shared/image-to-url';
+import { MapData } from '../../../shared/models/map/map-data';
+import { MapDetails } from '../../../shared/models/map/map-details';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { MapService } from 'src/app/services/map/map.service';
 

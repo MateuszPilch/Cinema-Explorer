@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { ResolveFn, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { PersonDetails } from 'shared/models/person/person-details';
+import { PersonDetails } from '../../../shared/models/person/person-details';
 import { environment } from '../../../environments/environment.prod';
 
 @Injectable({

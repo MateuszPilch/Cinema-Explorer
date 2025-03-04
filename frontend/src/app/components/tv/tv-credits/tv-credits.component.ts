@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MediaDetails } from 'shared/models/media/media-details';
-import { MediaCredits } from 'shared/models/media/media-credits';
+import { MediaDetails } from '../../../shared/models/media/media-details';
+import { MediaCredits } from '../../../shared/models/media/media-credits';
 
 @Component({
   selector: 'app-tv-credits',

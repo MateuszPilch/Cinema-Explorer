@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Options } from 'ngx-slider-v2';
-import { MediaData } from 'shared/models/media/media-data';
-import { TvGenres } from 'shared/models/tv/tv-genres';
-import { TvSearchFilter } from 'shared/models/tv/tv-search-filter';
+import { MediaData } from '../../../shared/models/media/media-data';
+import { TvGenres } from '../../../shared/models/tv/tv-genres';
+import { TvSearchFilter } from '../../../shared/models/tv/tv-search-filter';
 import { TvPageService } from 'src/app/services/tv/tv-page.service';
 
 @Component({

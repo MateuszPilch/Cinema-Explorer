@@ -1,10 +1,10 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
-import { MovieSearchFilter } from 'shared/models/movie/movie-search-filter';
+import { MovieSearchFilter } from '../../../../shared/models/movie/movie-search-filter';
 import { firstValueFrom } from 'rxjs';
-import { MediaData } from 'shared/models/media/media-data';
-import { MovieGenres } from 'shared/models/movie/movie-genres';
+import { MediaData } from '../../../../shared/models/media/media-data';
+import { MovieGenres } from '../../../../shared/models/movie/movie-genres';
 
 @Injectable()
 export class MoviePageService {

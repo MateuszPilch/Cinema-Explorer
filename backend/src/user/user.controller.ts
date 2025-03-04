@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, Query, Req, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { MediaReview } from 'shared/models/media/media-review';
+import { MediaReview } from '../../../shared/models/media/media-review';
 import { MediaReviewDto } from 'src/user/dto/media-review.dto';
 import { UserService } from './user.service';
 import { FileInterceptor } from '@nestjs/platform-express';

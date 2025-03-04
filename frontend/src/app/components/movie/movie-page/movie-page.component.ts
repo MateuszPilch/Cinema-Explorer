@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Options } from 'ngx-slider-v2';
-import { MediaData } from 'shared/models/media/media-data';
-import { MovieGenres } from 'shared/models/movie/movie-genres';
-import { MovieSearchFilter } from 'shared/models/movie/movie-search-filter';
+import { MediaData } from '../../../shared/models/media/media-data';
+import { MovieGenres } from '../../../shared/models/movie/movie-genres';
+import { MovieSearchFilter } from '../../../shared/models/movie/movie-search-filter';
 import { MoviePageService } from 'src/app/services/movie/movie-page.service';
 
 @Component({

@@ -1,8 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import Map from 'ol/Map';
-import { MapData } from 'shared/models/map/map-data';
-import { MapDetails } from 'shared/models/map/map-details';
-import { imageToUrl } from 'shared/image-to-url';
+import { MapData } from '../../../shared/models/map/map-data';
+import { MapDetails } from '../../../shared/models/map/map-details';
+import { imageToUrl } from '../../../shared/image-to-url';
 import { MapService } from 'src/app/services/map/map.service';
 
 @Component({

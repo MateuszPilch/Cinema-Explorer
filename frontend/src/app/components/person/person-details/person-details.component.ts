@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PersonDetails } from 'shared/models/person/person-details';
-import { PersonCredits } from 'shared/models/person/person-credits';
+import { PersonDetails } from '../../../shared/models/person/person-details';
+import { PersonCredits } from '../../../shared/models/person/person-credits';
 
 @Component({
   selector: 'app-person-details',

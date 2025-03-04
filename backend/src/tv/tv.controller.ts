@@ -1,13 +1,13 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
-import { MediaDetails } from 'shared/models/media/media-details';
-import { MediaCredits } from 'shared/models/media/media-credits';
+import { MediaDetails } from '../../../shared/models/media/media-details';
+import { MediaCredits } from '../../../shared/models/media/media-credits';
 import { TvDetailsService } from './tv-details/tv-details.service';
 import { TvCreditsService } from './tv-credits/tv-credits.service';
 import { TvPageService } from './tv-page/tv-page.service';
-import { MediaData } from 'shared/models/media/media-data';
-import { TvGenres } from 'shared/models/tv/tv-genres';
-import { TvSearchFilter } from 'shared/models/tv/tv-search-filter';
-import { MediaImages } from 'shared/models/media/media-images';
+import { MediaData } from '../../../shared/models/media/media-data';
+import { TvGenres } from '../../../shared/models/tv/tv-genres';
+import { TvSearchFilter } from '../../../shared/models/tv/tv-search-filter';
+import { MediaImages } from '../../../shared/models/media/media-images';
 
 @Controller('tv')
 export class TvController {

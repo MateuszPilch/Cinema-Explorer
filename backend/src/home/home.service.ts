@@ -2,7 +2,7 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { firstValueFrom } from 'rxjs';
-import { SearchData } from 'shared/models/search-data';
+import { SearchData } from '../../../shared/models/search-data';
 
 @Injectable()
 export class HomeService {

@@ -3,8 +3,8 @@ import { MapDetailsService } from './map-details/map-details.service';
 import { MapAddService } from './map-add/map-add.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MapPageService } from './map-page/map-page.service';
-import { MapDetails } from 'shared/models/map/map-details';
-import { MapAllLocations } from 'shared/models/map/map-all-locations';
+import { MapDetails } from '../../../shared/models/map/map-details';
+import { MapAllLocations } from '../../../shared/models/map/map-all-locations';
 import { MapDataDto } from './dto/map-data.dto';
 import { AuthGuard } from '@nestjs/passport';
 

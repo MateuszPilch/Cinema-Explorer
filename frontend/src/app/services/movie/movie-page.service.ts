@@ -2,9 +2,9 @@ import * as qs from 'qs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MediaData } from 'shared/models/media/media-data';
-import { MovieSearchFilter } from 'shared/models/movie/movie-search-filter';
-import { MovieGenres } from 'shared/models/movie/movie-genres';
+import { MediaData } from '../../../shared/models/media/media-data';
+import { MovieSearchFilter } from '../../../shared/models/movie/movie-search-filter';
+import { MovieGenres } from '../../../shared/models/movie/movie-genres';
 import { environment } from '../../../environments/environment.prod';
 
 @Injectable({

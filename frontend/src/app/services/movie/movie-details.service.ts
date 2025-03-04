@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { MediaDetails } from 'shared/models/media/media-details';
-import { MediaImages } from 'shared/models/media/media-images';
+import { MediaDetails } from '../../../shared/models/media/media-details';
+import { MediaImages } from '../../../shared/models/media/media-images';
 import { ResolveFn, ActivatedRouteSnapshot } from '@angular/router';
 import { environment } from '../../../environments/environment.prod';
 

@@ -1,6 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { PersonDetails } from 'shared/models/person/person-details';
-import { PersonCredits } from 'shared/models/person/person-credits';
+import { PersonDetails } from '../../../shared/models/person/person-details';
+import { PersonCredits } from '../../../shared/models/person/person-credits';
 import { PersonDetailsService } from './person-details/person-details.service';
 import { PersonCreditsService } from './person-credits/person-credits.service';
 
