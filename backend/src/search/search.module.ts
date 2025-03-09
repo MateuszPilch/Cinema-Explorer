@@ -3,7 +3,7 @@ import { HttpModule } from '@nestjs/axios';
 import { SearchController } from './search.controller';
 import { SearchService } from './search.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { User, UserSchema } from 'src/schemas/user.schema';
+import { User, UserSchema } from '../schemas/user.schema';
 
 
 @Module({

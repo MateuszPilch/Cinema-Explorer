@@ -5,8 +5,8 @@ import { plainToInstance } from 'class-transformer';
 import { Model } from 'mongoose';
 import { firstValueFrom } from 'rxjs';
 import { MapAllLocations } from '../../../../shared/models/map/map-all-locations';
+import { Map } from '../../schemas/map.schema';
 import { MapDetails } from '../../../../shared/models/map/map-details';
-import { Map } from 'src/schemas/map.schema';
 
 @Injectable()
 export class MapPageService { 

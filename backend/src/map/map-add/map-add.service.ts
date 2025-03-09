@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Model } from 'mongoose';
-import { Map } from 'src/schemas/map.schema';
+import { Map } from '../../schemas/map.schema';
 import { MapDataDto } from '../dto/map-data.dto';
 
 @Injectable()
