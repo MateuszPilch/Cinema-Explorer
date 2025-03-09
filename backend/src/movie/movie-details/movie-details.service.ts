@@ -19,7 +19,7 @@ export class MovieDetailsService {
       }
     };
     const { data } = await firstValueFrom(this.httpService.get(url, headers));
-    const res = plainToInstance(MediaDetails, data, { excludeExtraneousValues: true });
+    const res = plainToInstance(MediaDetails, data, { excludeExtraneousValues: false });
     return res;
   }
   async getMovieImages(movie_id: string): Promise<MediaImages> {
@@ -31,7 +31,7 @@ export class MovieDetailsService {
       }
     };
     const { data } = await firstValueFrom(this.httpService.get(url, headers));
-    const res = plainToInstance(MediaImages, data, { excludeExtraneousValues: true });
+    const res = plainToInstance(MediaImages, data, { excludeExtraneousValues: false });
     return res;
   }
 }

@@ -31,7 +31,7 @@ export class MapPageService {
 
   async getAllLocations(): Promise<MapAllLocations[]> {
     const details = (await this.mapModel.find({}, 'media_type media_id map_data._id map_data.center').lean());
-    const res = plainToInstance(MapAllLocations, details, { excludeExtraneousValues: true });
+    const res = plainToInstance(MapAllLocations, details, { excludeExtraneousValues: false });
     return res;
   }
 

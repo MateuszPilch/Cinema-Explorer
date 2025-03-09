@@ -19,7 +19,7 @@ export class HomeService {
     };
     const { data } = await firstValueFrom(this.httpService.get(url, headers))
     data.results.forEach((a)=> a.vote_average = Math.round(a.vote_average / 2 * 10) / 10);
-    const res = plainToInstance(SearchData, data, { excludeExtraneousValues: true });
+    const res = plainToInstance(SearchData, data, { excludeExtraneousValues: false });
     return res;
   }
 }

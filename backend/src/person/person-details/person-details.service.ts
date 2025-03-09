@@ -17,7 +17,7 @@ export class PersonDetailsService {
       }
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
-    const res = plainToInstance(PersonDetails, data, { excludeExtraneousValues: true });
+    const res = plainToInstance(PersonDetails, data, { excludeExtraneousValues: false });
     return res;
   }
 }

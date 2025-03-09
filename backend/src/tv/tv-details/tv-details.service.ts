@@ -18,7 +18,7 @@ export class TvDetailsService {
       }
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
-    const res = plainToInstance(MediaDetails, data, { excludeExtraneousValues: true });
+    const res = plainToInstance(MediaDetails, data, { excludeExtraneousValues: false });
     return res;
   }
 
@@ -31,7 +31,7 @@ export class TvDetailsService {
       }
     };
     const { data } = await firstValueFrom(this.httpService.get(url, headers));
-    const res = plainToInstance(MediaImages, data, { excludeExtraneousValues: true });
+    const res = plainToInstance(MediaImages, data, { excludeExtraneousValues: false });
     return res;
   }
 }

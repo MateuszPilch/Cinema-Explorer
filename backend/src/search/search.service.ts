@@ -43,7 +43,7 @@ export class SearchService {
       })
     }
 
-    const res = plainToInstance(SearchData, data, { excludeExtraneousValues: true });
+    const res = plainToInstance(SearchData, data, { excludeExtraneousValues: false });
     return res;
   }
 }

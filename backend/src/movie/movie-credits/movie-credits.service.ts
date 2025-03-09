@@ -18,7 +18,7 @@ export class MovieCreditsService {
       }
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
-    const res = plainToInstance(MediaCredits, data,{ excludeExtraneousValues: true });
+    const res = plainToInstance(MediaCredits, data,{ excludeExtraneousValues: false });
 
     res.cast.sort((a,b) => a.order - b.order);
     res.crew.sort((a,b) => b.popularity - a.popularity);
@@ -35,7 +35,7 @@ export class MovieCreditsService {
       }
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
-    let res = plainToInstance(MediaCredits, data, { excludeExtraneousValues: true });
+    let res = plainToInstance(MediaCredits, data, { excludeExtraneousValues: false });
 
     res.cast.sort((a,b) => a.order - b.order);
     res.crew.sort((a,b) => b.popularity - a.popularity);

@@ -22,7 +22,7 @@ export class MoviePageService {
 
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
     data.results.forEach((a)=> a.vote_average = Math.round(a.vote_average / 2 * 10) / 10);
-    const res = plainToInstance(MediaData, data, { excludeExtraneousValues: true });
+    const res = plainToInstance(MediaData, data, { excludeExtraneousValues: false });
     return res;
   }
   
@@ -36,7 +36,7 @@ export class MoviePageService {
     };
     const { data } = await firstValueFrom(this.httpService.get(url,headers))
     
-    const res = plainToInstance(MovieGenres, data.genres, { excludeExtraneousValues: true });
+    const res = plainToInstance(MovieGenres, data.genres, { excludeExtraneousValues: false });
     return res;
   }
 }
