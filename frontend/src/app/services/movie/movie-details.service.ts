@@ -22,7 +22,7 @@ export class MovieDetailsService {
   }
 
   getMovieLocationCount(movie_id: string): Observable<number> {
-    return this.http.get<number>(`${environment.backendUrl}/movie/${movie_id}/count`);
+    return this.http.get<number>(`${environment.backendUrl}/map/movie/${movie_id}/count`);
   }
 }
 

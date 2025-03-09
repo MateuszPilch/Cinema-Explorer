@@ -33,7 +33,6 @@ export class MapController {
   }
 
   @Get(':media_type/:media_id/count')
-  @UseInterceptors(FileInterceptor('image'))
   getLocationCount(@Param('media_type') media_type: string, @Param('media_id') media_id: string): Promise<number> {
     return this.mapDetailsService.getLocationCount(media_type, media_id);
   }

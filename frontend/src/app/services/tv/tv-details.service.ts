@@ -23,7 +23,7 @@ export class TvDetailsService {
   }
 
   getTvLocationCount(tv_id: string): Observable<number> {
-    return this.http.get<number>(`${environment.backendUrl}/tv/${tv_id}/count`);
+    return this.http.get<number>(`${environment.backendUrl}/map/tv/${tv_id}/count`);
   }
 }
 
