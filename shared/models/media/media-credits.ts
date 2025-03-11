@@ -8,7 +8,7 @@ export class MediaCredits {
   crew!: Crew[];
 }
 
-interface Cast {
+export interface Cast {
   adult: boolean;
   cast_id: number;
   character: string;
@@ -25,7 +25,7 @@ interface Cast {
   total_episode_count: number;
 }
 
-interface Crew {
+export interface Crew {
   adult: boolean;
   credit_id: number;
   department: string;
@@ -50,5 +50,5 @@ interface Roles {
 interface Jobs {
   credit_id: string;
   job: string;
-  episode_count: 4;
+  episode_count: number;
 }

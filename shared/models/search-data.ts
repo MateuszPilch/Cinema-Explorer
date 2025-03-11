@@ -22,6 +22,7 @@ export class SearchData {
 }
 
 interface Results {
+  avatar?: any;
   backdrop_path?: string;
   first_air_date? : string;
   id?: number;

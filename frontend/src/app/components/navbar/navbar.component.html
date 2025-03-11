@@ -17,35 +17,35 @@
   <div class="md:flex md:w-3/4 w-full md:p-0 pt-8 pb-3 items-center" [hidden]="!mobileMenuEnable">
     <div class="mx-5 md:w-2/5">
       <div class="flex items-center h-10 bg-white rounded-full shadow-sm">
-        <button (click)="searchService.searchMulti()" class="ml-3">
+        <button (click)="searchService.searchMulti(); toggleMobileMenu();" class="ml-3">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
           </svg>
         </button>
-        <input #search type="text" (keydown.enter)="searchService.searchMulti()" [(ngModel)]=searchService.searchQuery class="mx-3 w-full focus:outline-none" placeholder="Szukaj filmów, seriali...">
+        <input #search type="text" (keydown.enter)="searchService.searchMulti(); toggleMobileMenu()" [(ngModel)]=searchService.searchQuery class="mx-3 w-full focus:outline-none" placeholder="Szukaj filmów, seriali...">
       </div>
     </div>
     <div class="grid md:grid-cols-6 grid-cols-1 md:mx-10 md:gap-10 gap-2 md:pt-0 pt-2 text-xl">
-      <button routerLink="/map" class="group">
+      <button routerLink="/map" (click)="toggleMobileMenu()" class="group">
         <div class="py-3 group-hover:text-teal-500 duration-200">Mapa</div>
         <div class="hidden md:flex w-full h-2 rounded-full bg-gray-200 group-hover:bg-teal-300 duration-200"></div>  
       </button>
-      <button routerLink="/movie" class="group">
+      <button routerLink="/movie" (click)="toggleMobileMenu()" class="group">
         <div class="py-3 group-hover:text-teal-500 duration-200">Filmy</div>
         <div class="hidden md:flex w-full h-2 rounded-full bg-gray-200 group-hover:bg-teal-300 duration-200"></div>
       </button>
-      <button routerLink="/tv" class="group">
+      <button routerLink="/tv" (click)="toggleMobileMenu()" class="group">
           <div class="py-3 group-hover:text-teal-500 duration-200">Seriale</div>
           <div class="hidden md:flex w-full h-2 rounded-full bg-gray-200 group-hover:bg-teal-300 duration-200"></div>
       </button>
-      <button *ngIf="authService.isAuthenticated()" routerLink="/user/{{authService.getNickname()}}" class="group">
+      <button *ngIf="authService.isAuthenticated()" routerLink="/user/{{authService.getNickname()}}" (click)="toggleMobileMenu()" class="group">
         <div class="py-3 group-hover:text-teal-500 duration-200">Profil</div>
         <div class="hidden md:flex w-full h-2 rounded-full bg-gray-200 group-hover:bg-teal-300 duration-200"></div>
       </button>
         <button *ngIf="!authService.isAuthenticated()" routerLink="auth" class="flex mx-auto p-4 items-center justify-center bg-teal-300 hover:bg-teal-400 hover:scale-[1.03] duration-200 rounded-lg shadow-md">
           Zaloguj     
         </button>
-        <button *ngIf="authService.isAuthenticated()" (click)="authService.logout()" class="flex mx-auto p-4 items-center justify-center bg-teal-300 hover:bg-teal-400 hover:scale-[1.03] duration-200 rounded-lg shadow-md">
+        <button *ngIf="authService.isAuthenticated()" (click)="authService.logout(); toggleMobileMenu()" class="flex mx-auto p-4 items-center justify-center bg-teal-300 hover:bg-teal-400 hover:scale-[1.03] duration-200 rounded-lg shadow-md">
           Wyloguj
         </button>
     </div>

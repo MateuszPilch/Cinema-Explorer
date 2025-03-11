@@ -1,6 +1,6 @@
-<div *ngIf="errorService.getErrorMessages().length != 0" class="absolute mx-auto md:pb-8 p-2 md:top-24 top-0 md:right-0 right-0 md:left-auto left-0 z-50 font-poppins">
+<div *ngIf="errorService.getErrorMessages().length != 0" class="absolute mx-auto md:pb-8 p-2 md:top-20 top-0 md:right-4 right-0 md:left-auto left-0 z-50 font-poppins">
   <div class="flex px-4 py-2 items-center justify-between bg-red-500 text-white rounded-t">
-    <div class="text-xl font-bold">Wystąpił problem</div>
+    <div class="text-lg font-bold">Wystąpił problem</div>
     <button (click)="errorService.clearErrorMessages()" class="hover:scale-125 duration-200">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />

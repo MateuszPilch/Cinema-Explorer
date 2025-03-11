@@ -5,6 +5,7 @@ import { MovieGenres } from '../../../../../../shared/models/movie/movie-genres'
 import { MovieSearchFilter } from '../../../../../../shared/models/movie/movie-search-filter';
 import { MoviePageService } from 'src/app/services/movie/movie-page.service';
 
+
 @Component({
   selector: 'app-movie-page',
   templateUrl: './movie-page.component.html',
@@ -26,6 +27,7 @@ export class MoviePageComponent {
   upcomingDateString!: string;
 
   isFilterOpen: boolean = false;
+  isLoadingData: boolean = false;
 
   voteAvgRange: number[] = [1,5];
   voteAvgOptions: Options = {
@@ -74,27 +76,31 @@ export class MoviePageComponent {
 
   ngOnInit() {
     this.movieFilter = new MovieSearchFilter;
-    this.loadData();
-
     this.moviePageService.getMovieGenres().subscribe((genres) => {
       this.movieGenres = genres;
+
     });
 
+    this.loadData();
     this.nowDate = new Date();
     this.todayDateString = this.nowDate.toISOString().split('T')[0];
     this.upcomingDateString = this.nowDate.setMonth(this.nowDate.getMonth() + 6).toString();
   }
 
   loadData(): void {
-    this.page += 1;
-    this.setFilter('page', this.page);
-
-    this.moviePageService.getMovieData(this.movieFilter).subscribe((data) => {
-      this.movieData.page = data.page;
-      this.movieData.results = this.movieData.results.concat(data.results);
-      this.movieData.total_pages = data.total_pages
-      this.movieData.total_results = data.total_results
-    });
+    if(this.page < this.movieData.total_pages) {
+      this.isLoadingData = true;
+      this.page++;
+      this.setFilter('page', this.page);
+  
+      this.moviePageService.getMovieData(this.movieFilter).subscribe((data) => {
+        this.movieData.page = data.page;
+        this.movieData.results = this.movieData.results.concat(data.results);
+        this.movieData.total_pages = data.total_pages
+        this.movieData.total_results = data.total_results
+        this.isLoadingData = false;
+      });
+    }
   }
 
   toggleFilter() {

@@ -27,7 +27,8 @@ export class TvPageComponent {
   upcomingDateString!: string;
 
   isFilterOpen: boolean = false;
-  
+  isLoadingData: boolean = false;
+
   voteAvgRange: number[] = [1,5];
   voteAvgOptions: Options = {
     floor: 1,
@@ -75,27 +76,30 @@ export class TvPageComponent {
 
   ngOnInit() {
     this.tvFilter = new TvSearchFilter;
-    this.loadData();
-
     this.tvPageService.getTvGenres().subscribe((genres) => {
       this.tvGenres = genres;
     });
-
+    
+    this.loadData();
     this.nowDate = new Date();
     this.todayDateString = this.nowDate.toISOString().split('T')[0];
     this.upcomingDateString = this.nowDate.setMonth(this.nowDate.getMonth() + 6).toString();
   }
 
   loadData(): void {
-    this.page += 1;
-    this.setFilter('page', this.page);
+    if(this.page < this.tvData.total_pages) {
+      this.isLoadingData = true;
+      this.page += 1;
+      this.setFilter('page', this.page);
 
-    this.tvPageService.getTvData(this.tvFilter).subscribe((data) => {
-      this.tvData.page = data.page;
-      this.tvData.results = this.tvData.results.concat(data.results);
-      this.tvData.total_pages = data.total_pages
-      this.tvData.total_results = data.total_results
-    });
+      this.tvPageService.getTvData(this.tvFilter).subscribe((data) => {
+        this.tvData.page = data.page;
+        this.tvData.results = this.tvData.results.concat(data.results);
+        this.tvData.total_pages = data.total_pages
+        this.tvData.total_results = data.total_results
+        this.isLoadingData = false;
+      });
+    }
   }
 
   toggleFilter() {

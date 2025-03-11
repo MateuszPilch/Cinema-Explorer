@@ -1,4 +1,4 @@
-<div class="block md:p-8 p-4 bg-white rounded-xl shadow-md">
+<div class="flex flex-col md:p-8 p-4 min-h-[calc(90vh)] bg-white rounded-xl shadow-md">
   <div class="md:flex block justify-between">
     <div class="md:text-4xl text-xl">Filmy</div>
     <div class="md:flex md:pt-0 pt-4 gap-4 grid grid-cols-2 items-center">
@@ -127,31 +127,36 @@
       </button>
     </div>
   </div>
-  <div *ngIf="movieData.results.length <= 0" class="md:my-8 my-4 md:p-4 p-2 text-lg text-center bg-gray-100 rounded-xl shadow-md">
-    Brak wyników wyszukiwania
-  </div>
-  <div *ngIf="movieData.results.length > 0" class="md:my-8 my-4 md:p-4 p-2 text-lg text-center bg-gray-100 rounded-xl shadow-md">
-    Znaleziono {{movieData.total_results}} pozycji
-  </div>
-  <div infinite-scroll [infiniteScrollDistance]="2"[infiniteScrollThrottle]="500" (scrolled)="loadData()" class="grid md:grid-cols-5 grid-cols-2 md:gap-8 gap-4">
-    <div *ngFor="let movie of movieData.results" class="block bg-gray-100 hover:scale-[1.03] duration-200 rounded-xl shadow-md">
-      <button routerLink="/movie/{{movie.id}}">
-        <img class="w-72 rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{movie.poster_path}}" onerror="this.src='assets/images/media_blank.png';">   
-        <div class="relative text-center text-sm pt-2">
-          <div class="text-base h-16 font-bold line-clamp-2">{{movie.title}}</div>
-          <div *ngIf="movie.vote_average > 0"class="flex justify-center items-center">
-            <div class="md:text-base text-xs font-bold" >
-              {{movie.vote_average}}
-            </div>
-            <div class="pl-1">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="md:w-8 md:h-8 w-6 h-6 text-yellow-400">
-                <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-              </svg>
-            </div>
-          </div>
-          <div class="py-2 truncate">{{movie.release_date | date: 'd.MM.y'}}</div>
-        </div>
-      </button>
+  <div *ngIf="!isLoadingData || movieData.results.length > 0">
+    <div *ngIf="movieData.results.length <= 0" class="md:my-8 my-4 md:p-4 p-2 text-lg text-center bg-gray-100 rounded-xl shadow-md">
+      Brak wyników wyszukiwania
     </div>
+    <div *ngIf="movieData.results.length > 0" class="md:my-8 my-4 md:p-4 p-2 text-lg text-center bg-gray-100 rounded-xl shadow-md">
+      Znaleziono {{movieData.total_results}} pozycji
+    </div>
+    <div infinite-scroll [infiniteScrollDistance]="2"[infiniteScrollThrottle]="500" (scrolled)="loadData()" class="grid md:grid-cols-5 grid-cols-2 md:gap-8 gap-4">
+      <div *ngFor="let movie of movieData.results" class="block bg-gray-100 hover:scale-[1.03] duration-200 rounded-xl shadow-md">
+        <button routerLink="/movie/{{movie.id}}">
+          <img class="w-72 rounded-t-xl" src="https://image.tmdb.org/t/p/w200/{{movie.poster_path}}" onerror="this.src='assets/images/media_blank.png';">   
+          <div class="relative text-center text-sm pt-2">
+            <div class="text-base h-16 font-bold line-clamp-2">{{movie.title}}</div>
+            <div *ngIf="movie.vote_average > 0"class="flex justify-center items-center">
+              <div class="md:text-base text-xs font-bold" >
+                {{movie.vote_average}}
+              </div>
+              <div class="pl-1">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="md:w-8 md:h-8 w-6 h-6 text-yellow-400">
+                  <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+                </svg>
+              </div>
+            </div>
+            <div class="py-2 truncate">{{movie.release_date | date: 'd.MM.y'}}</div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isLoadingData" class="flex-1 flex items-center justify-center">
+    <app-loader></app-loader>
   </div>
 </div>

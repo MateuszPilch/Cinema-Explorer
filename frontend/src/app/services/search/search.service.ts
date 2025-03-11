@@ -10,10 +10,10 @@ import { environment } from '../../../environments/environment.prod';
 export class SearchService {
 
   searchData: SearchData = new SearchData();
-
   searchType!: string;
   searchQuery!: string;
-  searchPage: number = 1;
+  searchPage: number = 0;
+  isloadingData: boolean = false;
 
   constructor(private http: HttpClient, private router: Router) {
     this.loadSearch();
@@ -21,19 +21,23 @@ export class SearchService {
   }
 
   getSearchResults(): void {
-    this.http.get<SearchData>(`${environment.backendUrl}/search`, { 
-      params: {
-        type: this.searchType,
-        query: this.searchQuery,
-        page: this.searchPage
-      }
-    }).subscribe((data) => {
+    if(this.searchPage < this.searchData.total_pages) {
+      this.isloadingData = true;
       this.searchPage++;
-      this.searchData.page = data.page;
-      this.searchData.results = this.searchData.results.concat(data.results);
-      this.searchData.total_pages = data.total_pages;
-      this.searchData.total_results = data.total_results;
-    });;
+      this.http.get<SearchData>(`${environment.backendUrl}/search`, { 
+        params: {
+          type: this.searchType,
+          query: this.searchQuery,
+          page: this.searchPage
+        }
+      }).subscribe((data) => {
+        this.searchData.page = data.page;
+        this.searchData.results = this.searchData.results.concat(data.results);
+        this.searchData.total_pages = data.total_pages;
+        this.searchData.total_results = data.total_results;
+        this.isloadingData = false;
+      });;
+    }
   }
   
   loadSearch(): void {
@@ -51,7 +55,7 @@ export class SearchService {
       this.searchData = new SearchData();
       this.searchType = 'multi';
       this.searchQuery = this.searchQuery;
-      this.searchPage = 1;
+      this.searchPage = 0;
       this.saveSearch();
       this.getSearchResults();
       this.router.navigate(['/search']);
@@ -62,7 +66,7 @@ export class SearchService {
     if(this.searchQuery != '') {
       this.searchData = new SearchData();
       this.searchType = type;
-      this.searchPage = 1;
+      this.searchPage = 0;
       this.saveSearch();
       this.getSearchResults();
     }

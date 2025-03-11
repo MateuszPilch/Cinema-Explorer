@@ -37,6 +37,7 @@ export class SearchService {
       users.forEach((user) => {
         data.total_results += 1;
         data.results.push({
+          avatar: user.avatar,
           nickname: user.nickname,
           media_type: 'user',
         });

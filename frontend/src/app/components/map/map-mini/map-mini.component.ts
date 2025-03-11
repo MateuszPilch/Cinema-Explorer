@@ -16,6 +16,7 @@ export class MapMiniComponent {
   private map!: Map;
   
   mapDetails!: MapDetails
+  isLoadingData: boolean = false;
 
   constructor(private mapMiniService: MapService) {}
 
@@ -27,11 +28,13 @@ export class MapMiniComponent {
   }
 
   getRandomLocation(): void {
+    this.isLoadingData = true;
     this.mapMiniService.getRandomLocation().subscribe((data) => {
       this.mapDetails = data;
       this.mapDetails.mapData.forEach(async (location) => {
         location.image = await imageToUrl(location.image);
         this.mapMiniService.drawCircleLocation(location.center, location.radius);
+        this.isLoadingData = false;
       });
     });
     this.map.getView().setZoom(0);

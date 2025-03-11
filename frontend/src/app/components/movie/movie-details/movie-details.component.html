@@ -165,11 +165,8 @@
   </div>
 </div>
 <div *ngIf="isLightboxEnabled" class="fixed z-50 top-0 left-0 h-full w-full flex items-center bg-black bg-opacity-90">
-  <div class="absolute top-6 left-6 text-white text-3xl">
-    {{lightboxIndex + 1}}/{{movieImagesData.backdrops.length}}
-  </div>
   <button (click)="lightboxControl(false, 0)" class="absolute top-2 right-2">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-white w-16 h-16">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-white w-8 h-8">
       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
     </svg>  
   </button>
@@ -186,4 +183,7 @@
       <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
     </svg>      
   </button>
+  <div class="absolute top-6 left-6 text-white text-3xl">
+    {{lightboxIndex + 1}}/{{movieImagesData.backdrops.length}}
+  </div>
 </div>

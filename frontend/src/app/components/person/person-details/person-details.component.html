@@ -100,7 +100,7 @@
       <div *ngFor="let result of personCreditsData.cast" class="flex md:h-52 min-h-40 md:my-8 my-2 hover:scale-[1.02] duration-200">
         <button routerLink="/{{result.media_type}}/{{result.id}}" class="flex w-full items-center">
           <img class="md:w-fit w-1/4 md:h-full h-fit object-fill rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w500/{{result.poster_path}}" onerror="this.src='assets/images/media_blank.png';">
-          <div class="block w-[90%] h-full md:ml-4 ml-2 md:p-4 p-2 bg-gray-100 rounded-xl shadow-md ">
+          <div class="block w-[calc(90vw)] h-full md:ml-4 ml-2 md:p-4 p-2 bg-gray-100 rounded-xl shadow-md ">
             <div class="flex justify-between">
               <div class="md:text-xl text-base text-left font-bold">
                 {{result.title}}
@@ -128,7 +128,7 @@
       <div *ngFor="let result of personCreditsData.crew" class="flex md:h-52 min-h-40 md:my-8 my-2 hover:scale-[1.02] duration-200">
         <button routerLink="/{{result.media_type}}/{{result.id}}" class="flex w-full items-center">
           <img class="md:w-fit w-1/4 md:h-full h-fit object-fill rounded-xl shadow-md" src="https://image.tmdb.org/t/p/w500/{{result.poster_path}}" onerror="this.src='assets/images/media_blank.png';">
-          <div class="block w-[90%] h-full md:ml-4 ml-2 md:p-4 p-2 bg-gray-100 rounded-xl shadow-md ">
+          <div class="block w-[calc(90vw)] h-full md:ml-4 ml-2 md:p-4 p-2 bg-gray-100 rounded-xl shadow-md ">
             <div class="flex justify-between">
               <div class="md:text-xl text-base text-left font-bold">
                 {{result.title}}

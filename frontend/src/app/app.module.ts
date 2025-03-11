@@ -30,6 +30,7 @@ import { MapDetailsComponent } from './components/map/map-details/map-details.co
 import { MapMainComponent } from './components/map/map-main/map-main.component';
 import { TvPageComponent } from './components/tv/tv-page/tv-page.component';
 import { MapMiniComponent } from './components/map/map-mini/map-mini.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { MapMiniComponent } from './components/map/map-mini/map-mini.component';
     MapMainComponent,
     TvPageComponent,
     MapMiniComponent,
+    LoaderComponent,
   ],
   imports: [
     HttpClientModule,
